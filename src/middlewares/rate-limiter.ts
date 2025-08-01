@@ -15,13 +15,13 @@ import logger from "../utility/logger";
 
 const rateLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  limit: 1000, // Limit each user (config-id) to 1000 requests per min
+  limit: 2, // Limit each user (config-id) to 1000 requests per min
   standardHeaders: "draft-8", // Return `RateLimit-*` headers for clarity
   legacyHeaders: false,
-  keyGenerator: (req: Request) => {
-    // Use config-id from params if present, fallback to IP
-    return req.params["config-id"].toString() || req.ip || "unknown";
-  },
+  // keyGenerator: (req: Request) => {
+  //   // Use config-id from params if present, fallback to IP
+  //   return req.params["config-id"]?.toString() || req.ip || "unknown";
+  // },
   message: {
     status: 429,
     message:

@@ -1,53 +1,35 @@
-import express, { Application, Request, Response, NextFunction } from "express";
-import cors from "cors";
+import config from "./config/server-config";
 
-import requestLog from "./middlewares/request-log";
-import responseLog from "./middlewares/response-log";
-import { getLoggerMeta } from "./utility/utility";
-import { healthMonitor } from "./utility/health-monitor";
+import createServer from "./server";
+import mongoose from "mongoose";
+import connectDB from "./db";
 import logger from "./utility/logger";
 
-const createServer = (): Application => {
-  logger.info("Creating server...");
-  const app = express();
+const app = createServer();
 
-  app.use(logger.getCorrelationIdMiddleware());
-  app.use(cors());
-
-  // Logging Middleware
-  app.use(requestLog);
-  app.use(responseLog);
-  const base = "/";
-
-  // Health Check
-  app.get("/health", async (req: Request, res: Response) => {
-    try {
-      const healthStatus = await healthMonitor.getHealthStatus();
-      res.status(200).json({
-        status: "ok",
-        ...healthStatus,
-      });
-    } catch (error) {
-      logger.error("Health check failed", getLoggerMeta(req), { error });
-      res.status(503).json({
-        status: "error",
-        message: "Health check failed",
-      });
-    }
-  });
-
-  // Error Handling Middleware
-  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    // logger.error(err.message, { stack: err.stack });
-    logger.error(
-      `Internal Server Error: ${err.message}`,
-      getLoggerMeta(req),
-      err
-    );
-    res.status(500).send("INTERNAL SERVER ERROR");
-  });
-
-  return app;
-};
-
-export default createServer;
+const server = app.listen(config.port, async () => {
+	logger.info("Connecting to DB")
+	await connectDB();
+	logger.info(
+		`Server running on port ${config.port} in ${config.environment} mode`
+	);
+});
+// Graceful Shutdown
+process.on("SIGTERM", () => {
+	logger.info("SIGTERM signal received: closing HTTP server");
+	server.close(async () => {
+		await mongoose.connection.close();
+		logger.info("HTTP server closed");
+		logger.info("MongoDB connection closed");
+		process.exit(0); // Exit after closing server
+	});
+});
+process.on("SIGINT", () => {
+	logger.info("SIGINT signal received: closing HTTP server");
+	server.close(async () => {
+		await mongoose.connection.close();
+		logger.info("HTTP server closed");
+		logger.info("MongoDB connection closed");
+		process.exit(0); // Exit after closing server
+	});
+});
