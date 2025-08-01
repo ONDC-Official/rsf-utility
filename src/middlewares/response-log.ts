@@ -6,7 +6,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
 	const originalSend = res.send;
 	res.json = function (data: any) {
 		logger.info(`Response Log`, {
-			data: data,
 			statusCode: res.statusCode,
 			correlationId: req.correlationId,
 		});
@@ -14,7 +13,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
 	};
 	res.send = function (data: any) {
 		logger.info(`Response Log`, {
-			data: data,
 			statusCode: res.statusCode,
 			correlationId: req.correlationId,
 		});

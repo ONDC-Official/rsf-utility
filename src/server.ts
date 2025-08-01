@@ -1,57 +1,67 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
-
 import requestLog from "./middlewares/request-log";
 import responseLog from "./middlewares/response-log";
 import { getLoggerMeta } from "./utility/utility";
 import { healthMonitor } from "./utility/health-monitor";
 import logger from "./utility/logger";
 import payloadRouter from "./routes/payload-routes";
+import uiRoutes from "./routes/ui-routes";
+import swaggerSpec from "./swagger/swagger.config";
+import swaggerUi from "swagger-ui-express";
 
 const createServer = (): Application => {
-  logger.info("Creating server...");
-  const app = express();
+	logger.info("Creating server...");
+	const app = express();
 
-  app.use(logger.getCorrelationIdMiddleware());
-  app.use(cors());
-  app.use(express.json({ limit: "50mb" }));
+	app.use(logger.getCorrelationIdMiddleware());
+	app.use(cors());
+	app.use(express.json({ limit: "50mb" }));
 
-  // Logging Middleware
-  app.use(requestLog);
-  app.use(responseLog);
-  const base = "/";
-  app.use('/api',payloadRouter)
+	// Logging Middleware
+	app.use(requestLog);
+	app.use(responseLog);
+	const base = "/";
+	app.use(base, payloadRouter);
+	app.use(`${base}ui`, uiRoutes);
 
+	/// Swagger Documentation
+	//@ts-ignore
+	app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+	app.get("/api-docs.json", (_req, res) => {
+		res.setHeader("Content-Type", "application/json");
+		res.send(swaggerSpec);
+	});
 
-  // Health Check
-  app.get("/health", async (req: Request, res: Response) => {
-    try {
-      const healthStatus = await healthMonitor.getHealthStatus();
-      res.status(200).json({
-        status: "ok",
-        ...healthStatus,
-      });
-    } catch (error) {
-      logger.error("Health check failed", getLoggerMeta(req), { error });
-      res.status(503).json({
-        status: "error",
-        message: "Health check failed",
-      });
-    }
-  });
+	// Health Check
+	app.get("/health", async (req: Request, res: Response) => {
+		try {
+			const healthStatus = await healthMonitor.getHealthStatus();
+			res.status(200).json({
+				status: "ok",
+				...healthStatus,
+			});
+		} catch (error) {
+			logger.error("Health check failed", getLoggerMeta(req), { error });
+			res.status(503).json({
+				status: "error",
+				message: "Health check failed",
+			});
+		}
+	});
 
-  // Error Handling Middleware
-  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    // logger.error(err.message, { stack: err.stack });
-    logger.error(
-      `Internal Server Error: ${err.message}`,
-      getLoggerMeta(req),
-      err
-    );
-    res.status(500).send("INTERNAL SERVER ERROR");
-  });
+	// Error Handling Middleware
+	app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+		// logger.error(err.message, { stack: err.stack });
+		logger.error(
+			`Internal Server Error: ${err.message}`,
+			getLoggerMeta(req),
+			err
+		);
+		res.status(500).send("INTERNAL SERVER ERROR");
+	});
 
-  return app;
+	return app;
 };
 
 export default createServer;

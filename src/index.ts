@@ -1,5 +1,4 @@
 import config from "./config/server-config";
-
 import createServer from "./server";
 import mongoose from "mongoose";
 import connectDB from "./db";
@@ -8,7 +7,7 @@ import logger from "./utility/logger";
 const app = createServer();
 
 const server = app.listen(config.port, async () => {
-	logger.info("Connecting to DB")
+	logger.info("Connecting to DB....");
 	await connectDB();
 	logger.info(
 		`Server running on port ${config.port} in ${config.environment} mode`

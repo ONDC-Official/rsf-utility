@@ -7,7 +7,6 @@ export default (req: Request, _res: Response, next: NextFunction) => {
 		url: req.url,
 		body: req.body,
 		query: req.query,
-		headers: req.headers,
 		correlationId: req.correlationId,
 		params: req.params,
 	});
