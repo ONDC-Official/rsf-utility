@@ -2,13 +2,13 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import requestLog from "./middlewares/request-log";
 import responseLog from "./middlewares/response-log";
-import { getLoggerMeta } from "./utility/utility";
-import { healthMonitor } from "./utility/health-monitor";
-import logger from "./utility/logger";
-import payloadRouter from "./routes/payload-routes";
+import { getLoggerMeta } from "./utils/utility";
+import { healthMonitor } from "./utils/health-monitor";
+import logger from "./utils/logger";
 import uiRoutes from "./routes/ui-routes";
 import swaggerSpec from "./swagger/swagger.config";
 import swaggerUi from "swagger-ui-express";
+import apiRoutes from "./routes/api-routes";
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
@@ -22,7 +22,7 @@ const createServer = (): Application => {
 	app.use(requestLog);
 	app.use(responseLog);
 	const base = "/";
-	app.use(base, payloadRouter);
+	app.use(`${base}api`, apiRoutes);
 	app.use(`${base}ui`, uiRoutes);
 
 	/// Swagger Documentation

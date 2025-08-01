@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import logger from "../utility/logger";
+import logger from "../utils/logger";
 
 export default (req: Request, res: Response, next: NextFunction) => {
 	const originalJson = res.json;

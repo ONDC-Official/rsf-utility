@@ -21,7 +21,7 @@ export function createLogger({ serviceName }: LoggerConfig) {
 		defaultMeta: {
 			labels: {
 				service: serviceName,
-				category: "automation-framework",
+				category: "rsf-utility",
 			},
 		},
 		transports: getLoggerTransports(),

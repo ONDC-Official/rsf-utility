@@ -2,7 +2,7 @@ import config from "./config/server-config";
 import createServer from "./server";
 import mongoose from "mongoose";
 import connectDB from "./db";
-import logger from "./utility/logger";
+import logger from "./utils/logger";
 
 const app = createServer();
 

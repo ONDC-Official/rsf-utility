@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import logger from "../utility/logger";
-import { getLoggerMeta } from "../utility/utility";
+import logger from "../utils/logger";
+import { getLoggerMeta } from "../utils/utility";
 function validateRequiredParams(params: string[]) {
 	return (req: Request, res: Response, next: NextFunction): void => {
 		const missingParams = params.filter((param) => !req.query[param]);
