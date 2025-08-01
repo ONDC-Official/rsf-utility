@@ -5,5 +5,5 @@ import { schemaValidator } from '../controller/validation-controller';
 const payloadRouter = Router();
 
 
-payloadRouter.post('/api/:action',rateLimiter,schemaValidator)
+payloadRouter.post('/:action',rateLimiter,schemaValidator)
 export default payloadRouter;

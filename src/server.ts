@@ -20,7 +20,7 @@ const createServer = (): Application => {
   app.use(requestLog);
   app.use(responseLog);
   const base = "/";
-  app.use(base,payloadRouter)
+  app.use('/api',payloadRouter)
 
 
   // Health Check
