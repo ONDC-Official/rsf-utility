@@ -2,16 +2,6 @@ import rateLimit from "express-rate-limit";
 import { Request } from "express";
 import logger from "../utils/logger";
 
-// const rateLimiter = rateLimit({
-//   windowMs: 1 * 60 * 1000, // 1 minute
-//   max: 1000, // Limit each IP to 100 requests per windowMs
-//   standardHeaders: true, // Add rate limit info to response headers
-//   legacyHeaders: false, // Disable old X-RateLimit headers
-//   message: {
-//     status: 429,
-//     message: "Too many requests, please try again after a minute.",
-//   },
-// });
 
 const rateLimiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
