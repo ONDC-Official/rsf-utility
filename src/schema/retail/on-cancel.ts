@@ -1,679 +1,721 @@
 export const onCancelSchema = {
-  type: 'object',
+  type: "object",
   properties: {
     context: {
-      type: 'object',
+      type: "object",
       properties: {
         domain: {
-          type: 'string',
+          type: "string",
           minLength: 1,
         },
         country: {
-          type: 'string',
-          const: 'IND',
+          type: "string",
+          const: "IND",
         },
         city: {
-          type: 'string',
+          type: "string",
           minLength: 1,
         },
         action: {
-          type: 'string',
-          const: 'on_cancel',
+          type: "string",
+          const: "on_cancel",
         },
         core_version: {
-          type: 'string',
-          enum: ['1.2.5'],
+          type: "string",
+          enum: ["1.2.5", "1.2.0"],
           minLength: 1,
         },
         bap_id: {
-          type: 'string',
+          type: "string",
           minLength: 1,
         },
         bap_uri: {
-          type: 'string',
-          format: 'url',
+          type: "string",
+          format: "url",
         },
         bpp_id: {
-          type: 'string',
+          type: "string",
           minLength: 1,
         },
         bpp_uri: {
-          type: 'string',
-          format: 'url',
+          type: "string",
+          format: "url",
         },
         transaction_id: {
-          type: 'string',
+          type: "string",
           minLength: 1,
         },
         message_id: {
-          type: 'string',
+          type: "string",
           minLength: 1,
         },
         timestamp: {
-          type: 'string',
-          format: 'rfc3339-date-time',
+          type: "string",
+          format: "rfc3339-date-time",
         },
         ttl: {
-          type: 'string',
-          format: 'duration',
+          type: "string",
+          format: "duration",
         },
       },
       required: [
-        'domain',
-        'country',
-        'city',
-        'action',
-        'core_version',
-        'bap_id',
-        'bap_uri',
-        'bpp_id',
-        'bpp_uri',
-        'transaction_id',
-        'message_id',
-        'timestamp',
-        'ttl',
+        "domain",
+        "country",
+        "city",
+        "action",
+        "core_version",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp",
+        "ttl",
       ],
     },
     message: {
-      type: 'object',
+      type: "object",
       properties: {
         order: {
-          type: 'object',
+          type: "object",
           properties: {
             id: {
-              type: 'string',
+              type: "string",
               minLength: 1,
-              pattern: '^[a-zA-Z0-9-]{1,32}$|^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
-              errorMessage: 'Order ID should be alphanumeric upto 32 letters max or UUID',
+              pattern:
+                "^[a-zA-Z0-9-]{1,32}$|^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              errorMessage:
+                "Order ID should be alphanumeric upto 32 letters max or UUID",
             },
             state: {
-              type: 'string',
-              enum: ['Cancelled'],
+              type: "string",
+              enum: ["Cancelled"],
             },
             provider: {
-              type: 'object',
+              type: "object",
               properties: {
                 id: {
-                  type: 'string',
+                  type: "string",
                   minLength: 1,
                 },
                 locations: {
-                  type: 'array',
+                  type: "array",
                   items: {
-                    type: 'object',
+                    type: "object",
                     properties: {
                       id: {
-                        type: 'string',
+                        type: "string",
                         minLength: 1,
                       },
                     },
-                    required: ['id'],
+                    required: ["id"],
                   },
                 },
               },
-              required: ['id', 'locations'],
+              required: ["id", "locations"],
             },
             items: {
-              type: 'array',
+              type: "array",
               items: {
-                type: 'object',
+                type: "object",
                 properties: {
                   id: {
-                    type: 'string',
+                    type: "string",
                     minLength: 1,
                   },
                   fulfillment_id: {
-                    type: 'string',
+                    type: "string",
                     minLength: 1,
                   },
                   quantity: {
-                    type: 'object',
+                    type: "object",
                     properties: {
                       count: {
-                        type: 'integer',
+                        type: "integer",
                       },
                     },
-                    required: ['count'],
+                    required: ["count"],
                   },
                 },
-                required: ['id', 'fulfillment_id', 'quantity'],
+                required: ["id", "fulfillment_id", "quantity"],
               },
             },
             billing: {
-              type: 'object',
+              type: "object",
               properties: {
                 name: {
-                  type: 'string',
+                  type: "string",
                   minLength: 1,
                 },
                 address: {
-                  type: 'object',
+                  type: "object",
                   properties: {
                     name: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                     building: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                     locality: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                     city: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                     state: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                     country: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                     area_code: {
-                      type: 'string',
+                      type: "string",
                       minLength: 1,
                     },
                   },
-                  required: ['name', 'building', 'locality', 'city', 'state', 'country', 'area_code'],
+                  required: [
+                    "name",
+                    "building",
+                    "locality",
+                    "city",
+                    "state",
+                    "country",
+                    "area_code",
+                  ],
                 },
                 email: {
-                  type: 'string',
-                  format: 'email',
+                  type: "string",
+                  format: "email",
                 },
                 phone: {
-                  type: 'string',
+                  type: "string",
                   minLength: 10,
                   maxLength: 11,
                 },
                 created_at: {
-                  type: 'string',
-                  format: 'rfc3339-date-time',
+                  type: "string",
+                  format: "rfc3339-date-time",
                 },
                 updated_at: {
-                  type: 'string',
-                  format: 'rfc3339-date-time',
+                  type: "string",
+                  format: "rfc3339-date-time",
                 },
               },
-              required: ['name', 'address', 'phone', 'created_at', 'updated_at'],
+              required: [
+                "name",
+                "address",
+                "phone",
+                "created_at",
+                "updated_at",
+              ],
             },
             cancellation: {
-              type: 'object',
+              type: "object",
               properties: {
                 cancelled_by: {
-                  type: 'string',
+                  type: "string",
                   minLength: 1,
                 },
                 reason: {
-                  type: 'object',
+                  type: "object",
                   properties: {
                     id: {
-                      type: 'string',
+                      type: "string",
                       minLength: 3,
                       maxLength: 3,
                     },
                   },
-                  required: ['id'],
+                  required: ["id"],
                 },
               },
-              required: ['cancelled_by', 'reason'],
+              required: ["cancelled_by", "reason"],
             },
             fulfillments: {
-              type: 'array',
+              type: "array",
               items: {
-                type: 'object',
+                type: "object",
                 properties: {
                   id: {
-                    type: 'string',
+                    type: "string",
                     minLength: 1,
                   },
-                  '@ondc/org/provider_name': {
-                    type: 'string',
+                  "@ondc/org/provider_name": {
+                    type: "string",
                     minLength: 1,
                   },
                   state: {
-                    type: 'object',
+                    type: "object",
                     properties: {
                       descriptor: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           code: {
-                            type: 'string',
+                            type: "string",
                             minLength: 1,
-                            enum: ['Cancelled', 'RTO-Initiated'],
+                            enum: ["Cancelled", "RTO-Initiated"],
                           },
                         },
-                        required: ['code'],
+                        required: ["code"],
                       },
                     },
-                    required: ['descriptor'],
+                    required: ["descriptor"],
                   },
                   type: {
-                    type: 'string',
+                    type: "string",
                     minLength: 1,
                   },
                   tracking: {
-                    type: 'boolean',
+                    type: "boolean",
                   },
                   start: {
-                    type: 'object',
+                    type: "object",
                     properties: {
                       location: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           id: {
-                            type: 'string',
+                            type: "string",
                           },
                           descriptor: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               name: {
-                                type: 'string',
+                                type: "string",
                               },
                             },
-                            required: ['name'],
+                            required: ["name"],
                           },
                           gps: {
-                            type: 'string',
+                            type: "string",
                           },
                           address: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               locality: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               city: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               area_code: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                                 maxLength: 6,
                               },
                               state: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                             },
-                            required: ['locality', 'city', 'area_code', 'state'],
+                            required: [
+                              "locality",
+                              "city",
+                              "area_code",
+                              "state",
+                            ],
                           },
                         },
-                        required: ['id', 'descriptor', 'gps', 'address'],
+                        required: ["id", "descriptor", "gps", "address"],
                       },
                       time: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           range: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               start: {
-                                type: 'string',
-                                format: 'rfc3339-date-time',
+                                type: "string",
+                                format: "rfc3339-date-time",
                               },
                               end: {
-                                type: 'string',
-                                format: 'rfc3339-date-time',
+                                type: "string",
+                                format: "rfc3339-date-time",
                               },
                             },
-                            required: ['start', 'end'],
+                            required: ["start", "end"],
                           },
                         },
-                        required: ['range'],
+                        required: ["range"],
                       },
                       contact: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           phone: {
-                            type: 'string',
+                            type: "string",
                             minLength: 10,
                             maxLength: 11,
                           },
                           email: {
-                            type: 'string',
-                            format: 'email',
+                            type: "string",
+                            format: "email",
                           },
                         },
-                        required: ['phone'],
+                        required: ["phone"],
                       },
                     },
-                    required: ['location', 'contact'],
+                    required: ["location", "contact"],
                   },
                   end: {
-                    type: 'object',
+                    type: "object",
                     properties: {
                       location: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           gps: {
-                            type: 'string',
+                            type: "string",
                             minLength: 1,
                           },
                           address: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               name: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               building: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               locality: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               city: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               state: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               country: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                               area_code: {
-                                type: 'string',
+                                type: "string",
                                 minLength: 1,
                               },
                             },
-                            required: ['name', 'building', 'locality', 'city', 'state', 'country', 'area_code'],
+                            required: [
+                              "name",
+                              "building",
+                              "locality",
+                              "city",
+                              "state",
+                              "country",
+                              "area_code",
+                            ],
                           },
                         },
-                        required: ['gps', 'address'],
+                        required: ["gps", "address"],
                       },
                       time: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           range: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               start: {
-                                type: 'string',
-                                format: 'rfc3339-date-time',
+                                type: "string",
+                                format: "rfc3339-date-time",
                               },
                               end: {
-                                type: 'string',
-                                format: 'rfc3339-date-time',
+                                type: "string",
+                                format: "rfc3339-date-time",
                               },
                             },
-                            required: ['start', 'end'],
+                            required: ["start", "end"],
                           },
                         },
-                        required: ['range'],
+                        required: ["range"],
                       },
                       person: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           name: {
-                            type: 'string',
+                            type: "string",
                             minLength: 1,
                           },
                         },
-                        required: ['name'],
+                        required: ["name"],
                       },
                       contact: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           phone: {
-                            type: 'string',
+                            type: "string",
                             minLength: 10,
                             maxLength: 11,
                           },
                           email: {
-                            type: 'string',
-                            format: 'email',
+                            type: "string",
+                            format: "email",
                           },
                         },
-                        required: ['phone'],
+                        required: ["phone"],
                       },
                     },
-                    required: ['location', 'person', 'contact'],
+                    required: ["location", "person", "contact"],
                   },
                   tags: {
-                    type: 'array',
+                    type: "array",
                     items: {
-                      type: 'object',
+                      type: "object",
                       properties: {
                         code: {
-                          type: 'string',
-                          enum: ['cancel_request', 'igm_request', 'precancel_state', 'quote_trail', 'routing', 'tracking'],
+                          type: "string",
+                          enum: [
+                            "cancel_request",
+                            "igm_request",
+                            "precancel_state",
+                            "quote_trail",
+                            "routing",
+                            "tracking",
+                          ],
                         },
                         list: {
-                          type: 'array',
+                          type: "array",
                           items: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               code: {
-                                type: 'string',
+                                type: "string",
                                 enum: [
-                                  'reason_id',
-                                  'initiated_by',
-                                  'fulfillment_state',
-                                  'updated_at',
-                                  'retry_count',
-                                  'rto_id',
-                                  'id',
-                                  'currency',
-                                  'value',
-                                  'type',
-                                  'subtype'
+                                  "reason_id",
+                                  "initiated_by",
+                                  "fulfillment_state",
+                                  "updated_at",
+                                  "retry_count",
+                                  "rto_id",
+                                  "id",
+                                  "currency",
+                                  "value",
+                                  "type",
+                                  "subtype",
                                 ],
                               },
                               value: {
-                                type: 'string',
+                                type: "string",
                               },
                             },
-                            required: ['code', 'value'],
+                            required: ["code", "value"],
                           },
                         },
                       },
-                      required: ['code', 'list'],
+                      required: ["code", "list"],
                     },
                     additionalProperties: false,
                   },
                 },
-                required: ['id', 'state', 'type'],
+                required: ["id", "state", "type"],
               },
             },
             quote: {
-              type: 'object',
+              type: "object",
               properties: {
                 price: {
-                  type: 'object',
+                  type: "object",
                   properties: {
                     currency: {
-                      type: 'string',
+                      type: "string",
                     },
                     value: {
-                      type: 'string',
-                      pattern: '^[0-9]+(\.[0-9]{1,2})?$', errorMessage: 'Price value should be a number in string with upto 2 decimal places'
+                      type: "string",
+                      pattern: "^[0-9]+(.[0-9]{1,2})?$",
+                      errorMessage:
+                        "Price value should be a number in string with upto 2 decimal places",
                     },
                   },
-                  required: ['currency', 'value'],
+                  required: ["currency", "value"],
                 },
                 breakup: {
-                  type: 'array',
+                  type: "array",
                   items: {
-                    type: 'object',
+                    type: "object",
                     properties: {
-                      '@ondc/org/item_id': {
-                        type: 'string',
+                      "@ondc/org/item_id": {
+                        type: "string",
                       },
-                      '@ondc/org/item_quantity': {
-                        type: 'object',
+                      "@ondc/org/item_quantity": {
+                        type: "object",
                         properties: {
                           count: {
-                            type: 'integer',
+                            type: "integer",
                           },
                         },
-                        required: ['count'],
+                        required: ["count"],
                       },
-                      '@ondc/org/title_type': {
-                        type: 'string',
+                      "@ondc/org/title_type": {
+                        type: "string",
                       },
                       price: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           currency: {
-                            type: 'string',
+                            type: "string",
                           },
                           value: {
-                            type: 'string',
-                            pattern: '^[-+]?[0-9]+(\.[0-9]{1,2})?$', errorMessage: 'Price value should be a number in string with upto 2 decimal places'
+                            type: "string",
+                            pattern: "^[-+]?[0-9]+(.[0-9]{1,2})?$",
+                            errorMessage:
+                              "Price value should be a number in string with upto 2 decimal places",
                           },
                         },
-                        required: ['currency', 'value'],
+                        required: ["currency", "value"],
                       },
                       item: {
-                        type: 'object',
+                        type: "object",
                         properties: {
                           price: {
-                            type: 'object',
+                            type: "object",
                             properties: {
                               currency: {
-                                type: 'string',
+                                type: "string",
                               },
                               value: {
-                                type: 'string',
-                                pattern: '^[-+]?[0-9]+(\.[0-9]{1,2})?$', errorMessage: 'Price value should be a number in string with upto 2 decimal places'
+                                type: "string",
+                                pattern: "^[-+]?[0-9]+(.[0-9]{1,2})?$",
+                                errorMessage:
+                                  "Price value should be a number in string with upto 2 decimal places",
                               },
                             },
-                            required: ['currency', 'value'],
+                            required: ["currency", "value"],
                           },
                         },
                       },
                     },
-                    required: ['@ondc/org/item_id', '@ondc/org/title_type'],
+                    required: ["@ondc/org/item_id", "@ondc/org/title_type"],
                   },
                 },
                 ttl: {
-                  type: 'string',
-                  format: 'duration',
+                  type: "string",
+                  format: "duration",
                 },
               },
-              required: ['price', 'breakup', 'ttl'],
+              required: ["price", "breakup", "ttl"],
             },
             payment: {
-              type: 'object',
+              type: "object",
               properties: {
                 uri: {
-                  type: 'string',
+                  type: "string",
                 },
                 tl_method: {
-                  type: 'string',
+                  type: "string",
                 },
                 params: {
-                  type: 'object',
+                  type: "object",
                   properties: {
                     currency: {
-                      type: 'string',
+                      type: "string",
                     },
                     transaction_id: {
-                      type: 'string',
+                      type: "string",
                     },
                     amount: {
-                      type: 'string',
+                      type: "string",
                     },
                   },
-                  required: ['currency', 'amount'],
+                  required: ["currency", "amount"],
                 },
                 status: {
-                  type: 'string',
+                  type: "string",
                 },
                 type: {
-                  type: 'string',
+                  type: "string",
                 },
                 collected_by: {
-                  type: 'string',
+                  type: "string",
                 },
-                '@ondc/org/buyer_app_finder_fee_type': {
-                  type: 'string',
+                "@ondc/org/buyer_app_finder_fee_type": {
+                  type: "string",
                 },
-                '@ondc/org/buyer_app_finder_fee_amount': {
-                  type: 'string',
+                "@ondc/org/buyer_app_finder_fee_amount": {
+                  type: "string",
                 },
-                '@ondc/org/settlement_details': {
-                  type: 'array',
+                "@ondc/org/settlement_details": {
+                  type: "array",
                   items: {
-                    type: 'object',
+                    type: "object",
                     properties: {
                       settlement_counterparty: {
-                        type: 'string',
+                        type: "string",
                       },
                       settlement_phase: {
-                        type: 'string',
+                        type: "string",
                       },
                       beneficiary_name: {
-                        type: 'string',
+                        type: "string",
                       },
                       settlement_type: {
-                        type: 'string',
+                        type: "string",
                       },
                       upi_address: {
-                        type: 'string',
+                        type: "string",
                       },
                       settlement_bank_account_no: {
-                        type: 'string',
+                        type: "string",
                       },
                       settlement_ifsc_code: {
-                        type: 'string',
+                        type: "string",
                       },
                       bank_name: {
-                        type: 'string',
+                        type: "string",
                       },
                       branch_name: {
-                        type: 'string',
+                        type: "string",
                       },
                     },
                   },
                 },
               },
               required: [
-                'params',
-                'status',
-                'type',
-                'collected_by',
-                '@ondc/org/buyer_app_finder_fee_type',
-                '@ondc/org/buyer_app_finder_fee_amount',
-                '@ondc/org/settlement_details',
+                "params",
+                "status",
+                "type",
+                "collected_by",
+                "@ondc/org/buyer_app_finder_fee_type",
+                "@ondc/org/buyer_app_finder_fee_amount",
+                "@ondc/org/settlement_details",
               ],
             },
             created_at: {
-              type: 'string',
-              format: 'rfc3339-date-time',
+              type: "string",
+              format: "rfc3339-date-time",
             },
             updated_at: {
-              type: 'string',
-              format: 'rfc3339-date-time',
+              type: "string",
+              format: "rfc3339-date-time",
             },
           },
           required: [
-            'id',
-            'state',
-            'provider',
-            'items',
-            'billing',
-            'cancellation',
-            'fulfillments',
-            'quote',
-            'payment',
-            'created_at',
-            'updated_at',
+            "id",
+            "state",
+            "provider",
+            "items",
+            "billing",
+            "cancellation",
+            "fulfillments",
+            "quote",
+            "payment",
+            "created_at",
+            "updated_at",
           ],
           additionalProperties: false,
         },
       },
-      required: ['order'],
+      required: ["order"],
     },
   },
-  required: ['context', 'message'],
-}
+  required: ["context", "message"],
+};
