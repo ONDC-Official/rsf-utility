@@ -32,7 +32,7 @@ export const devFormat = combine(
 	splat(),
 	errors({ stack: true }),
 	printf((info) => {
-		const { timestamp, level, message, stack, ...meta } = info;
+		const { timestamp, level, message, stack, scope, ...meta } = info;
 		const metaString = Object.entries(meta)
 			.map(([key, value]) => {
 				if (typeof value === "object") {
@@ -41,12 +41,20 @@ export const devFormat = combine(
 				return `${key}: ${value}`;
 			})
 			.join("\n");
-		// Handle errors with stack traces
-		if (stack) {
-			return `----------\n${timestamp} ${message}\n${metaString}\n${stack}`;
+
+		// Colorize the 'scope' key if present
+		let scopeString = "";
+		if (scope) {
+			// Use ANSI escape code for cyan (36m) as a "cool" color
+			scopeString = `\x1b[36mscope: ${scope}\x1b[0m\n`;
 		}
 
-		return `----------\n${timestamp} ${message}\n${metaString}`;
+		// Handle errors with stack traces
+		if (stack) {
+			return `----------\n${timestamp} ${message}\n${scopeString}${metaString}\n${stack}`;
+		}
+
+		return `----------\n${timestamp} ${message}\n${scopeString}${metaString}`;
 	})
 );
 

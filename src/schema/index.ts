@@ -3,6 +3,7 @@ import { onConfirmSchema } from "./retail/on-confirm";
 import { onStatusSchema } from "./retail/on-status";
 import { onUpdateSchema } from "./retail/on-update";
 import logger from "../utils/logger";
+import { UserAjvSchema } from "./models/user.schema";
 export default function getSchema(action: string) {
 	switch (action) {
 		case "on_confirm":

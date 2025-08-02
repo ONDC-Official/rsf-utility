@@ -15,13 +15,16 @@ export function validateSchemaForAction(
 			errors: `Schema for action '${action}' not found.`,
 		};
 	}
+	return validateGivenSchema(schema, actionPayload);
+}
+
+export function validateGivenSchema(schema: any, actionPayload: any) {
 	const ajv = new Ajv({ allErrors: true });
 	addFormats(ajv);
 	const validate = ajv.compile(schema as any);
 	const valid = validate(actionPayload);
 	if (!valid) return createErrorMessage(validate, valid);
-	logger.debug("L0 validations result", {
-		...loggerMetaData,
+	logger.debug("validations result", {
 		valid: valid,
 		errors: validate.errors,
 	});
