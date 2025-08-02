@@ -4,6 +4,8 @@ import { Request, Response, NextFunction } from "express";
 import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
 
+const uploadLogger = logger.child("file-upload-middleware");
+
 const upload = multer({
   storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
@@ -12,8 +14,9 @@ const upload = multer({
       !file.originalname.endsWith(".json") ||
       file.mimetype !== "application/json"
     ) {
-      logger.warning(
-        `Invalid file type uploaded: ${file.originalname} (${file.mimetype})`
+      uploadLogger.warning(
+        `Invalid file type uploaded: ${file.originalname} (${file.mimetype})`,
+        getLoggerMeta(req)
       );
       //   return cb(new Error("Only JSON file(s) uploads are allowed"));
     }

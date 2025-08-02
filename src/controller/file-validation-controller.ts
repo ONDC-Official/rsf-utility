@@ -4,6 +4,7 @@ import { validateSchemaForAction } from "../services/schema.service";
 import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
 
+const fileValidationLogger = logger.child("file-validation-controller");
 /**
  * Schema validation controller for uploaded JSON payloads
  * @returns Validated JSON payloads in req.validatedPayloads (req object of Express)
@@ -40,8 +41,9 @@ export const schemaValidator = (
           //       "context.action is required for validation <check uploaded payloads>",
           //   });
         }
-        logger.info(
-          `file-validation-controller: Validating payload for filename:${filename} & action: ${action}`
+        fileValidationLogger.info(
+          `Validating payload for filename:${filename} & action: ${action}`,
+          getLoggerMeta(req)
         );
         const { valid, schemaErrors } = validateSchemaForAction(
           payload,
@@ -65,7 +67,11 @@ export const schemaValidator = (
           logger.info("schema validation passed", getLoggerMeta(req));
         }
       } catch (error) {
-        logger.error("Error in schema validation", getLoggerMeta(req), error);
+        fileValidationLogger.error(
+          "Error in schema validation",
+          getLoggerMeta(req),
+          error
+        );
         errors.push({
           filename: filename,
           error: error instanceof Error ? error.message : "Unknown error",
@@ -76,6 +82,12 @@ export const schemaValidator = (
         // });
       }
     });
+
+    fileValidationLogger.info(
+      "saving validated payloads",
+      getLoggerMeta(req),
+      validated
+    );
 
     (req as any).validatedPayloads = validated;
     // Clean up processed JSON to avoid misuse or memory leak
@@ -89,7 +101,11 @@ export const schemaValidator = (
     }
     next();
   } catch (error) {
-    logger.error("Error in schema validation", getLoggerMeta(req), error);
+    fileValidationLogger.error(
+      "Error in schema validation",
+      getLoggerMeta(req),
+      error
+    );
     res.status(500).json({
       error: "Internal server error during schema validation",
       details: error instanceof Error ? error.message : "Unknown error",
