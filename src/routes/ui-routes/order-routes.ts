@@ -1,5 +1,9 @@
 import { Router } from "express";
+import { container } from "../../di/container";
 
-const router = Router();
+const orderRoutes = Router();
+const orderController = container.orderController;
 
-export default router;
+
+orderRoutes.get("/", orderController.getOrders);
+export default orderRoutes;
