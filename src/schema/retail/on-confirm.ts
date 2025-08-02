@@ -1,4 +1,4 @@
-export const onConfirmSchema = {
+const onConfirmSchema = {
   type: "object",
   properties: {
     context: {
@@ -8,13 +8,21 @@ export const onConfirmSchema = {
           type: "string",
           minLength: 1,
         },
+        country: {
+          type: "string",
+          const: "IND",
+        },
+        city: {
+          type: "string",
+          minLength: 1,
+        },
         action: {
           type: "string",
           const: "on_confirm",
         },
         core_version: {
           type: "string",
-          enum: ["1.2.5"],
+          // enum: ["1.2.5", "1.2.0"],
           minLength: 1,
         },
         bap_id: {
@@ -23,7 +31,6 @@ export const onConfirmSchema = {
         },
         bap_uri: {
           type: "string",
-          minLength: 1,
           format: "url",
         },
         bpp_id: {
@@ -32,7 +39,6 @@ export const onConfirmSchema = {
         },
         bpp_uri: {
           type: "string",
-          minLength: 1,
           format: "url",
         },
         transaction_id: {
@@ -42,14 +48,6 @@ export const onConfirmSchema = {
         message_id: {
           type: "string",
           minLength: 1,
-        },
-        city: {
-          type: "string",
-          minLength: 1,
-        },
-        country: {
-          type: "string",
-          const: "IND",
         },
         timestamp: {
           type: "string",
@@ -62,6 +60,8 @@ export const onConfirmSchema = {
       },
       required: [
         "domain",
+        "country",
+        "city",
         "action",
         "core_version",
         "bap_id",
@@ -70,9 +70,8 @@ export const onConfirmSchema = {
         "bpp_uri",
         "transaction_id",
         "message_id",
-        "city",
-        "country",
         "timestamp",
+        // "ttl",
       ],
     },
     message: {
@@ -86,8 +85,7 @@ export const onConfirmSchema = {
             },
             state: {
               type: "string",
-              // enum: ['Created', 'Accepted', 'Cancelled'],
-              enum: ["Created"],
+              enum: ["Created", "Accepted", "Cancelled"],
             },
             provider: {
               type: "object",
@@ -104,11 +102,11 @@ export const onConfirmSchema = {
                         type: "string",
                       },
                     },
-                    required: ["id"],
+                    // required: ["id"],
                   },
                 },
               },
-              required: ["id", "locations"],
+              // required: ["id", "locations"],
             },
             items: {
               type: "array",
@@ -151,14 +149,14 @@ export const onConfirmSchema = {
                               },
                               value: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                             },
-                            required: ["code", "value"],
+                            // required: ["code", "value"],
                           },
                         },
                       },
-                      required: ["code", "list"],
+                      // required: ["code", "list"],
                     },
                   },
                 },
@@ -170,74 +168,75 @@ export const onConfirmSchema = {
               properties: {
                 name: {
                   type: "string",
+                  // minLength: 1,
                 },
                 address: {
                   type: "object",
                   properties: {
                     name: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     building: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     locality: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     city: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     state: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     country: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     area_code: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                   },
-                  required: [
-                    "name",
-                    "building",
-                    "locality",
-                    "city",
-                    "state",
-                    "country",
-                    "area_code",
-                  ],
+                  // required: [
+                  //   "name",
+                  //   "building",
+                  //   "locality",
+                  //   "city",
+                  //   "state",
+                  //   "country",
+                  //   "area_code",
+                  // ],
                 },
                 email: {
                   type: "string",
-                  format: "email",
+                  // format: "email",
                 },
                 phone: {
                   type: "string",
-                  minLength: 10,
-                  maxLength: 11,
+                  // minLength: 10,
+                  // maxLength: 11,
                 },
                 created_at: {
                   type: "string",
-                  format: "rfc3339-date-time",
+                  // format: "rfc3339-date-time",
                 },
                 updated_at: {
                   type: "string",
-                  format: "rfc3339-date-time",
+                  // format: "rfc3339-date-time",
                 },
               },
-              required: [
-                "name",
-                "address",
-                "phone",
-                "created_at",
-                "updated_at",
-              ],
+              // required: [
+              //   "name",
+              //   "address",
+              //   "phone",
+              //   "created_at",
+              //   "updated_at",
+              // ],
             },
             fulfillments: {
               type: "array",
@@ -246,11 +245,15 @@ export const onConfirmSchema = {
                 properties: {
                   id: {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
                   },
                   "@ondc/org/provider_name": {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
+                  },
+                  "@ondc/org/TAT": {
+                    type: "string",
+                    format: "duration",
                   },
                   state: {
                     type: "object",
@@ -260,7 +263,7 @@ export const onConfirmSchema = {
                         properties: {
                           code: {
                             type: "string",
-                            const: "Pending",
+                            enum: ["Pending", "Cancelled"],
                           },
                         },
                         required: ["code"],
@@ -270,7 +273,7 @@ export const onConfirmSchema = {
                   },
                   type: {
                     type: "string",
-                    enum: ["Delivery", "Self-Pickup", "Buyer-Delivery"],
+                    // enum: ["Delivery", "Self-Pickup", "Buyer-Delivery"],
                   },
                   tracking: {
                     type: "boolean",
@@ -281,36 +284,48 @@ export const onConfirmSchema = {
                       location: {
                         type: "object",
                         properties: {
-                          id: { type: "string", minLength: 1 },
+                          id: {
+                            type: "string",
+                            // minLength: 1
+                          },
                           descriptor: {
                             type: "object",
                             properties: {
                               name: { type: "string" },
                             },
-                            required: ["name"],
+                            // required: ["name"],
                           },
                           gps: { type: "string" },
                           address: {
                             type: "object",
                             properties: {
-                              locality: { type: "string", minLength: 1 },
-                              city: { type: "string", minLength: 1 },
+                              locality: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              city: {
+                                type: "string",
+                                // minLength: 1
+                              },
                               area_code: {
                                 type: "string",
-                                minLength: 1,
-                                maxLength: 6,
+                                // minLength: 1,
+                                // maxLength: 6,
                               },
-                              state: { type: "string", minLength: 1 },
+                              state: {
+                                type: "string",
+                                // minLength: 1
+                              },
                             },
-                            required: [
-                              "locality",
-                              "city",
-                              "area_code",
-                              "state",
-                            ],
+                            // required: [
+                            //   "locality",
+                            //   "city",
+                            //   "area_code",
+                            //   "state",
+                            // ],
                           },
                         },
-                        required: ["id", "descriptor", "gps", "address"],
+                        required: ["descriptor"],
                       },
                       time: {
                         type: "object",
@@ -318,38 +333,59 @@ export const onConfirmSchema = {
                           range: {
                             type: "object",
                             properties: {
-                              start: { type: "string", minLength: 1 },
-                              end: { type: "string", minLength: 1 },
+                              start: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              end: {
+                                type: "string",
+                                //  minLength: 1
+                              },
                             },
-                            required: ["start", "end"],
+                            // required: ["start", "end"],
                           },
                         },
-                        required: ["range"],
+                        // required: ["range"],
                       },
                       instructions: {
                         type: "object",
                         properties: {
-                          code: { type: "string", minLength: 1 },
-                          name: { type: "string", minLength: 1 },
-                          short_desc: { type: "string", minLength: 1 },
-                          long_desc: { type: "string", minLength: 1 },
+                          code: {
+                            type: "string",
+                            //  minLength: 1
+                          },
+                          name: {
+                            type: "string",
+                            // minLength: 1
+                          },
+                          short_desc: {
+                            type: "string",
+                            //  minLength: 1
+                          },
+                          long_desc: {
+                            type: "string",
+                            // minLength: 1
+                          },
                         },
-                        required: ["code", "name", "short_desc", "long_desc"],
+                        // required: ["code", "name", "short_desc", "long_desc"],
                       },
                       contact: {
                         type: "object",
                         properties: {
                           phone: {
                             type: "string",
-                            minLength: 10,
-                            maxLength: 11,
+                            // minLength: 10,
+                            // maxLength: 11,
                           },
-                          email: { type: "string", format: "email" },
+                          email: {
+                            type: "string",
+                            // format: "email"
+                          },
                         },
-                        required: ["phone"],
+                        // required: ["phone"],
                       },
                     },
-                    required: ["location", "contact"],
+                    // required: ["location", "contact"],
                   },
                   end: {
                     type: "object",
@@ -361,30 +397,48 @@ export const onConfirmSchema = {
                           address: {
                             type: "object",
                             properties: {
-                              name: { type: "string", minLength: 1 },
-                              building: { type: "string", minLength: 1 },
-                              locality: { type: "string", minLength: 1 },
-                              city: { type: "string", minLength: 1 },
-                              state: { type: "string", minLength: 1 },
-                              country: { type: "string", minLength: 1 },
+                              name: {
+                                type: "string",
+                                //  minLength: 1
+                              },
+                              building: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              locality: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              city: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              state: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              country: {
+                                type: "string",
+                                // minLength: 1
+                              },
                               area_code: {
                                 type: "string",
-                                minLength: 1,
-                                maxLength: 6,
+                                // minLength: 1,
+                                // maxLength: 6,
                               },
                             },
-                            required: [
-                              "name",
-                              "building",
-                              "locality",
-                              "city",
-                              "state",
-                              "country",
-                              "area_code",
-                            ],
+                            // required: [
+                            //   "name",
+                            //   "building",
+                            //   "locality",
+                            //   "city",
+                            //   "state",
+                            //   "country",
+                            //   "area_code",
+                            // ],
                           },
                         },
-                        required: ["gps", "address"],
+                        // required: ["gps", "address"],
                       },
                       time: {
                         type: "object",
@@ -392,77 +446,90 @@ export const onConfirmSchema = {
                           range: {
                             type: "object",
                             properties: {
-                              start: { type: "string", minLength: 1 },
-                              end: { type: "string", minLength: 1 },
+                              start: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              end: {
+                                type: "string",
+                                // minLength: 1
+                              },
                             },
-                            required: ["start", "end"],
+                            // required: ["start", "end"],
                           },
                         },
-                        required: ["range"],
+                        // required: ["range"],
                       },
                       person: {
                         type: "object",
                         properties: {
-                          name: { type: "string", minLength: 1 },
+                          name: {
+                            type: "string",
+                            // minLength: 1
+                          },
                         },
-                        required: ["name"],
+                        // required: ["name"],
                       },
                       contact: {
                         type: "object",
                         properties: {
                           phone: {
                             type: "string",
-                            minLength: 10,
-                            maxLength: 11,
+                            // minLength: 10,
+                            // maxLength: 11,
                           },
-                          email: { type: "string", format: "email" },
+                          email: {
+                            type: "string",
+                            //  format: "email"
+                          },
                         },
-                        required: ["phone"],
+                        // required: ["phone"],
                       },
                     },
-                    required: ["location", "person", "contact"],
+                    // required: ["location", "person", "contact"],
                   },
                 },
 
                 // Always required
                 required: [
                   "id",
-                  "@ondc/org/provider_name",
+                  // "@ondc/org/provider_name",
                   "state",
                   "type",
-                  "tracking",
-                  "start",
+                  "@ondc/org/TAT",
+                  // "tracking",
+                  // "start",
                 ],
 
-                // Conditionally require `end` if type !== "Self-Pickup"
-                allOf: [
-                  {
-                    if: {
-                      properties: { type: { const: "Self-Pickup" } },
-                    },
-                    then: {
-                      required: [
-                        "id",
-                        "@ondc/org/provider_name",
-                        "state",
-                        "type",
-                        "tracking",
-                        "start",
-                      ],
-                    },
-                    else: {
-                      required: [
-                        "id",
-                        "@ondc/org/provider_name",
-                        "state",
-                        "type",
-                        "tracking",
-                        "start",
-                        "end",
-                      ],
-                    },
-                  },
-                ],
+                // // Conditionally require `end` if type !== "Self-Pickup"
+                // allOf: [
+                //   {
+                //     if: {
+                //       properties: { type: { const: "Self-Pickup" } },
+                //     },
+                //     then: {
+                //       required: [
+                //         "id",
+                //         "@ondc/org/provider_name",
+                //         "state",
+                //         "type",
+                //         "tracking",
+                //         "start",
+                //       ],
+                //     },
+                //     else: {
+                //       required: [
+                //         "id",
+                //         "@ondc/org/provider_name",
+                //         "state",
+                //         "type",
+                //         "tracking",
+                //         "start",
+                //         "end",
+                //       ],
+                //     },
+                //   },
+                // ],
               },
             },
             quote: {
@@ -473,7 +540,7 @@ export const onConfirmSchema = {
                   properties: {
                     currency: {
                       type: "string",
-                      pattern: "^(?!s*$).+",
+                      // pattern: "^(?!s*$).+",
                     },
                     value: {
                       type: "string",
@@ -508,22 +575,22 @@ export const onConfirmSchema = {
                       },
                       "@ondc/org/title_type": {
                         type: "string",
-                        enum: [
-                          "item",
-                          "delivery",
-                          "packing",
-                          "tax",
-                          "misc",
-                          "discount",
-                          "offer",
-                        ],
+                        // enum: [
+                        //   "item",
+                        //   "delivery",
+                        //   "packing",
+                        //   "tax",
+                        //   "misc",
+                        //   "discount",
+                        //   "offer",
+                        // ],
                       },
                       price: {
                         type: "object",
                         properties: {
                           currency: {
                             type: "string",
-                            pattern: "^(?!s*$).+",
+                            // pattern: "^(?!s*$).+",
                           },
                           value: {
                             type: "string",
@@ -546,7 +613,7 @@ export const onConfirmSchema = {
                             properties: {
                               currency: {
                                 type: "string",
-                                pattern: "^(?!s*$).+",
+                                // pattern: "^(?!s*$).+",
                               },
                               value: {
                                 type: "string",
@@ -576,14 +643,14 @@ export const onConfirmSchema = {
                                       },
                                       value: {
                                         type: "string",
-                                        minLength: 1,
+                                        // minLength: 1,
                                       },
                                     },
-                                    required: ["code", "value"],
+                                    // required: ["code", "value"],
                                   },
                                 },
                               },
-                              required: ["code", "list"],
+                              // required: ["code", "list"],
                             },
                           },
                         },
@@ -591,7 +658,7 @@ export const onConfirmSchema = {
                     },
                     required: [
                       "@ondc/org/item_id",
-                      "title",
+                      // "title",
                       "@ondc/org/title_type",
                       "price",
                     ],
@@ -602,7 +669,11 @@ export const onConfirmSchema = {
                   format: "duration",
                 },
               },
-              required: ["price", "breakup", "ttl"],
+              required: [
+                "price",
+                "breakup",
+                // "ttl"
+              ],
             },
             payment: {
               type: "object",
@@ -671,7 +742,7 @@ export const onConfirmSchema = {
                       },
                       settlement_type: {
                         type: "string",
-                        enum: ["upi", "neft", "rtgs"],
+                        // enum: ["upi", "neft", "rtgs"],
                       },
                       upi_address: { type: "string" },
                       settlement_bank_account_no: {
@@ -686,57 +757,57 @@ export const onConfirmSchema = {
                       },
                       branch_name: { type: "string" },
                     },
-                    allOf: [
-                      {
-                        if: {
-                          properties: {
-                            settlement_type: {
-                              const: "upi",
-                            },
-                          },
-                        },
-                        then: {
-                          properties: {
-                            upi_address: {
-                              type: "string",
-                            },
-                          },
-                          required: ["upi_address"],
-                        },
-                      },
-                      {
-                        if: {
-                          properties: {
-                            settlement_type: {
-                              enum: ["rtgs", "neft"],
-                            },
-                          },
-                        },
-                        then: {
-                          properties: {
-                            settlement_bank_account_no: {
-                              type: "string",
-                            },
-                            settlement_ifsc_code: {
-                              type: "string",
-                            },
-                            bank_name: { type: "string" },
-                            branch_name: { type: "string" },
-                          },
-                          required: [
-                            "settlement_ifsc_code",
-                            "settlement_bank_account_no",
-                            "bank_name",
-                            "branch_name",
-                          ],
-                        },
-                      },
-                    ],
-                    required: [
-                      "settlement_counterparty",
-                      "settlement_phase",
-                      "settlement_type",
-                    ],
+                    // allOf: [
+                    //   {
+                    //     if: {
+                    //       properties: {
+                    //         settlement_type: {
+                    //           const: "upi",
+                    //         },
+                    //       },
+                    //     },
+                    //     then: {
+                    //       properties: {
+                    //         upi_address: {
+                    //           type: "string",
+                    //         },
+                    //       },
+                    //       required: ["upi_address"],
+                    //     },
+                    //   },
+                    //   {
+                    //     if: {
+                    //       properties: {
+                    //         settlement_type: {
+                    //           enum: ["rtgs", "neft"],
+                    //         },
+                    //       },
+                    //     },
+                    //     then: {
+                    //       properties: {
+                    //         settlement_bank_account_no: {
+                    //           type: "string",
+                    //         },
+                    //         settlement_ifsc_code: {
+                    //           type: "string",
+                    //         },
+                    //         bank_name: { type: "string" },
+                    //         branch_name: { type: "string" },
+                    //       },
+                    //       required: [
+                    //         "settlement_ifsc_code",
+                    //         "settlement_bank_account_no",
+                    //         "bank_name",
+                    //         "branch_name",
+                    //       ],
+                    //     },
+                    //   },
+                    // ],
+                    // required: [
+                    //   "settlement_counterparty",
+                    //   "settlement_phase",
+                    //   "settlement_type",
+                    // ],
                   },
                 },
               },
@@ -747,6 +818,9 @@ export const onConfirmSchema = {
                 "collected_by",
                 "@ondc/org/buyer_app_finder_fee_type",
                 "@ondc/org/buyer_app_finder_fee_amount",
+                "@ondc/org/settlement_basis",
+                "@ondc/org/settlement_window",
+                // "@ondc/org/withholding_amount",
               ],
             },
             tags: {
@@ -760,6 +834,14 @@ export const onConfirmSchema = {
                   },
                   list: {
                     type: "array",
+                    contains: {
+                      type: "object",
+                      properties: {
+                        code: { const: "np_type" },
+                        value: { enum: ["MSN", "ISN"] },
+                      },
+                      required: ["code", "value"],
+                    },
                     items: {
                       allOf: [
                         {
@@ -828,7 +910,7 @@ export const onConfirmSchema = {
                   },
                 },
                 required: ["code", "list"],
-                additionalProperties: false,
+                // additionalProperties: false,
               },
             },
             created_at: {
@@ -860,3 +942,5 @@ export const onConfirmSchema = {
   },
   required: ["context", "message"],
 };
+
+export default onConfirmSchema;

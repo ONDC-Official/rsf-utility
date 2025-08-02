@@ -1,4 +1,4 @@
-export const onUpdateSchema = {
+const onUpdateSchema = {
   type: "object",
   properties: {
     context: {
@@ -22,7 +22,7 @@ export const onUpdateSchema = {
         },
         core_version: {
           type: "string",
-          enum: ["1.2.5"],
+          // enum: ["1.2.5", "1.2.0"],
           minLength: 1,
         },
         bap_id: {
@@ -53,9 +53,15 @@ export const onUpdateSchema = {
           type: "string",
           format: "rfc3339-date-time",
         },
+        ttl: {
+          type: "string",
+          format: "duration",
+        },
       },
       required: [
         "domain",
+        "country",
+        "city",
         "action",
         "core_version",
         "bap_id",
@@ -64,9 +70,8 @@ export const onUpdateSchema = {
         "bpp_uri",
         "transaction_id",
         "message_id",
-        "city",
-        "country",
         "timestamp",
+        // "ttl",
       ],
     },
     message: {
@@ -77,45 +82,118 @@ export const onUpdateSchema = {
           properties: {
             id: {
               type: "string",
-              pattern:
-                "^[a-zA-Z0-9-]{1,32}$|^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-              errorMessage:
-                "Order ID should be alphanumeric upto 32 letters max or UUID",
             },
             state: {
               type: "string",
               enum: [
                 "Created",
                 "Accepted",
-                "Cancelled",
+                "In-progress",
                 "Completed",
-                "Delivered",
+                "Cancelled",
               ],
+            },
+            cancellation: {
+              type: "object",
+              properties: {
+                cancelled_by: {
+                  type: "string",
+                  // minLength: 1,
+                },
+                reason: {
+                  type: "object",
+                  properties: {
+                    id: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    state: {
+                      type: "string",
+                    },
+                  },
+                  // required: ["id", "state"],
+                },
+              },
+              // required: ["cancelled_by", "reason"],
             },
             provider: {
               type: "object",
               properties: {
-                id: { type: "string" },
+                id: {
+                  type: "string",
+                  // minLength: 1,
+                },
                 locations: {
                   type: "array",
                   items: {
                     type: "object",
-                    properties: { id: { type: "string" } },
+                    properties: {
+                      id: {
+                        type: "string",
+                        // minLength: 1,
+                      },
+                    },
+                    // required: ["id"],
                   },
                 },
               },
-              required: ["id", "locations"],
+              // required: ["id", "locations"],
             },
             items: {
               type: "array",
               items: {
                 type: "object",
                 properties: {
-                  id: { type: "string" },
-                  fulfillment_id: { type: "string" },
+                  id: {
+                    type: "string",
+                    minLength: 1,
+                  },
+                  fulfillment_id: {
+                    type: "string",
+                    minLength: 1,
+                  },
                   quantity: {
                     type: "object",
-                    properties: { count: { type: "integer" } },
+                    properties: {
+                      count: {
+                        type: "integer",
+                      },
+                    },
+                    required: ["count"],
+                  },
+                  parent_item_id: {
+                    type: "string",
+                    minLength: 1,
+                  },
+                  tags: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        code: {
+                          type: "string",
+                          // minLength: 1,
+                        },
+                        list: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            properties: {
+                              code: {
+                                type: "string",
+                                // minLength: 1,
+                              },
+                              value: {
+                                type: "string",
+                                // minLength: 1,
+                              },
+                            },
+                            // required: ["code", "value"],
+                          },
+                        },
+                      },
+                      // required: ["code", "list"],
+                    },
                   },
                 },
                 required: ["id", "fulfillment_id", "quantity"],
@@ -124,55 +202,95 @@ export const onUpdateSchema = {
             billing: {
               type: "object",
               properties: {
-                name: { type: "string" },
+                name: {
+                  type: "string",
+                  // minLength: 1,
+                },
                 address: {
                   type: "object",
                   properties: {
-                    name: { type: "string" },
-                    building: { type: "string" },
-                    locality: { type: "string" },
-                    city: { type: "string" },
-                    state: { type: "string" },
-                    country: { type: "string" },
-                    area_code: { type: "string" },
+                    name: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    building: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    locality: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    city: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    state: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    country: {
+                      type: "string",
+                      // minLength: 1,
+                    },
+                    area_code: {
+                      type: "string",
+                      // minLength: 1,
+                    },
                   },
-                  required: [
-                    "name",
-                    "building",
-                    "locality",
-                    "city",
-                    "state",
-                    "country",
-                    "area_code",
-                  ],
+                  // required: [
+                  //   "name",
+                  //   "building",
+                  //   "locality",
+                  //   "city",
+                  //   "state",
+                  //   "country",
+                  //   "area_code",
+                  // ],
                 },
-                email: { type: "string" },
-                phone: { type: "string" },
-                created_at: { type: "string", format: "rfc3339-date-time" },
-                updated_at: { type: "string", format: "rfc3339-date-time" },
+                email: {
+                  type: "string",
+                  // format: "email",
+                },
+                phone: {
+                  type: "string",
+                  // minLength: 10,
+                  // maxLength: 11,
+                },
+                created_at: {
+                  type: "string",
+                  // format: "rfc3339-date-time",
+                },
+                updated_at: {
+                  type: "string",
+                  // format: "rfc3339-date-time",
+                },
               },
-              required: [
-                "name",
-                "address",
-                "email",
-                "phone",
-                "created_at",
-                "updated_at",
-              ],
+              // required: [
+              //   "name",
+              //   "address",
+              //   "phone",
+              //   "created_at",
+              //   "updated_at",
+              // ],
             },
             fulfillments: {
               type: "array",
               items: {
                 type: "object",
                 properties: {
-                  id: { type: "string" },
-                  "@ondc/org/provider_name": { type: "string" },
-                  type: {
+                  id: {
                     type: "string",
-                    enum: ["Cancel", "Delivery", "Return"],
+                    // minLength: 1,
                   },
-                  tracking: { type: "boolean" },
-                  "@ondc/org/TAT": { type: "string" },
+                  "@ondc/org/provider_name": {
+                    type: "string",
+                    // minLength: 1,
+                  },
+                  "@ondc/org/TAT": {
+                    type: "string",
+                    format: "duration",
+                  },
                   state: {
                     type: "object",
                     properties: {
@@ -182,37 +300,44 @@ export const onUpdateSchema = {
                           code: {
                             type: "string",
                             enum: [
-                              "Accepted",
-                              "Cancelled",
                               "Pending",
+                              "Packed",
+                              "Agent-assigned",
+                              "Out-for-pickup",
+                              "Pickup-failed",
+                              "At-pickup",
+                              "Order-picked-up",
+                              "In-transit",
+                              "At-destination-hub",
+                              "Out-for-delivery",
+                              "At-delivery",
+                              "Delivery-failed",
                               "Order-delivered",
+                              "Cancelled",
+                              // "RTO-Initiated",
+                              // "RTO-Disposed",
+                              // "RTO-Delivered",
                               "Return_Initiated",
-                              "Return_Pick_Failed",
+                              "Liquidated",
                               "Return_Approved",
                               "Return_Picked",
-                              "Return_Delivered",
-                              "Liquidated",
+                              "Return_Pick_Failed",
                               "Return_Rejected",
-                            ],
-                          },
-                          short_desc: {
-                            type: "string",
-                            enum: [
-                              "001",
-                              "002",
-                              "003",
-                              "004",
-                              "005",
-                              "006",
-                              "007",
-                              "008",
-                              "009",
-                              "010",
+                              "Return_Delivered",
                             ],
                           },
                         },
+                        required: ["code"],
                       },
                     },
+                    required: ["descriptor"],
+                  },
+                  type: {
+                    type: "string",
+                    // enum: ["Delivery", "Self-Pickup", "Buyer-Delivery"],
+                  },
+                  tracking: {
+                    type: "boolean",
                   },
                   start: {
                     type: "object",
@@ -220,93 +345,108 @@ export const onUpdateSchema = {
                       location: {
                         type: "object",
                         properties: {
-                          id: { type: "string" },
+                          id: {
+                            type: "string",
+                            // minLength: 1
+                          },
                           descriptor: {
                             type: "object",
                             properties: {
                               name: { type: "string" },
                             },
-                            required: ["name"],
+                            // required: ["name"],
                           },
                           gps: { type: "string" },
                           address: {
                             type: "object",
                             properties: {
-                              locality: { type: "string" },
-                              city: { type: "string" },
-                              area_code: { type: "string" },
-                              state: { type: "string" },
+                              locality: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              city: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              area_code: {
+                                type: "string",
+                                // minLength: 1,
+                                // maxLength: 6,
+                              },
+                              state: {
+                                type: "string",
+                                // minLength: 1
+                              },
                             },
-                            required: [
-                              "locality",
-                              "city",
-                              "area_code",
-                              "state",
-                            ],
+                            // required: [
+                            //   "locality",
+                            //   "city",
+                            //   "area_code",
+                            //   "state",
+                            // ],
                           },
                         },
-                        required: ["gps", "address"],
+                        required: ["descriptor"],
                       },
                       time: {
                         type: "object",
                         properties: {
-                          timestamp: {
-                            type: "string",
-                            format: "rfc3339-date-time",
-                          },
                           range: {
                             type: "object",
                             properties: {
                               start: {
                                 type: "string",
-                                format: "rfc3339-date-time",
+                                // minLength: 1
                               },
                               end: {
                                 type: "string",
-                                format: "rfc3339-date-time",
+                                //  minLength: 1
                               },
                             },
+                            // required: ["start", "end"],
                           },
                         },
+                        // required: ["range"],
                       },
                       instructions: {
                         type: "object",
                         properties: {
-                          code: { type: "string" },
-                          name: { type: "string" },
-                          short_desc: { type: "string" },
-                          long_desc: { type: "string" },
-                          images: { type: "array", items: { type: "string" } },
-                        },
-                      },
-                      authorization: {
-                        type: "object",
-                        properties: {
-                          type: { type: "string" },
-                          token: { type: "string" },
-                          valid_from: {
+                          code: {
                             type: "string",
-                            format: "rfc3339-date-time",
+                            //  minLength: 1
                           },
-                          valid_to: {
+                          name: {
                             type: "string",
-                            format: "rfc3339-date-time",
+                            // minLength: 1
+                          },
+                          short_desc: {
+                            type: "string",
+                            //  minLength: 1
+                          },
+                          long_desc: {
+                            type: "string",
+                            // minLength: 1
                           },
                         },
+                        // required: ["code", "name", "short_desc", "long_desc"],
                       },
                       contact: {
                         type: "object",
                         properties: {
                           phone: {
                             type: "string",
-                            minLength: 10,
-                            maxLength: 11,
+                            // minLength: 10,
+                            // maxLength: 11,
                           },
-                          email: { type: "string", format: "email" },
+                          email: {
+                            type: "string",
+                            // format: "email"
+                          },
                         },
-                        required: ["phone", "email"],
+                        // required: ["phone"],
                       },
                     },
+                    // required: ["location", "contact"],
                   },
                   end: {
                     type: "object",
@@ -318,123 +458,139 @@ export const onUpdateSchema = {
                           address: {
                             type: "object",
                             properties: {
-                              name: { type: "string" },
-                              building: { type: "string" },
-                              locality: { type: "string" },
-                              city: { type: "string" },
-                              state: { type: "string" },
-                              country: { type: "string" },
-                              area_code: { type: "string" },
+                              name: {
+                                type: "string",
+                                //  minLength: 1
+                              },
+                              building: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              locality: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              city: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              state: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              country: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              area_code: {
+                                type: "string",
+                                // minLength: 1,
+                                // maxLength: 6,
+                              },
                             },
+                            // required: [
+                            //   "name",
+                            //   "building",
+                            //   "locality",
+                            //   "city",
+                            //   "state",
+                            //   "country",
+                            //   "area_code",
+                            // ],
                           },
                         },
+                        // required: ["gps", "address"],
                       },
                       time: {
                         type: "object",
                         properties: {
-                          timestamp: {
-                            type: "string",
-                            format: "rfc3339-date-time",
+                          range: {
+                            type: "object",
+                            properties: {
+                              start: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                              end: {
+                                type: "string",
+                                // minLength: 1
+                              },
+                            },
+                            // required: ["start", "end"],
                           },
                         },
-                      },
-                      instructions: {
-                        type: "object",
-                        properties: {
-                          code: { type: "string" },
-                          name: { type: "string" },
-                          images: { type: "array", items: { type: "string" } },
-                        },
-                      },
-                      authorization: {
-                        type: "object",
-                        properties: {
-                          type: { type: "string" },
-                          token: { type: "string" },
-                          valid_from: {
-                            type: "string",
-                            format: "rfc3339-date-time",
-                          },
-                          valid_to: {
-                            type: "string",
-                            format: "rfc3339-date-time",
-                          },
-                        },
+                        // required: ["range"],
                       },
                       person: {
                         type: "object",
                         properties: {
-                          name: { type: "string" },
+                          name: {
+                            type: "string",
+                            // minLength: 1
+                          },
                         },
+                        // required: ["name"],
                       },
                       contact: {
                         type: "object",
                         properties: {
                           phone: {
                             type: "string",
-                            minLength: 10,
-                            maxLength: 11,
+                            // minLength: 10,
+                            // maxLength: 11,
                           },
-                          email: { type: "string", format: "email" },
-                        },
-                      },
-                    },
-                  },
-                  agent: {
-                    type: "object",
-                    properties: {
-                      name: { type: "string" },
-                      phone: { type: "string" },
-                    },
-                  },
-                  vehicle: {
-                    type: "object",
-                    properties: {
-                      registration: { type: "string" },
-                    },
-                  },
-                  tags: {
-                    type: "array",
-                    items: {
-                      type: "object",
-                      properties: {
-                        code: { type: "string" },
-                        list: {
-                          type: "array",
-                          items: {
-                            type: "object",
-                            properties: {
-                              code: { type: "string" },
-                              value: { type: "string" },
-                            },
+                          email: {
+                            type: "string",
+                            //  format: "email"
                           },
                         },
+                        // required: ["phone"],
                       },
                     },
+                    // required: ["location", "person", "contact"],
                   },
                 },
-                required: ["state", "id", "type"],
-                dependencies: {
-                  type: {
-                    allOf: [
-                      {
-                        if: {
-                          properties: {
-                            type: {
-                              enum: ["Cancel", "Return"],
-                            },
-                          },
-                        },
-                        then: {
-                          properties: {
-                            tags: { type: "array" },
-                          },
-                          required: ["tags"],
-                        },
-                      },
-                    ],
-                  },
-                },
+
+                // Always required
+                required: [
+                  "id",
+                  // "@ondc/org/provider_name",
+                  "state",
+                  "type",
+                  // "@ondc/org/TAT",
+                  // "tracking",
+                  // "start",
+                ],
+
+                // // Conditionally require `end` if type !== "Self-Pickup"
+                // allOf: [
+                //   {
+                //     if: {
+                //       properties: { type: { const: "Self-Pickup" } },
+                //     },
+                //     then: {
+                //       required: [
+                //         "id",
+                //         "@ondc/org/provider_name",
+                //         "state",
+                //         "type",
+                //         "tracking",
+                //         "start",
+                //       ],
+                //     },
+                //     else: {
+                //       required: [
+                //         "id",
+                //         "@ondc/org/provider_name",
+                //         "state",
+                //         "type",
+                //         "tracking",
+                //         "start",
+                //         "end",
+                //       ],
+                //     },
+                //   },
+                // ],
               },
             },
             quote: {
@@ -443,56 +599,119 @@ export const onUpdateSchema = {
                 price: {
                   type: "object",
                   properties: {
-                    currency: { type: "string" },
-                    value: { type: "string" },
+                    currency: {
+                      type: "string",
+                      // pattern: "^(?!s*$).+",
+                    },
+                    value: {
+                      type: "string",
+                      minLength: 1,
+                      pattern: "^[0-9]+(.[0-9]{1,2})?$",
+                      errorMessage:
+                        "Price value should be a number in string with upto 2 decimal places",
+                    },
                   },
+                  required: ["currency", "value"],
                 },
                 breakup: {
                   type: "array",
                   items: {
                     type: "object",
                     properties: {
-                      "@ondc/org/item_id": { type: "string" },
+                      "@ondc/org/item_id": {
+                        type: "string",
+                      },
                       "@ondc/org/item_quantity": {
                         type: "object",
-                        properties: { count: { type: "integer" } },
+                        properties: {
+                          count: {
+                            type: "integer",
+                          },
+                        },
+                        required: ["count"],
                       },
-                      title: { type: "string" },
-                      "@ondc/org/title_type": { type: "string" },
+                      title: {
+                        type: "string",
+                        minLength: 1,
+                      },
+                      "@ondc/org/title_type": {
+                        type: "string",
+                        // enum: [
+                        //   "item",
+                        //   "delivery",
+                        //   "packing",
+                        //   "tax",
+                        //   "misc",
+                        //   "discount",
+                        //   "offer",
+                        // ],
+                      },
                       price: {
                         type: "object",
                         properties: {
-                          currency: { type: "string" },
-                          value: { type: "string" },
+                          currency: {
+                            type: "string",
+                            // pattern: "^(?!s*$).+",
+                          },
+                          value: {
+                            type: "string",
+                            minLength: 1,
+                            pattern: "^[-+]?[0-9]+(.[0-9]{1,2})?$",
+                            errorMessage:
+                              "Price value should be a number in string with upto 2 decimal places",
+                          },
                         },
+                        required: ["currency", "value"],
                       },
                       item: {
                         type: "object",
                         properties: {
+                          parent_item_id: {
+                            type: "string",
+                          },
                           price: {
                             type: "object",
                             properties: {
-                              currency: { type: "string" },
-                              value: { type: "string" },
+                              currency: {
+                                type: "string",
+                                // pattern: "^(?!s*$).+",
+                              },
+                              value: {
+                                type: "string",
+                                minLength: 1,
+                                pattern: "^[-+]?[0-9]+(.[0-9]{1,2})?$",
+                                errorMessage:
+                                  "Price value should be a number in string with upto 2 decimal places",
+                              },
                             },
+                            required: ["currency", "value"],
                           },
-                        },
-                      },
-                      tags: {
-                        type: "array",
-                        items: {
-                          type: "object",
-                          properties: {
-                            code: { type: "string" },
-                            list: {
-                              type: "array",
-                              items: {
-                                type: "object",
-                                properties: {
-                                  code: { type: "string" },
-                                  value: { type: "string" },
+                          tags: {
+                            type: "array",
+                            items: {
+                              type: "object",
+                              properties: {
+                                code: {
+                                  type: "string",
+                                },
+                                list: {
+                                  type: "array",
+                                  items: {
+                                    type: "object",
+                                    properties: {
+                                      code: {
+                                        type: "string",
+                                      },
+                                      value: {
+                                        type: "string",
+                                        // minLength: 1,
+                                      },
+                                    },
+                                    // required: ["code", "value"],
+                                  },
                                 },
                               },
+                              // required: ["code", "list"],
                             },
                           },
                         },
@@ -500,15 +719,22 @@ export const onUpdateSchema = {
                     },
                     required: [
                       "@ondc/org/item_id",
-                      "title",
+                      // "title",
                       "@ondc/org/title_type",
                       "price",
                     ],
                   },
                 },
-                ttl: { type: "string", format: "duration" },
+                ttl: {
+                  type: "string",
+                  format: "duration",
+                },
               },
-              required: ["price", "breakup", "ttl"],
+              required: [
+                "price",
+                "breakup",
+                // "ttl"
+              ],
             },
             payment: {
               type: "object",
@@ -533,7 +759,7 @@ export const onUpdateSchema = {
                       type: "string",
                     },
                   },
-                  required: ["currency", "transaction_id", "amount"],
+                  required: ["currency", "amount"],
                 },
                 status: {
                   type: "string",
@@ -573,18 +799,11 @@ export const onUpdateSchema = {
                       },
                       settlement_phase: {
                         type: "string",
+                        const: "sale-amount",
                       },
                       settlement_type: {
                         type: "string",
-                        enum: [
-                          "upi",
-                          "neft",
-                          "rtgs",
-                          "wallet",
-                          "netbanking",
-                          "paylater",
-                          "card",
-                        ],
+                        // enum: ["upi", "neft", "rtgs"],
                       },
                       upi_address: { type: "string" },
                       settlement_bank_account_no: {
@@ -599,56 +818,57 @@ export const onUpdateSchema = {
                       },
                       branch_name: { type: "string" },
                     },
-                    allOf: [
-                      {
-                        if: {
-                          properties: {
-                            settlement_type: {
-                              const: "upi",
-                            },
-                          },
-                        },
-                        then: {
-                          properties: {
-                            upi_address: {
-                              type: "string",
-                            },
-                          },
-                        },
-                      },
-                      {
-                        if: {
-                          properties: {
-                            settlement_type: {
-                              enum: ["rtgs", "neft"],
-                            },
-                          },
-                        },
-                        then: {
-                          properties: {
-                            settlement_bank_account_no: {
-                              type: "string",
-                            },
-                            settlement_ifsc_code: {
-                              type: "string",
-                            },
-                            bank_name: { type: "string" },
-                            branch_name: { type: "string" },
-                          },
-                          required: [
-                            "settlement_ifsc_code",
-                            "settlement_bank_account_no",
-                            "bank_name",
-                            "branch_name",
-                          ],
-                        },
-                      },
-                    ],
-                    required: [
-                      "settlement_counterparty",
-                      "settlement_phase",
-                      "settlement_type",
-                    ],
+                    // allOf: [
+                    //   {
+                    //     if: {
+                    //       properties: {
+                    //         settlement_type: {
+                    //           const: "upi",
+                    //         },
+                    //       },
+                    //     },
+                    //     then: {
+                    //       properties: {
+                    //         upi_address: {
+                    //           type: "string",
+                    //         },
+                    //       },
+                    //       required: ["upi_address"],
+                    //     },
+                    //   },
+                    //   {
+                    //     if: {
+                    //       properties: {
+                    //         settlement_type: {
+                    //           enum: ["rtgs", "neft"],
+                    //         },
+                    //       },
+                    //     },
+                    //     then: {
+                    //       properties: {
+                    //         settlement_bank_account_no: {
+                    //           type: "string",
+                    //         },
+                    //         settlement_ifsc_code: {
+                    //           type: "string",
+                    //         },
+                    //         bank_name: { type: "string" },
+                    //         branch_name: { type: "string" },
+                    //       },
+                    //       required: [
+                    //         "settlement_ifsc_code",
+                    //         "settlement_bank_account_no",
+                    //         "bank_name",
+                    //         "branch_name",
+                    //       ],
+                    //     },
+                    //   },
+                    // ],
+                    // required: [
+                    //   "settlement_counterparty",
+                    //   "settlement_phase",
+                    //   "settlement_type",
+                    // ],
                   },
                 },
               },
@@ -659,6 +879,9 @@ export const onUpdateSchema = {
                 "collected_by",
                 "@ondc/org/buyer_app_finder_fee_type",
                 "@ondc/org/buyer_app_finder_fee_amount",
+                "@ondc/org/settlement_basis",
+                "@ondc/org/settlement_window",
+                // "@ondc/org/withholding_amount",
               ],
             },
             documents: {
@@ -666,14 +889,24 @@ export const onUpdateSchema = {
               items: {
                 type: "object",
                 properties: {
-                  url: { type: "string" },
-                  label: { type: "string" },
+                  url: {
+                    type: "string",
+                  },
+                  label: {
+                    type: "string",
+                  },
                 },
-                required: ["url", "label"],
+                // required: ["url", "label"],
               },
             },
-            created_at: { type: "string", format: "rfc3339-date-time" },
-            updated_at: { type: "string", format: "rfc3339-date-time" },
+            created_at: {
+              type: "string",
+              format: "rfc3339-date-time",
+            },
+            updated_at: {
+              type: "string",
+              format: "rfc3339-date-time",
+            },
           },
           required: [
             "id",
@@ -694,3 +927,5 @@ export const onUpdateSchema = {
   },
   required: ["context", "message"],
 };
+
+export default onUpdateSchema;
