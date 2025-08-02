@@ -8,6 +8,9 @@ export class UserRepository {
 	async checkUserById(id: string) {
 		return await User.exists({ _id: id });
 	}
+	async getUserById(id: string) {
+		return await User.findById(id);
+	}
 
 	async checkUserByUniqueCombination(
 		role: UserType["role"],

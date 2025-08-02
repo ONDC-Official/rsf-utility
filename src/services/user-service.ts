@@ -1,4 +1,4 @@
-import { UserRepository } from "../repositories/user.repository";
+import { UserRepository } from "../repositories/user-repository";
 import { UserType } from "../types/models/user.type";
 
 export class UserService {
@@ -12,11 +12,24 @@ export class UserService {
 		return await this.userRepo.getAllUsers();
 	}
 
-	async overrideUser(userId: string, userData: any) {
+	async overrideUser(userId: string, userData: UserType) {
 		return await this.userRepo.updateUser(userId, userData);
 	}
 
-	async updateUserDetails(userId: string, userData: any) {
+	async updateUserDetails(userId: string, userData: Partial<UserType>) {
+		const allowedFields = [
+			"tcs",
+			"tds",
+			"settlement_agency_url",
+			"settlement_agency_api_key",
+			"settlement_agency_id",
+			"provider_details",
+		];
+		for (const key of Object.keys(userData)) {
+			if (!allowedFields.includes(key)) {
+				throw new Error(`Field ${key} is not allowed to be updated`);
+			}
+		}
 		return await this.userRepo.updateUser(userId, userData);
 	}
 
@@ -26,6 +39,13 @@ export class UserService {
 
 	checkUserById = async (id: string) => {
 		return await this.userRepo.checkUserById(id);
+	};
+	getUserById = async (id: string) => {
+		const user = await this.userRepo.getUserById(id);
+		if (!user) {
+			throw new Error("User not found");
+		}
+		return user;
 	};
 	checkUserByUniqueCombination = async (
 		role: UserType["role"],

@@ -6,9 +6,9 @@ import { getLoggerMeta } from "./utils/utility";
 import { healthMonitor } from "./utils/health-monitor";
 import logger from "./utils/logger";
 import uiRoutes from "./routes/ui-routes";
-import swaggerSpec from "./swagger/swagger.config";
-import swaggerUi from "swagger-ui-express";
+import { openApiDocument } from "./docs/open-apiSpec";
 import apiRoutes from "./routes/api-routes";
+import swaggerUi from "swagger-ui-express";
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
@@ -27,10 +27,10 @@ const createServer = (): Application => {
 
 	/// Swagger Documentation
 	//@ts-ignore
-	app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+	app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
 	app.get("/api-docs.json", (_req, res) => {
 		res.setHeader("Content-Type", "application/json");
-		res.send(swaggerSpec);
+		res.send(openApiDocument);
 	});
 
 	// Health Check
