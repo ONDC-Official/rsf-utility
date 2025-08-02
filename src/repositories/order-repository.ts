@@ -7,4 +7,7 @@ export class OrderRepository {
     async getAllOrders(queryParams: any) {
 		return await Order.find(queryParams);
 	}
+	async findOrderByUserAndOrderId(user_id: string, order_id: string) {
+  		return await Order.findOne({ user_id, order_id });
+}
 }

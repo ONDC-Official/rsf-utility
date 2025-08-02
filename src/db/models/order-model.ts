@@ -17,7 +17,6 @@ const OrderSchema = new mongoose.Schema(
 		user_id: { type: String, required: true },
 		bap_id: { type: String, required: true },
 		bpp_id: { type: String, required: true },
-		msn: { type: Boolean, required: true },
 		domain: { type: String, required: true },
 		provider_id: { type: String, required: true },
 		state: {

@@ -10,20 +10,47 @@ export const extractFields = (
     try {
       const value = JSONPath({ path, json: payload });
 
+      let resolvedValue;
       if (Array.isArray(value)) {
-        // Handle empty or single-item arrays
         if (value.length === 0) {
-          result[key] = "";
+          resolvedValue = "";
         } else {
-          result[key] = value.length === 1 ? value[0] : value;
+          resolvedValue = value.length === 1 ? value[0] : value;
         }
       } else {
-        result[key] = value ?? "";
+        resolvedValue = value ?? "";
+      }
+
+      // Type coercion based on schema
+      switch (key) {
+        case "created_at":
+        case "updated_at":
+          result[key] = resolvedValue ? new Date(resolvedValue) : "";
+          break;
+
+        case "buyer_finder_fee_amount":
+        case "withholding_amount":
+          result[key] =
+            resolvedValue !== "" && !isNaN(resolvedValue)
+              ? Number(resolvedValue)
+              : "";
+          break;
+
+        case "quote":
+          result[key] =
+            typeof resolvedValue === "object" && resolvedValue !== null
+              ? resolvedValue
+              : {};
+          break;
+
+        default:
+          result[key] = resolvedValue;
       }
     } catch (err) {
-      console.error(`Error extracting key "${key}" from path "${path}":`);
+      console.error(`Error extracting key "${key}" from path "${path}":`, err);
       result[key] = "";
     }
   }
+
   return result;
 };
