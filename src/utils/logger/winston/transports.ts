@@ -21,7 +21,7 @@ export default function getLoggerTransports(): winston.transport[] {
 		loggerTransports.push(
 			new transports.File({
 				filename: "logs/development.log",
-				format: devFormat,
+				format: jsonFormat,
 			})
 		);
 	}

@@ -135,6 +135,10 @@ class AutomationLogger {
 		this.logger.warn(message, ...args);
 	}
 
+	child(scope: string, meta?: any): winston.Logger {
+		return this.logger.child({ scope: scope, ...meta });
+	}
+
 	startTimer(): winston.Profiler {
 		return this.logger.startTimer();
 	}

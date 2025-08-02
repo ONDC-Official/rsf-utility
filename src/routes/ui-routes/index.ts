@@ -1,5 +1,5 @@
 import { Router } from "express";
-import userRoutes from "./user-routes";
+import userRoutes from "./user.routes";
 import uploadRoutes from "./upload-routes";
 
 const uiRoutes = Router();

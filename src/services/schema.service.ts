@@ -15,6 +15,10 @@ export function validateSchemaForAction(
       schemaErrors: `Schema for action '${action}' not found.`,
     };
   }
+  return validateGivenSchema(schema, actionPayload);
+}
+
+export function validateGivenSchema(schema: any, actionPayload: any) {
   const ajv = new Ajv({ allErrors: true });
   addFormats(ajv);
   require("ajv-errors")(ajv);
@@ -34,12 +38,11 @@ export function validateSchemaForAction(
     // This ensures the string is in the correct format and represents a valid date
     return rfc3339String === dateTimeString;
   });
+
   const validate = ajv.compile(schema as any);
   const valid = validate(actionPayload);
-  logger.debug(`validating the payload: ${actionPayload}`);
   if (!valid) return createErrorMessage(validate, valid);
-  logger.debug("L0 validations result", {
-    ...loggerMetaData,
+  logger.debug("validations result", {
     valid: valid,
     schemaErrors: validate.errors,
   });
