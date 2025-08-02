@@ -5,9 +5,12 @@ import { getLoggerMeta } from "../utils/utility";
 import {
 	GetSettlementsQuerySchema,
 	PrepareSettlementsBody,
-} from "../types/query-params/settle.query.type";
-const settleLogger = logger.child("settle-controller");
+} from "../types/settle-params";
 import { z } from "zod";
+import { validateUserId } from "../types/user-id-type";
+
+const settleLogger = logger.child("settle-controller");
+
 export class SettleController {
 	constructor(private settleService: SettleService) {}
 
@@ -15,9 +18,9 @@ export class SettleController {
 		try {
 			settleLogger.info("Fetching settlements", getLoggerMeta(req));
 			const userId = req.params.userId;
-			if (!userId) {
-				settleLogger.error("User ID is required", getLoggerMeta(req));
-				res.status(400).json({ message: "User ID is required" });
+			if (!validateUserId(userId)) {
+				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
+				res.status(400).json({ message: "Valid User ID is required" });
 				return;
 			}
 			const validationResult = GetSettlementsQuerySchema.safeParse(req.query);
@@ -71,7 +74,7 @@ export class SettleController {
 				});
 				return;
 			}
-			await this.settleService.prepareSettlement(
+			const settlements = await this.settleService.prepareSettlements(
 				userId,
 				validationResult.data.order_ids
 			);
@@ -79,9 +82,10 @@ export class SettleController {
 				"Settlement prepared successfully, new settlements created in the DB",
 				getLoggerMeta(req)
 			);
+			res.status(201).json(settlements);
 		} catch (error: any) {
 			settleLogger.error(
-				"Error preparing settlements",
+				"Error preparing settlement",
 				getLoggerMeta(req),
 				error
 			);

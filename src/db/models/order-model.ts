@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Quote = new mongoose.Schema({
-	total_order_value: { type: String, required: true },
+	total_order_value: { type: Number, required: true },
 	breakup: [
 		{
 			title: { type: String, required: true },
@@ -33,7 +33,7 @@ const OrderSchema = new mongoose.Schema(
 		settlement_basis: { type: String, required: true },
 		settlement_window: { type: String, required: true },
 		withholding_amount: { type: Number, required: true },
-		quote: Quote,
+		quote: { type: Quote, required: true },
 	},
 	{ timestamps: true }
 );

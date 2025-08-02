@@ -11,7 +11,7 @@ const SettleSchema = new mongoose.Schema(
 		tax: { type: Number, required: true },
 		withholding_amount: { type: Number, required: true },
 		inter_np_settlement: { type: Number, required: true },
-		provider: { type: String, required: true },
+		provider_id: { type: String, required: true },
 		due_date: { type: Date, required: true },
 		settlement_reference: { type: String },
 		error: { type: String },

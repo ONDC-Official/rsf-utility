@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { GetSettlementsQuerySchema } from "../types/query-params/settle.query.type";
+import { GetSettlementsQuerySchema } from "../types/settle-params";
 import { Settle } from "../db/models/settle-model";
 
 export class SettleRepository {
@@ -21,6 +21,12 @@ export class SettleRepository {
 			.skip(queryData.skip)
 			.limit(queryData.limit)
 			.sort({ createdAt: -1 });
+	}
+
+	async insertSettlementList(
+		settlements: z.infer<typeof GetSettlementsQuerySchema>[]
+	) {
+		return await Settle.insertMany(settlements);
 	}
 }
 

@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/user-service";
 import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
+import { UserSchema } from "../schema/models/user-schema";
+import { z } from "zod";
+import { validateUserId } from "../types/user-id-type";
 
 const userLogger = logger.child("user-controller");
 
@@ -11,8 +14,25 @@ export class UserController {
 	createUser = async (req: Request, res: Response) => {
 		try {
 			const body = req.body;
-			userLogger.info("Creating user", getLoggerMeta(req), body);
-			const user = await this.userService.createUser(body);
+			const validationResult = UserSchema.safeParse(body);
+			if (!validationResult.success) {
+				userLogger.error(
+					"Invalid user data",
+					getLoggerMeta(req),
+					validationResult.error
+				);
+				res.status(400).json({
+					message: "Invalid user data",
+					errors: z.treeifyError(validationResult.error),
+				});
+				return;
+			}
+			userLogger.info(
+				"Creating user",
+				getLoggerMeta(req),
+				validationResult.data
+			);
+			const user = await this.userService.createUser(validationResult.data);
 			res.status(201).json(user);
 		} catch (error: any) {
 			userLogger.error("Error creating user", getLoggerMeta(req), error);
@@ -35,16 +55,32 @@ export class UserController {
 		try {
 			const userId = req.params.id;
 			const body = req.body;
-			if (!userId) {
-				res.status(400).json({ message: "User ID is required" });
+			if (!validateUserId(userId)) {
+				res.status(400).json({ message: "Valid User ID is required" });
 				return;
 			}
 			if (!(await this.userService.checkUserById(userId))) {
 				res.status(404).json({ message: "User not found" });
 				return;
 			}
+			const validationResult = UserSchema.safeParse(body);
+			if (!validationResult.success) {
+				userLogger.error(
+					"Invalid user data",
+					getLoggerMeta(req),
+					validationResult.error
+				);
+				res.status(400).json({
+					message: "Invalid user data",
+					errors: z.treeifyError(validationResult.error),
+				});
+				return;
+			}
 			userLogger.info("Patching user", getLoggerMeta(req), { userId, body });
-			const updatedUser = await this.userService.overrideUser(userId, body);
+			const updatedUser = await this.userService.overrideUser(
+				userId,
+				validationResult.data
+			);
 			res.status(200).json(updatedUser);
 		} catch (error: any) {
 			userLogger.error("Error patching user", getLoggerMeta(req), error);
@@ -56,8 +92,8 @@ export class UserController {
 		try {
 			const userId = req.params.id;
 			const body = req.body;
-			if (!userId) {
-				res.status(400).json({ message: "User ID is required" });
+			if (!validateUserId(userId)) {
+				res.status(400).json({ message: "Valid User ID is required" });
 				return;
 			}
 			if (!(await this.userService.checkUserById(userId))) {

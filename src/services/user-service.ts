@@ -1,10 +1,10 @@
 import { UserRepository } from "../repositories/user-repository";
-import { UserType } from "../types/models/user.type";
+import { UserType } from "../schema/models/user-schema";
 
 export class UserService {
 	constructor(private userRepo: UserRepository) {}
 
-	async createUser(userData: any) {
+	async createUser(userData: UserType) {
 		return await this.userRepo.createUser(userData);
 	}
 

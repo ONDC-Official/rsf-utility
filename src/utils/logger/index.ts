@@ -8,7 +8,7 @@ import { console } from "inspector";
 
 class AutomationLogger {
 	private static instance: AutomationLogger | undefined;
-	private logger: winston.Logger;
+	public logger: winston.Logger;
 	loggingColors: {
 		info: string;
 		error: string;
@@ -135,8 +135,15 @@ class AutomationLogger {
 		this.logger.warn(message, ...args);
 	}
 
-	child(scope: string, meta?: any): winston.Logger {
-		return this.logger.child({ scope: scope, ...meta });
+	child(scope: string, meta?: any): AutomationLogger {
+		// 1. Create a new winston child logger from the parent's logger
+		const winstonChild = this.logger.child({ scope: scope, ...meta });
+		// 2. Create a new AutomationLogger instance that inherits the parent's methods
+		const childLogger = Object.create(this);
+		// 3. Replace the internal winston logger with the new child logger
+		childLogger.logger = winstonChild;
+		// 4. Return the new, fully-functional AutomationLogger instance
+		return childLogger;
 	}
 
 	startTimer(): winston.Profiler {

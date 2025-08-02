@@ -79,6 +79,7 @@ export const PrepareSettlementsBody = z
 		order_ids: z
 			.array(z.string())
 			.min(1)
+			.max(1000)
 			.openapi({
 				description: "List of order IDs to prepare settlements for",
 				example: ["order1", "order2"],
