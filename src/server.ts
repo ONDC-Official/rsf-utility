@@ -52,7 +52,6 @@ const createServer = (): Application => {
 
 	// Error Handling Middleware
 	app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-		// logger.error(err.message, { stack: err.stack });
 		logger.error(
 			`Internal Server Error: ${err.message}`,
 			getLoggerMeta(req),
