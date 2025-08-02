@@ -25,6 +25,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "express-rate-limit": "^8.0.1",
+    "jsonpath-plus": "^10.3.0",
     "lodash": "^4.17.21",
     "mongoose": "^8.17.0",
     "multer": "^2.0.2",
