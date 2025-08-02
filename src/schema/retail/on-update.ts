@@ -1,4 +1,4 @@
-export const onStatusSchema = {
+const onUpdateSchema = {
   type: "object",
   properties: {
     context: {
@@ -927,3 +927,5 @@ export const onStatusSchema = {
   },
   required: ["context", "message"],
 };
+
+export default onUpdateSchema;

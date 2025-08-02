@@ -1,4 +1,4 @@
-export const onCancelSchema = {
+const onCancelSchema = {
   type: "object",
   properties: {
     context: {
@@ -753,3 +753,5 @@ export const onCancelSchema = {
   },
   required: ["context", "message"],
 };
+
+export default onCancelSchema;

@@ -1,4 +1,4 @@
-export const onConfirmSchema = {
+const onConfirmSchema = {
   type: "object",
   properties: {
     context: {
@@ -942,3 +942,5 @@ export const onConfirmSchema = {
   },
   required: ["context", "message"],
 };
+
+export default onConfirmSchema;
