@@ -9,7 +9,7 @@ const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
 const userController = new UserController(userService);
 
-const orderRepository = new OrderRepository()
+const orderRepository = new OrderRepository();
 const orderService = new OrderService(orderRepository);
 const orderController = new OrderController(orderService);
 
@@ -17,5 +17,4 @@ const orderController = new OrderController(orderService);
 export const container = {
 	userController,
 	orderController,
-	userService
 };

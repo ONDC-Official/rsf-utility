@@ -32,21 +32,44 @@ export class UserService {
 		subscriber_id: UserType["subscriber_id"],
 		domain: UserType["domain"]
 	) => {
-		return await this.userRepo.checkUserByUniqueCombination(
+		const result = await this.userRepo.checkUserByUniqueCombination(
 			role,
 			subscriber_id,
 			domain
 		);
+		return result;
 	};
 	getUserByUniqueCombination = async (
 		role: UserType["role"],
 		subscriber_id: UserType["subscriber_id"],
 		domain: UserType["domain"]
 	) => {
-		return await this.userRepo.getUserByUniqueCombination(
+		const result = await this.userRepo.getUserByUniqueCombination(
 			role,
 			subscriber_id,
 			domain
 		);
+		if (!result) {
+			throw new Error("User not found");
+		}
+		return result;
+	};
+
+	getUserIdsByRoleAndDomain = async (
+		domain: string,
+		bapId: string,
+		bppId: string
+	) => {
+		let bap_user_id: string | undefined = undefined;
+		let bpp_user_id: string | undefined = undefined;
+		if (await this.checkUserByUniqueCombination("BAP", bapId, domain)) {
+			const user = await this.getUserByUniqueCombination("BAP", bapId, domain);
+			bap_user_id = user._id.toString();
+		}
+		if (await this.checkUserByUniqueCombination("BPP", bppId, domain)) {
+			const user = await this.getUserByUniqueCombination("BPP", bppId, domain);
+			bpp_user_id = user._id.toString();
+		}
+		return { bap_user_id, bpp_user_id };
 	};
 }

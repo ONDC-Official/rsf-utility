@@ -95,27 +95,38 @@ export class UserController {
 			res.status(400).json({ message: error.message });
 		}
 	};
-	// userValidation = async (
-	//   req: Request,
-	//   res: Response,
-	//   next: NextFunction
-	// ) => {
-	//   logger.info("User Handler invoked", getLoggerMeta(req));
-	//   try { 
-	// 	const payload = req.body; 
-	// 	// const {bap_user_id, bpp_user_id} = await this.userService.getUserIdsByRoleAndDomain(payload)
-	// 	if(!bap_user_id && !bpp_user_id){
-	// 		return res.status(400).json({
-	// 		message: "Cannot find user for this domain and subscriber_id.",
-	// 	  });
-	// 	}
-	// 	res.locals.bap_user_id = bap_user_id;
-	// 	res.locals.bpp_user_id = bpp_user_id;
-	// 	next();
-	//   } catch (e: any) {
-	// 	logger.error("Error in user validation", getLoggerMeta(req), e);
-	// 	res.status(500).json({ message: "Internal server error" });
-	// 	return;
-	//   }
-	// };
+	userValidationMiddleware = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) => {
+		logger.info("User Handler invoked", getLoggerMeta(req));
+		try {
+			const payload = req.body;
+			const { domain, bap_id, bpp_id } = payload.context;
+			if (!domain || !bap_id || !bpp_id) {
+				return res.status(400).json({
+					message: "Domain, BAP ID, and BPP ID are required in the context",
+				});
+			}
+			const { bap_user_id, bpp_user_id } =
+				await this.userService.getUserIdsByRoleAndDomain(
+					domain,
+					bap_id,
+					bpp_id
+				);
+			if (!bap_user_id && !bpp_user_id) {
+				return res.status(400).json({
+					message: "Cannot find user for this domain and subscriber_id.",
+				});
+			}
+			res.locals.bap_user_id = bap_user_id;
+			res.locals.bpp_user_id = bpp_user_id;
+			next();
+		} catch (e: any) {
+			logger.error("Error in user validation", getLoggerMeta(req), e);
+			res.status(500).json({ message: "Internal server error" });
+			return;
+		}
+	};
 }
