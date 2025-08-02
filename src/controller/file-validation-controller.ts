@@ -1,6 +1,6 @@
 // middlewares/jsonValidationMiddleware.ts
 import { Request, Response, NextFunction } from "express";
-import { validateSchemaForAction } from "../services/schema.service";
+import { validateSchemaForAction } from "../services/schema-service";
 import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
 

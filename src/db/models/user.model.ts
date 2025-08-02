@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema(
 		signing_private_key: { type: String, required: true },
 		settlement_agency_url: { type: String, required: true },
 		settlement_agency_api_key: { type: String, required: true },
+		settlement_agency_id: { type: String, required: true },
 	},
 	{ timestamps: true }
 );

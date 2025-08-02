@@ -11,6 +11,7 @@ export const UserAjvSchema = {
 		"signing_private_key",
 		"settlement_agency_url",
 		"settlement_agency_api_key",
+		"settlement_agency_id",
 	],
 	properties: {
 		role: {
@@ -54,6 +55,9 @@ export const UserAjvSchema = {
 			format: "uri",
 		},
 		settlement_agency_api_key: {
+			type: "string",
+		},
+		settlement_agency_id: {
 			type: "string",
 		},
 	},

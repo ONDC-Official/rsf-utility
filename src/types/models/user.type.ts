@@ -15,6 +15,7 @@ export interface UserType {
 	provider_details: ProviderDetails[];
 	signing_private_key: string;
 	settlement_agency_url: string;
+	settlement_agency_id: string;
 	settlement_agency_api_key: string;
 	createdAt?: Date;
 	updatedAt?: Date;

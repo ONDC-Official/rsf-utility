@@ -21,11 +21,11 @@ userRoutes.post(
 	schemaValidatorForUser(UserAjvSchema),
 	userController.createUser
 );
-userRoutes.put(
-	"/:id",
-	schemaValidatorForUser(UserAjvSchema),
-	userController.putUser
-);
-userRoutes.patch("/:id", userController.updateUser);
-userRoutes.delete("/:id", userController.deleteUser);
+// userRoutes.put(
+// 	"/:id",
+// 	schemaValidatorForUser(UserAjvSchema),
+// 	userController.putUser
+// );
+userRoutes.patch("/:id", userController.updateUser); // only tax details are editable
+// userRoutes.delete("/:id", userController.deleteUser);
 export default userRoutes;
