@@ -2,6 +2,7 @@
 import multer from "multer";
 import { Request, Response, NextFunction } from "express";
 import logger from "../utils/logger";
+import { getLoggerMeta } from "../utils/utility";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -11,10 +12,10 @@ const upload = multer({
       !file.originalname.endsWith(".json") ||
       file.mimetype !== "application/json"
     ) {
-      logger.error(
+      logger.warning(
         `Invalid file type uploaded: ${file.originalname} (${file.mimetype})`
       );
-      return cb(new Error("Only JSON file(s) uploads are allowed"));
+      //   return cb(new Error("Only JSON file(s) uploads are allowed"));
     }
     cb(null, true);
   },
@@ -40,23 +41,33 @@ export function jsonFileUploadMiddleware(
     const files = (req.files as Express.Multer.File[]) || [];
     if (!files.length)
       return res.status(400).json({ error: "No files uploaded" });
-    const jsonPayloads: any[] = [];
+    const payloadsWithFilenames: Array<{ filename: string; payload: any }> = [];
+    const errors: { filename: string; error: string }[] = [];
     for (const file of files) {
       try {
         // Check that file contains parsable JSON
         const parsed = JSON.parse(file.buffer.toString("utf-8"));
-        if (Array.isArray(parsed)) {
-          jsonPayloads.push(...parsed);
-        } else {
-          jsonPayloads.push(parsed);
-        }
+        logger.info(`Parsed JSON from file: ${file.originalname}`);
+        payloadsWithFilenames.push({
+          filename: file.originalname,
+          payload: parsed,
+        });
       } catch (e) {
-        return res
-          .status(400)
-          .json({ error: `File "${file.originalname}" is not valid JSON` });
+        errors.push({
+          filename: file.originalname,
+          error: "File is not valid JSON",
+        });
       }
     }
-    (req as any).processedJsonPayloads = jsonPayloads;
+    (req as any).processedJsonPayloads = payloadsWithFilenames;
+    if (errors.length) {
+      logger.error("File Upload Error", getLoggerMeta(req), errors);
+      return res.status(400).json({
+        message: "Some files failed to upload as JSON.",
+        invalidFiles: errors, // [{ filename, error }]
+        acceptedFileCount: payloadsWithFilenames.length,
+      });
+    }
     next();
   });
 }
