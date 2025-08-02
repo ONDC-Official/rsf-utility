@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { validateSchemaForAction } from "../services/schema-service";
+import { validateSchemaForAction } from "../services/schema.service";
 import { getLoggerMeta } from "../utils/utility";
 import logger from "../utils/logger";
 
