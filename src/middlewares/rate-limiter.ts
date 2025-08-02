@@ -1,12 +1,14 @@
 import rateLimit from "express-rate-limit";
-import { Request } from "express";
+// import { Request } from "express";
 import logger from "../utils/logger";
+const rateLimitLogger = logger.child("rate-limiter");
 
 const rateLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  limit: 1000, // Limit each user (config-id) to 1000 requests per min
+  limit: 1, // Limit each user (config-id) to 1000 requests per min
   standardHeaders: "draft-8", // Return `RateLimit-*` headers for clarity
   legacyHeaders: false,
+  keyGenerator: () => "global",
   // keyGenerator: (req: Request) => {
   //   // Use config-id from params if present, fallback to IP
   //   return req.params["config-id"]?.toString() || req.ip || "unknown";
@@ -18,7 +20,7 @@ const rateLimiter = rateLimit({
   },
   handler: (req, res, next, options) => {
     // Custom handler for logging/alerting if needed
-    logger.debug(
+    rateLimitLogger.debug(
       `Request exceeded the configured rate limit ${options.limit} per ${options.windowMs} milliseconds`
     );
     res.status(options.message.status).json(options.message);

@@ -26,4 +26,22 @@ export class OrderService {
 	async checkUniqueOrder(user_id: string, order_id: string) {
 		return await this.orderRepo.checkOrderByUserAndOrderId(user_id, order_id);
 	}
+
+	async updateOrder(
+		user_id: string,
+		order_id: string,
+		updateData: Partial<OrderType>
+	) {
+		const updatedOrder = await this.orderRepo.updateOrderByUserAndOrderId(
+			user_id,
+			order_id,
+			updateData
+		);
+		if (!updatedOrder) {
+			throw new Error(
+				`Failed to update order with ID ${order_id} for user ${user_id}`
+			);
+		}
+		return updatedOrder;
+	}
 }

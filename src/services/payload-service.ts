@@ -37,10 +37,21 @@ export const extractFields = (
           break;
 
         case "quote":
-          result[key] =
-            typeof resolvedValue === "object" && resolvedValue !== null
-              ? resolvedValue
-              : {};
+          if (typeof resolvedValue === "object" && resolvedValue !== null) {
+            const priceValue = Number(resolvedValue?.price?.value || "0");
+            const breakup = Array.isArray(resolvedValue.breakup)
+              ? resolvedValue.breakup
+              : [];
+            result[key] = {
+              total_order_value: priceValue,
+              breakup,
+            };
+          } else {
+            result[key] = {
+              total_order_value: 0,
+              breakup: [],
+            };
+          }
           break;
 
         default:

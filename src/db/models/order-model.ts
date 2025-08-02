@@ -38,4 +38,7 @@ const OrderSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
+// ✅ Compound unique index on order_id and user_id
+OrderSchema.index({ order_id: 1, user_id: 1 }, { unique: true });
+
 export const Order = mongoose.model("Order", OrderSchema);

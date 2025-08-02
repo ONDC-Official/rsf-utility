@@ -1,4 +1,4 @@
-export const onCancelSchema = {
+const onCancelSchema = {
   type: "object",
   properties: {
     context: {
@@ -22,7 +22,7 @@ export const onCancelSchema = {
         },
         core_version: {
           type: "string",
-          enum: ["1.2.5", "1.2.0"],
+          // enum: ["1.2.5", "1.2.0"],
           minLength: 1,
         },
         bap_id: {
@@ -71,7 +71,7 @@ export const onCancelSchema = {
         "transaction_id",
         "message_id",
         "timestamp",
-        "ttl",
+        // "ttl",
       ],
     },
     message: {
@@ -82,11 +82,7 @@ export const onCancelSchema = {
           properties: {
             id: {
               type: "string",
-              minLength: 1,
-              pattern:
-                "^[a-zA-Z0-9-]{1,32}$|^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-              errorMessage:
-                "Order ID should be alphanumeric upto 32 letters max or UUID",
+              // minLength: 1,
             },
             state: {
               type: "string",
@@ -97,7 +93,7 @@ export const onCancelSchema = {
               properties: {
                 id: {
                   type: "string",
-                  minLength: 1,
+                  // minLength: 1,
                 },
                 locations: {
                   type: "array",
@@ -106,7 +102,7 @@ export const onCancelSchema = {
                     properties: {
                       id: {
                         type: "string",
-                        minLength: 1,
+                        // minLength: 1,
                       },
                     },
                     required: ["id"],
@@ -122,11 +118,11 @@ export const onCancelSchema = {
                 properties: {
                   id: {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
                   },
                   fulfillment_id: {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
                   },
                   quantity: {
                     type: "object",
@@ -137,6 +133,37 @@ export const onCancelSchema = {
                     },
                     required: ["count"],
                   },
+                  parent_item_id: {
+                    type: "string",
+                  },
+                  tags: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        code: {
+                          type: "string",
+                        },
+                        list: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            properties: {
+                              code: {
+                                type: "string",
+                              },
+                              value: {
+                                type: "string",
+                                // minLength: 1,
+                              },
+                            },
+                            // required: ["code", "value"],
+                          },
+                        },
+                      },
+                      // required: ["code", "list"],
+                    },
+                  },
                 },
                 required: ["id", "fulfillment_id", "quantity"],
               },
@@ -146,96 +173,96 @@ export const onCancelSchema = {
               properties: {
                 name: {
                   type: "string",
-                  minLength: 1,
+                  // minLength: 1,
                 },
                 address: {
                   type: "object",
                   properties: {
                     name: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     building: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     locality: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     city: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     state: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     country: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                     area_code: {
                       type: "string",
-                      minLength: 1,
+                      // minLength: 1,
                     },
                   },
-                  required: [
-                    "name",
-                    "building",
-                    "locality",
-                    "city",
-                    "state",
-                    "country",
-                    "area_code",
-                  ],
+                  // required: [
+                  //   "name",
+                  //   "building",
+                  //   "locality",
+                  //   "city",
+                  //   "state",
+                  //   "country",
+                  //   "area_code",
+                  // ],
                 },
                 email: {
                   type: "string",
-                  format: "email",
+                  // format: "email",
                 },
                 phone: {
                   type: "string",
-                  minLength: 10,
-                  maxLength: 11,
+                  // minLength: 10,
+                  // maxLength: 11,
                 },
                 created_at: {
                   type: "string",
-                  format: "rfc3339-date-time",
+                  // format: "rfc3339-date-time",
                 },
                 updated_at: {
                   type: "string",
-                  format: "rfc3339-date-time",
+                  // format: "rfc3339-date-time",
                 },
               },
-              required: [
-                "name",
-                "address",
-                "phone",
-                "created_at",
-                "updated_at",
-              ],
+              // required: [
+              //   "name",
+              //   "address",
+              //   "phone",
+              //   "created_at",
+              //   "updated_at",
+              // ],
             },
             cancellation: {
               type: "object",
               properties: {
                 cancelled_by: {
                   type: "string",
-                  minLength: 1,
+                  // minLength: 1,
                 },
                 reason: {
                   type: "object",
                   properties: {
                     id: {
                       type: "string",
-                      minLength: 3,
-                      maxLength: 3,
+                      // minLength: 3,
+                      // maxLength: 3,
                     },
                   },
-                  required: ["id"],
+                  // required: ["id"],
                 },
               },
-              required: ["cancelled_by", "reason"],
+              // required: ["cancelled_by", "reason"],
             },
             fulfillments: {
               type: "array",
@@ -244,11 +271,11 @@ export const onCancelSchema = {
                 properties: {
                   id: {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
                   },
                   "@ondc/org/provider_name": {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
                   },
                   state: {
                     type: "object",
@@ -258,7 +285,6 @@ export const onCancelSchema = {
                         properties: {
                           code: {
                             type: "string",
-                            minLength: 1,
                             enum: ["Cancelled", "RTO-Initiated"],
                           },
                         },
@@ -269,7 +295,7 @@ export const onCancelSchema = {
                   },
                   type: {
                     type: "string",
-                    minLength: 1,
+                    // minLength: 1,
                   },
                   tracking: {
                     type: "boolean",
@@ -290,7 +316,7 @@ export const onCancelSchema = {
                                 type: "string",
                               },
                             },
-                            required: ["name"],
+                            // required: ["name"],
                           },
                           gps: {
                             type: "string",
@@ -300,31 +326,31 @@ export const onCancelSchema = {
                             properties: {
                               locality: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               city: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               area_code: {
                                 type: "string",
-                                minLength: 1,
-                                maxLength: 6,
+                                // minLength: 1,
+                                // maxLength: 6,
                               },
                               state: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                             },
-                            required: [
-                              "locality",
-                              "city",
-                              "area_code",
-                              "state",
-                            ],
+                            // required: [
+                            //   "locality",
+                            //   "city",
+                            //   "area_code",
+                            //   "state",
+                            // ],
                           },
                         },
-                        required: ["id", "descriptor", "gps", "address"],
+                        // required: ["id", "descriptor", "gps", "address"],
                       },
                       time: {
                         type: "object",
@@ -334,14 +360,14 @@ export const onCancelSchema = {
                             properties: {
                               start: {
                                 type: "string",
-                                format: "rfc3339-date-time",
+                                // format: "rfc3339-date-time",
                               },
                               end: {
                                 type: "string",
-                                format: "rfc3339-date-time",
+                                // format: "rfc3339-date-time",
                               },
                             },
-                            required: ["start", "end"],
+                            // required: ["start", "end"],
                           },
                         },
                         required: ["range"],
@@ -351,18 +377,18 @@ export const onCancelSchema = {
                         properties: {
                           phone: {
                             type: "string",
-                            minLength: 10,
-                            maxLength: 11,
+                            // minLength: 10,
+                            // maxLength: 11,
                           },
                           email: {
                             type: "string",
-                            format: "email",
+                            // format: "email",
                           },
                         },
-                        required: ["phone"],
+                        // required: ["phone"],
                       },
                     },
-                    required: ["location", "contact"],
+                    // required: ["location", "contact"],
                   },
                   end: {
                     type: "object",
@@ -372,52 +398,52 @@ export const onCancelSchema = {
                         properties: {
                           gps: {
                             type: "string",
-                            minLength: 1,
+                            // minLength: 1,
                           },
                           address: {
                             type: "object",
                             properties: {
                               name: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               building: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               locality: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               city: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               state: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               country: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                               area_code: {
                                 type: "string",
-                                minLength: 1,
+                                // minLength: 1,
                               },
                             },
-                            required: [
-                              "name",
-                              "building",
-                              "locality",
-                              "city",
-                              "state",
-                              "country",
-                              "area_code",
-                            ],
+                            // required: [
+                            //   "name",
+                            //   "building",
+                            //   "locality",
+                            //   "city",
+                            //   "state",
+                            //   "country",
+                            //   "area_code",
+                            // ],
                           },
                         },
-                        required: ["gps", "address"],
+                        // required: ["gps", "address"],
                       },
                       time: {
                         type: "object",
@@ -427,95 +453,95 @@ export const onCancelSchema = {
                             properties: {
                               start: {
                                 type: "string",
-                                format: "rfc3339-date-time",
+                                // format: "rfc3339-date-time",
                               },
                               end: {
                                 type: "string",
-                                format: "rfc3339-date-time",
+                                // format: "rfc3339-date-time",
                               },
                             },
-                            required: ["start", "end"],
+                            // required: ["start", "end"],
                           },
                         },
-                        required: ["range"],
+                        // required: ["range"],
                       },
                       person: {
                         type: "object",
                         properties: {
                           name: {
                             type: "string",
-                            minLength: 1,
+                            // minLength: 1,
                           },
                         },
-                        required: ["name"],
+                        // required: ["name"],
                       },
                       contact: {
                         type: "object",
                         properties: {
                           phone: {
                             type: "string",
-                            minLength: 10,
-                            maxLength: 11,
+                            // minLength: 10,
+                            // maxLength: 11,
                           },
                           email: {
                             type: "string",
-                            format: "email",
+                            // format: "email",
                           },
                         },
-                        required: ["phone"],
+                        // required: ["phone"],
                       },
                     },
-                    required: ["location", "person", "contact"],
+                    // required: ["location", "person", "contact"],
                   },
-                  tags: {
-                    type: "array",
-                    items: {
-                      type: "object",
-                      properties: {
-                        code: {
-                          type: "string",
-                          enum: [
-                            "cancel_request",
-                            "igm_request",
-                            "precancel_state",
-                            "quote_trail",
-                            "routing",
-                            "tracking",
-                          ],
-                        },
-                        list: {
-                          type: "array",
-                          items: {
-                            type: "object",
-                            properties: {
-                              code: {
-                                type: "string",
-                                enum: [
-                                  "reason_id",
-                                  "initiated_by",
-                                  "fulfillment_state",
-                                  "updated_at",
-                                  "retry_count",
-                                  "rto_id",
-                                  "id",
-                                  "currency",
-                                  "value",
-                                  "type",
-                                  "subtype",
-                                ],
-                              },
-                              value: {
-                                type: "string",
-                              },
-                            },
-                            required: ["code", "value"],
-                          },
-                        },
-                      },
-                      required: ["code", "list"],
-                    },
-                    additionalProperties: false,
-                  },
+                  // tags: {
+                  //   type: "array",
+                  //   items: {
+                  //     type: "object",
+                  //     properties: {
+                  //       code: {
+                  //         type: "string",
+                  //         enum: [
+                  //           "cancel_request",
+                  //           "igm_request",
+                  //           "precancel_state",
+                  //           "quote_trail",
+                  //           "routing",
+                  //           "tracking",
+                  //         ],
+                  //       },
+                  //       list: {
+                  //         type: "array",
+                  //         items: {
+                  //           type: "object",
+                  //           properties: {
+                  //             code: {
+                  //               type: "string",
+                  //               enum: [
+                  //                 "reason_id",
+                  //                 "initiated_by",
+                  //                 "fulfillment_state",
+                  //                 "updated_at",
+                  //                 "retry_count",
+                  //                 "rto_id",
+                  //                 "id",
+                  //                 "currency",
+                  //                 "value",
+                  //                 "type",
+                  //                 "subtype",
+                  //               ],
+                  //             },
+                  //             value: {
+                  //               type: "string",
+                  //             },
+                  //           },
+                  //           required: ["code", "value"],
+                  //         },
+                  //       },
+                  //     },
+                  //     required: ["code", "list"],
+                  //   },
+                  //   additionalProperties: false,
+                  // },
                 },
                 required: ["id", "state", "type"],
               },
@@ -594,7 +620,11 @@ export const onCancelSchema = {
                         },
                       },
                     },
-                    required: ["@ondc/org/item_id", "@ondc/org/title_type"],
+                    required: [
+                      "@ondc/org/item_id",
+                      "@ondc/org/title_type",
+                      "price",
+                    ],
                   },
                 },
                 ttl: {
@@ -602,7 +632,11 @@ export const onCancelSchema = {
                   format: "duration",
                 },
               },
-              required: ["price", "breakup", "ttl"],
+              required: [
+                "price",
+                "breakup",
+                // "ttl"
+              ],
             },
             payment: {
               type: "object",
@@ -686,7 +720,7 @@ export const onCancelSchema = {
                 "collected_by",
                 "@ondc/org/buyer_app_finder_fee_type",
                 "@ondc/org/buyer_app_finder_fee_amount",
-                "@ondc/org/settlement_details",
+                // "@ondc/org/settlement_details",
               ],
             },
             created_at: {
@@ -704,14 +738,14 @@ export const onCancelSchema = {
             "provider",
             "items",
             "billing",
-            "cancellation",
+            // "cancellation",
             "fulfillments",
             "quote",
             "payment",
             "created_at",
             "updated_at",
           ],
-          additionalProperties: false,
+          // additionalProperties: false,
         },
       },
       required: ["order"],
@@ -719,3 +753,5 @@ export const onCancelSchema = {
   },
   required: ["context", "message"],
 };
+
+export default onCancelSchema;
