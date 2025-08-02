@@ -1,8 +1,8 @@
 // middlewares/jsonFileUploadMiddleware.ts
 import multer from "multer";
 import { Request, Response, NextFunction } from "express";
+import logger from "../utils/logger";
 
-// Multer setup: support single or multiple file uploads
 const upload = multer({
   storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
@@ -11,14 +11,20 @@ const upload = multer({
       !file.originalname.endsWith(".json") ||
       file.mimetype !== "application/json"
     ) {
-      return cb(new Error("Only JSON files uploads are allowed"));
+      logger.error(
+        `Invalid file type uploaded: ${file.originalname} (${file.mimetype})`
+      );
+      return cb(new Error("Only JSON file(s) uploads are allowed"));
     }
     cb(null, true);
   },
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB per file
 });
 
-// This wrapper supports both single or multiple files
+/**
+ * Middleware to handle JSON file uploads
+ * @returns Processed JSON payloads in req.processedJsonPayloads (req object of Express)
+ */
 export function jsonFileUploadMiddleware(
   req: Request,
   res: Response,
@@ -28,6 +34,7 @@ export function jsonFileUploadMiddleware(
   const handler = upload.any(); // Allows both single and multiple files with any field name
   handler(req, res, function (err: any) {
     if (err) {
+      logger.error(`File upload error: ${err.message}`);
       return res.status(400).json({ error: err.message || "Upload failed" });
     }
     const files = (req.files as Express.Multer.File[]) || [];
