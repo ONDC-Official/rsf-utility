@@ -12,6 +12,9 @@ const server = app.listen(config.port, async () => {
 	logger.info(
 		`Server running on port ${config.port} in ${config.environment} mode`
 	);
+	logger.warning(
+		"For more information, visit the API documentation at /api-docs"
+	);
 });
 // Graceful Shutdown
 process.on("SIGTERM", () => {
