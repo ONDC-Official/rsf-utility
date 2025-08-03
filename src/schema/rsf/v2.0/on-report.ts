@@ -1,3 +1,5 @@
+import { ENUMS } from "../../../constants/enums";
+
 const onReportSchema = {
   type: "object",
   required: ["context", "message"],
@@ -98,7 +100,7 @@ const onReportSchema = {
                       },
                       status: {
                         type: "string",
-                        enum: ["SETTLED", "NOT_SETTLED"],
+                        enum: Object.values(ENUMS.REPORT_STATUS),
                       },
                       reference_no: { type: "string" },
                     },
@@ -132,7 +134,7 @@ const onReportSchema = {
                       },
                       status: {
                         type: "string",
-                        enum: ["SETTLED", "NOT_SETTLED"],
+                        enum: Object.values(ENUMS.REPORT_STATUS),
                       },
                       error: {
                         type: "object",
@@ -158,7 +160,7 @@ const onReportSchema = {
                       },
                       status: {
                         type: "string",
-                        enum: ["NOT_SETTLED", "SETTLED"],
+                        enum: Object.values(ENUMS.REPORT_STATUS),
                       },
                       error: {
                         type: "object",

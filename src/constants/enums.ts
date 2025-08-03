@@ -55,9 +55,83 @@ export const CONTEXT_ACTION = {
 export type ContextAction =
   (typeof CONTEXT_ACTION)[keyof typeof CONTEXT_ACTION];
 
+export const SETTLEMENT_STATUS = {
+  PREPARED: "PREPARED", //INTERNAL USE ONLY
+  PENDING: "PENDING",
+  SETTLED: "SETTLED",
+  NOT_SETTLED: "NOT-SETTLED",
+} as const;
+
+export type SettlementStatus =
+  (typeof SETTLEMENT_STATUS)[keyof typeof SETTLEMENT_STATUS];
+
+export const RECON_STATUS = {
+  TO_BE_INITIATED: "TO-BE-INITIATED",
+  SETTLED: "SETTLED",
+  NOT_SETTLED: "NOT-SETTLED",
+} as const;
+
+export type ReconStatus = (typeof RECON_STATUS)[keyof typeof RECON_STATUS];
+
+export const REPORT_STATUS = {
+  SETTLED: "SETTLED",
+  NOT_SETTLED: "NOT-SETTLED",
+} as const;
+
+export type ReportStatus = (typeof REPORT_STATUS)[keyof typeof REPORT_STATUS];
+
+export const SETTLEMENT_TYPE = {
+  NP_NP: "NP-NP",
+  MISC: "MISC",
+  NIL: "NIL",
+} as const;
+
+export type SettlementType =
+  (typeof SETTLEMENT_TYPE)[keyof typeof SETTLEMENT_TYPE];
+
+export const PAYMENT_STATUS = {
+  PAID: "PAID",
+  NOT_PAID: "NOT-PAID",
+} as const;
+
+export type PaymentStatus =
+  (typeof PAYMENT_STATUS)[keyof typeof PAYMENT_STATUS];
+
+export const PAYMENT_TYPE = {
+  ON_ORDER: "ON-ORDER",
+  ON_FULFILLMENT: "ON-FULFILLMENT",
+} as const;
+
+export type PaymentType = (typeof PAYMENT_TYPE)[keyof typeof PAYMENT_TYPE];
+
+export const PARTICIPANT_TYPE = {
+  BAP: "BAP",
+  BPP: "BPP",
+} as const;
+
+export type ParticipantType =
+  (typeof PARTICIPANT_TYPE)[keyof typeof PARTICIPANT_TYPE];
+
+export const SETTLEMENT_BASIS = {
+  SHIPMENT: "shipment",
+  DELIVERY: "delivery",
+  RETURN_WINDOW_EXPIRY: "return_window_expiry",
+} as const;
+
+export type SettlementBasis =
+  (typeof SETTLEMENT_BASIS)[keyof typeof SETTLEMENT_BASIS];
+
 export const ENUMS = {
   ORDER_STATE,
   NP_TYPE,
   FULFILLMENT_STATE,
   CONTEXT_ACTION,
+  SETTLEMENT_STATUS,
+  RECON_STATUS,
+  REPORT_STATUS,
+  SETTLEMENT_TYPE,
+  PAYMENT_STATUS,
+  PAYMENT_TYPE,
+  PARTICIPANT_TYPE,
+  SETTLEMENT_BASIS,
 };

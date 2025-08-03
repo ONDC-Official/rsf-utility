@@ -1,3 +1,5 @@
+import { ENUMS } from "../../constants/enums";
+
 const onStatusSchema = {
   type: "object",
   properties: {
@@ -85,13 +87,7 @@ const onStatusSchema = {
             },
             state: {
               type: "string",
-              enum: [
-                "Created",
-                "Accepted",
-                "In-progress",
-                "Completed",
-                "Cancelled",
-              ],
+              enum: Object.values(ENUMS.ORDER_STATE),
             },
             cancellation: {
               type: "object",
@@ -299,32 +295,7 @@ const onStatusSchema = {
                         properties: {
                           code: {
                             type: "string",
-                            enum: [
-                              "Pending",
-                              "Packed",
-                              "Agent-assigned",
-                              "Out-for-pickup",
-                              "Pickup-failed",
-                              "At-pickup",
-                              "Order-picked-up",
-                              "In-transit",
-                              "At-destination-hub",
-                              "Out-for-delivery",
-                              "At-delivery",
-                              "Delivery-failed",
-                              "Order-delivered",
-                              "Cancelled",
-                              "RTO-Initiated",
-                              "RTO-Disposed",
-                              "RTO-Delivered",
-                              "Return_Initiated",
-                              "Liquidated",
-                              "Return_Approved",
-                              "Return_Picked",
-                              "Return_Pick_Failed",
-                              "Return_Rejected",
-                              "Return_Delivered",
-                            ],
+                            enum: Object.values(ENUMS.FULFILLMENT_STATE),
                           },
                         },
                         required: ["code"],
@@ -763,15 +734,15 @@ const onStatusSchema = {
                 },
                 status: {
                   type: "string",
-                  enum: ["PAID", "NOT-PAID"],
+                  enum: Object.values(ENUMS.PAYMENT_STATUS),
                 },
                 type: {
                   type: "string",
-                  enum: ["ON-ORDER", "ON-FULFILLMENT"],
+                  enum: Object.values(ENUMS.PAYMENT_TYPE),
                 },
                 collected_by: {
                   type: "string",
-                  enum: ["BAP", "BPP"],
+                  enum: Object.values(ENUMS.PARTICIPANT_TYPE),
                 },
                 "@ondc/org/buyer_app_finder_fee_type": {
                   type: "string",

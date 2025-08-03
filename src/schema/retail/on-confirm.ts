@@ -1,3 +1,5 @@
+import { ENUMS } from "../../constants/enums";
+
 const onConfirmSchema = {
   type: "object",
   properties: {
@@ -85,7 +87,7 @@ const onConfirmSchema = {
             },
             state: {
               type: "string",
-              enum: ["Created", "Accepted", "Cancelled"],
+              enum: Object.values(ENUMS.ORDER_STATE),
             },
             provider: {
               type: "object",
@@ -702,15 +704,15 @@ const onConfirmSchema = {
                 },
                 status: {
                   type: "string",
-                  enum: ["PAID", "NOT-PAID"],
+                  enum: Object.values(ENUMS.PAYMENT_STATUS),
                 },
                 type: {
                   type: "string",
-                  enum: ["ON-ORDER", "ON-FULFILLMENT"],
+                  enum: Object.values(ENUMS.PAYMENT_TYPE),
                 },
                 collected_by: {
                   type: "string",
-                  enum: ["BAP", "BPP"],
+                  enum: Object.values(ENUMS.PARTICIPANT_TYPE),
                 },
                 "@ondc/org/buyer_app_finder_fee_type": {
                   type: "string",
@@ -720,7 +722,7 @@ const onConfirmSchema = {
                 },
                 "@ondc/org/settlement_basis": {
                   type: "string",
-                  enum: ["shipment", "delivery", "return_window_expiry"],
+                  enum: Object.values(ENUMS.SETTLEMENT_BASIS),
                 },
                 "@ondc/org/settlement_window": {
                   type: "string",
@@ -859,7 +861,7 @@ const onConfirmSchema = {
                               },
                               value: {
                                 type: "string",
-                                enum: ["MSN", "ISN"],
+                                enum: Object.values(ENUMS.NP_TYPE),
                               },
                             },
                             required: ["code", "value"],

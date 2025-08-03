@@ -1,3 +1,5 @@
+import { ENUMS } from "../../../constants/enums";
+
 const onSettleSchema = {
   type: "object",
   required: ["context", "message"],
@@ -16,7 +18,7 @@ const onSettleSchema = {
         "transaction_id",
         "message_id",
         "timestamp",
-        "ttl",
+        // "ttl",
       ],
       properties: {
         domain: { type: "string" },
@@ -66,7 +68,10 @@ const onSettleSchema = {
           type: "object",
           required: ["type"],
           properties: {
-            type: { type: "string", enum: ["NP-NP", "MISC", "NIL"] },
+            type: {
+              type: "string",
+              enum: Object.values(ENUMS.SETTLEMENT_TYPE),
+            },
             id: { type: "string" },
             orders: {
               type: "array",
@@ -110,7 +115,7 @@ const onSettleSchema = {
                       },
                       status: {
                         type: "string",
-                        enum: ["SETTLED", "NOT_SETTLED"],
+                        enum: Object.values(ENUMS.REPORT_STATUS),
                       },
                       error: {
                         type: "object",
@@ -160,7 +165,7 @@ const onSettleSchema = {
                       },
                       status: {
                         type: "string",
-                        enum: ["SETTLED", "NOT_SETTLED"],
+                        enum: Object.values(ENUMS.REPORT_STATUS),
                       },
                       error: {
                         type: "object",
@@ -193,7 +198,7 @@ const onSettleSchema = {
                       },
                       status: {
                         type: "string",
-                        enum: ["SETTLED", "NOT_SETTLED"],
+                        enum: Object.values(ENUMS.REPORT_STATUS),
                       },
                       reference_no: { type: "string" },
                       error: {

@@ -36,9 +36,10 @@ export function jsonFileUploadMiddleware(
 ) {
   // Support either single ('file') or multiple files (array('file'))
   const handler = upload.any(); // Allows both single and multiple files with any field name
+  uploadLogger.info(`Processing file upload`, getLoggerMeta(req));
   handler(req, res, function (err: any) {
     if (err) {
-      logger.error(`File upload error: ${err.message}`);
+      uploadLogger.error(`File upload error: ${err.message}`);
       return res.status(400).json({ error: err.message || "Upload failed" });
     }
     const files = (req.files as Express.Multer.File[]) || [];
@@ -50,7 +51,7 @@ export function jsonFileUploadMiddleware(
       try {
         // Check that file contains parsable JSON
         const parsed = JSON.parse(file.buffer.toString("utf-8"));
-        logger.info(`Parsed JSON from file: ${file.originalname}`);
+        uploadLogger.info(`Parsed JSON from file: ${file.originalname}`);
         payloadsWithFilenames.push({
           filename: file.originalname,
           payload: parsed,
@@ -64,7 +65,7 @@ export function jsonFileUploadMiddleware(
     }
     (req as any).processedJsonPayloads = payloadsWithFilenames;
     if (errors.length) {
-      logger.error("File Upload Error", getLoggerMeta(req), errors);
+      uploadLogger.error("File Upload Error", getLoggerMeta(req), errors);
       return res.status(400).json({
         message: "Some files failed to upload as JSON.",
         invalidFiles: errors, // [{ filename, error }]

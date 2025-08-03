@@ -5,7 +5,7 @@ const rateLimitLogger = logger.child("rate-limiter");
 
 const rateLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  limit: 1, // Limit each user (config-id) to 1000 requests per min
+  limit: 1000, // Limit each user (config-id) to 1000 requests per min
   standardHeaders: "draft-8", // Return `RateLimit-*` headers for clarity
   legacyHeaders: false,
   keyGenerator: () => "global",

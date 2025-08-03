@@ -1,3 +1,4 @@
+import { ENUMS } from "../../../constants/enums";
 const reconSchema = {
   type: "object",
   required: ["context", "message"],
@@ -91,7 +92,7 @@ const reconSchema = {
                     payment_id: { type: "string" },
                     status: {
                       type: "string",
-                      enum: ["PENDING", "SETTLED", "TO_BE_INITIATED"],
+                      enum: Object.values(ENUMS.RECON_STATUS),
                     },
                     amount: {
                       type: "object",
@@ -134,7 +135,7 @@ const reconSchema = {
                       },
                     },
                     settlement_ref_no: { type: "string" },
-                    updated_at: { type: "string", format: "date-time" },
+                    updated_at: { type: "string", format: "rfc3339-date-time" },
                   },
                 },
               },

@@ -1,3 +1,5 @@
+import { ENUMS } from "../../../constants/enums";
+
 const onReconSchema = {
   type: "object",
   required: ["context", "message"],
@@ -92,7 +94,7 @@ const onReconSchema = {
                     payment_id: { type: "string" },
                     status: {
                       type: "string",
-                      enum: ["PENDING", "SETTLED", "TO_BE_INITIATED"],
+                      enum: Object.values(ENUMS.RECON_STATUS),
                     },
                     settlement_ref_no: { type: "string" },
                     amount: {

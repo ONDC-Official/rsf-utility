@@ -1,3 +1,5 @@
+import { ENUMS } from "../../../constants/enums";
+
 const settleSchema = {
   type: "object",
   required: ["context", "message"],
@@ -51,7 +53,7 @@ const settleSchema = {
         bpp_uri: { type: "string", format: "uri" },
         transaction_id: { type: "string" },
         message_id: { type: "string" },
-        timestamp: { type: "string", format: "date-time" },
+        timestamp: { type: "string", format: "rfc3339-date-time" },
         ttl: { type: "string", format: "duration" },
       },
       additionalProperties: false,
@@ -66,13 +68,15 @@ const settleSchema = {
           type: "object",
           required: ["type", "id", "orders"],
           properties: {
-            type: { type: "string", enum: ["NP-NP", "MISC", "NIL"] },
+            type: {
+              type: "string",
+              enum: Object.values(ENUMS.SETTLEMENT_TYPE),
+            },
             id: { type: "string" },
             orders: {
               type: "array",
               items: {
                 type: "object",
-                required: ["self"],
                 properties: {
                   id: { type: "string" },
                   inter_participant: {
