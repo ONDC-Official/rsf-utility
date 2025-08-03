@@ -1,12 +1,17 @@
 import { OrderController } from "../controller/order-controller";
 import { PayloadController } from "../controller/payload-controller";
+import { RsfController } from "../controller/rsf-controller";
 import { SettleController } from "../controller/settle-controller";
+import { TriggerController } from "../controller/trigger-controller";
 import { UserController } from "../controller/user-controller";
 import { OrderRepository } from "../repositories/order-repository";
 import { SettleRepository } from "../repositories/settle-repository";
 import { UserRepository } from "../repositories/user-repository";
 import { OrderService } from "../services/order-service";
-import { SettleService } from "../services/settle-service";
+import { OnSettleService } from "../services/rsf-api-services/on_settle-service";
+import { RsfService } from "../services/rsf-api-services/rsf-service";
+import { SettleDbManagementService } from "../services/settle-service";
+import { TriggerService } from "../services/trigger-services/trigger-service";
 import { UserService } from "../services/user-service";
 
 const userRepository = new UserRepository();
@@ -18,18 +23,31 @@ const orderService = new OrderService(orderRepository);
 const orderController = new OrderController(orderService, userService);
 
 const settleRepository = new SettleRepository();
-const settleService = new SettleService(
-  settleRepository,
-  userService,
-  orderService
+const settleDbManagementService = new SettleDbManagementService(
+	settleRepository,
+	userService,
+	orderService
 );
-const settleController = new SettleController(settleService);
+const settleController = new SettleController(settleDbManagementService);
 
 const payloadController = new PayloadController(orderService);
+
+const triggerService = new TriggerService(
+	settleDbManagementService,
+	userService
+);
+const triggerController = new TriggerController(triggerService);
+
+const onSettleService = new OnSettleService(settleDbManagementService);
+const rsfService = new RsfService(onSettleService);
+const rsfController = new RsfController(rsfService);
+
 // Export all controllers (or services too, if needed)
 export const container = {
-  userController,
-  orderController,
-  settleController,
-  payloadController,
+	userController,
+	orderController,
+	triggerController,
+	settleController,
+	payloadController,
+	rsfController,
 };

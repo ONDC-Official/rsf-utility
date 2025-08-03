@@ -10,7 +10,8 @@ payloadRouter.post(
 	rateLimiter,
 	schemaValidator,
 	container.userController.userValidationMiddleware,
-	container.payloadController.payloadHandler,
+	container.rsfController.rsfPayloadHandler,
+	container.payloadController.nonRsfPayloadHandler,
 	(req, res) => {
 		const { action } = req.params;
 		res.status(200).json({

@@ -61,18 +61,22 @@ export const UserSchema = z
 			description: "Signing private key",
 			example: "privateKey123",
 		}),
-		settlement_agency_url: z.string().url().openapi({
-			description: "Settlement agency URL",
-			example: "https://settlement-agency.com",
+		subscriber_unique_key_id: z.string().openapi({
+			description: "Unique Key ID or uKid",
+			example: "ukid123",
 		}),
-		settlement_agency_api_key: z.string().openapi({
-			description: "Settlement agency API key",
-			example: "apiKey123",
-		}),
-		settlement_agency_id: z.string().openapi({
-			description: "Settlement agency ID",
-			example: "agency123",
-		}),
+		// settlement_agency_url: z.url().openapi({
+		// 	description: "Settlement agency URL",
+		// 	example: "https://settlement-agency.com",
+		// }),
+		// settlement_agency_api_key: z.string().openapi({
+		// 	description: "Settlement agency API key",
+		// 	example: "apiKey123",
+		// }),
+		// settlement_agency_id: z.string().openapi({
+		// 	description: "Settlement agency ID",
+		// 	example: "agency123",
+		// }),
 	})
 	.strict()
 	.openapi("UserSchema");

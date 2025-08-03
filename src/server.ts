@@ -12,6 +12,7 @@ import swaggerUi from "swagger-ui-express";
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
+
 	const app = express();
 
 	app.use(logger.getCorrelationIdMiddleware());

@@ -27,6 +27,18 @@ export class SettleRepository {
 		return await Settle.insertMany(settlements);
 	}
 
+	async updateSettlement(
+		userId: string,
+		orderId: string,
+		settlement: z.infer<typeof SettleSchema>
+	) {
+		return await Settle.findOneAndUpdate(
+			{ user_id: userId, order_id: orderId },
+			{ $set: settlement },
+			{ new: true }
+		);
+	}
+
 	async insertSettlement(settlement: z.infer<typeof SettleSchema>) {
 		const newSettlement = new Settle(settlement);
 		return await newSettlement.save();

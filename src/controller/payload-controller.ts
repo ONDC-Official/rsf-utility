@@ -8,7 +8,11 @@ import { extractFields } from "../services/payload-service";
 export class PayloadController {
 	constructor(private orderService: OrderService) {}
 
-	payloadHandler = async (req: Request, res: Response, next: NextFunction) => {
+	nonRsfPayloadHandler = async (
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) => {
 		const payload = req.body;
 		const { bap_user_id, bpp_user_id } = res.locals;
 		const extracted = extractFields(payload, orderJsonPathMap);

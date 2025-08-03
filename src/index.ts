@@ -3,7 +3,10 @@ import createServer from "./server";
 import mongoose from "mongoose";
 import connectDB from "./db";
 import logger from "./utils/logger";
+import checkRequiredEnvVars from "./utils/validate-env";
+import { requiredEnvVariables } from "./config/node-config";
 
+checkRequiredEnvVars(requiredEnvVariables);
 const app = createServer();
 
 const server = app.listen(config.port, async () => {
