@@ -1,5 +1,6 @@
 import winston, { transports } from "winston";
 import { devFormat, lokiFormat as jsonFormat } from "./format";
+import DailyRotateFile from "winston-daily-rotate-file";
 
 export default function getLoggerTransports(): winston.transport[] {
 	// Determine the environment
@@ -19,8 +20,11 @@ export default function getLoggerTransports(): winston.transport[] {
 	} else {
 		loggerTransports.push(new transports.Console({ format: devFormat }));
 		loggerTransports.push(
-			new transports.File({
-				filename: "logs/development.log",
+			new DailyRotateFile({
+				filename: "logs/development-%DATE%.log",
+				datePattern: "YYYY-MM-DD",
+				zippedArchive: false,
+				maxFiles: "1d", // Keep only the last 1 days' files
 				format: jsonFormat,
 			})
 		);

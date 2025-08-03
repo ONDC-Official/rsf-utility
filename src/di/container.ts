@@ -11,6 +11,7 @@ import { OrderService } from "../services/order-service";
 import { OnSettleService } from "../services/rsf-api-services/on_settle-service";
 import { RsfService } from "../services/rsf-api-services/rsf-service";
 import { SettleDbManagementService } from "../services/settle-service";
+import { SettleTriggerService } from "../services/trigger-services/settle-trigger-service";
 import { TriggerService } from "../services/trigger-services/trigger-service";
 import { UserService } from "../services/user-service";
 
@@ -32,10 +33,11 @@ const settleController = new SettleController(settleDbManagementService);
 
 const payloadController = new PayloadController(orderService);
 
-const triggerService = new TriggerService(
+const settleTriggerService = new SettleTriggerService(
 	settleDbManagementService,
 	userService
 );
+const triggerService = new TriggerService(settleTriggerService);
 const triggerController = new TriggerController(triggerService);
 
 const onSettleService = new OnSettleService(settleDbManagementService);
