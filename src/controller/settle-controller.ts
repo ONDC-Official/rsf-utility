@@ -3,6 +3,7 @@ import logger from "../utils/logger";
 import { Request, Response } from "express";
 import { getLoggerMeta } from "../utils/utility";
 import {
+	GenerateSettlementsBody,
 	GetSettlementsQuerySchema,
 	PrepareSettlementsBody,
 } from "../types/settle-params";
@@ -86,6 +87,47 @@ export class SettleController {
 		} catch (error: any) {
 			settleLogger.error(
 				"Error preparing settlement",
+				getLoggerMeta(req),
+				error
+			);
+			res.status(500).json({ message: error.message });
+		}
+	};
+
+	generateSettlement = async (req: Request, res: Response) => {
+		try {
+			settleLogger.info("Generating settlement", getLoggerMeta(req));
+			const userId = req.params.userId;
+			if (!validateUserId(userId)) {
+				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
+				res.status(400).json({ message: "Valid User ID is required" });
+				return;
+			}
+			const validationResult = GenerateSettlementsBody.safeParse(req.body);
+			if (!validationResult.success) {
+				settleLogger.error(
+					"Invalid request body",
+					getLoggerMeta(req),
+					validationResult.error
+				);
+				res.status(400).json({
+					message: "Invalid request body",
+					errors: z.treeifyError(validationResult.error),
+				});
+				return;
+			}
+			const settlementPayload = await this.settleService.generateSettlePayloads(
+				userId,
+				validationResult.data.order_ids
+			);
+			settleLogger.info(
+				"Settlement generated successfully",
+				getLoggerMeta(req)
+			);
+			res.status(201).json(settlementPayload);
+		} catch (error: any) {
+			settleLogger.error(
+				"Error generating settlement",
 				getLoggerMeta(req),
 				error
 			);

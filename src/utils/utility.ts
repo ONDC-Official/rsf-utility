@@ -5,5 +5,6 @@ export function getLoggerMeta(req: Request) {
 		correlationId: req.correlationId,
 		params: req.params,
 		query: req.query,
+		userId: req.params.userId,
 	};
 }

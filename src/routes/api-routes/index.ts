@@ -1,5 +1,5 @@
 import { Router } from "express";
-import payloadRouter from "./payload.routes";
+import payloadRouter from "./payload-routes";
 
 const apiRoutes = Router();
 

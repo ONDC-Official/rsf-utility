@@ -1,4 +1,4 @@
-import { User } from "../db/models/user.model";
+import { User } from "../db/models/user-model";
 import { UserType } from "../schema/models/user-schema";
 export class UserRepository {
 	async createUser(data: UserType) {

@@ -4,6 +4,7 @@ const SettleSchema = new mongoose.Schema(
 	{
 		order_id: { type: String, required: true },
 		user_id: { type: String, required: true },
+		settlement_id: { type: String, required: true },
 		collector_id: { type: String, required: true },
 		receiver_id: { type: String, required: true },
 		total_order_value: { type: Number, required: true },
@@ -13,7 +14,11 @@ const SettleSchema = new mongoose.Schema(
 		inter_np_settlement: { type: Number, required: true },
 		provider_id: { type: String, required: true },
 		due_date: { type: Date, required: true },
-		type: { enum: ["NP-NP", "NIL", "MISC"], required: true },
+		type: {
+			type: String,
+			enum: ["NP-NP", "NIL", "MISC"],
+			required: true,
+		},
 		settlement_reference: { type: String },
 		error: { type: String },
 		status: {
@@ -24,5 +29,7 @@ const SettleSchema = new mongoose.Schema(
 	},
 	{ timestamps: true }
 );
+
+SettleSchema.index({ user_id: 1, order_id: 1 }, { unique: true }); // Ensure unique settlement per user and order
 
 export const Settle = mongoose.model("Settle", SettleSchema);

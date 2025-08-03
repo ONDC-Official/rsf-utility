@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
 			required: true,
 		},
 		subscriber_id: { type: String, required: true },
+		subscriber_url: { type: String, required: true },
 		domain: { type: String, required: true },
 		tcs: { type: String, required: true },
 		tds: { type: String, required: true },

@@ -7,6 +7,9 @@ settleRouter.get("/:userId", container.settleController.getSettlements); // all(
 settleRouter.post(
 	"/:userId/prepare",
 	container.settleController.prepareSettlement
-); // same to
-settleRouter.post("/:userId/generate", async (req, res) => {}); // same collector and receiver and 100 limit
+);
+settleRouter.post(
+	"/:userId/generate",
+	container.settleController.generateSettlement
+); // same collector and receiver and 100 limit
 export default settleRouter;

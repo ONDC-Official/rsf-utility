@@ -87,3 +87,18 @@ export const PrepareSettlementsBody = z
 	})
 	.strict()
 	.openapi("PrepareSettlementsBody");
+
+export const GenerateSettlementsBody = z
+	.object({
+		order_ids: z
+			.array(z.string())
+			.min(1)
+			.max(100)
+			.openapi({
+				description:
+					"List of settlements order IDs to generate settlements for",
+				example: ["order1", "order2"],
+			}),
+	})
+	.strict()
+	.openapi("GenerateSettlementsBody");

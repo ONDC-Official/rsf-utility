@@ -21,6 +21,13 @@ export const SettleSchema = z
 			description: "Receiver identifier",
 			example: "receiver123",
 		}),
+		settlement_id: z
+			.string()
+			.openapi({
+				description: "Unique identifier for the settlement",
+				example: "settlement123",
+			})
+			.optional(),
 		total_order_value: z.number().openapi({
 			description: "Total order value",
 			example: 1000,
@@ -49,11 +56,11 @@ export const SettleSchema = z
 			description: "Due date for settlement",
 			example: "2025-08-03T00:00:00.000Z",
 		}),
-		settlement_reference: z.string().optional().openapi({
+		settlement_reference: z.string().nullable().optional().openapi({
 			description: "Settlement reference",
 			example: "reference123",
 		}),
-		error: z.string().optional().openapi({
+		error: z.string().optional().nullable().openapi({
 			description: "Error details",
 			example: "Error occurred",
 		}),

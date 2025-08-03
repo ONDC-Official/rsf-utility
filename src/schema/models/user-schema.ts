@@ -34,6 +34,10 @@ export const UserSchema = z
 			description: "Subscriber ID",
 			example: "subscriber123",
 		}),
+		subscriber_url: z.url().openapi({
+			description: "Subscriber URL",
+			example: "https://subscriber.example.com",
+		}),
 		domain: z.string().openapi({
 			description: "Domain",
 			example: "retail",

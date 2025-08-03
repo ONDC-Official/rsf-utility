@@ -31,6 +31,13 @@ export class SettleRepository {
 		const newSettlement = new Settle(settlement);
 		return await newSettlement.save();
 	}
+
+	async checkUniqueSettlement(userId: string, orderId: string) {
+		return await Settle.exists({
+			user_id: userId,
+			order_id: orderId,
+		});
+	}
 }
 
 // add list of counterparty
