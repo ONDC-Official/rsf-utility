@@ -6,7 +6,7 @@ const triggerRoutes = Router();
 triggerRoutes.post(
 	"/:userId/:action",
 	schemaValidator,
-	container.triggerController.handleTrigger
+	container.triggerController.handleTrigger,
 );
 
 export default triggerRoutes;

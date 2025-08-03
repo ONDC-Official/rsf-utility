@@ -31,7 +31,7 @@ export class SettleController {
 				settleLogger.error(
 					"Invalid query parameters",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				res.status(400).json({
 					message: "Invalid query parameters",
@@ -41,7 +41,7 @@ export class SettleController {
 			}
 			const data = await this.settleService.getSettlements(
 				userId,
-				validationResult.data
+				validationResult.data,
 			);
 			settleLogger.info("Settlements fetched successfully", getLoggerMeta(req));
 			res.status(200).json(data);
@@ -49,7 +49,7 @@ export class SettleController {
 			settleLogger.error(
 				"Error fetching settlements",
 				getLoggerMeta(req),
-				error
+				error,
 			);
 			res.status(500).json({ message: error.message });
 		}
@@ -69,7 +69,7 @@ export class SettleController {
 				settleLogger.error(
 					"Invalid request body",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				res.status(400).json({
 					message: "Invalid request body",
@@ -79,24 +79,24 @@ export class SettleController {
 			}
 			const settlements = await this.settleService.prepareSettlements(
 				userId,
-				validationResult.data.order_ids
+				validationResult.data.order_ids,
 			);
 			settleLogger.info(
 				"Settlement prepared successfully, new settlements created in the DB",
-				getLoggerMeta(req)
+				getLoggerMeta(req),
 			);
 			res.status(201).json(settlements);
 		} catch (error: any) {
 			settleLogger.error(
 				"Error preparing settlement",
 				getLoggerMeta(req),
-				error
+				error,
 			);
 			res.status(500).json({ message: error.message });
 		}
 	};
 
-	generateSettlement = async (req: Request, res: Response) => {
+	generateNpNpSettlement = async (req: Request, res: Response) => {
 		try {
 			settleLogger.info("Generating settlement", getLoggerMeta(req));
 			const userId = req.params.userId;
@@ -110,7 +110,7 @@ export class SettleController {
 				settleLogger.error(
 					"Invalid request body",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				res.status(400).json({
 					message: "Invalid request body",
@@ -120,18 +120,18 @@ export class SettleController {
 			}
 			const settlementPayload = await this.settleService.generateSettlePayloads(
 				userId,
-				validationResult.data.order_ids
+				validationResult.data.order_ids,
 			);
 			settleLogger.info(
 				"Settlement generated successfully",
-				getLoggerMeta(req)
+				getLoggerMeta(req),
 			);
 			res.status(201).json(settlementPayload);
 		} catch (error: any) {
 			settleLogger.error(
 				"Error generating settlement",
 				getLoggerMeta(req),
-				error
+				error,
 			);
 			res.status(500).json({ message: error.message });
 		}
@@ -140,7 +140,7 @@ export class SettleController {
 	generateMiscSettlement = async (
 		req: Request,
 		res: Response,
-		next: NextFunction
+		next: NextFunction,
 	) => {
 		try {
 			settleLogger.info("Generating misc settlement", getLoggerMeta(req));
@@ -154,22 +154,22 @@ export class SettleController {
 				settleLogger.error(
 					"Invalid request body",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				return res.status(400).json({
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
 			}
-			const miscData = req.body;
+			const miscData = validationResult.data;
 			const miscPayload = await this.settleService.generateMiscPayload(
 				userId,
-				miscData
+				miscData,
 			);
 
 			settleLogger.info(
 				"Settlement generated successfully",
-				getLoggerMeta(req)
+				getLoggerMeta(req),
 			);
 
 			(req as any).miscPayload = miscPayload;
@@ -179,7 +179,7 @@ export class SettleController {
 			settleLogger.error(
 				"Error generating settlement",
 				getLoggerMeta(req),
-				error
+				error,
 			);
 			res.status(500).json({ message: error.message });
 		}
@@ -188,7 +188,7 @@ export class SettleController {
 	generateNilSettlement = async (
 		req: Request,
 		res: Response,
-		next: NextFunction
+		next: NextFunction,
 	) => {
 		try {
 			settleLogger.info("Generating Nil settlement", getLoggerMeta(req));
@@ -202,7 +202,7 @@ export class SettleController {
 				settleLogger.error(
 					"Invalid request body",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				return res.status(400).json({
 					message: "Invalid request body",
@@ -213,7 +213,7 @@ export class SettleController {
 
 			settleLogger.info(
 				"Settlement generated successfully",
-				getLoggerMeta(req)
+				getLoggerMeta(req),
 			);
 
 			(req as any).nilPayload = nilPayload;
@@ -223,7 +223,7 @@ export class SettleController {
 			settleLogger.error(
 				"Error generating settlement",
 				getLoggerMeta(req),
-				error
+				error,
 			);
 			res.status(500).json({ message: error.message });
 		}

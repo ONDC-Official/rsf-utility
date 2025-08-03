@@ -8,6 +8,7 @@ export const RsfOnActionsSchema = z
 		description:
 			"valid actions for consuming RSF APIs from settlement agencies",
 		example: "on_settle",
-	});
+	})
+	.openapi("RsfOnActionsSchema");
 
 export type RsfOnAction = z.infer<typeof RsfOnActionsSchema>;
