@@ -94,6 +94,7 @@ export class SettleService {
 			provider_id: order.provider_id,
 			due_date: new Date(),
 			status: "PREPARED",
+			type: "NP-NP",
 		};
 	}
 }

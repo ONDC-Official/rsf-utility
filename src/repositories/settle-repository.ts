@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { GetSettlementsQuerySchema } from "../types/settle-params";
 import { Settle } from "../db/models/settle-model";
+import { SettleSchema } from "../schema/models/settle-schema";
 
 export class SettleRepository {
 	async findWithQuery(queryData: {
@@ -23,10 +23,13 @@ export class SettleRepository {
 			.sort({ createdAt: -1 });
 	}
 
-	async insertSettlementList(
-		settlements: z.infer<typeof GetSettlementsQuerySchema>[]
-	) {
+	async insertSettlementList(settlements: z.infer<typeof SettleSchema>[]) {
 		return await Settle.insertMany(settlements);
+	}
+
+	async insertSettlement(settlement: z.infer<typeof SettleSchema>) {
+		const newSettlement = new Settle(settlement);
+		return await newSettlement.save();
 	}
 }
 

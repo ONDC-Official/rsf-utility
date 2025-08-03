@@ -61,6 +61,10 @@ export const SettleSchema = z
 			description: "Settlement status",
 			example: "PENDING",
 		}),
+		type: z.enum(["NP-NP", "NIL", "MISC"]).openapi({
+			description: "Type of settlement",
+			example: "NP-NP",
+		}),
 	})
 	.strict()
 	.openapi("SettleSchema");

@@ -13,6 +13,7 @@ const SettleSchema = new mongoose.Schema(
 		inter_np_settlement: { type: Number, required: true },
 		provider_id: { type: String, required: true },
 		due_date: { type: Date, required: true },
+		type: { enum: ["NP-NP", "NIL", "MISC"], required: true },
 		settlement_reference: { type: String },
 		error: { type: String },
 		status: {
