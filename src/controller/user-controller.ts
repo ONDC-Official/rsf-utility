@@ -193,31 +193,31 @@ export class UserController {
 		logger.info("User Handler invoked", getLoggerMeta(req));
 		try {
 			const payload = req.body;
-			const { domain, bap_url, bpp_url } = payload.context;
-			if (!domain || !bap_url || !bpp_url) {
-				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
+			const { domain, bap_uri, bpp_uri } = payload.context;
+			if (!domain || !bap_uri || !bpp_uri) {
+				return res.status(400).json({
 					message: "Domain, BAP URL, and BPP URL are required in the context",
 				});
 				// return res.status(400).json({
 				// 	message: "Domain, BAP URL, and BPP URL are required in the context",
 				// });
 			}
-			const { bap_user_url, bpp_user_url } =
+			const { bap_user_uri, bpp_user_uri } =
 				await this.userService.getUserIdsByRoleAndDomain(
 					domain,
-					bap_url,
-					bpp_url,
+					bap_uri,
+					bpp_uri,
 				);
-			if (!bap_user_url && !bpp_user_url) {
-				return sendError(res, "USER_NOT_FOUND", undefined, {
+			if (!bap_user_uri && !bpp_user_uri) {
+				return res.status(400).json({
 					message: "Cannot find user for this domain and subscriber_id.",
 				});
 				// return res.status(400).json({
 				// 	message: "Cannot find user for this domain and subscriber_id.",
 				// });
 			}
-			res.locals.bap_user_url = bap_user_url;
-			res.locals.bpp_user_url = bpp_user_url;
+			res.locals.bap_user_url = bap_user_uri;
+			res.locals.bpp_user_url = bpp_user_uri;
 			next();
 		} catch (e: any) {
 			logger.error("Error in user validation", getLoggerMeta(req), e);

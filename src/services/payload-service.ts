@@ -1,67 +1,106 @@
 import { JSONPath } from "jsonpath-plus";
+import { OrderType } from "../schema/models/order-schema";
 
 export const extractFields = (
-  payload: any,
-  paths: Record<string, string>
-): Record<string, any> => {
-  const result: Record<string, any> = {};
+	payload: any,
+	paths: Record<string, string>,
+): OrderType => {
+	const result: Partial<OrderType> = {};
 
-  for (const [key, path] of Object.entries(paths)) {
-    try {
-      const value = JSONPath({ path, json: payload });
+	let tempQuote: any = null;
+	let tempBuyerFinderFeeType: string = "";
+	let tempBuyerFinderFeeAmountRaw: any = 0;
 
-      let resolvedValue;
-      if (Array.isArray(value)) {
-        if (value.length === 0) {
-          resolvedValue = "";
-        } else {
-          resolvedValue = value.length === 1 ? value[0] : value;
-        }
-      } else {
-        resolvedValue = value ?? "";
-      }
+	for (const [key, path] of Object.entries(paths)) {
+		try {
+			const value = JSONPath({ path, json: payload });
+			const resolvedValue = Array.isArray(value)
+				? value.length === 0
+					? ""
+					: value.length === 1
+						? value[0]
+						: value
+				: (value ?? "");
 
-      // Type coercion based on schema
-      switch (key) {
-        case "created_at":
-        case "updated_at":
-          result[key] = resolvedValue ? new Date(resolvedValue) : "";
-          break;
+			switch (key) {
+				case "created_at":
+					result.created_at = resolvedValue
+						? new Date(resolvedValue)
+						: new Date();
+					break;
 
-        case "buyer_finder_fee_amount":
-        case "withholding_amount":
-          result[key] =
-            resolvedValue !== "" && !isNaN(resolvedValue)
-              ? Number(resolvedValue)
-              : "";
-          break;
+				case "updated_at":
+					result.updated_at = resolvedValue
+						? new Date(resolvedValue)
+						: new Date();
+					break;
 
-        case "quote":
-          if (typeof resolvedValue === "object" && resolvedValue !== null) {
-            const priceValue = Number(resolvedValue?.price?.value || "0");
-            const breakup = Array.isArray(resolvedValue.breakup)
-              ? resolvedValue.breakup
-              : [];
-            result[key] = {
-              total_order_value: priceValue,
-              breakup,
-            };
-          } else {
-            result[key] = {
-              total_order_value: 0,
-              breakup: [],
-            };
-          }
-          break;
+				case "withholding_amount":
+					result.withholding_amount =
+						resolvedValue !== "" && !isNaN(resolvedValue)
+							? Number(resolvedValue)
+							: 0;
+					break;
 
-        default:
-          result[key] = resolvedValue;
-      }
-    } catch (err) {
-      console.error(`Error extracting key "${key}" from path "${path}":`, err);
-      result[key] = "";
-    }
-  }
+				case "buyer_finder_fee_type":
+					tempBuyerFinderFeeType = resolvedValue || "";
+					(result as any)[key] =
+						typeof resolvedValue === "string" ? resolvedValue : "";
+					break;
 
-  return result;
+				case "buyer_finder_fee_amount":
+					tempBuyerFinderFeeAmountRaw = resolvedValue;
+					break;
+
+				case "quote":
+					if (typeof resolvedValue === "object" && resolvedValue !== null) {
+						const priceValue = Number(resolvedValue?.price?.value || 0);
+
+						const breakup = Array.isArray(resolvedValue.breakup)
+							? resolvedValue.breakup.map((item: any) => ({
+									title: String(item["@ondc/org/title_type"] || ""),
+									price: Number(
+										typeof item.price === "object" && item.price?.value
+											? item.price.value
+											: (item.price ?? 0),
+									),
+									id: String(item["@ondc/org/item_id"] || ""),
+								}))
+							: [];
+
+						tempQuote = {
+							total_order_value: priceValue,
+							breakup,
+						};
+
+						result[key as keyof OrderType] = tempQuote;
+
+						const numericFee = Number(tempBuyerFinderFeeAmountRaw || 0);
+						const fee =
+							tempBuyerFinderFeeType === "percent"
+								? (priceValue * numericFee) / 100
+								: numericFee;
+
+						result["buyer_finder_fee_amount"] = fee;
+					} else {
+						result.quote = {
+							total_order_value: 0,
+							breakup: [],
+						};
+						result.buyer_finder_fee_amount = 0;
+					}
+					break;
+
+				default:
+					result[key as keyof OrderType] =
+						resolvedValue !== undefined && resolvedValue !== null
+							? resolvedValue
+							: "";
+			}
+		} catch (err) {
+			console.error(`Error extracting "${key}" from "${path}":`);
+		}
+	}
+
+	return result as OrderType;
 };

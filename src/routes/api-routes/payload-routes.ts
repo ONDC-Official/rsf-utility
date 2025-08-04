@@ -12,7 +12,7 @@ payloadRouter.post(
 	schemaValidator,
 	container.userController.userValidationMiddleware,
 	container.rsfController.rsfPayloadHandler,
-	container.payloadController.nonRsfPayloadHandler,
+	container.payloadController.nonRsfpayloadHandler,
 	(req, res) => {
 		const { action } = req.params;
 		return sendSuccess(res, {}, `Action ${action} processed successfully`);

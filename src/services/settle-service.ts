@@ -17,12 +17,12 @@ export class SettleDbManagementService {
 	constructor(
 		private settleRepo: SettleRepository,
 		private userService: UserService,
-		private orderService: OrderService
+		private orderService: OrderService,
 	) {}
 
 	async getSettlements(
 		userId: string,
-		data: z.infer<typeof GetSettlementsQuerySchema>
+		data: z.infer<typeof GetSettlementsQuerySchema>,
 	) {
 		settleLogger.info("Fetching settlements for user", { userId, data });
 		if (!(await this.userService.checkUserById(userId))) {
@@ -54,7 +54,7 @@ export class SettleDbManagementService {
 			throw new Error("User not found");
 		}
 		const orderIds = data.message.settlements.orders.map(
-			(order: any) => order.id
+			(order: any) => order.id,
 		);
 		if (orderIds.length === 0) {
 			throw new Error("No order IDs provided for settlement check");
@@ -62,7 +62,7 @@ export class SettleDbManagementService {
 		for (const orderId of orderIds) {
 			if (!(await this.settleRepo.checkUniqueSettlement(userId, orderId))) {
 				throw new Error(
-					`Settlement for order ID ${orderId} does not exist for user ID: ${userId}`
+					`Settlement for order ID ${orderId} does not exist for user ID: ${userId}`,
 				);
 			}
 		}
@@ -81,12 +81,13 @@ export class SettleDbManagementService {
 		for (const orderId of orderIds) {
 			if (!(await this.orderService.checkUniqueOrder(userId, orderId))) {
 				throw new Error(
-					`Order with ID ${orderId} not found for user ${userId}`
+					`Order with ID ${orderId} not found for user ${userId}`,
 				);
 			}
+			// @ts-ignore
 			const order = (await this.orderService.getUniqueOrders(
 				userId,
-				orderId
+				orderId,
 			)) as OrderType;
 			const settleData = this.prepareSingleSettlement(order, userConfig);
 			settles.push(settleData);
@@ -105,7 +106,7 @@ export class SettleDbManagementService {
 	prepareSingleSettlement(order: OrderType, userConfig: UserType): SettleType {
 		const { commission, tax, inter_np_settlement } = calculateSettlementDetails(
 			order,
-			userConfig
+			userConfig,
 		);
 		return {
 			order_id: order.order_id,
@@ -138,7 +139,7 @@ export class SettleDbManagementService {
 		for (const orderId of orderIds) {
 			if (!(await this.settleRepo.checkUniqueSettlement(userId, orderId))) {
 				throw new Error(
-					`Settlement for order ID ${orderId} does not exist for config ID: ${userId}`
+					`Settlement for order ID ${orderId} does not exist for config ID: ${userId}`,
 				);
 			}
 			const settlement = await this.settleRepo.findWithQuery({
@@ -149,13 +150,13 @@ export class SettleDbManagementService {
 			});
 			if (!settlement || settlement.length === 0) {
 				throw new Error(
-					`Settlement for order ID ${orderId} does not exist for config ID: ${userId}`
+					`Settlement for order ID ${orderId} does not exist for config ID: ${userId}`,
 				);
 			}
 			const settleData = settlement[0];
 			if (settleData.status === "SETTLED") {
 				throw new Error(
-					`Settlement for order ID ${orderId} is already settled for config ID: ${userId}`
+					`Settlement for order ID ${orderId} is already settled for config ID: ${userId}`,
 				);
 			}
 			const validId = `${settleData.collector_id}-${settleData.receiver_id}`;
@@ -164,7 +165,7 @@ export class SettleDbManagementService {
 			}
 			if (uniqueId !== validId) {
 				throw new Error(
-					`Collector and Receiver IDs do not match for order ID ${orderId} in config ID: ${userId}`
+					`Collector and Receiver IDs do not match for order ID ${orderId} in config ID: ${userId}`,
 				);
 			}
 			settlements.push(settleData);
@@ -178,11 +179,11 @@ export class SettleDbManagementService {
 	async updateSettlementsViaResponse(
 		userId: string,
 		data: any,
-		responseData: any
+		responseData: any,
 	) {
 		const hasError = responseData.error ? true : false;
 		const orderIds = data.message.settlements.orders.map(
-			(order: any) => order.id
+			(order: any) => order.id,
 		);
 		settleLogger.info("Updating settlements via response", {
 			userId,
@@ -199,7 +200,7 @@ export class SettleDbManagementService {
 			});
 			if (!settlement || settlement.length === 0) {
 				logger.error(
-					`Settlement not found for order ID: ${orderId} for user ID: ${userId}`
+					`Settlement not found for order ID: ${orderId} for user ID: ${userId}`,
 				);
 				continue;
 			}
