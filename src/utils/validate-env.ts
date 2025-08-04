@@ -6,6 +6,7 @@ export function validateEnv(config: Record<string, unknown>) {
 
 	if (!result.success) {
 		const errorMessage = z.treeifyError(result.error);
+		console.log(errorMessage)
 		logger.error(
 			"❌ Invalid environment variables:",
 			errorMessage,

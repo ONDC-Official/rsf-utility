@@ -4,5 +4,6 @@ import { container } from "../../di/container";
 const orderRoutes = Router();
 const orderController = container.orderController;
 
-orderRoutes.get("/", orderController.getOrders);
+
+orderRoutes.get("/:userId", orderController.getOrders);
 export default orderRoutes;

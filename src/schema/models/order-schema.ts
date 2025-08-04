@@ -65,7 +65,7 @@ export const OrderSchema = z
 			example: "provider123",
 		}),
 		state: z
-			.enum(["Created", "Accepted", "In-Progress", "Completed", "Cancelled"])
+			.enum(["Created", "Accepted", "In-progress", "Completed", "Cancelled"])
 			.openapi({
 				description: "State of the order",
 				example: "Created",
@@ -109,6 +109,14 @@ export const OrderSchema = z
 		quote: QuoteSchema.openapi({
 			description: "Quote details",
 		}),
+		settle_status: z.boolean().openapi({
+			description: "Status of settlement for an order",
+			example: false,
+		}),
+		payment_transaction_id: z.string().openapi({
+			description: "Transaction id of Payment",
+			example: "transID123"
+		})
 	})
 	.strict()
 	.openapi("OrderSchema");
