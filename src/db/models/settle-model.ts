@@ -77,7 +77,7 @@ const SettleSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
-		}, // settlement status PENDING, SETTLED, NOT-SETTLED
+		},
 		context: { type: ContextSchema, required: false },
 	},
 	{ timestamps: true },

@@ -10,10 +10,15 @@ import {
 	MiscSettlementSchema,
 	NilSettlementSchema,
 } from "../types/settle-params";
+import { GenReconBody } from "../types/generate-recon-types";
+import { GenerateReconService } from "../services/generate-services/generate-recon-service";
 
 const settleLogger = logger.child("generate-controller");
 export class GenerateController {
-	constructor(private generateSettleService: GenerateSettleService) {}
+	constructor(
+		private generateSettleService: GenerateSettleService,
+		private generateReconService: GenerateReconService,
+	) {}
 
 	handleSettleNpNp = async (req: Request, res: Response) => {
 		try {
@@ -175,12 +180,6 @@ export class GenerateController {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
-				// return res.status(400).json({
-
-				// return res.status(400).json({
-				// 	message: "Invalid request body",
-				// 	errors: z.treeifyError(validationResult.error),
-				// });
 			}
 			const nilPayload =
 				await this.generateSettleService.generateNilPayload(userId);
@@ -215,6 +214,42 @@ export class GenerateController {
 
 	handleRecon = async (req: Request, res: Response) => {
 		try {
+			const body = req.body;
+			settleLogger.info("Handling generate recon", getLoggerMeta(req), body);
+			const userId = req.params.userId;
+			if (!validateUserId(userId)) {
+				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+			}
+			const validationResult = GenReconBody.safeParse(body);
+			if (!validationResult.success) {
+				settleLogger.error(
+					"Invalid request body",
+					getLoggerMeta(req),
+					validationResult.error,
+				);
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
+					message: "Invalid request body",
+					errors: z.treeifyError(validationResult.error),
+				});
+			}
+			const reconData = validationResult.data;
+			const reconPayload = await this.generateReconService.generateReconPayload(
+				userId,
+				reconData,
+			);
+			settleLogger.info(
+				"Recon payload generated successfully",
+				getLoggerMeta(req),
+			);
+			return sendSuccess(
+				res,
+				reconPayload,
+				"Recon payload generated successfully",
+				201,
+			);
 		} catch (error: any) {
 			settleLogger.error("Error handling recon", getLoggerMeta(req), error);
 			return sendError(res, "INTERNAL_ERROR", undefined, {

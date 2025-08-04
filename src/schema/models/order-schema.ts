@@ -82,7 +82,7 @@ export const OrderSchema = z
 			description: "Collector identifier",
 			example: "BAP",
 		}),
-		settlement_counterparty: z.string().openapi({
+		settlement_counterparty: z.string().optional().nullable().openapi({
 			description: "Settlement counterparty",
 			example: "counterparty123",
 		}),
@@ -94,15 +94,15 @@ export const OrderSchema = z
 			description: "Buyer finder fee type",
 			example: "percentage",
 		}),
-		settlement_basis: z.string().openapi({
+		settlement_basis: z.string().optional().nullable().openapi({
 			description: "Settlement basis",
 			example: "basis123",
 		}),
-		settlement_window: z.string().openapi({
+		settlement_window: z.string().optional().nullable().openapi({
 			description: "Settlement window",
 			example: "window123",
 		}),
-		withholding_amount: z.number().openapi({
+		withholding_amount: z.number().optional().nullable().openapi({
 			description: "Withholding amount",
 			example: 100,
 		}),
@@ -113,10 +113,14 @@ export const OrderSchema = z
 			description: "Status of settlement for an order",
 			example: false,
 		}),
-		payment_transaction_id: z.string().openapi({
+		payment_transaction_id: z.string().optional().nullable().openapi({
 			description: "Transaction id of Payment",
-			example: "transID123"
-		})
+			example: "transID123",
+		}),
+		due_data: z.date().optional().nullable().openapi({
+			description: "Due date for the order",
+			example: "2025-08-03T00:00:00.000Z",
+		}),
 	})
 	.strict()
 	.openapi("OrderSchema");

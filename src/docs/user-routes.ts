@@ -63,3 +63,18 @@ registry.registerPath({
 		},
 	},
 });
+
+// DELETE /ui/user/{userId}
+registry.registerPath({
+	method: "delete",
+	path: "/ui/user/{userId}",
+	summary: "Delete a user config",
+	request: {
+		params: z.object({ userId: objectIdSchema }),
+	},
+	responses: {
+		204: {
+			description: "User config deleted successfully.",
+		},
+	},
+});

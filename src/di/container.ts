@@ -10,6 +10,7 @@ import { OrderRepository } from "../repositories/order-repository";
 import { RsfPayloadRepository } from "../repositories/rsf-payload-repository";
 import { SettleRepository } from "../repositories/settle-repository";
 import { UserRepository } from "../repositories/user-repository";
+import { GenerateReconService } from "../services/generate-services/generate-recon-service";
 import { GenerateSettleService } from "../services/generate-services/generate-settle-service";
 import { OrderService } from "../services/order-service";
 import { OnSettleService } from "../services/rsf-api-services/on_settle-service";
@@ -58,7 +59,14 @@ const generateSettleService = new GenerateSettleService(
 	settleDbManagementService,
 	userService,
 );
-const generateRsfController = new GenerateController(generateSettleService);
+const generateReconService = new GenerateReconService(
+	settleDbManagementService,
+	userService,
+);
+const generateRsfController = new GenerateController(
+	generateSettleService,
+	generateReconService,
+);
 
 // Export all controllers (or services too, if needed)
 export const container = {
