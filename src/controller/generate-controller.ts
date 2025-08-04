@@ -49,7 +49,7 @@ export class GenerateController {
 			const settlementPayload =
 				await this.generateSettleService.generateSettlePayloads(
 					userId,
-					validationResult.data.order_ids,
+					validationResult.data.settle_data,
 				);
 			settleLogger.info(
 				"Settlement generated successfully",
@@ -210,6 +210,16 @@ export class GenerateController {
 				error: error.message,
 			});
 			// res.status(500).json({ message: error.message });
+		}
+	};
+
+	handleRecon = async (req: Request, res: Response) => {
+		try {
+		} catch (error: any) {
+			settleLogger.error("Error handling recon", getLoggerMeta(req), error);
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
 		}
 	};
 }
