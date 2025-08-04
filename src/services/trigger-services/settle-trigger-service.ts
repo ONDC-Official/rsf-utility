@@ -1,4 +1,7 @@
-import { SettleAgencyConfig } from "../../config/settle-agency-config";
+import {
+	SettleAgencyConfig,
+	subscriberConfig,
+} from "../../config/rsf-utility-instance-config";
 import { SettleType } from "../../schema/models/settle-schema";
 import { UserType } from "../../schema/models/user-schema";
 import {
@@ -17,7 +20,7 @@ const triggerLogger = logger.child("settle-trigger-service");
 export class SettleTriggerService {
 	constructor(
 		private settleService: SettleDbManagementService,
-		private userService: UserService
+		private userService: UserService,
 	) {}
 
 	async handleSettleAction(userId: string, data: any) {
@@ -28,19 +31,19 @@ export class SettleTriggerService {
 		const responseData = await this.signAndSendPayload(
 			userConfig,
 			data,
-			"settle"
+			"settle",
 		);
 		await this.performPostRequestActions(settleType)(
 			userId,
 			data,
-			responseData.data
+			responseData.data,
 		);
 		return responseData;
 	}
 	async signAndSendPayload(
 		userConfig: UserType,
 		payload: any,
-		action: TriggerActionType
+		action: TriggerActionType,
 	) {
 		triggerLogger.info("Signing and sending payload", {
 			userConfig,
@@ -49,7 +52,7 @@ export class SettleTriggerService {
 		const requirements = this.getTriggerRequirements(
 			userConfig,
 			payload,
-			action
+			action,
 		);
 		const header = await createHeader(requirements);
 		return triggerRequest(requirements, header);
@@ -62,14 +65,14 @@ export class SettleTriggerService {
 	getTriggerRequirements(
 		userConfig: UserType,
 		data: any,
-		action: TriggerActionType
+		action: TriggerActionType,
 	): TriggeringRequirements {
 		return {
 			action: action,
 			data: data,
-			privateKey: userConfig.signing_private_key,
-			subscriberId: userConfig.subscriber_id,
-			subscriberUniqueKeyId: userConfig.subscriber_unique_key_id,
+			privateKey: subscriberConfig.subscriberPrivateKey,
+			subscriberId: subscriberConfig.subscriberId,
+			subscriberUniqueKeyId: subscriberConfig.subscriberUniqueId,
 			forwardingBaseUrl: SettleAgencyConfig.agencyUrl,
 		};
 	}
@@ -82,7 +85,7 @@ export class SettleTriggerService {
 					await this.settleService.updateSettlementsViaResponse(
 						userId,
 						data,
-						responseData
+						responseData,
 					);
 				};
 		}

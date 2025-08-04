@@ -2,10 +2,13 @@ import { SettleType } from "../../schema/models/settle-schema";
 import { UserType } from "../../schema/models/user-schema";
 import { v4 as uuidv4 } from "uuid";
 import logger from "../logger";
-import { SettleAgencyConfig } from "../../config/settle-agency-config";
+import {
+	SettleAgencyConfig,
+	subscriberConfig,
+} from "../../config/rsf-utility-instance-config";
 export function generateSettlePayload(
 	userConfig: UserType,
-	settlements: SettleType[]
+	settlements: SettleType[],
 ) {
 	if (!userConfig || !settlements || settlements.length === 0) {
 		throw new Error("Invalid user configuration or settlements data");
@@ -23,7 +26,7 @@ export function generateSettlePayload(
 			},
 			version: "2.0.0",
 			action: "settle",
-			bap_id: userConfig.subscriber_id,
+			bap_id: subscriberConfig.subscriberId,
 			bap_uri: userConfig.subscriber_url,
 			bpp_id: SettleAgencyConfig.agencyId,
 			bpp_uri: SettleAgencyConfig.agencyUrl,
@@ -41,14 +44,14 @@ export function generateSettlePayload(
 				orders: settlements.map((settle) => {
 					// ! TODO: proper amount calculations currently using dummy values
 					logger.warning(
-						"Using dummy values for settlement amounts, please implement proper calculations"
+						"Using dummy values for settlement amounts, please implement proper calculations",
 					);
 					const providerDetails = userConfig.provider_details.find(
-						(provider) => provider.provider_id === settle.provider_id
+						(provider) => provider.provider_id === settle.provider_id,
 					);
 					if (!providerDetails) {
 						throw new Error(
-							`Provider details not found for provider ID: ${settle.provider_id}`
+							`Provider details not found for provider ID: ${settle.provider_id}`,
 						);
 					}
 					return {

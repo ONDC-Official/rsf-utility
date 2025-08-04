@@ -14,18 +14,18 @@ export class UserRepository {
 
 	async checkUserByUniqueCombination(
 		role: UserType["role"],
-		subscriber_id: UserType["subscriber_id"],
-		domain: UserType["domain"]
+		subscriber_url: UserType["subscriber_url"],
+		domain: UserType["domain"],
 	) {
-		return await User.exists({ role, subscriber_id, domain });
+		return await User.exists({ role, subscriber_url, domain });
 	}
 
 	async getUserByUniqueCombination(
 		role: UserType["role"],
-		subscriber_id: UserType["subscriber_id"],
-		domain: UserType["domain"]
+		subscriber_url: UserType["subscriber_url"],
+		domain: UserType["domain"],
 	) {
-		return await User.findOne({ role, subscriber_id, domain });
+		return await User.findOne({ role, subscriber_url, domain });
 	}
 
 	async getAllUsers() {
