@@ -8,6 +8,13 @@ export class RsfService {
 	constructor(private onSettleService: OnSettleService) {}
 
 	ingestRsfPayload = async (payload: any, action: RsfOnAction) => {
-		logger.info("Ingesting RSF payload", { action });
+		rsfLogger.info("Ingesting RSF payload", { action });
+		switch (action) {
+			case "on_settle":
+				await this.onSettleService.ingestOnsettlePayload(payload);
+				break;
+			default:
+				break
+		}
 	};
 }

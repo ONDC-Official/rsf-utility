@@ -5,7 +5,7 @@ import { z } from "zod";
 import logger from "../utils/logger";
 import { OrderService } from "./order-service";
 import { OrderType } from "../schema/models/order-schema";
-import { SettleType } from "../schema/models/settle-schema";
+import { SettleSchema, SettleType } from "../schema/models/settle-schema";
 import { UserType } from "../schema/models/user-schema";
 import { calculateSettlementDetails } from "../utils/settle-utils/tax";
 
@@ -168,5 +168,35 @@ export class SettleDbManagementService {
 			status: "PREPARED",
 			type: "NP-NP",
 		};
+	}
+	async getSettlementByContextAndOrderId(
+		txn_id: string,
+		message_id: string,
+		order_id: string,
+	) {
+		const settlement = this.settleRepo.getSettlementByContextAndOrderId(
+			txn_id,
+			message_id,
+			order_id,
+		);
+		if (!settlement) {
+			throw new Error(
+				"Settlement not found for the given transaction and message ID",
+			);
+		}
+		return settlement;
+	}
+	async updateSettlementByOnSettle(
+		txn_id: string,
+		message_id: string,
+		orderId: string,
+		settlement: z.infer<typeof SettleSchema>,
+	) {
+		return await this.settleRepo.updateSettlementByOnSettle(
+			txn_id,
+			message_id,
+			orderId,
+			settlement,
+		);
 	}
 }
