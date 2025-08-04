@@ -9,7 +9,7 @@ export function sendSuccess<T>(
 	message = "OK",
 	statusCode = 200,
 ) {
-	return res.status(statusCode).json({
+	return res.status(statusCode).send({
 		success: true,
 		data,
 		message,
@@ -31,7 +31,7 @@ export function sendError(
 			message: customMessage || "An unexpected error occurred.",
 		});
 	}
-	return res.status(errorMeta.httpStatus).json({
+	return res.status(errorMeta.httpStatus).send({
 		success: false,
 		errorCode: errorMeta.code,
 		message: customMessage ?? errorMeta.message,

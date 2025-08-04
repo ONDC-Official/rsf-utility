@@ -8,16 +8,17 @@ export const rsfAuditLogger = (
 	res: Response,
 	next: NextFunction,
 ) => {
-	const originalJson = res.json;
 	const originalSend = res.send;
-	res.json = function (data: any) {
-		saveRsfPayload(req, data, res);
-		return originalJson.call(this, data);
-	};
-	res.send = function (data: any) {
-		saveRsfPayload(req, data, res);
-		return originalSend.call(this, data);
-	};
+	if (!res.locals.isSendWrapped) {
+		res.locals.isSendWrapped = true; // Flag to indicate the wrapping is done
+		res.send = function (data: any) {
+			if (!res.locals.isCacheUpdated) {
+				res.locals.isCacheUpdated = true;
+				saveRsfPayload(req, data, res);
+			}
+			return originalSend.call(this, data);
+		};
+	}
 	next();
 };
 function saveRsfPayload(req: Request, data: any, res: Response) {
