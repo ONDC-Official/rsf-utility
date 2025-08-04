@@ -1,3 +1,34 @@
+export const ERROR_CODES = {
+	TOO_MANY_REQUESTS: {
+		code: "GEN_429",
+		message: "Too many requests. Please try again later.",
+		httpStatus: 429,
+	},
+	AUTH_INVALID_TOKEN: {
+		code: "AUTH_401",
+		message: "Invalid or expired token.",
+		httpStatus: 401,
+	},
+	USER_NOT_FOUND: {
+		code: "USR_404",
+		message: "User not found.",
+		httpStatus: 404,
+	},
+	VALIDATION_FAILED: {
+		code: "VAL_400",
+		message: "Validation failed.",
+		httpStatus: 400,
+	},
+	INTERNAL_ERROR: {
+		code: "GEN_500",
+		message: "Internal server error.",
+		httpStatus: 500,
+	},
+	// add more...
+} as const;
+
+export type ErrorCodeKey = keyof typeof ERROR_CODES;
+
 export const SA_ERRORS = {
 	"70000": {
 		From: "Any",
