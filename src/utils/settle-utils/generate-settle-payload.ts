@@ -6,9 +6,12 @@ import {
 	SettleAgencyConfig,
 	subscriberConfig,
 } from "../../config/rsf-utility-instance-config";
+import z from "zod";
+import { GenSettlementsBodyObject } from "../../types/settle-params";
 export function generateSettlePayload(
 	userConfig: UserType,
 	settlements: SettleType[],
+	settlementData: z.infer<typeof GenSettlementsBodyObject>[],
 ) {
 	if (!userConfig || !settlements || settlements.length === 0) {
 		throw new Error("Invalid user configuration or settlements data");

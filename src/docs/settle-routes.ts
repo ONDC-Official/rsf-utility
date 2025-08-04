@@ -7,7 +7,7 @@ import {
 } from "../types/settle-params";
 import { SettleSchema } from "../schema/models/settle-schema";
 import { objectIdSchema } from "../types/user-id-type";
-import { z, ZodAny } from "zod";
+import { z } from "zod";
 import { registry } from "./open-api-registry";
 
 // GET /ui/settle/{userId}

@@ -88,16 +88,42 @@ export const PrepareSettlementsBody = z
 	.strict()
 	.openapi("PrepareSettlementsBody");
 
+export const GenSettlementsBodyObject = z.object({
+	order_id: z.string().openapi({
+		description: "Order ID for the settlement",
+		example: "order123",
+	}),
+	provider_value: z
+		.number()
+		.min(0)
+		.positive()
+		.openapi({
+			description: "settlment value for the provider in the settlement",
+			example: 800.0,
+		})
+		.optional(),
+	self_value: z
+		.number()
+		.min(0)
+		.positive()
+		.openapi({
+			description: "Self value in the settlement",
+			example: 200.0,
+		})
+		.optional(),
+});
+
 export const GenerateSettlementsBody = z
 	.object({
-		order_ids: z
-			.array(z.string())
+		settle_data: z
+			.array(GenSettlementsBodyObject)
 			.min(1)
 			.max(100)
 			.openapi({
-				description:
-					"List of settlements order IDs to generate settlements for",
-				example: ["order1", "order2"],
+				description: "List of settlements data to generate settlements for",
+				example: [
+					{ order_id: "order123", provider_value: 800.0, self_value: 200.0 },
+				],
 			}),
 	})
 	.strict()

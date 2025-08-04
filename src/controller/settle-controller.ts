@@ -170,7 +170,7 @@ export class SettleController {
 			}
 			const settlementPayload = await this.settleService.generateSettlePayloads(
 				userId,
-				validationResult.data.order_ids,
+				validationResult.data.settle_data,
 			);
 			settleLogger.info(
 				"Settlement generated successfully",

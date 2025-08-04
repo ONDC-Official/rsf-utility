@@ -1,5 +1,9 @@
 import { SettleRepository } from "../repositories/settle-repository";
-import { GetSettlementsQuerySchema } from "../types/settle-params";
+import {
+	GetSettlementsQuerySchema,
+	GenerateSettlementsBody,
+	GenSettlementsBodyObject,
+} from "../types/settle-params";
 import { UserService } from "./user-service";
 import { z } from "zod";
 import logger from "../utils/logger";
@@ -125,10 +129,13 @@ export class SettleDbManagementService {
 		};
 	}
 
-	async generateSettlePayloads(userId: string, orderIds: string[]) {
+	async generateSettlePayloads(
+		userId: string,
+		settlementData: z.infer<typeof GenSettlementsBodyObject>[],
+	) {
 		settleLogger.info("Generating settlements for user", {
 			userId,
-			orderIds,
+			settlementData,
 		});
 		if (!(await this.userService.checkUserById(userId))) {
 			throw new Error("User not found");
@@ -136,27 +143,29 @@ export class SettleDbManagementService {
 		const userConfig = await this.userService.getUserById(userId);
 		let uniqueId = "";
 		const settlements: SettleType[] = [];
-		for (const orderId of orderIds) {
-			if (!(await this.settleRepo.checkUniqueSettlement(userId, orderId))) {
+		for (const data of settlementData) {
+			if (
+				!(await this.settleRepo.checkUniqueSettlement(userId, data.order_id))
+			) {
 				throw new Error(
-					`Settlement for order ID ${orderId} does not exist for config ID: ${userId}`,
+					`Settlement for order ID ${data.order_id} does not exist for config ID: ${userId}`,
 				);
 			}
 			const settlement = await this.settleRepo.findWithQuery({
 				user_id: userId,
-				order_id: orderId,
+				order_id: data.order_id,
 				skip: 0,
 				limit: 1,
 			});
 			if (!settlement || settlement.length === 0) {
 				throw new Error(
-					`Settlement for order ID ${orderId} does not exist for config ID: ${userId}`,
+					`Settlement for order ID ${data.order_id} does not exist for config ID: ${userId}`,
 				);
 			}
 			const settleData = settlement[0];
 			if (settleData.status === "SETTLED") {
 				throw new Error(
-					`Settlement for order ID ${orderId} is already settled for config ID: ${userId}`,
+					`Settlement for order ID ${data.order_id} is already settled for config ID: ${userId}`,
 				);
 			}
 			const validId = `${settleData.collector_id}-${settleData.receiver_id}`;
@@ -165,7 +174,7 @@ export class SettleDbManagementService {
 			}
 			if (uniqueId !== validId) {
 				throw new Error(
-					`Collector and Receiver IDs do not match for order ID ${orderId} in config ID: ${userId}`,
+					`Collector and Receiver IDs do not match for order ID ${data.order_id} in config ID: ${userId}`,
 				);
 			}
 			settlements.push(settleData);
@@ -173,7 +182,7 @@ export class SettleDbManagementService {
 		if (settlements.length === 0) {
 			throw new Error("No settlements to generate payloads for");
 		}
-		return generateSettlePayload(userConfig, settlements);
+		return generateSettlePayload(userConfig, settlements, settlementData);
 	}
 
 	async updateSettlementsViaResponse(
