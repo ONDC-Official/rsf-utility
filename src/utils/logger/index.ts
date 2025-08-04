@@ -25,22 +25,22 @@ class AutomationLogger {
 		AutomationLogger.instance = this;
 		if (!process.env.SERVICE_NAME) {
 			console.warn(
-				"SERVICE_NAME environment variable is not set. Defaulting to 'default-service'. This may lead to confusion in log aggregation. \n"
+				"SERVICE_NAME environment variable is not set. Defaulting to 'default-service'. This may lead to confusion in log aggregation. \n",
 			);
 		}
 		if (!process.env.LOG_LEVEL) {
 			console.warn(
-				"LOG_LEVEL environment variable is not set. Defaulting to 'info'. This may lead to missing debug logs. \n"
+				"LOG_LEVEL environment variable is not set. Defaulting to 'info'. This may lead to missing debug logs. \n",
 			);
 		}
 		if (!process.env.NODE_ENV) {
 			throw new Error(
-				"NODE_ENV environment variable is not set. This is required to determine the logging environment. \n"
+				"NODE_ENV environment variable is not set. This is required to determine the logging environment. \n",
 			);
 		}
 		if (process.env.NODE_ENV !== "production") {
 			console.warn(
-				"Running in non-production environment. Logs may not be sent to Grafana Loki. \n"
+				"Running in non-production environment. Logs may not be sent to Grafana Loki. \n",
 			);
 		}
 		this.logger = createLogger({
@@ -133,11 +133,8 @@ class AutomationLogger {
 				error,
 			};
 		}
-
 		// Sanitize the final constructed object before logging
-		const sanitizedLogObject = this._sanitizeObject(logObject);
-
-		this.logger.error(message, sanitizedLogObject);
+		this.logger.error(message, logObject);
 	}
 
 	debug(message: string, ...args: any[]) {

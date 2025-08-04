@@ -23,7 +23,7 @@ const QuoteSchema = z.object({
 					description: "ID of the item",
 					example: "item123",
 				}),
-			})
+			}),
 		)
 		.openapi({
 			description: "Breakup of the order",
@@ -45,6 +45,14 @@ export const OrderSchema = z
 			example: "bap123",
 		}),
 		bpp_id: z.string().openapi({
+			description: "BPP identifier",
+			example: "bpp123",
+		}),
+		bap_url: z.string().openapi({
+			description: "BAP identifier",
+			example: "bap123",
+		}),
+		bpp_url: z.string().openapi({
 			description: "BPP identifier",
 			example: "bpp123",
 		}),
