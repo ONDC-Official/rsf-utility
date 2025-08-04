@@ -162,14 +162,10 @@ export class SettleDbManagementService {
 			user_id: order.user_id,
 			collector_id: order.collected_by === "BAP" ? order.bap_id : order.bpp_id,
 			receiver_id: order.collected_by === "BAP" ? order.bpp_id : order.bap_id,
-			collector_url:
-				order.collected_by === "BAP" ? order.bap_url : order.bpp_url,
-			receiver_url:
-				order.collected_by === "BAP" ? order.bpp_url : order.bap_url,
 			total_order_value: order.quote.total_order_value, // calc
 			commission: commission, // calc
 			tax: tax, // calc
-			withholding_amount: order.withholding_amount,
+			withholding_amount: order.withholding_amount ?? 0,
 			inter_np_settlement: inter_np_settlement, // calc
 			provider_id: order.provider_id,
 			due_date: new Date(),

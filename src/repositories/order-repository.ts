@@ -7,17 +7,17 @@ export class OrderRepository {
 		return await Order.create(data);
 	}
 	async getAllOrders(queryParams: GetOrderParamsType, user_id: string) {
-		if (queryParams.isCompleted) {
+		if (queryParams.is_completed) {
 			queryParams.status = "Complete";
 		}
-		const { isCompleted,page,limit,...rest } = queryParams;
+		const { is_completed: isCompleted, page, limit, ...rest } = queryParams;
 		const cleanedQuery = {
 			...rest,
 			user_id: user_id,
 		};
-		console.log("The cleaned query is",cleanedQuery)
+		console.log("The cleaned query is", cleanedQuery);
 		return await Order.find(cleanedQuery)
-			.skip((page  - 1)* limit)
+			.skip((page - 1) * limit)
 			.limit(limit)
 			.sort({ createdAt: -1 });
 	}

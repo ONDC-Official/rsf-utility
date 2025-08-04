@@ -3,7 +3,7 @@ import { z } from "zod";
 // POST /api/:action
 registry.registerPath({
 	method: "post",
-	path: "/api/:action",
+	path: "/api/{action}",
 	request: {
 		params: z.object({
 			action: z

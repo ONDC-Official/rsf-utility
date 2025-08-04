@@ -38,10 +38,6 @@ export const GetOrdersQuerySchema = z
 		status: z
 			.enum(allowedStatuses)
 			.openapi({
-				param: {
-					name: "status",
-					in: "query",
-				},
 				description: "Settlement status to filter",
 				example: "PENDING",
 			})
@@ -49,37 +45,27 @@ export const GetOrdersQuerySchema = z
 		settle_status: z
 			.enum(allowedSettlementStatuses)
 			.openapi({
-				param: {
-					name: "status",
-					in: "query",
-				},
 				description: "Order status to filter",
 				example: false,
 			})
 			.optional(),
-        isCompleted: z
+		is_completed: z
 			.string()
-            .optional()
-            .transform((val) => val === "true")
+			.optional()
+			.transform((val) => val === "true")
 			.openapi({
-				param: {
-					name: "iscompleted",
-					in: "query",
-				},
 				description: "Check for completed orders",
 				example: false,
 			})
 			.optional()
-            .default(false)
+			.default(false),
 	})
-	.strict()
-	.openapi("OrderQueryParams");
+	.strict();
 
 export type GetOrderParamsType = {
-    page: number,
-    limit: number,
-    status?: string,
-    settle_status?: string,
-    isCompleted?: boolean
-}
-
+	page: number;
+	limit: number;
+	status?: string;
+	settle_status?: string;
+	is_completed?: boolean;
+};

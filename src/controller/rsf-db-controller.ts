@@ -4,6 +4,7 @@ import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
 import { Request, Response } from "express";
 import { z } from "zod";
+import { sendSuccess } from "../utils/resUtils";
 export class RsfPayloadDbController {
 	constructor(private rsfPayloadDbService: RsfPayloadDbService) {}
 
@@ -26,7 +27,8 @@ export class RsfPayloadDbController {
 			const payloads = await this.rsfPayloadDbService.getRsfPayloads(
 				validationResult.data,
 			);
-			res.status(200).json(payloads);
+			// res.status(200).json(payloads);
+			sendSuccess(res, payloads, "RSF payloads fetched successfully");
 		} catch (error: any) {
 			logger.error("Error fetching RSF payloads", getLoggerMeta(req), error);
 			res.status(500).json({ message: error.message });

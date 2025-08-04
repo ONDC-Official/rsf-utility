@@ -62,6 +62,7 @@ const generateSettleService = new GenerateSettleService(
 const generateReconService = new GenerateReconService(
 	settleDbManagementService,
 	userService,
+	orderService,
 );
 const generateRsfController = new GenerateController(
 	generateSettleService,
