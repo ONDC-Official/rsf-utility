@@ -1,3 +1,4 @@
+import { GenerateController } from "../controller/generate-controller";
 import { OrderController } from "../controller/order-controller";
 import { PayloadController } from "../controller/payload-controller";
 import { RsfPayloadDbController } from "../controller/rsf-db-controller";
@@ -9,6 +10,7 @@ import { OrderRepository } from "../repositories/order-repository";
 import { RsfPayloadRepository } from "../repositories/rsf-payload-repository";
 import { SettleRepository } from "../repositories/settle-repository";
 import { UserRepository } from "../repositories/user-repository";
+import { GenerateSettleService } from "../services/generate-services/generate-settle-service";
 import { OrderService } from "../services/order-service";
 import { OnSettleService } from "../services/rsf-api-services/on_settle-service";
 import { RsfService } from "../services/rsf-api-services/rsf-service";
@@ -52,6 +54,12 @@ const onSettleService = new OnSettleService(settleDbManagementService);
 const rsfService = new RsfService(onSettleService);
 const rsfRequestController = new RsfRequestController(rsfService);
 
+const generateSettleService = new GenerateSettleService(
+	settleDbManagementService,
+	userService,
+);
+const generateRsfController = new GenerateController(generateSettleService);
+
 // Export all controllers (or services too, if needed)
 export const container = {
 	userController,
@@ -62,4 +70,5 @@ export const container = {
 	rsfRequestController,
 	rsfPayloadDbController,
 	rsfPayloadDbService,
+	generateRsfController,
 };

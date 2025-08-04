@@ -28,3 +28,9 @@ bap_id from userProfile , bpp_id fixed
 // prepare(post to settle) (in-progress)
 // get api
 // generate(payload generate settle using settle db: with 100 limit);
+
+/\*
+
+recon
+
+\*/
