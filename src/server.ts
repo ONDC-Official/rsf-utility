@@ -9,6 +9,8 @@ import uiRoutes from "./routes/ui-routes";
 import { openApiDocument } from "./docs/open-apiSpec";
 import apiRoutes from "./routes/api-routes";
 import swaggerUi from "swagger-ui-express";
+import { send } from "process";
+import { sendError, sendSuccess } from "./utils/resUtils";
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
@@ -38,16 +40,22 @@ const createServer = (): Application => {
 	app.get("/health", async (req: Request, res: Response) => {
 		try {
 			const healthStatus = await healthMonitor.getHealthStatus();
-			res.status(200).json({
-				status: "ok",
-				...healthStatus,
-			});
+			return sendSuccess(res, healthStatus);
+			// res.status(200).json({
+			// 	status: "ok",
+			// 	...healthStatus,
+			// });
 		} catch (error) {
 			logger.error("Health check failed", getLoggerMeta(req), { error });
-			res.status(503).json({
-				status: "error",
-				message: "Health check failed",
+
+			return sendError(res, "HEALTH_CHECK_FAILED", "Health check failed", {
+				error: error instanceof Error ? error.message : String(error),
 			});
+			//
+			// res.status(503).json({
+			// 	status: "error",
+			// 	message: "Health check failed",
+			// });
 		}
 	});
 
@@ -56,9 +64,11 @@ const createServer = (): Application => {
 		logger.error(
 			`Internal Server Error: ${err.message}`,
 			getLoggerMeta(req),
-			err
+			err,
 		);
-		res.status(500).send("INTERNAL SERVER ERROR");
+
+		return sendError(res, "INTERNAL_ERROR", "Internal Server Error");
+		// res.status(500).send("INTERNAL SERVER ERROR");
 	});
 
 	return app;

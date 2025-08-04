@@ -6,21 +6,18 @@ import { SettleTriggerService } from "./settle-trigger-service";
 const triggerLogger = logger.child("trigger-service");
 
 export class TriggerService {
-	constructor(
-		private settleTriggerService: SettleTriggerService,
-		private rsfPayloadDbService: RsfPayloadDbService,
-	) {}
+	constructor(private settleTriggerService: SettleTriggerService) {}
 
 	async handleTrigger(action: TriggerActionType, userId: string, data: any) {
 		triggerLogger.info("Handling trigger action", { action, userId, data });
 		const response = await this.GetResponse(action, userId, data);
-		await this.rsfPayloadDbService.saveRsfPayload({
-			requestData: data,
-			responseData: {
-				statusCode: response.status,
-				body: response.data,
-			},
-		});
+		// await this.rsfPayloadDbService.saveRsfPayload({
+		// 	requestData: data,
+		// 	responseData: {
+		// 		statusCode: response.status,
+		// 		body: response.data,
+		// 	},
+		// });
 		return response;
 	}
 

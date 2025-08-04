@@ -1,14 +1,23 @@
 import { OrderRepository } from "../repositories/order-repository";
 import { OrderType } from "../schema/models/order-schema";
+import { GetOrderParamsType } from "../types/order-params";
+import logger from "../utils/logger";
+import { UserService } from "./user-service";
 
+const orderLogger = logger.child("order-service");
 export class OrderService {
-	constructor(private orderRepo: OrderRepository) {}
+	constructor(private orderRepo: OrderRepository,private userService: UserService) {}
 
 	async createOrder(orderData: OrderType) {
 		return await this.orderRepo.createOrder(orderData);
 	}
-	async getOrders(queryParams: any) {
-		return await this.orderRepo.getAllOrders(queryParams);
+	async getOrders(queryParams: GetOrderParamsType,user_id: string) {
+		orderLogger.info("Fetching settlements for user", { user_id, queryParams });
+		if (!(await this.userService.checkUserById(user_id))) {
+			throw new Error("User not found");
+		}
+
+		return await this.orderRepo.getAllOrders(queryParams,user_id);
 	}
 	async getUniqueOrders(user_id: string, order_id: string) {
 		const order = await this.orderRepo.findOrderByUserAndOrderId(
@@ -43,5 +52,8 @@ export class OrderService {
 			);
 		}
 		return updatedOrder;
+	}
+	async checkUserById(userId: string) {
+		return await this.userService.checkUserById(userId);
 	}
 }

@@ -11,6 +11,8 @@ import {
 } from "../types/settle-params";
 import { z } from "zod";
 import { validateUserId } from "../types/user-id-type";
+import { sendError, sendSuccess } from "../utils/resUtils";
+import { send } from "process";
 
 const settleLogger = logger.child("settle-controller");
 
@@ -23,8 +25,12 @@ export class SettleController {
 			const userId = req.params.userId;
 			if (!validateUserId(userId)) {
 				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
-				res.status(400).json({ message: "Valid User ID is required" });
-				return;
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+				// res.status(400).json({ message: "Valid User ID is required" });
+				// return;
 			}
 			const validationResult = GetSettlementsQuerySchema.safeParse(req.query);
 			if (!validationResult.success) {
@@ -33,26 +39,40 @@ export class SettleController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				res.status(400).json({
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
 					message: "Invalid query parameters",
 					errors: z.treeifyError(validationResult.error),
 				});
-				return;
+				// return res.status(400).json({
+
+				// res.status(400).json({
+				// 	message: "Invalid query parameters",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
+				// return;
 			}
 			const data = await this.settleService.getSettlements(
 				userId,
 				validationResult.data,
 			);
 			settleLogger.info("Settlements fetched successfully", getLoggerMeta(req));
-			res.status(200).json(data);
+
+			return sendSuccess(res, data, "Settlements fetched successfully");
+			// res.status(200).json(data);
 		} catch (error: any) {
 			settleLogger.error(
 				"Error fetching settlements",
 				getLoggerMeta(req),
 				error,
 			);
-			res.status(500).json({ message: error.message });
+
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(500).json({ message: error.message });
 		}
+		// res.status(500).json({ message: error.message });
 	};
 
 	prepareSettlement = async (req: Request, res: Response) => {
@@ -61,8 +81,13 @@ export class SettleController {
 			const userId = req.params.userId;
 			if (!userId) {
 				settleLogger.error("User ID is required", getLoggerMeta(req));
-				res.status(400).json({ message: "User ID is required" });
-				return;
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "User ID is required",
+				});
+
+				// res.status(400).json({ message: "User ID is required" });
+				// return;
 			}
 			const validationResult = PrepareSettlementsBody.safeParse(req.body);
 			if (!validationResult.success) {
@@ -71,11 +96,17 @@ export class SettleController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				res.status(400).json({
+
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
-				return;
+
+				// res.status(400).json({
+				// 	message: "Invalid request body",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
+				// return;
 			}
 			const settlements = await this.settleService.prepareSettlements(
 				userId,
@@ -85,14 +116,24 @@ export class SettleController {
 				"Settlement prepared successfully, new settlements created in the DB",
 				getLoggerMeta(req),
 			);
-			res.status(201).json(settlements);
+			return sendSuccess(
+				res,
+				settlements,
+				"Settlement prepared successfully",
+				201,
+			);
+			//
+			// res.status(201).json(settlements);
 		} catch (error: any) {
 			settleLogger.error(
 				"Error preparing settlement",
 				getLoggerMeta(req),
 				error,
 			);
-			res.status(500).json({ message: error.message });
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(500).json({ message: error.message });
 		}
 	};
 
@@ -102,8 +143,12 @@ export class SettleController {
 			const userId = req.params.userId;
 			if (!validateUserId(userId)) {
 				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
-				res.status(400).json({ message: "Valid User ID is required" });
-				return;
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+				// res.status(400).json({ message: "Valid User ID is required" });
+				// return;
 			}
 			const validationResult = GenerateSettlementsBody.safeParse(req.body);
 			if (!validationResult.success) {
@@ -112,11 +157,16 @@ export class SettleController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				res.status(400).json({
+
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
-				return;
+				// res.status(400).json({
+				// 	message: "Invalid request body",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
+				// return;
 			}
 			const settlementPayload = await this.settleService.generateSettlePayloads(
 				userId,
@@ -126,14 +176,28 @@ export class SettleController {
 				"Settlement generated successfully",
 				getLoggerMeta(req),
 			);
-			res.status(201).json(settlementPayload);
+
+			return sendSuccess(
+				res,
+				settlementPayload,
+				"Settlement generated successfully",
+				201,
+			);
+			//
+
+			// res.status(201).json(settlementPayload);
 		} catch (error: any) {
 			settleLogger.error(
 				"Error generating settlement",
 				getLoggerMeta(req),
 				error,
 			);
-			res.status(500).json({ message: error.message });
+
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			//
+			// res.status(500).json({ message: error.message });
 		}
 	};
 
@@ -147,7 +211,11 @@ export class SettleController {
 			const userId = req.params.userId;
 			if (!validateUserId(userId)) {
 				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
-				return res.status(400).json({ message: "Valid User ID is required" });
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+				// return res.status(400).json({ message: "Valid User ID is required" });
 			}
 			const validationResult = MiscSettlementSchema.safeParse(req.body);
 			if (!validationResult.success) {
@@ -156,10 +224,15 @@ export class SettleController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				return res.status(400).json({
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
+
+				// return res.status(400).json({
+				// 	message: "Invalid request body",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
 			}
 			const miscData = validationResult.data;
 			const miscPayload = await this.settleService.generateMiscPayload(
@@ -173,7 +246,14 @@ export class SettleController {
 			);
 
 			(req as any).miscPayload = miscPayload;
-			return res.status(201).json(miscPayload);
+
+			return sendSuccess(
+				res,
+				miscPayload,
+				"Settlement generated successfully",
+				201,
+			);
+			// return res.status(201).json(miscPayload);
 			//   const miscData = req.body.miscData;
 		} catch (error: any) {
 			settleLogger.error(
@@ -181,7 +261,11 @@ export class SettleController {
 				getLoggerMeta(req),
 				error,
 			);
-			res.status(500).json({ message: error.message });
+
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(500).json({ message: error.message });
 		}
 	};
 
@@ -195,8 +279,14 @@ export class SettleController {
 			const userId = req.params.userId;
 			if (!validateUserId(userId)) {
 				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
-				return res.status(400).json({ message: "Valid User ID is required" });
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+				// return res.status(400).json({ message: "Valid User ID is required" });
 			}
+
+			// res.status(400).json({ message: "Valid User ID is required" });
+
 			const validationResult = NilSettlementSchema.safeParse(req.body);
 			if (!validationResult.success) {
 				settleLogger.error(
@@ -204,10 +294,18 @@ export class SettleController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				return res.status(400).json({
+
+				// sendError()
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
+				// return res.status(400).json({
+
+				// return res.status(400).json({
+				// 	message: "Invalid request body",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
 			}
 			const nilPayload = await this.settleService.generateNilPayload(userId);
 
@@ -217,7 +315,14 @@ export class SettleController {
 			);
 
 			(req as any).nilPayload = nilPayload;
-			return res.status(201).json(nilPayload);
+			return sendSuccess(
+				res,
+				nilPayload,
+				"Settlement generated successfully",
+				201,
+			);
+			//
+			// return res.status(201).json(nilPayload);
 			//   const miscData = req.body.miscData;
 		} catch (error: any) {
 			settleLogger.error(
@@ -225,7 +330,10 @@ export class SettleController {
 				getLoggerMeta(req),
 				error,
 			);
-			res.status(500).json({ message: error.message });
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(500).json({ message: error.message });
 		}
 	};
 }

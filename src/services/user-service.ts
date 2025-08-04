@@ -80,16 +80,16 @@ export class UserService {
 		bapUrl: string,
 		bppUrl: string,
 	) => {
-		let bap_user_url: string | undefined = undefined;
-		let bpp_user_url: string | undefined = undefined;
+		let bap_user_uri: string | undefined = undefined;
+		let bpp_user_uri: string | undefined = undefined;
 		if (await this.checkUserByUniqueCombination("BAP", bapUrl, domain)) {
 			const user = await this.getUserByUniqueCombination("BAP", bapUrl, domain);
-			bap_user_url = user._id.toString();
+			bap_user_uri = user._id.toString();
 		}
 		if (await this.checkUserByUniqueCombination("BPP", bppUrl, domain)) {
 			const user = await this.getUserByUniqueCombination("BPP", bppUrl, domain);
-			bpp_user_url = user._id.toString();
+			bpp_user_uri = user._id.toString();
 		}
-		return { bap_user_url, bpp_user_url };
+		return { bap_user_uri, bpp_user_uri };
 	};
 }

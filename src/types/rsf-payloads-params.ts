@@ -46,3 +46,5 @@ export type RsfPayloadStructure = {
 		statusCode: number;
 	};
 };
+
+export const RsfActionListSchema = z.enum(rsfApiList);

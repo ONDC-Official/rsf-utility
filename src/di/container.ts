@@ -27,8 +27,8 @@ const userService = new UserService(userRepository);
 const userController = new UserController(userService);
 
 const orderRepository = new OrderRepository();
-const orderService = new OrderService(orderRepository);
-const orderController = new OrderController(orderService, userService);
+const orderService = new OrderService(orderRepository, userService);
+const orderController = new OrderController(orderService);
 
 const settleRepository = new SettleRepository();
 const settleDbManagementService = new SettleDbManagementService(
@@ -45,10 +45,7 @@ const settleTriggerService = new SettleTriggerService(
 	userService,
 );
 
-const triggerService = new TriggerService(
-	settleTriggerService,
-	rsfPayloadDbService,
-);
+const triggerService = new TriggerService(settleTriggerService);
 const triggerController = new TriggerController(triggerService);
 
 const onSettleService = new OnSettleService(settleDbManagementService);
@@ -64,4 +61,5 @@ export const container = {
 	payloadController,
 	rsfRequestController,
 	rsfPayloadDbController,
+	rsfPayloadDbService,
 };

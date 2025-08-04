@@ -30,12 +30,13 @@ const OrderSchema = new mongoose.Schema(
 		created_at: { type: Date, required: true },
 		updated_at: { type: Date, required: true },
 		collected_by: { type: String, required: true },
-		settlement_counterparty: { type: String, required: true },
+		settlement_counterparty: { type: String, required: false },
 		buyer_finder_fee_amount: { type: Number, required: true },
 		buyer_finder_fee_type: { type: String, required: true },
-		settlement_basis: { type: String, required: true },
-		settlement_window: { type: String, required: true },
-		withholding_amount: { type: Number, required: true },
+		settlement_basis: { type: String, required: false },
+		settlement_window: { type: String, required: false },
+		withholding_amount: { type: Number, required: false },
+		settle_status: { type: String, default: false,required: true },
 		quote: { type: Quote, required: true },
 	},
 	{ timestamps: true },
@@ -44,3 +45,6 @@ const OrderSchema = new mongoose.Schema(
 OrderSchema.index({ order_id: 1, user_id: 1 }, { unique: true });
 
 export const Order = mongoose.model("Order", OrderSchema);
+
+
+

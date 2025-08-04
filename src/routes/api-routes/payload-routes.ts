@@ -2,21 +2,22 @@ import { Router } from "express";
 import rateLimiter from "../../middlewares/rate-limiter";
 import { schemaValidator } from "../../controller/validation-controller";
 import { container } from "../../di/container";
+import { sendSuccess } from "../../utils/resUtils";
+import { rsfAuditLogger } from "../../middlewares/rsf-audit-logger";
 
 const payloadRouter = Router();
 
 payloadRouter.post(
 	"/:action",
 	rateLimiter,
+	rsfAuditLogger,
 	schemaValidator,
 	container.userController.userValidationMiddleware,
 	container.rsfRequestController.rsfPayloadHandler,
-	container.payloadController.nonRsfPayloadHandler,
+	container.payloadController.nonRsfpayloadHandler,
 	(req, res) => {
 		const { action } = req.params;
-		res.status(200).json({
-			message: `Action ${action} processed successfully`,
-		});
+		return sendSuccess(res, {}, `Action ${action} processed successfully`);
 	},
 );
 export default payloadRouter;
