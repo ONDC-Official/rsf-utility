@@ -71,7 +71,7 @@ export class RsfRequestController {
 				action,
 				payload,
 			});
-			this.rsfService.ingestRsfPayload(payload, actionValidationResult.data);
+			await this.rsfService.ingestRsfPayload(payload, actionValidationResult.data);
 			res.status(200).send(getAckResponse());
 		} catch (error) {
 			rsfLogger.error("Error handling RSF payload", getLoggerMeta(req), {

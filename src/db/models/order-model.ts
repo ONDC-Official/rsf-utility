@@ -37,6 +37,7 @@ const OrderSchema = new mongoose.Schema(
 		settlement_window: { type: String, required: false },
 		withholding_amount: { type: Number, required: false },
 		settle_status: { type: String, default: false,required: true },
+		due_date: { type: Date, required: false },
 		quote: { type: Quote, required: true },
 	},
 	{ timestamps: true },

@@ -9,12 +9,9 @@ import { z } from "zod";
 import logger from "../utils/logger";
 import { OrderService } from "./order-service";
 import { OrderType } from "../schema/models/order-schema";
-import { SettleType } from "../schema/models/settle-schema";
+import { SettleSchema, SettleType } from "../schema/models/settle-schema";
 import { UserType } from "../schema/models/user-schema";
 import { calculateSettlementDetails } from "../utils/settle-utils/tax";
-import { generateSettlePayload } from "../utils/settle-utils/generate-settle-payload";
-import { generateMiscFile } from "../utils/settle-utils/generate-misc-file";
-import { generateNilFile } from "../utils/settle-utils/generate-nil-file";
 
 const settleLogger = logger.child("settle-service");
 export class SettleDbManagementService {
@@ -72,6 +69,14 @@ export class SettleDbManagementService {
 		}
 	}
 
+	async checkUniqueSettlement(userId: string, orderId: string) {
+		settleLogger.info("Checking unique settlement for user", {
+			userId,
+			orderId,
+		});
+		return await this.settleRepo.checkUniqueSettlement(userId, orderId);
+	}
+
 	async prepareSettlements(userId: string, orderIds: string[]) {
 		settleLogger.info("Preparing settlement data for user", {
 			userId,
@@ -105,84 +110,6 @@ export class SettleDbManagementService {
 			orderIds,
 		});
 		return result;
-	}
-
-	prepareSingleSettlement(order: OrderType, userConfig: UserType): SettleType {
-		const { commission, tax, inter_np_settlement } = calculateSettlementDetails(
-			order,
-			userConfig,
-		);
-		return {
-			order_id: order.order_id,
-			user_id: order.user_id,
-			collector_id: order.collected_by === "BAP" ? order.bap_id : order.bpp_id,
-			receiver_id: order.collected_by === "BAP" ? order.bpp_id : order.bap_id,
-			total_order_value: order.quote.total_order_value, // calc
-			commission: commission, // calc
-			tax: tax, // calc
-			withholding_amount: order.withholding_amount,
-			inter_np_settlement: inter_np_settlement, // calc
-			provider_id: order.provider_id,
-			due_date: new Date(),
-			status: "PREPARED",
-			type: "NP-NP",
-		};
-	}
-
-	async generateSettlePayloads(
-		userId: string,
-		settlementData: z.infer<typeof GenSettlementsBodyObject>[],
-	) {
-		settleLogger.info("Generating settlements for user", {
-			userId,
-			settlementData,
-		});
-		if (!(await this.userService.checkUserById(userId))) {
-			throw new Error("User not found");
-		}
-		const userConfig = await this.userService.getUserById(userId);
-		let uniqueId = "";
-		const settlements: SettleType[] = [];
-		for (const data of settlementData) {
-			if (
-				!(await this.settleRepo.checkUniqueSettlement(userId, data.order_id))
-			) {
-				throw new Error(
-					`Settlement for order ID ${data.order_id} does not exist for config ID: ${userId}`,
-				);
-			}
-			const settlement = await this.settleRepo.findWithQuery({
-				user_id: userId,
-				order_id: data.order_id,
-				skip: 0,
-				limit: 1,
-			});
-			if (!settlement || settlement.length === 0) {
-				throw new Error(
-					`Settlement for order ID ${data.order_id} does not exist for config ID: ${userId}`,
-				);
-			}
-			const settleData = settlement[0];
-			if (settleData.status === "SETTLED") {
-				throw new Error(
-					`Settlement for order ID ${data.order_id} is already settled for config ID: ${userId}`,
-				);
-			}
-			const validId = `${settleData.collector_id}-${settleData.receiver_id}`;
-			if (uniqueId == "") {
-				uniqueId = validId;
-			}
-			if (uniqueId !== validId) {
-				throw new Error(
-					`Collector and Receiver IDs do not match for order ID ${data.order_id} in config ID: ${userId}`,
-				);
-			}
-			settlements.push(settleData);
-		}
-		if (settlements.length === 0) {
-			throw new Error("No settlements to generate payloads for");
-		}
-		return generateSettlePayload(userConfig, settlements, settlementData);
 	}
 
 	async updateSettlementsViaResponse(
@@ -225,23 +152,55 @@ export class SettleDbManagementService {
 		}
 	}
 
-	async generateMiscPayload(userId: string, miscData: any) {
-		if (!(await this.userService.checkUserById(userId))) {
-			throw new Error("User not found");
-		}
-
-		const userConfig = await this.userService.getUserById(userId);
-
-		return generateMiscFile(userConfig, miscData);
+	prepareSingleSettlement(order: OrderType, userConfig: UserType): SettleType {
+		const { commission, tax, inter_np_settlement } = calculateSettlementDetails(
+			order,
+			userConfig,
+		);
+		return {
+			order_id: order.order_id,
+			user_id: order.user_id,
+			collector_id: order.collected_by === "BAP" ? order.bap_id : order.bpp_id,
+			receiver_id: order.collected_by === "BAP" ? order.bpp_id : order.bap_id,
+			total_order_value: order.quote.total_order_value, // calc
+			commission: commission, // calc
+			tax: tax, // calc
+			withholding_amount: order.withholding_amount,
+			inter_np_settlement: inter_np_settlement, // calc
+			provider_id: order.provider_id,
+			due_date: new Date(),
+			status: "PREPARED",
+			type: "NP-NP",
+		};
 	}
-
-	async generateNilPayload(userId: string) {
-		if (!(await this.userService.checkUserById(userId))) {
-			throw new Error("User not found");
+	async getSettlementByContextAndOrderId(
+		txn_id: string,
+		message_id: string,
+		order_id: string,
+	) {
+		const settlement = this.settleRepo.getSettlementByContextAndOrderId(
+			txn_id,
+			message_id,
+			order_id,
+		);
+		if (!settlement) {
+			throw new Error(
+				"Settlement not found for the given transaction and message ID",
+			);
 		}
-
-		const userConfig = await this.userService.getUserById(userId);
-
-		return generateNilFile(userConfig);
+		return settlement;
+	}
+	async updateSettlementByOnSettle(
+		txn_id: string,
+		message_id: string,
+		orderId: string,
+		settlement: z.infer<typeof SettleSchema>,
+	) {
+		return await this.settleRepo.updateSettlementByOnSettle(
+			txn_id,
+			message_id,
+			orderId,
+			settlement,
+		);
 	}
 }

@@ -51,6 +51,30 @@ export class SettleRepository {
 			order_id: orderId,
 		});
 	}
+	async getSettlementByContextAndOrderId(
+		txn_id: string,
+		message_id: string,
+		order_id: string,
+	) {
+		const settlement = await Settle.findOne({
+			"context.transaction_id": txn_id,
+			"context.message_id": message_id,
+			order_id: order_id,
+		});
+		return settlement;
+	}
+	async updateSettlementByOnSettle(
+		txn_id: string,
+		message_id: string,
+		orderId: string,
+		settlement: z.infer<typeof SettleSchema>,
+	) {
+		return await Settle.findOneAndUpdate(
+			{ "context.transaction_id": txn_id,"context.message_id": message_id, order_id: orderId },
+			{ $set: settlement },
+			{ new: true },
+		);
+	}
 }
 
 // add list of counterparty

@@ -60,8 +60,20 @@ const SettleSchema = new mongoose.Schema(
 			required: true,
 		},
 		settlement_reference: { type: String },
+		provider_settlement_reference: { type: String },
+		self_settlement_reference: { type: String },
 		error: { type: String },
 		status: {
+			type: String,
+			required: true,
+			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
+		},
+		provider_status: {
+			type: String,
+			required: true,
+			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
+		},
+		self_status: {
 			type: String,
 			required: true,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
