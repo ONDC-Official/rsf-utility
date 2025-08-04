@@ -5,7 +5,7 @@ import logger from "../logger";
 import {
 	SettleAgencyConfig,
 	subscriberConfig,
-} from "../../config/settle-agency-config";
+} from "../../config/rsf-utility-instance-config";
 export function generateSettlePayload(
 	userConfig: UserType,
 	settlements: SettleType[],

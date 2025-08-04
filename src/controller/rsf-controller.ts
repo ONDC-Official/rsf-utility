@@ -7,7 +7,7 @@ import { RsfOnActionsSchema } from "../types/rsf-type";
 import { z } from "zod";
 import { getAckResponse, getNackResponse } from "../utils/ackUtils";
 import { validateHeader } from "../utils/header-utils";
-import { SettleAgencyConfig } from "../config/settle-agency-config";
+import { SettleAgencyConfig } from "../config/rsf-utility-instance-config";
 const rsfLogger = logger.child("rsf-controller");
 
 export class RsfController {
@@ -16,7 +16,7 @@ export class RsfController {
 	rsfPayloadHandler = async (
 		req: Request,
 		res: Response,
-		next: NextFunction
+		next: NextFunction,
 	) => {
 		// ? response only with ONDC (ACK/NACK)s
 		try {
@@ -26,7 +26,7 @@ export class RsfController {
 				rsfLogger.info(
 					"Non-RSF domain detected, skipping RSF payload handling",
 					getLoggerMeta(req),
-					{ domain }
+					{ domain },
 				);
 				return next();
 			}
@@ -36,7 +36,7 @@ export class RsfController {
 				rsfLogger.error(
 					"Invalid action detected for RSF payload",
 					getLoggerMeta(req),
-					{ action }
+					{ action },
 				);
 				return res.status(400).json({
 					message: "Invalid action for RSF payload",
@@ -55,7 +55,7 @@ export class RsfController {
 				const isHeaderValid = validateHeader(
 					req.headers,
 					payload,
-					SettleAgencyConfig.agencyKey
+					SettleAgencyConfig.agencyKey,
 				);
 				if (!isHeaderValid) {
 					rsfLogger.error("Invalid header", getLoggerMeta(req));

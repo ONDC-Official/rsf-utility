@@ -4,7 +4,7 @@ import logger from "../logger";
 import {
 	SettleAgencyConfig,
 	subscriberConfig,
-} from "../../config/settle-agency-config";
+} from "../../config/rsf-utility-instance-config";
 const nilGeneratorLogger = logger.child("generate-misc-payload");
 
 export function generateNilFile(userConfig: UserType) {

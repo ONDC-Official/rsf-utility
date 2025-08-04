@@ -8,7 +8,7 @@ import { buildMiscSettlement } from "./build-misc-settlement";
 import {
 	SettleAgencyConfig,
 	subscriberConfig,
-} from "../../config/settle-agency-config";
+} from "../../config/rsf-utility-instance-config";
 
 type MiscSettlementSchema = z.infer<typeof MiscSettlementSchema>;
 export function generateMiscFile(
