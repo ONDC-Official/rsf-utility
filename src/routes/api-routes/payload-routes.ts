@@ -10,13 +10,13 @@ payloadRouter.post(
 	rateLimiter,
 	schemaValidator,
 	container.userController.userValidationMiddleware,
-	container.rsfController.rsfPayloadHandler,
+	container.rsfRequestController.rsfPayloadHandler,
 	container.payloadController.nonRsfPayloadHandler,
 	(req, res) => {
 		const { action } = req.params;
 		res.status(200).json({
 			message: `Action ${action} processed successfully`,
 		});
-	}
+	},
 );
 export default payloadRouter;

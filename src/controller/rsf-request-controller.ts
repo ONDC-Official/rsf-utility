@@ -10,7 +10,7 @@ import { validateHeader } from "../utils/header-utils";
 import { SettleAgencyConfig } from "../config/rsf-utility-instance-config";
 const rsfLogger = logger.child("rsf-controller");
 
-export class RsfController {
+export class RsfRequestController {
 	constructor(private rsfService: RsfService) {}
 
 	rsfPayloadHandler = async (

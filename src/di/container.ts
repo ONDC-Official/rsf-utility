@@ -1,19 +1,26 @@
 import { OrderController } from "../controller/order-controller";
 import { PayloadController } from "../controller/payload-controller";
-import { RsfController } from "../controller/rsf-controller";
+import { RsfPayloadDbController } from "../controller/rsf-db-controller";
+import { RsfRequestController } from "../controller/rsf-request-controller";
 import { SettleController } from "../controller/settle-controller";
 import { TriggerController } from "../controller/trigger-controller";
 import { UserController } from "../controller/user-controller";
 import { OrderRepository } from "../repositories/order-repository";
+import { RsfPayloadRepository } from "../repositories/rsf-payload-repository";
 import { SettleRepository } from "../repositories/settle-repository";
 import { UserRepository } from "../repositories/user-repository";
 import { OrderService } from "../services/order-service";
 import { OnSettleService } from "../services/rsf-api-services/on_settle-service";
 import { RsfService } from "../services/rsf-api-services/rsf-service";
+import { RsfPayloadDbService } from "../services/rsf-payloadDb-service";
 import { SettleDbManagementService } from "../services/settle-service";
 import { SettleTriggerService } from "../services/trigger-services/settle-trigger-service";
 import { TriggerService } from "../services/trigger-services/trigger-service";
 import { UserService } from "../services/user-service";
+
+const rsfPayloadRepository = new RsfPayloadRepository();
+const rsfPayloadDbService = new RsfPayloadDbService(rsfPayloadRepository);
+const rsfPayloadDbController = new RsfPayloadDbController(rsfPayloadDbService);
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
@@ -27,7 +34,7 @@ const settleRepository = new SettleRepository();
 const settleDbManagementService = new SettleDbManagementService(
 	settleRepository,
 	userService,
-	orderService
+	orderService,
 );
 const settleController = new SettleController(settleDbManagementService);
 
@@ -35,14 +42,18 @@ const payloadController = new PayloadController(orderService);
 
 const settleTriggerService = new SettleTriggerService(
 	settleDbManagementService,
-	userService
+	userService,
 );
-const triggerService = new TriggerService(settleTriggerService);
+
+const triggerService = new TriggerService(
+	settleTriggerService,
+	rsfPayloadDbService,
+);
 const triggerController = new TriggerController(triggerService);
 
 const onSettleService = new OnSettleService(settleDbManagementService);
 const rsfService = new RsfService(onSettleService);
-const rsfController = new RsfController(rsfService);
+const rsfRequestController = new RsfRequestController(rsfService);
 
 // Export all controllers (or services too, if needed)
 export const container = {
@@ -51,5 +62,6 @@ export const container = {
 	triggerController,
 	settleController,
 	payloadController,
-	rsfController,
+	rsfRequestController,
+	rsfPayloadDbController,
 };

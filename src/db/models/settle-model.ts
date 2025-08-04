@@ -5,7 +5,7 @@ const subLocationSchema = new mongoose.Schema(
 	{
 		code: { type: String, required: true },
 	},
-	{ _id: false }
+	{ _id: false },
 );
 
 const locationSchema = new mongoose.Schema(
@@ -19,10 +19,10 @@ const locationSchema = new mongoose.Schema(
 			required: true,
 		},
 	},
-	{ _id: false }
+	{ _id: false },
 );
 
-const ContextSchema = new mongoose.Schema(
+export const ContextSchema = new mongoose.Schema(
 	{
 		domain: { type: String, required: true },
 		location: { type: locationSchema, required: true },
@@ -37,7 +37,7 @@ const ContextSchema = new mongoose.Schema(
 		timestamp: { type: String, required: true },
 		ttl: { type: String, required: true },
 	},
-	{ _id: false }
+	{ _id: false },
 );
 
 const SettleSchema = new mongoose.Schema(
@@ -68,7 +68,7 @@ const SettleSchema = new mongoose.Schema(
 		}, // settlement status PENDING, SETTLED, NOT-SETTLED
 		context: { type: ContextSchema, required: false },
 	},
-	{ timestamps: true }
+	{ timestamps: true },
 );
 
 SettleSchema.index({ user_id: 1, order_id: 1 }, { unique: true }); // Ensure unique settlement per user and order

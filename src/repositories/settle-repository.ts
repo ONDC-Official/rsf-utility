@@ -11,15 +11,16 @@ export class SettleRepository {
 		order_id?: string;
 		status?: string;
 	}) {
+		const { limit, skip, counterparty_id, ...query } = queryData;
 		return await Settle.find({
-			...queryData,
+			...query,
 			$or: [
-				{ receiver_id: queryData.counterparty_id },
-				{ collector_id: queryData.counterparty_id },
+				{ receiver_id: counterparty_id },
+				{ collector_id: counterparty_id },
 			],
 		})
-			.skip(queryData.skip)
-			.limit(queryData.limit)
+			.skip(skip)
+			.limit(limit)
 			.sort({ createdAt: -1 });
 	}
 
@@ -30,12 +31,12 @@ export class SettleRepository {
 	async updateSettlement(
 		userId: string,
 		orderId: string,
-		settlement: z.infer<typeof SettleSchema>
+		settlement: z.infer<typeof SettleSchema>,
 	) {
 		return await Settle.findOneAndUpdate(
 			{ user_id: userId, order_id: orderId },
 			{ $set: settlement },
-			{ new: true }
+			{ new: true },
 		);
 	}
 
