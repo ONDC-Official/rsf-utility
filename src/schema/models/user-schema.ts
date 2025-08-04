@@ -30,10 +30,10 @@ export const UserSchema = z
 			description: "Role of the user",
 			example: "BAP",
 		}),
-		subscriber_id: z.string().openapi({
-			description: "Subscriber ID",
-			example: "subscriber123",
-		}),
+		// subscriber_id: z.string().openapi({
+		// 	description: "Subscriber ID",
+		// 	example: "subscriber123",
+		// }),
 		subscriber_url: z.url().openapi({
 			description: "Subscriber URL",
 			example: "https://subscriber.example.com",
@@ -57,14 +57,14 @@ export const UserSchema = z
 		provider_details: z.array(ProviderDetailsSchema).openapi({
 			description: "Details of providers",
 		}),
-		signing_private_key: z.string().openapi({
-			description: "Signing private key",
-			example: "privateKey123",
-		}),
-		subscriber_unique_key_id: z.string().openapi({
-			description: "Unique Key ID or uKid",
-			example: "ukid123",
-		}),
+		// signing_private_key: z.string().openapi({
+		// 	description: "Signing private key",
+		// 	example: "privateKey123",
+		// }),
+		// subscriber_unique_key_id: z.string().openapi({
+		// 	description: "Unique Key ID or uKid",
+		// 	example: "ukid123",
+		// }),
 		// settlement_agency_url: z.url().openapi({
 		// 	description: "Settlement agency URL",
 		// 	example: "https://settlement-agency.com",

@@ -5,12 +5,15 @@ const miscGeneratorLogger = logger.child("generate-misc-payload");
 import { z } from "zod";
 import { MiscSettlementSchema } from "../../types/settle-params";
 import { buildMiscSettlement } from "./build-misc-settlement";
-import { SettleAgencyConfig } from "../../config/settle-agency-config";
+import {
+	SettleAgencyConfig,
+	subscriberConfig,
+} from "../../config/settle-agency-config";
 
 type MiscSettlementSchema = z.infer<typeof MiscSettlementSchema>;
 export function generateMiscFile(
 	userConfig: UserType,
-	miscData: MiscSettlementSchema
+	miscData: MiscSettlementSchema,
 ) {
 	miscGeneratorLogger.info("Generating Misc Settlement file payload");
 
@@ -30,7 +33,7 @@ export function generateMiscFile(
 			},
 			version: "2.0.0",
 			action: "settle",
-			bap_id: userConfig.subscriber_id,
+			bap_id: subscriberConfig.subscriberId,
 			bap_uri: userConfig.subscriber_url,
 			bpp_id: SettleAgencyConfig.agencyId,
 			bpp_uri: SettleAgencyConfig.agencyUrl,

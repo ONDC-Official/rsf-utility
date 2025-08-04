@@ -7,7 +7,7 @@ const ProviderDetails = new mongoose.Schema(
 		ifsc_code: { type: String, required: true },
 		bank_name: { type: String, required: true },
 	},
-	{ _id: false }
+	{ _id: false },
 );
 
 const UserSchema = new mongoose.Schema(
@@ -17,23 +17,23 @@ const UserSchema = new mongoose.Schema(
 			enum: ["BAP", "BPP"],
 			required: true,
 		},
-		subscriber_id: { type: String, required: true },
+		// subscriber_id: { type: String, required: true },
 		subscriber_url: { type: String, required: true },
 		domain: { type: String, required: true },
 		tcs: { type: String, required: true },
 		tds: { type: String, required: true },
 		msn: { type: Boolean, required: true },
 		provider_details: { type: [ProviderDetails], required: true },
-		signing_private_key: { type: String, required: true },
-		subscriber_unique_key_id: { type: String, required: true },
+		// signing_private_key: { type: String, required: true },
+		// subscriber_unique_key_id: { type: String, required: true },
 		// settlement_agency_url: { type: String, required: true },
 		// settlement_agency_api_key: { type: String, required: true },
 		// settlement_agency_id: { type: String, required: true },
 	},
-	{ timestamps: true }
+	{ timestamps: true },
 );
 
 // Compound index for uniqueness on role + subscriber_id + domain
-UserSchema.index({ role: 1, subscriber_id: 1, domain: 1 }, { unique: true });
+UserSchema.index({ role: 1, subscriber_url: 1, domain: 1 }, { unique: true });
 
 export const User = mongoose.model("User", UserSchema);

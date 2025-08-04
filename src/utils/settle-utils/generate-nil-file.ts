@@ -1,7 +1,10 @@
 import { UserType } from "../../schema/models/user-schema";
 import { v4 as uuidv4 } from "uuid";
 import logger from "../logger";
-import { SettleAgencyConfig } from "../../config/settle-agency-config";
+import {
+	SettleAgencyConfig,
+	subscriberConfig,
+} from "../../config/settle-agency-config";
 const nilGeneratorLogger = logger.child("generate-misc-payload");
 
 export function generateNilFile(userConfig: UserType) {
@@ -23,7 +26,7 @@ export function generateNilFile(userConfig: UserType) {
 			},
 			version: "2.0.0",
 			action: "settle",
-			bap_id: userConfig.subscriber_id,
+			bap_id: subscriberConfig.subscriberId,
 			bap_uri: userConfig.subscriber_url,
 			bpp_id: SettleAgencyConfig.agencyId,
 			bpp_uri: SettleAgencyConfig.agencyUrl,

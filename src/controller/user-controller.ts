@@ -19,7 +19,7 @@ export class UserController {
 				userLogger.error(
 					"Invalid user data",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				res.status(400).json({
 					message: "Invalid user data",
@@ -30,7 +30,7 @@ export class UserController {
 			userLogger.info(
 				"Creating user",
 				getLoggerMeta(req),
-				validationResult.data
+				validationResult.data,
 			);
 			const user = await this.userService.createUser(validationResult.data);
 			res.status(201).json(user);
@@ -68,7 +68,7 @@ export class UserController {
 				userLogger.error(
 					"Invalid user data",
 					getLoggerMeta(req),
-					validationResult.error
+					validationResult.error,
 				);
 				res.status(400).json({
 					message: "Invalid user data",
@@ -79,7 +79,7 @@ export class UserController {
 			userLogger.info("Patching user", getLoggerMeta(req), { userId, body });
 			const updatedUser = await this.userService.overrideUser(
 				userId,
-				validationResult.data
+				validationResult.data,
 			);
 			res.status(200).json(updatedUser);
 		} catch (error: any) {
@@ -103,7 +103,7 @@ export class UserController {
 			userLogger.info("Updating user", getLoggerMeta(req), { userId, body });
 			const updatedUser = await this.userService.updateUserDetails(
 				userId,
-				body
+				body,
 			);
 			res.status(200).json(updatedUser);
 		} catch (error: any) {
@@ -134,30 +134,30 @@ export class UserController {
 	userValidationMiddleware = async (
 		req: Request,
 		res: Response,
-		next: NextFunction
+		next: NextFunction,
 	) => {
 		logger.info("User Handler invoked", getLoggerMeta(req));
 		try {
 			const payload = req.body;
-			const { domain, bap_id, bpp_id } = payload.context;
-			if (!domain || !bap_id || !bpp_id) {
+			const { domain, bap_url, bpp_url } = payload.context;
+			if (!domain || !bap_url || !bpp_url) {
 				return res.status(400).json({
-					message: "Domain, BAP ID, and BPP ID are required in the context",
+					message: "Domain, BAP URL, and BPP URL are required in the context",
 				});
 			}
-			const { bap_user_id, bpp_user_id } =
+			const { bap_user_url, bpp_user_url } =
 				await this.userService.getUserIdsByRoleAndDomain(
 					domain,
-					bap_id,
-					bpp_id
+					bap_url,
+					bpp_url,
 				);
-			if (!bap_user_id && !bpp_user_id) {
+			if (!bap_user_url && !bpp_user_url) {
 				return res.status(400).json({
 					message: "Cannot find user for this domain and subscriber_id.",
 				});
 			}
-			res.locals.bap_user_id = bap_user_id;
-			res.locals.bpp_user_id = bpp_user_id;
+			res.locals.bap_user_url = bap_user_url;
+			res.locals.bpp_user_url = bpp_user_url;
 			next();
 		} catch (e: any) {
 			logger.error("Error in user validation", getLoggerMeta(req), e);

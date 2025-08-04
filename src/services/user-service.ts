@@ -49,25 +49,25 @@ export class UserService {
 	};
 	checkUserByUniqueCombination = async (
 		role: UserType["role"],
-		subscriber_id: UserType["subscriber_id"],
-		domain: UserType["domain"]
+		subscriber_url: UserType["subscriber_url"],
+		domain: UserType["domain"],
 	) => {
 		const result = await this.userRepo.checkUserByUniqueCombination(
 			role,
-			subscriber_id,
-			domain
+			subscriber_url,
+			domain,
 		);
 		return result;
 	};
 	getUserByUniqueCombination = async (
 		role: UserType["role"],
-		subscriber_id: UserType["subscriber_id"],
-		domain: UserType["domain"]
+		subscriber_url: UserType["subscriber_url"],
+		domain: UserType["domain"],
 	) => {
 		const result = await this.userRepo.getUserByUniqueCombination(
 			role,
-			subscriber_id,
-			domain
+			subscriber_url,
+			domain,
 		);
 		if (!result) {
 			throw new Error("User not found");
@@ -77,19 +77,19 @@ export class UserService {
 
 	getUserIdsByRoleAndDomain = async (
 		domain: string,
-		bapId: string,
-		bppId: string
+		bapUrl: string,
+		bppUrl: string,
 	) => {
-		let bap_user_id: string | undefined = undefined;
-		let bpp_user_id: string | undefined = undefined;
-		if (await this.checkUserByUniqueCombination("BAP", bapId, domain)) {
-			const user = await this.getUserByUniqueCombination("BAP", bapId, domain);
-			bap_user_id = user._id.toString();
+		let bap_user_url: string | undefined = undefined;
+		let bpp_user_url: string | undefined = undefined;
+		if (await this.checkUserByUniqueCombination("BAP", bapUrl, domain)) {
+			const user = await this.getUserByUniqueCombination("BAP", bapUrl, domain);
+			bap_user_url = user._id.toString();
 		}
-		if (await this.checkUserByUniqueCombination("BPP", bppId, domain)) {
-			const user = await this.getUserByUniqueCombination("BPP", bppId, domain);
-			bpp_user_id = user._id.toString();
+		if (await this.checkUserByUniqueCombination("BPP", bppUrl, domain)) {
+			const user = await this.getUserByUniqueCombination("BPP", bppUrl, domain);
+			bpp_user_url = user._id.toString();
 		}
-		return { bap_user_id, bpp_user_id };
+		return { bap_user_url, bpp_user_url };
 	};
 }
