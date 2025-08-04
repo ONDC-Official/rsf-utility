@@ -7,7 +7,7 @@ import { send } from "process";
 
 const rateLimiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
-	limit: 2, // Limit each user (config-id) to 1000 requests per min
+	limit: 10, // Limit each user (config-id) to 1000 requests per min
 	standardHeaders: "draft-8", // Return `RateLimit-*` headers for clarity
 	legacyHeaders: false,
 	keyGenerator: () => "global",
@@ -23,13 +23,13 @@ const rateLimiter = rateLimit({
 	handler: (req, res, next, options) => {
 		// Custom handler for logging/alerting if needed
 		rateLimitLogger.debug(
-			`Request exceeded the configured rate limit ${options.limit} per ${options.windowMs} milliseconds`,
+			`Request exceeded the configured rate limit ${options.limit} per ${options.windowMs / 60000} minute.`,
 		);
 		// res.status(options.message.status).json(options.message);
 		sendError(
 			res,
 			"TOO_MANY_REQUESTS",
-			"Rate limit exceeded for your user. Please try again after a minute.",
+			`Rate limit exceeded for your user. Please try again after ${options.windowMs / 60000} minute(s).`,
 		);
 	},
 });

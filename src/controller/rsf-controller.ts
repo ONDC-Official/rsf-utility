@@ -8,6 +8,7 @@ import { z } from "zod";
 import { getAckResponse, getNackResponse } from "../utils/ackUtils";
 import { validateHeader } from "../utils/header-utils";
 import { SettleAgencyConfig } from "../config/rsf-utility-instance-config";
+import { sendError } from "../utils/resUtils";
 const rsfLogger = logger.child("rsf-controller");
 
 export class RsfController {
@@ -38,10 +39,13 @@ export class RsfController {
 					getLoggerMeta(req),
 					{ action },
 				);
-				return res.status(400).json({
-					message: "Invalid action for RSF payload",
-					errors: z.treeifyError(actionValidationResult.error),
-				});
+
+				return res.status(200).send(getNackResponse("70002"));
+
+				// return res.status(400).json({
+				// 	message: "Invalid action for RSF payload",
+				// 	errors: z.treeifyError(actionValidationResult.error),
+				// });
 			}
 			const auth = req.headers.authorization;
 			if (!auth) {

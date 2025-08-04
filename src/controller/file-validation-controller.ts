@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { validateSchemaForAction } from "../services/schema-service";
 import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
+import { sendError } from "../utils/resUtils";
 
 const fileValidationLogger = logger.child("file-validation-controller");
 /**
@@ -20,7 +21,9 @@ export const schemaValidator = (
 		const payloads = (req as any).processedJsonPayloads || undefined;
 
 		if (!payloads) {
-			return res.status(400).json({ error: "No payloads to validate" });
+			return sendError(res, "VALIDATION_FAILED", "No payloads to validate");
+
+			// return res.status(400).json({ error: "No payloads to validate" });
 		}
 
 		const validated: any[] = [];
@@ -94,10 +97,12 @@ export const schemaValidator = (
 		delete (req as any).processedJsonPayloads;
 
 		if (errors.length) {
-			return res.status(422).json({
-				message: "Schema Validation failed",
-				details: errors,
-			});
+			return sendError(res, "SCHEMA_VALIDATION_FAILED", undefined, errors);
+
+			// return res.status(422).json({
+			// 	message: "Schema Validation failed",
+			// 	details: errors,
+			// });
 		}
 		next();
 	} catch (error) {
@@ -106,9 +111,15 @@ export const schemaValidator = (
 			getLoggerMeta(req),
 			error,
 		);
-		res.status(500).json({
-			error: "Internal server error during schema validation",
-			details: error instanceof Error ? error.message : "Unknown error",
+
+		return sendError(res, "INTERNAL_ERROR", undefined, {
+			error: error instanceof Error ? error.message : String(error),
 		});
+		// return
+
+		// res.status(500).json({
+		// 	error: "Internal server error during schema validation",
+		// 	details:
+		// });
 	}
 };

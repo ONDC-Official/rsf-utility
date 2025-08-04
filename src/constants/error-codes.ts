@@ -1,29 +1,98 @@
 export const ERROR_CODES = {
 	TOO_MANY_REQUESTS: {
-		code: "GEN_429",
+		code: "GEN_001",
 		message: "Too many requests. Please try again later.",
 		httpStatus: 429,
 	},
 	AUTH_INVALID_TOKEN: {
-		code: "AUTH_401",
+		code: "AUTH_000",
 		message: "Invalid or expired token.",
 		httpStatus: 401,
 	},
+	INVALID_QUERY_PARAMS: {
+		code: "GEN_002",
+		message: "Invalid query parameters provided.",
+		httpStatus: 400,
+	},
 	USER_NOT_FOUND: {
-		code: "USR_404",
+		code: "USR_000",
 		message: "User not found.",
 		httpStatus: 404,
 	},
+	INVALID_REQUEST_BODY: {
+		code: "GEN_003",
+		message: "Invalid request body provided.",
+		httpStatus: 400,
+	},
 	VALIDATION_FAILED: {
-		code: "VAL_400",
+		code: "VAL_000",
 		message: "Validation failed.",
 		httpStatus: 400,
 	},
 	INTERNAL_ERROR: {
-		code: "GEN_500",
+		code: "GEN_000",
 		message: "Internal server error.",
 		httpStatus: 500,
 	},
+	SCHEMA_VALIDATION_FAILED: {
+		code: "VAL_001",
+		message: "Schema Validation Failed",
+		httpStatus: 422,
+	},
+	ORDER_CREATION_FAILED: {
+		code: "ORD_000",
+		message: "Failed to create order.",
+		httpStatus: 500,
+	},
+	FILES_UPLOAD_FAILED: {
+		code: "FILE_000",
+		message: "File upload failed.",
+		httpStatus: 400,
+	},
+	HEALTH_CHECK_FAILED: {
+		code: "GEN_004",
+		message: "Health check failed.",
+		httpStatus: 503,
+	},
+
+	// ORDER_NOT_FOUND: {
+	// 	code: "ORD_404",
+	// 	message: "Order not found.",
+	// 	httpStatus: 404,
+	// },
+
+	// // Settlement-related errors
+	// SETTLEMENT_CREATION_FAILED: {
+	// 	code: "SET_500",
+	// 	message: "Failed to create settlement.",
+	// 	httpStatus: 500,
+	// },
+	// SETTLEMENT_NOT_FOUND: {
+	// 	code: "SET_404",
+	// 	message: "Settlement not found.",
+	// 	httpStatus: 404,
+	// },
+	// // Shared DB-level errors (can be reused)
+	// DB_DUPLICATE_ENTRY: {
+	// 	code: "DB_409",
+	// 	message: "Duplicate entry exists.",
+	// 	httpStatus: 409,
+	// },
+	// DB_CONN_FAIL: {
+	// 	code: "DB_500",
+	// 	message: "Database connection failed.",
+	// 	httpStatus: 500,
+	// },
+	DB_QUERY_ERROR: {
+		code: "DB_400",
+		message: "Database query failed.",
+		httpStatus: 400,
+	},
+	// DB_TIMEOUT: {
+	// 	code: "DB_504",
+	// 	message: "Database operation timed out.",
+	// 	httpStatus: 504,
+	// },
 	// add more...
 } as const;
 
