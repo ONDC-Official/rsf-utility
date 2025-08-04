@@ -19,6 +19,11 @@ export const ERROR_CODES = {
 		message: "User not found.",
 		httpStatus: 404,
 	},
+	INVALID_USER_DATA: {
+		code: "USR_001",
+		message: "User Data is invalid.",
+		httpStatus: 400,
+	},
 	INVALID_REQUEST_BODY: {
 		code: "GEN_003",
 		message: "Invalid request body provided.",

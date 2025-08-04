@@ -5,6 +5,8 @@ import { getLoggerMeta } from "../utils/utility";
 import { UserSchema } from "../schema/models/user-schema";
 import { z } from "zod";
 import { validateUserId } from "../types/user-id-type";
+import { send } from "process";
+import { sendError, sendSuccess } from "../utils/resUtils";
 
 const userLogger = logger.child("user-controller");
 
@@ -21,11 +23,15 @@ export class UserController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				res.status(400).json({
-					message: "Invalid user data",
+
+				return sendError(res, "INVALID_USER_DATA", undefined, {
 					errors: z.treeifyError(validationResult.error),
 				});
-				return;
+				// res.status(400).json({
+				// 	message: "Invalid user data",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
+				// return;
 			}
 			userLogger.info(
 				"Creating user",
@@ -33,10 +39,14 @@ export class UserController {
 				validationResult.data,
 			);
 			const user = await this.userService.createUser(validationResult.data);
-			res.status(201).json(user);
+			return sendSuccess(res, user, undefined, 201);
+			// res.status(201).json(user);
 		} catch (error: any) {
 			userLogger.error("Error creating user", getLoggerMeta(req), error);
-			res.status(400).json({ message: error.message });
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(400).json({ message: error.message });
 		}
 	};
 
@@ -44,10 +54,14 @@ export class UserController {
 		try {
 			userLogger.info("Fetching all users", getLoggerMeta(req));
 			const users = await this.userService.getUsers();
-			res.status(200).json(users);
+			return sendSuccess(res, users);
+			// res.status(200).json(users);
 		} catch (error: any) {
 			userLogger.error("Error fetching users", getLoggerMeta(req), error);
-			res.status(500).json({ message: error.message });
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(500).json({ message: error.message });
 		}
 	};
 
@@ -56,12 +70,19 @@ export class UserController {
 			const userId = req.params.id;
 			const body = req.body;
 			if (!validateUserId(userId)) {
-				res.status(400).json({ message: "Valid User ID is required" });
-				return;
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+
+				// res.status(400).json({ message: "Valid User ID is required" });
+				// return;
 			}
 			if (!(await this.userService.checkUserById(userId))) {
-				res.status(404).json({ message: "User not found" });
-				return;
+				return sendError(res, "USER_NOT_FOUND", undefined, {
+					message: "User not found",
+				});
+				// res.status(404).json({ message: "User not found" });
+				// return;
 			}
 			const validationResult = UserSchema.safeParse(body);
 			if (!validationResult.success) {
@@ -70,10 +91,14 @@ export class UserController {
 					getLoggerMeta(req),
 					validationResult.error,
 				);
-				res.status(400).json({
-					message: "Invalid user data",
+
+				return sendError(res, "INVALID_USER_DATA", undefined, {
 					errors: z.treeifyError(validationResult.error),
 				});
+				// res.status(400).json({
+				// 	message: "Invalid user data",
+				// 	errors: z.treeifyError(validationResult.error),
+				// });
 				return;
 			}
 			userLogger.info("Patching user", getLoggerMeta(req), { userId, body });
@@ -81,10 +106,15 @@ export class UserController {
 				userId,
 				validationResult.data,
 			);
-			res.status(200).json(updatedUser);
+
+			return sendSuccess(res, updatedUser);
+			// res.status(200).json(updatedUser);
 		} catch (error: any) {
 			userLogger.error("Error patching user", getLoggerMeta(req), error);
-			res.status(400).json({ message: error.message });
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(400).json({ message: error.message });
 		}
 	};
 
@@ -93,22 +123,33 @@ export class UserController {
 			const userId = req.params.id;
 			const body = req.body;
 			if (!validateUserId(userId)) {
-				res.status(400).json({ message: "Valid User ID is required" });
-				return;
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+				// res.status(400).json({ message: "Valid User ID is required" });
+				// return;
 			}
 			if (!(await this.userService.checkUserById(userId))) {
-				res.status(404).json({ message: "User not found" });
-				return;
+				return sendError(res, "USER_NOT_FOUND", undefined, {
+					message: "User not found",
+				});
+				// res.status(404).json({ message: "User not found" });
+				// return;
 			}
 			userLogger.info("Updating user", getLoggerMeta(req), { userId, body });
 			const updatedUser = await this.userService.updateUserDetails(
 				userId,
 				body,
 			);
-			res.status(200).json(updatedUser);
+			return sendSuccess(res, updatedUser);
+			// res.status(200).json(updatedUser);
 		} catch (error: any) {
 			userLogger.error("Error updating user", getLoggerMeta(req), error);
-			res.status(400).json({ message: error.message });
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+
+			// res.status(400).json({ message: error.message });
 		}
 	};
 
@@ -116,19 +157,32 @@ export class UserController {
 		try {
 			const userId = req.params.id;
 			if (!userId) {
-				res.status(400).json({ message: "User ID is required" });
-				return;
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+				// res.status(400).json({ message: "User ID is required" });
+				// return;
 			}
 			if (!(await this.userService.checkUserById(userId))) {
-				res.status(404).json({ message: "User not found to delete" });
-				return;
+				return sendError(res, "USER_NOT_FOUND", undefined, {
+					message: "User not found to delete",
+				});
+				// userLogger.error("User not found to delete", getLoggerMeta(req));
+				//
+				// res.status(404).json({ message: "User not found to delete" });
+				// return;
 			}
 			userLogger.info("Deleting user", getLoggerMeta(req), { userId });
 			await this.userService.deleteUser(userId);
-			res.status(204).send();
+			return sendSuccess(res, userId, "User deleted successfully", 204);
+			// res.status(204).send();
 		} catch (error: any) {
 			userLogger.error("Error deleting user", getLoggerMeta(req), error);
-			res.status(400).json({ message: error.message });
+
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+			// res.status(400).json({ message: error.message });
 		}
 	};
 	userValidationMiddleware = async (
@@ -141,9 +195,12 @@ export class UserController {
 			const payload = req.body;
 			const { domain, bap_url, bpp_url } = payload.context;
 			if (!domain || !bap_url || !bpp_url) {
-				return res.status(400).json({
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Domain, BAP URL, and BPP URL are required in the context",
 				});
+				// return res.status(400).json({
+				// 	message: "Domain, BAP URL, and BPP URL are required in the context",
+				// });
 			}
 			const { bap_user_url, bpp_user_url } =
 				await this.userService.getUserIdsByRoleAndDomain(
@@ -152,17 +209,24 @@ export class UserController {
 					bpp_url,
 				);
 			if (!bap_user_url && !bpp_user_url) {
-				return res.status(400).json({
+				return sendError(res, "USER_NOT_FOUND", undefined, {
 					message: "Cannot find user for this domain and subscriber_id.",
 				});
+				// return res.status(400).json({
+				// 	message: "Cannot find user for this domain and subscriber_id.",
+				// });
 			}
 			res.locals.bap_user_url = bap_user_url;
 			res.locals.bpp_user_url = bpp_user_url;
 			next();
 		} catch (e: any) {
 			logger.error("Error in user validation", getLoggerMeta(req), e);
-			res.status(500).json({ message: "Internal server error" });
-			return;
+
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: e.message,
+			});
+			// res.status(500).json({ message: "Internal server error" });
+			// return;
 		}
 	};
 }
