@@ -21,6 +21,7 @@ import { SettleTriggerService } from "../services/trigger-services/settle-trigge
 import { TriggerService } from "../services/trigger-services/trigger-service";
 import { UserService } from "../services/user-service";
 import { ReconTriggerService } from "../services/trigger-services/recon-trigger-service";
+import { ReconRequestService } from "../services/rsf-request-api-services/recon-api-service";
 
 const rsfPayloadRepository = new RsfPayloadRepository();
 const rsfPayloadDbService = new RsfPayloadDbService(rsfPayloadRepository);
@@ -59,13 +60,18 @@ const triggerService = new TriggerService(
 const triggerController = new TriggerController(triggerService);
 
 const onSettleService = new OnSettleService(settleDbManagementService);
-const rsfService = new RsfService(onSettleService);
+const reconRequestService = new ReconRequestService(
+	settleDbManagementService,
+	userService,
+);
+const rsfService = new RsfService(onSettleService, reconRequestService);
 const rsfRequestController = new RsfRequestController(rsfService);
 
 const generateSettleService = new GenerateSettleService(
 	settleDbManagementService,
 	userService,
 );
+
 const generateReconService = new GenerateReconService(
 	settleDbManagementService,
 	userService,

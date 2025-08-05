@@ -53,7 +53,6 @@ export class PayloadController {
 						);
 					}
 				} else {
-					console.log("i am in this function not that function")
 					await this.orderService.createOrder({
 						...extracted,
 						user_id,

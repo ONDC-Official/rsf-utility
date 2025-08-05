@@ -52,6 +52,7 @@ const reconSchema = new mongoose.Schema(
 		withholding_amount: { type: Number, required: false },
 		tcs: { type: Number, required: false },
 		tds: { type: Number, required: false },
+		context: { type: ContextSchema, required: false },
 	},
 	{
 		_id: false,

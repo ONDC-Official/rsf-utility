@@ -1,7 +1,5 @@
-import { SettleType } from "../../schema/models/settle-schema";
 import {
 	GenReconBodyType,
-	GenReconOrderObjType,
 	ReconAggregateData,
 } from "../../types/generate-recon-types";
 import { reconBuilder } from "../../utils/recon-utils/generate-recon-payload";

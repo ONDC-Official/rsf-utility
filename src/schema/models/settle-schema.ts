@@ -96,6 +96,9 @@ export const SubReconDataSchema = z
 			description: "Tax Deducted at Source",
 			example: 3,
 		}),
+		context: ContextSchema.optional().nullable().openapi({
+			description: "Context information for the reconciliation",
+		}),
 	})
 	.strict()
 	.openapi("SubReconDataSchema");
