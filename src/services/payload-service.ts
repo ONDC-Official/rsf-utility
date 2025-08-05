@@ -44,6 +44,14 @@ export const extractFields = (
 					result.withholding_amount = tempWitholdingAmount;
 					break;
 
+				case "np_type":
+					const npType = Array.isArray(resolvedValue)
+						? resolvedValue[0]?.trim().toUpperCase()
+						: null;
+
+					result.msn = npType === "MSN";
+					break;
+
 				case "buyer_finder_fee_type":
 					tempBuyerFinderFeeType = resolvedValue || "";
 					(result as any)[key] =

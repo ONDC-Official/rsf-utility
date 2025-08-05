@@ -17,13 +17,15 @@ export function calculateSettlementDetails(
 	const total_order_value = order?.quote?.total_order_value ?? 0;
 	const domain = order?.domain ?? "";
 	const role = userConfig?.role ?? "";
-	const tax: number = 0;
-
-	const inter_np_settlement = total_order_value - commission - tax;
+	let calculatedTax: number = 0;
+	if (role == "BAP" && domain === "ONDC:RET11" && order.msn == false) {
+		calculatedTax = ((total_order_value - commission) * tds) / 100;
+	}
+	const inter_np_settlement = total_order_value - commission - calculatedTax;
 
 	return {
 		commission: commission,
-		tax: 1,
+		tax: calculatedTax,
 		inter_np_settlement: inter_np_settlement,
 	};
 }

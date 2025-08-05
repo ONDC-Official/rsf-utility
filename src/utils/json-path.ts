@@ -20,4 +20,6 @@ export const orderJsonPathMap: Record<string, string> = {
 	withholding_amount: '$.message.order.payment["@ondc/org/withholding_amount"]',
 	quote: "$.message.order.quote",
 	provider_id: "$.message.order.provider.id",
+	np_type:
+		"$.message.order.tags[?@.code=='bpp_terms'].list[?@.code=='np_type'].value",
 };

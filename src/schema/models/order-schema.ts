@@ -101,6 +101,12 @@ export const OrderSchema = z
 			description: "Settlement window",
 			example: "window123",
 		}),
+		msn: z.boolean().openapi({
+			description: `NP Type for BPP (Boolean flag)
+- true: BPP is MSN (Marketplace Seller Node)
+- false: BPP is ISN (Inventory Seller Node)`,
+			example: false,
+		}),
 		withholding_amount: z.number().optional().nullable().openapi({
 			description: "Withholding amount",
 			example: 100,
