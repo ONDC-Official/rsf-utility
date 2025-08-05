@@ -49,11 +49,11 @@ export const OrderSchema = z
 			description: "BPP identifier",
 			example: "bpp123",
 		}),
-		bap_url: z.string().openapi({
+		bap_uri: z.string().openapi({
 			description: "BAP identifier",
 			example: "bap123",
 		}),
-		bpp_url: z.string().openapi({
+		bpp_uri: z.string().openapi({
 			description: "BPP identifier",
 			example: "bpp123",
 		}),

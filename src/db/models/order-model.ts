@@ -34,6 +34,7 @@ const OrderSchema = new mongoose.Schema(
 			enum: ["BAP", "BPP"],
 			required: true,
 		},
+		msn: { type: Boolean, default: false, required: true },
 		settlement_counterparty: { type: String, required: false },
 		buyer_finder_fee_amount: { type: Number, required: true },
 		buyer_finder_fee_type: { type: String, required: true },

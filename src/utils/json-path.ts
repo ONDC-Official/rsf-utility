@@ -21,5 +21,5 @@ export const orderJsonPathMap: Record<string, string> = {
 	quote: "$.message.order.quote",
 	provider_id: "$.message.order.provider.id",
 	np_type:
-		"$.message.order.tags[?@.code=='bpp_terms'].list[?@.code=='np_type'].value",
+		'$.message.order.tags[?(@.code=="bpp_terms")].list[?(@.code=="np_type")].value',
 };

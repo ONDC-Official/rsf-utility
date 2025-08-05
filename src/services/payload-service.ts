@@ -1,5 +1,6 @@
 import { JSONPath } from "jsonpath-plus";
 import { OrderType } from "../schema/models/order-schema";
+import { resolve } from "path";
 
 export const extractFields = (
 	payload: any,
@@ -45,9 +46,10 @@ export const extractFields = (
 					break;
 
 				case "np_type":
-					const npType = Array.isArray(resolvedValue)
-						? resolvedValue[0]?.trim().toUpperCase()
+					const npType = resolvedValue
+						? resolvedValue?.trim().toUpperCase()
 						: null;
+					console.log(npType);
 
 					result.msn = npType === "MSN";
 					break;
