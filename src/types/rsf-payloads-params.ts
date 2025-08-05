@@ -41,6 +41,7 @@ export type GetRsfPayloadsParamsType = z.infer<typeof GetRsfPayloadsParams>;
 
 export type RsfPayloadStructure = {
 	requestData: any;
+	headers: any;
 	responseData: {
 		body: any;
 		statusCode: number;

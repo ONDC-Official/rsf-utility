@@ -76,6 +76,10 @@ export const SubReconDataSchema = z
 			description: "Status of the reconciliation",
 			example: "PENDING",
 		}),
+		settlement_id: z.string().optional().nullable().openapi({
+			description: "Unique identifier for the settlement between NP-NP",
+			example: "settlement123",
+		}),
 		amount: z.number().min(0).optional().nullable().openapi({
 			description: "Amount involved in the reconciliation",
 			example: 100,

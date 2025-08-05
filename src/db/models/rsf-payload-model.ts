@@ -30,6 +30,7 @@ const RsfPayloadSchema = new mongoose.Schema(
 	{
 		request: { type: RequestSchema, required: true },
 		response: { type: ResponseSchema, required: true },
+		headers: { type: Schema.Types.Mixed, required: false },
 	},
 	{ timestamps: true, strict: false },
 );

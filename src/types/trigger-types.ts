@@ -12,8 +12,5 @@ export type TriggerActionType = z.infer<typeof TriggerActionSchema>;
 export type TriggeringRequirements = {
 	action: TriggerActionType;
 	data: any;
-	privateKey: string;
-	subscriberId: string;
-	subscriberUniqueKeyId: string;
 	forwardingBaseUrl: string;
 };

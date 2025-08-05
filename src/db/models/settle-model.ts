@@ -47,6 +47,7 @@ const reconSchema = new mongoose.Schema(
 			enum: Object.values(ENUMS.INTERNAL_RECON_STATUS),
 			required: true,
 		},
+		settlement_id: { type: String, required: false },
 		amount: { type: Number, required: false },
 		commission: { type: Number, required: false },
 		withholding_amount: { type: Number, required: false },

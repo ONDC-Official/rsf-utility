@@ -33,15 +33,15 @@ export function reconBuilder(
 				const settleData = data.settleData;
 				const apiData = data.reconData;
 				const totalAmount =
-					apiData.paymentDetails?.settlement_amount ??
+					apiData.recon_data?.settlement_amount ??
 					settleData.inter_np_settlement;
 				const commission =
-					apiData.paymentDetails?.commission_amount ?? settleData.commission;
+					apiData.recon_data?.commission_amount ?? settleData.commission;
 				const withholdingAmount =
-					apiData.paymentDetails?.withholding_amount ??
+					apiData.recon_data?.withholding_amount ??
 					settleData.withholding_amount;
-				const tcs = apiData.paymentDetails?.tcs ?? userConfig.tcs;
-				const tds = apiData.paymentDetails?.tds ?? userConfig.tds;
+				const tcs = apiData.recon_data?.tcs ?? userConfig.tcs;
+				const tds = apiData.recon_data?.tds ?? userConfig.tds;
 				return {
 					id: settleData.order_id,
 					amount: {

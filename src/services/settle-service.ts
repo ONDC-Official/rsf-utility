@@ -21,6 +21,14 @@ export class SettleDbManagementService {
 		private orderService: OrderService,
 	) {}
 
+	async getSingleSettlement(userId: string, orderId: string) {
+		settleLogger.info("Fetching single settlement for user", {
+			userId,
+			orderId,
+		});
+		return await this.settleRepo.findSingleSettlement(userId, orderId);
+	}
+
 	async getSettlements(
 		userId: string,
 		data: z.infer<typeof GetSettlementsQuerySchema>,
@@ -192,7 +200,7 @@ export class SettleDbManagementService {
 		message_id: string,
 		order_id: string,
 	) {
-		const settlement = this.settleRepo.getSettlementByContextAndOrderId(
+		const settlement = this.settleRepo.getSettlementByOnSettle(
 			txn_id,
 			message_id,
 			order_id,
@@ -258,5 +266,12 @@ export class SettleDbManagementService {
 			orderId,
 		});
 		return update;
+	}
+
+	async getAllSettlementsForRecon(transactionId: string, messageId: string) {
+		return await this.settleRepo.getAllSettlementsForRecon(
+			transactionId,
+			messageId,
+		);
 	}
 }

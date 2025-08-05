@@ -5,6 +5,8 @@ import { UserService } from "../user-service";
 import { getAckResponse, getNackResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { SubReconDataType } from "../../schema/models/settle-schema";
+import { INTERNAL_RECON_STATUS } from "../../constants/enums";
+import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
 
 // A new type to hold the prepared data after successful validation.
 type PreparedUpdate = {
@@ -65,9 +67,16 @@ export class ReconRequestService {
 
 				// Validate if the settlement is in a state that allows reconciliation.
 				if (
-					settlement.reconInfo.recon_status === "PENDING" ||
-					settlement.reconInfo.recon_status === "ACCEPTED"
+					this.illegalReconStatus.includes(settlement.reconInfo.recon_status)
 				) {
+					logger.error(
+						`Settlement for order ${orderId} is already processed or in a pending state.`,
+						{
+							userId: user._id.toString(),
+							orderId,
+							status: settlement.reconInfo.recon_status,
+						},
+					);
 					throw new Error(
 						`Settlement for order ${orderId} is already processed or in a pending state.`,
 					);
@@ -80,18 +89,11 @@ export class ReconRequestService {
 						`Settlement data is missing in the payload for order ${orderId}`,
 					);
 				}
-
-				// If all validations pass, prepare the data for the update pass.
-				const reconData: SubReconDataType = {
-					recon_status: "PENDING",
-					amount: parseFloat(settleDataInPayload.amount.value || "0"),
-					withholding_amount: parseFloat(
-						settleDataInPayload.withholding_amount.value || "0",
-					),
-					commission: parseFloat(settleDataInPayload.commission.value || "0"),
-					tcs: parseFloat(settleDataInPayload.tcs || "0"),
-					tds: parseFloat(settleDataInPayload.tds || "0"),
-				};
+				const reconData = extractReconDetails(
+					settleDataInPayload,
+					reconPayload,
+					INTERNAL_RECON_STATUS.RECEIVED_ACCEPTED,
+				);
 
 				updatesToProcess.push({
 					userId: user._id.toString(),
@@ -173,6 +175,13 @@ export class ReconRequestService {
 			`No user-config found for order ${order_id} with BAP URI ${bap_uri} or BPP URI ${bpp_uri}`,
 		);
 	}
+
+	illegalReconStatus: string[] = [
+		INTERNAL_RECON_STATUS.RECEIVED_ACCEPTED,
+		INTERNAL_RECON_STATUS.RECEIVED_PENDING,
+		INTERNAL_RECON_STATUS.SENT_PENDING,
+		INTERNAL_RECON_STATUS.SENT_ACCEPTED,
+	];
 }
 
 type UserWithId = UserType & { _id: Types.ObjectId };
