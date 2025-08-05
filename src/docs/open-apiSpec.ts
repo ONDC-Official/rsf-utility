@@ -2,13 +2,13 @@ import { OpenApiGeneratorV31 } from "@asteasolutions/zod-to-openapi";
 import { registry } from "./open-api-registry";
 
 // Import route files to ensure they are registered with the registry
+import "./external-routes";
 import "./user-routes";
 import "./order-routes";
 import "./settle-routes";
 import "./generate-routes";
 import "./trigger-routes";
 import "./rsf-payloads";
-import "./external-routes";
 
 // Generate the OpenAPI document from the populated registry
 const generator = new OpenApiGeneratorV31(registry.definitions);

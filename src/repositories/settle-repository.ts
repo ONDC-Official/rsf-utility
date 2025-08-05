@@ -31,7 +31,7 @@ export class SettleRepository {
 	async updateSettlement(
 		userId: string,
 		orderId: string,
-		settlement: z.infer<typeof SettleSchema>,
+		settlement: Partial<z.infer<typeof SettleSchema>>,
 	) {
 		return await Settle.findOneAndUpdate(
 			{ user_id: userId, order_id: orderId },
@@ -70,7 +70,11 @@ export class SettleRepository {
 		settlement: z.infer<typeof SettleSchema>,
 	) {
 		return await Settle.findOneAndUpdate(
-			{ "context.transaction_id": txn_id,"context.message_id": message_id, order_id: orderId },
+			{
+				"context.transaction_id": txn_id,
+				"context.message_id": message_id,
+				order_id: orderId,
+			},
 			{ $set: settlement },
 			{ new: true },
 		);

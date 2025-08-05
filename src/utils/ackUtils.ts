@@ -26,3 +26,10 @@ export const getAckResponse = () => {
 		},
 	};
 };
+
+export const checkPerfectAck = (response: any) => {
+	if (response?.message?.ack?.status === "ACK") {
+		return true;
+	}
+	return false;
+};

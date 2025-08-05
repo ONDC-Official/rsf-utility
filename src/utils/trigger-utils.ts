@@ -1,10 +1,11 @@
 import axios, { isAxiosError } from "axios";
 import { TriggeringRequirements } from "../types/trigger-types";
 import logger from "./logger";
+import { getNackResponse } from "./ackUtils";
 
 export const triggerRequest = async (
 	requirements: TriggeringRequirements,
-	headers?: any
+	headers?: any,
 ) => {
 	try {
 		const url = `${requirements.forwardingBaseUrl}/${requirements.action}`;
@@ -22,9 +23,10 @@ export const triggerRequest = async (
 				data: getAxiosErrorMessage(error),
 			};
 		}
+		logger.error("Unexpected error in triggerRequest", error);
 		return {
 			status: 500,
-			data: "An error occurred while triggering the request",
+			data: getNackResponse("503"),
 		};
 	}
 };

@@ -24,7 +24,6 @@ export class TriggerController {
 				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
 					message: "Valid User ID is required",
 				});
-				// return res.status(400).json({ message: "Valid User ID is required" });
 			}
 			const actionValidationResult = TriggerActionSchema.safeParse(action);
 			if (!actionValidationResult.success) {
@@ -36,11 +35,6 @@ export class TriggerController {
 				return sendError(res, "SCHEMA_VALIDATION_FAILED", undefined, {
 					errors: z.treeifyError(actionValidationResult.error),
 				});
-
-				// return res.status(400).json({
-				// 	message: "Invalid action",
-				// 	errors: z.treeifyError(actionValidationResult.error),
-				// });
 			}
 			const body = req.body;
 			const response = await this.triggerService.handleTrigger(
@@ -51,18 +45,12 @@ export class TriggerController {
 			triggerLogger.info("Trigger handled successfully", getLoggerMeta(req), {
 				response,
 			});
-
 			return sendSuccess(res, response.data, undefined, response.status);
-
-			// res.status(response.status).json(response.data);
-			// return;
 		} catch (error: any) {
 			triggerLogger.error("Error handling trigger", getLoggerMeta(req), error);
 			return sendError(res, "INTERNAL_ERROR", undefined, {
 				error: error.message,
 			});
-			// res.status(500).json({ message: error.message });
-			// return;
 		}
 	};
 }

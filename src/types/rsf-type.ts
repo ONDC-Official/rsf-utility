@@ -3,7 +3,7 @@ import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 
 extendZodWithOpenApi(z);
 export const RsfOnActionsSchema = z
-	.enum(["on_settle", "on_recon", "on_report"])
+	.enum(["on_settle", "recon", "on_recon", "on_report"])
 	.openapi({
 		description:
 			"valid actions for consuming RSF APIs from settlement agencies",

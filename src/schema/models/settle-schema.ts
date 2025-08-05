@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../../constants/enums";
 
 extendZodWithOpenApi(z);
 
@@ -68,6 +69,36 @@ export const ContextSchema = z
 	.openapi("ContextSchema");
 
 export type RsfContextType = z.infer<typeof ContextSchema>;
+
+export const SubReconDataSchema = z
+	.object({
+		recon_status: z.enum(Object.values(ENUMS.INTERNAL_RECON_STATUS)).openapi({
+			description: "Status of the reconciliation",
+			example: "PENDING",
+		}),
+		amount: z.number().min(0).optional().nullable().openapi({
+			description: "Amount involved in the reconciliation",
+			example: 100,
+		}),
+		commission: z.number().min(0).optional().nullable().openapi({
+			description: "Commission amount",
+			example: 10,
+		}),
+		withholding_amount: z.number().min(0).optional().nullable().openapi({
+			description: "Withholding amount",
+			example: 5,
+		}),
+		tcs: z.number().min(0).optional().nullable().openapi({
+			description: "Tax Collected at Source",
+			example: 2,
+		}),
+		tds: z.number().min(0).optional().nullable().openapi({
+			description: "Tax Deducted at Source",
+			example: 3,
+		}),
+	})
+	.strict()
+	.openapi("SubReconDataSchema");
 
 export const SettleSchema = z
 	.object({
@@ -141,8 +172,21 @@ export const SettleSchema = z
 		context: ContextSchema.optional().nullable().openapi({
 			description: "Context information for the settlement",
 		}),
+		reconInfo: SubReconDataSchema.openapi({
+			description: "Reconciliation information for the settlement",
+			example: {
+				recon_status: "PENDING",
+				amount: 100,
+				commission: 10,
+				withholding_amount: 5,
+				tcs: 2,
+				tds: 3,
+			},
+		}),
 	})
 	.strict()
 	.openapi("SettleSchema");
 
 export type SettleType = z.infer<typeof SettleSchema>;
+
+export type SubReconDataType = z.infer<typeof SubReconDataSchema>;

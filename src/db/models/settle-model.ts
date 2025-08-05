@@ -40,6 +40,24 @@ export const ContextSchema = new mongoose.Schema(
 	{ _id: false },
 );
 
+const reconSchema = new mongoose.Schema(
+	{
+		recon_status: {
+			type: String,
+			enum: Object.values(ENUMS.INTERNAL_RECON_STATUS),
+			required: true,
+		},
+		amount: { type: Number, required: false },
+		commission: { type: Number, required: false },
+		withholding_amount: { type: Number, required: false },
+		tcs: { type: Number, required: false },
+		tds: { type: Number, required: false },
+	},
+	{
+		_id: false,
+	},
+);
+
 const SettleSchema = new mongoose.Schema(
 	{
 		order_id: { type: String, required: true },
@@ -79,6 +97,7 @@ const SettleSchema = new mongoose.Schema(
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
 		context: { type: ContextSchema, required: false },
+		reconInfo: { type: reconSchema, required: true },
 	},
 	{ timestamps: true },
 );

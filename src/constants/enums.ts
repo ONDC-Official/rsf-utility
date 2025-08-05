@@ -123,6 +123,13 @@ export const SETTLEMENT_BASIS = {
 export type SettlementBasis =
 	(typeof SETTLEMENT_BASIS)[keyof typeof SETTLEMENT_BASIS];
 
+export const INTERNAL_RECON_STATUS = {
+	INACTIVE: "INACTIVE",
+	ACTIVE: "PENDING",
+	ACCEPTED: "ACCEPTED",
+	REJECTED: "REJECTED",
+} as const;
+
 export const ENUMS = {
 	ORDER_STATE,
 	NP_TYPE,
@@ -136,4 +143,5 @@ export const ENUMS = {
 	PAYMENT_TYPE,
 	PARTICIPANT_TYPE,
 	SETTLEMENT_BASIS,
+	INTERNAL_RECON_STATUS,
 };

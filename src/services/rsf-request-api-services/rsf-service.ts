@@ -13,8 +13,11 @@ export class RsfService {
 			case "on_settle":
 				await this.onSettleService.ingestOnsettlePayload(payload);
 				break;
+			case "recon":
+				rsfLogger.info("Recon action is not implemented yet", { action });
+				break;
 			default:
-				break
+				break;
 		}
 	};
 }

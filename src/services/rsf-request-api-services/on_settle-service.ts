@@ -1,18 +1,14 @@
-import { assignWith, set } from "lodash";
 import logger from "../../utils/logger";
 import { SettleDbManagementService } from "../settle-service";
-
-import { SettleType } from "../../schema/models/settle-schema";
-import { RsfOnAction } from "../../types/rsf-type";
 
 const onSettleLogger = logger.child("on-settle-service");
 
 export class OnSettleService {
 	constructor(private settleService: SettleDbManagementService) {}
 
-	ingestOnsettlePayload = async (payload: any) => {
-		const txn_id = payload.context.transaction_id;
-		const message_id = payload.context.message_id;
+	ingestOnsettlePayload = async (ondcOnSettlePayload: any) => {
+		const txn_id = ondcOnSettlePayload.context.transaction_id;
+		const message_id = ondcOnSettlePayload.context.message_id;
 
 		if (!txn_id || !message_id) {
 			onSettleLogger.error("Transaction ID or Message ID is missing", {
@@ -21,7 +17,7 @@ export class OnSettleService {
 			});
 			throw new Error("Transaction ID or Message ID is missing");
 		}
-		for (const order of payload.message.settlement.orders) {
+		for (const order of ondcOnSettlePayload.message.settlement.orders) {
 			if (order.id) {
 				const settlement =
 					await this.settleService.getSettlementByContextAndOrderId(

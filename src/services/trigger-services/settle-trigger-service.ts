@@ -23,19 +23,23 @@ export class SettleTriggerService {
 		private userService: UserService,
 	) {}
 
-	async handleSettleAction(userId: string, data: any) {
-		triggerLogger.info("Handling settle action", { userId, data });
+	async handleSettleAction(userId: string, ondcSettlePayload: any) {
+		triggerLogger.info("Handling settle action", {
+			userId,
+			data: ondcSettlePayload,
+		});
 		const userConfig = await this.getUserConfigData(userId);
-		const settleType = detectSettleType(data);
-		await this.performPreResponseActions(settleType)(userId, data);
+		this.validateUserConfigData(userConfig, ondcSettlePayload);
+		const settleType = detectSettleType(ondcSettlePayload);
+		await this.performPreResponseActions(settleType)(userId, ondcSettlePayload);
 		const responseData = await this.signAndSendPayload(
 			userConfig,
-			data,
+			ondcSettlePayload,
 			"settle",
 		);
 		await this.performPostRequestActions(settleType)(
 			userId,
-			data,
+			ondcSettlePayload,
 			responseData.data,
 		);
 		return responseData;
@@ -55,7 +59,7 @@ export class SettleTriggerService {
 			action,
 		);
 		const header = await createHeader(requirements);
-		return triggerRequest(requirements, header);
+		return await triggerRequest(requirements, header);
 	}
 
 	async getUserConfigData(userId: string) {
@@ -91,6 +95,22 @@ export class SettleTriggerService {
 		}
 		throw new Error(`Unsupported settle type: ${settleType}`);
 	}
+
+	validateUserConfigData(userConfig: UserType, ondcSettlePayload: any) {
+		triggerLogger.info("Validating user config data for settle trigger");
+		const bapUri = ondcSettlePayload.context.bap_uri;
+		const bppUri = ondcSettlePayload.context.bpp_uri;
+		const userUri = userConfig.subscriber_url;
+		if (!userUri) {
+			throw new Error("User URI is not defined in user config");
+		}
+		if (userUri !== bapUri && userUri !== bppUri) {
+			throw new Error(
+				`User URI ${userUri} does not match BAP URI ${bapUri} or BPP URI ${bppUri}`,
+			);
+		}
+	}
+
 	performPreResponseActions(settleType: SettleType["type"]) {
 		triggerLogger.info("Performing pre-response actions", { settleType });
 		switch (settleType) {

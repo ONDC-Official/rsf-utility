@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { RSF_DOMAINS } from "../constants/enums";
 import logger from "../utils/logger";
 import { getLoggerMeta } from "../utils/utility";
-import { RsfService } from "../services/rsf-api-services/rsf-service";
+import { RsfService } from "../services/rsf-request-api-services/rsf-service";
 import { RsfOnActionsSchema } from "../types/rsf-type";
 import { getAckResponse, getNackResponse } from "../utils/ackUtils";
 import { validateHeader } from "../utils/header-utils";
@@ -71,7 +71,10 @@ export class RsfRequestController {
 				action,
 				payload,
 			});
-			await this.rsfService.ingestRsfPayload(payload, actionValidationResult.data);
+			await this.rsfService.ingestRsfPayload(
+				payload,
+				actionValidationResult.data,
+			);
 			res.status(200).send(getAckResponse());
 		} catch (error) {
 			rsfLogger.error("Error handling RSF payload", getLoggerMeta(req), {
