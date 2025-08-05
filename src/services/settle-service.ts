@@ -99,6 +99,10 @@ export class SettleDbManagementService {
 				orderId,
 			)) as OrderType;
 			const settleData = this.prepareSingleSettlement(order, userConfig);
+			const marked = await this.orderService.updateOrder(userId, orderId, {
+				settle_status: true,
+			});
+			console.log("Marked settled_status of order as",true);
 			settles.push(settleData);
 		}
 		if (settles.length === 0) {
@@ -202,5 +206,27 @@ export class SettleDbManagementService {
 			orderId,
 			settlement,
 		);
+	}
+	async markOrders(userId: string, orderIds: string[], flag: boolean) {
+		settleLogger.info("Marking settle_status for orders", {
+			userId,
+			orderIds,
+			flag,
+		});
+		if (!(await this.userService.checkUserById(userId))) {
+			throw new Error("User not found");
+		}
+		for (const orderId of orderIds) {
+			if (!(await this.orderService.checkUniqueOrder(userId, orderId))) {
+				throw new Error(
+					`Order with ID ${orderId} not found for user ${userId}`,
+				);
+			}
+			const order = await this.orderService.updateOrder(userId, orderId, {
+				settle_status: flag,
+			});
+			settleLogger.info("Orders marked successfully with flag", { flag });
+			return order;
+		}
 	}
 }

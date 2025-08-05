@@ -15,7 +15,6 @@ export class OrderRepository {
 			...rest,
 			user_id: user_id,
 		};
-		console.log("The cleaned query is", cleanedQuery);
 		return await Order.find(cleanedQuery)
 			.skip((page - 1) * limit)
 			.limit(limit)
