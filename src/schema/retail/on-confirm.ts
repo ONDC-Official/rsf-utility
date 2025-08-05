@@ -825,96 +825,96 @@ const onConfirmSchema = {
                 // "@ondc/org/withholding_amount",
               ],
             },
-            tags: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  code: {
-                    type: "string",
-                    enum: ["bpp_terms", "bap_terms"],
-                  },
-                  list: {
-                    type: "array",
-                    contains: {
-                      type: "object",
-                      properties: {
-                        code: { const: "np_type" },
-                        value: { enum: ["MSN", "ISN"] },
-                      },
-                      required: ["code", "value"],
-                    },
-                    items: {
-                      allOf: [
-                        {
-                          if: {
-                            properties: {
-                              code: { const: "np_type" },
-                            },
-                          },
-                          then: {
-                            type: "object",
-                            properties: {
-                              code: {
-                                type: "string",
-                                enum: ["np_type"],
-                              },
-                              value: {
-                                type: "string",
-                                enum: Object.values(ENUMS.NP_TYPE),
-                              },
-                            },
-                            required: ["code", "value"],
-                          },
-                        },
-                        {
-                          if: {
-                            properties: {
-                              code: { const: "tax_number" },
-                            },
-                          },
-                          then: {
-                            type: "object",
-                            properties: {
-                              value: {
-                                type: "string",
-                                pattern:
-                                  "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$|^GSTIN[0-9]{10}$",
-                                errorMessage:
-                                  "Value for tax_number must be a valid tax number i.e alphanumeric with 15 characters ",
-                              },
-                            },
-                            required: ["code", "value"],
-                          },
-                        },
-                        {
-                          if: {
-                            properties: {
-                              code: { const: "provider_tax_number" },
-                            },
-                          },
-                          then: {
-                            type: "object",
-                            properties: {
-                              value: {
-                                type: "string",
-                                pattern: "[A-Z]{5}[0-9]{4}[A-Z]{1}",
-                                errorMessage:
-                                  "Value for provider_tax_number must be alphanumeric characters only",
-                              },
-                            },
-                            required: ["code", "value"],
-                          },
-                        },
-                      ],
-                    },
-                    minItems: 1,
-                  },
-                },
-                required: ["code", "list"],
-                // additionalProperties: false,
-              },
-            },
+            // tags: {
+            //   type: "array",
+            //   items: {
+            //     type: "object",
+            //     properties: {
+            //       code: {
+            //         type: "string",
+            //         enum: ["bpp_terms", "bap_terms"],
+            //       },
+            //       list: {
+            //         type: "array",
+            //         contains: {
+            //           type: "object",
+            //           properties: {
+            //             code: { const: "np_type" },
+            //             value: { enum: ["MSN", "ISN"] },
+            //           },
+            //           required: ["code", "value"],
+            //         },
+            //         items: {
+            //           allOf: [
+            //             {
+            //               if: {
+            //                 properties: {
+            //                   code: { const: "np_type" },
+            //                 },
+            //               },
+            //               then: {
+            //                 type: "object",
+            //                 properties: {
+            //                   code: {
+            //                     type: "string",
+            //                     enum: ["np_type"],
+            //                   },
+            //                   value: {
+            //                     type: "string",
+            //                     enum: Object.values(ENUMS.NP_TYPE),
+            //                   },
+            //                 },
+            //                 required: ["code", "value"],
+            //               },
+            //             },
+            //             {
+            //               if: {
+            //                 properties: {
+            //                   code: { const: "tax_number" },
+            //                 },
+            //               },
+            //               then: {
+            //                 type: "object",
+            //                 properties: {
+            //                   value: {
+            //                     type: "string",
+            //                     pattern:
+            //                       "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$|^GSTIN[0-9]{10}$",
+            //                     errorMessage:
+            //                       "Value for tax_number must be a valid tax number i.e alphanumeric with 15 characters ",
+            //                   },
+            //                 },
+            //                 required: ["code", "value"],
+            //               },
+            //             },
+            //             {
+            //               if: {
+            //                 properties: {
+            //                   code: { const: "provider_tax_number" },
+            //                 },
+            //               },
+            //               then: {
+            //                 type: "object",
+            //                 properties: {
+            //                   value: {
+            //                     type: "string",
+            //                     pattern: "[A-Z]{5}[0-9]{4}[A-Z]{1}",
+            //                     errorMessage:
+            //                       "Value for provider_tax_number must be alphanumeric characters only",
+            //                   },
+            //                 },
+            //                 required: ["code", "value"],
+            //               },
+            //             },
+            //           ],
+            //         },
+            //         minItems: 1,
+            //       },
+            //     },
+            //     required: ["code", "list"],
+            //     // additionalProperties: false,
+            //   },
+            // },
             created_at: {
               type: "string",
               format: "rfc3339-date-time",
