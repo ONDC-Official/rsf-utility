@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../../constants/enums";
 
 extendZodWithOpenApi(z);
 
@@ -130,11 +131,11 @@ export const SettleSchema = z
 			description: "Error details",
 			example: "Error occurred",
 		}),
-		status: z.enum(["PREPARED", "PENDING", "SETTLED", "NOT-SETTLED"]).openapi({
+		status: z.enum(Object.values(ENUMS.SETTLEMENT_STATUS)).openapi({
 			description: "Settlement status",
 			example: "PENDING",
 		}),
-		type: z.enum(["NP-NP", "NIL", "MISC"]).openapi({
+		type: z.enum(Object.values(ENUMS.SETTLEMENT_TYPE)).openapi({
 			description: "Type of settlement",
 			example: "NP-NP",
 		}),

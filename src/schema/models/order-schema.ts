@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../../constants/enums";
 
 extendZodWithOpenApi(z);
 
@@ -64,12 +65,10 @@ export const OrderSchema = z
 			description: "Provider identifier",
 			example: "provider123",
 		}),
-		state: z
-			.enum(["Created", "Accepted", "In-progress", "Completed", "Cancelled"])
-			.openapi({
-				description: "State of the order",
-				example: "Created",
-			}),
+		state: z.enum(Object.values(ENUMS.ORDER_STATE)).openapi({
+			description: "State of the order",
+			example: "Created",
+		}),
 		created_at: z.date().openapi({
 			description: "Creation date of the order",
 			example: "2025-08-03T00:00:00.000Z",
@@ -115,8 +114,8 @@ export const OrderSchema = z
 		}),
 		payment_transaction_id: z.string().openapi({
 			description: "Transaction id of Payment",
-			example: "transID123"
-		})
+			example: "transID123",
+		}),
 	})
 	.strict()
 	.openapi("OrderSchema");
