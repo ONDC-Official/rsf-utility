@@ -31,7 +31,7 @@ const RsfPayloadSchema = new mongoose.Schema(
 		request: { type: RequestSchema, required: true },
 		response: { type: ResponseSchema, required: true },
 	},
-	{ timestamps: true },
+	{ timestamps: true, strict: false },
 );
 
 export const RsfPayload = mongoose.model("RsfPayload", RsfPayloadSchema);

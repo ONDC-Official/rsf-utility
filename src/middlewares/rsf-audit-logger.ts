@@ -28,7 +28,13 @@ function saveRsfPayload(req: Request, data: any, res: Response) {
 		logger.warning("Skipping rsfAuditLogger middleware", getLoggerMeta(req));
 		return;
 	}
-	logger.info("Saving Rsf Payload to DB", getLoggerMeta(req));
+	logger.info(
+		"Saving Rsf Payload to DB",
+		getLoggerMeta(req),
+		req.body,
+		data,
+		res.statusCode,
+	);
 	container.rsfPayloadDbService.saveRsfPayload({
 		requestData: req.body,
 		responseData: {

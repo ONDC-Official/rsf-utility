@@ -4,10 +4,10 @@ import { UserSchema } from "../schema/models/user-schema";
 import { objectIdSchema } from "../types/user-id-type";
 import { registry } from "./open-api-registry";
 
-// GET /ui/user/
+// GET /ui/users/
 registry.registerPath({
 	method: "get",
-	path: "/ui/user/",
+	path: "/ui/users/",
 	summary: "Retrieve a list of users configs",
 	responses: {
 		200: {
@@ -23,10 +23,10 @@ registry.registerPath({
 	},
 });
 
-// POST /ui/user/
+// POST /ui/users/
 registry.registerPath({
 	method: "post",
-	path: "/ui/user/",
+	path: "/ui/users/",
 	summary: "Create a new user config",
 	request: {
 		body: { content: { "application/json": { schema: UserSchema } } },
@@ -45,10 +45,10 @@ registry.registerPath({
 	},
 });
 
-// PATCH /ui/user/{userId}
+// PATCH /ui/users/{userId}
 registry.registerPath({
 	method: "patch",
-	path: "/ui/user/{userId}",
+	path: "/ui/users/{userId}",
 	summary: "Update a user config",
 	request: {
 		params: z.object({ userId: objectIdSchema }),
@@ -60,6 +60,21 @@ registry.registerPath({
 		200: {
 			description: "User config updated successfully.",
 			content: { "application/json": { schema: UserSchema } },
+		},
+	},
+});
+
+// DELETE /ui/users/{userId}
+registry.registerPath({
+	method: "delete",
+	path: "/ui/users/{userId}",
+	summary: "Delete a user config",
+	request: {
+		params: z.object({ userId: objectIdSchema }),
+	},
+	responses: {
+		204: {
+			description: "User config deleted successfully.",
 		},
 	},
 });

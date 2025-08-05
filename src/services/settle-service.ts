@@ -46,15 +46,15 @@ export class SettleDbManagementService {
 		});
 	}
 
-	async checkSettlementsForUser(userId: string, data: any) {
+	async checkSettlementsForUser(userId: string, settleNpNpPayload: any) {
 		settleLogger.info("Checking settlements existence for user", {
 			userId,
-			data,
+			data: settleNpNpPayload,
 		});
 		if (!(await this.userService.checkUserById(userId))) {
 			throw new Error("User not found");
 		}
-		const orderIds = data.message.settlements.orders.map(
+		const orderIds = settleNpNpPayload.message.settlements.orders.map(
 			(order: any) => order.id,
 		);
 		if (orderIds.length === 0) {
@@ -165,7 +165,7 @@ export class SettleDbManagementService {
 			total_order_value: order.quote.total_order_value, // calc
 			commission: commission, // calc
 			tax: tax, // calc
-			withholding_amount: order.withholding_amount,
+			withholding_amount: order.withholding_amount ?? 0,
 			inter_np_settlement: inter_np_settlement, // calc
 			provider_id: order.provider_id,
 			due_date: new Date(),

@@ -42,13 +42,13 @@ export const UserSchema = z
 			description: "Domain",
 			example: "retail",
 		}),
-		tcs: z.string().openapi({
+		tcs: z.number().openapi({
 			description: "TCS",
-			example: "TCS123",
+			example: 2.5,
 		}),
-		tds: z.string().openapi({
+		tds: z.number().openapi({
 			description: "TDS",
-			example: "TDS123",
+			example: 10,
 		}),
 		msn: z.boolean().openapi({
 			description: "MSN flag",

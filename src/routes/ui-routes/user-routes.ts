@@ -21,5 +21,5 @@ userRoutes.post("/", userController.createUser);
 // 	userController.putUser
 // );
 userRoutes.patch("/:id", userController.updateUser); // only tax details are editable
-// userRoutes.delete("/:id", userController.deleteUser);
+userRoutes.delete("/:id", userController.deleteUser);
 export default userRoutes;
