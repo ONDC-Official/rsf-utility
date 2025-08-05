@@ -14,10 +14,10 @@ const Quote = new mongoose.Schema({
 
 const OrderSchema = new mongoose.Schema(
 	{
-		order_id: { type: String, unique: true, required: true },
+		order_id: { type: String, required: true },
 		user_id: { type: String, required: true },
-		bap_url: { type: String, required: true },
-		bpp_url: { type: String, required: true },
+		bap_uri: { type: String, required: true },
+		bpp_uri: { type: String, required: true },
 		bap_id: { type: String, required: true },
 		bpp_id: { type: String, required: true },
 		domain: { type: String, required: true },
@@ -34,6 +34,7 @@ const OrderSchema = new mongoose.Schema(
 			enum: ["BAP", "BPP"],
 			required: true,
 		},
+		msn: { type: Boolean, default: false, required: true },
 		settlement_counterparty: { type: String, required: false },
 		buyer_finder_fee_amount: { type: Number, required: true },
 		buyer_finder_fee_type: { type: String, required: true },
@@ -41,7 +42,7 @@ const OrderSchema = new mongoose.Schema(
 		settlement_window: { type: String, required: false },
 		withholding_amount: { type: Number, required: false },
 		settle_status: { type: Boolean, default: false, required: true },
-		due_date: { type: Date, required: false },
+		due_date: { type: Date, required: false,default: new Date() },
 		quote: { type: Quote, required: true },
 		payment_transaction_id: { type: String, required: false },
 	},

@@ -1,5 +1,6 @@
 import { JSONPath } from "jsonpath-plus";
 import { OrderType } from "../schema/models/order-schema";
+import { resolve } from "path";
 
 export const extractFields = (
 	payload: any,
@@ -10,6 +11,7 @@ export const extractFields = (
 	let tempQuote: any = null;
 	let tempBuyerFinderFeeType: string = "";
 	let tempBuyerFinderFeeAmountRaw: any = 0;
+	let tempWitholdingAmount: number = 0;
 
 	for (const [key, path] of Object.entries(paths)) {
 		try {
@@ -36,10 +38,20 @@ export const extractFields = (
 					break;
 
 				case "withholding_amount":
-					result.withholding_amount =
+					tempWitholdingAmount =
 						resolvedValue !== "" && !isNaN(resolvedValue)
 							? Number(resolvedValue)
 							: 0;
+					result.withholding_amount = tempWitholdingAmount;
+					break;
+
+				case "np_type":
+					const npType = resolvedValue
+						? resolvedValue?.trim().toUpperCase()
+						: null;
+					console.log(npType);
+
+					result.msn = npType === "MSN";
 					break;
 
 				case "buyer_finder_fee_type":
@@ -82,12 +94,15 @@ export const extractFields = (
 								: numericFee;
 
 						result["buyer_finder_fee_amount"] = fee;
+						result.withholding_amount =
+							(priceValue * tempWitholdingAmount) / 100;
 					} else {
 						result.quote = {
 							total_order_value: 0,
 							breakup: [],
 						};
 						result.buyer_finder_fee_amount = 0;
+						result.withholding_amount = 0;
 					}
 					break;
 

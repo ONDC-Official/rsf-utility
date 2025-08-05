@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../../constants/enums";
 
 extendZodWithOpenApi(z);
 
@@ -48,11 +49,11 @@ export const OrderSchema = z
 			description: "BPP identifier",
 			example: "bpp123",
 		}),
-		bap_url: z.string().openapi({
+		bap_uri: z.string().openapi({
 			description: "BAP identifier",
 			example: "bap123",
 		}),
-		bpp_url: z.string().openapi({
+		bpp_uri: z.string().openapi({
 			description: "BPP identifier",
 			example: "bpp123",
 		}),
@@ -64,12 +65,10 @@ export const OrderSchema = z
 			description: "Provider identifier",
 			example: "provider123",
 		}),
-		state: z
-			.enum(["Created", "Accepted", "In-progress", "Completed", "Cancelled"])
-			.openapi({
-				description: "State of the order",
-				example: "Created",
-			}),
+		state: z.enum(Object.values(ENUMS.ORDER_STATE)).openapi({
+			description: "State of the order",
+			example: "Created",
+		}),
 		created_at: z.date().openapi({
 			description: "Creation date of the order",
 			example: "2025-08-03T00:00:00.000Z",
@@ -101,6 +100,12 @@ export const OrderSchema = z
 		settlement_window: z.string().optional().nullable().openapi({
 			description: "Settlement window",
 			example: "window123",
+		}),
+		msn: z.boolean().openapi({
+			description: `NP Type for BPP (Boolean flag)
+- true: BPP is MSN (Marketplace Seller Node)
+- false: BPP is ISN (Inventory Seller Node)`,
+			example: false,
 		}),
 		withholding_amount: z.number().optional().nullable().openapi({
 			description: "Withholding amount",
