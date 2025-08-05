@@ -47,7 +47,7 @@ export class PayloadController {
 							getLoggerMeta(req),
 						);
 					} else {
-						logger.info(
+						logger.warning(
 							`Skipping update: existing order is newer or same for user_id=${user_id}, order_id=${order_id}`,
 							getLoggerMeta(req),
 						);
