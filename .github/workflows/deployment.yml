@@ -1,4 +1,4 @@
-name: ONDC Automation Mock Service Deployment
+name: ONDC Rsf Utility Deployment
 
 on:
   workflow_dispatch:
