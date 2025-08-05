@@ -16,20 +16,19 @@ export class PayloadController {
 		logger.info("Payload Handler invoked", getLoggerMeta(req));
 		try {
 			const payload = req.body;
-			const bap_user_id = String(res.locals.bap_user_id || "");
-			const bpp_user_id = String(res.locals.bpp_user_id || "");
-
+			const bap_user_uri = String(res.locals.bap_user_uri || "");
+			const bpp_user_uri = String(res.locals.bpp_user_uri || "");
 			const extracted = extractFields(payload, orderJsonPathMap);
-			const userIds = [bap_user_id, bpp_user_id].filter(Boolean);
+			const userUris = [bap_user_uri, bpp_user_uri].filter(Boolean);
 
-			for (const user_id of userIds) {
+			for (const user_id of userUris) {
+				console.log("The user_id is", user_id);
 				const order_id = extracted.order_id;
 				const extractedUpdatedAt = new Date(extracted.updated_at);
 				const checkOrder = await this.orderService.checkUniqueOrder(
 					user_id,
 					order_id,
 				);
-
 				if (checkOrder) {
 					const existingOrder = await this.orderService.getUniqueOrders(
 						user_id,
@@ -54,6 +53,7 @@ export class PayloadController {
 						);
 					}
 				} else {
+					console.log("i am in this function not that function")
 					await this.orderService.createOrder({
 						...extracted,
 						user_id,

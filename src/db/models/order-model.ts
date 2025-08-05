@@ -14,10 +14,10 @@ const Quote = new mongoose.Schema({
 
 const OrderSchema = new mongoose.Schema(
 	{
-		order_id: { type: String, unique: true, required: true },
+		order_id: { type: String, required: true },
 		user_id: { type: String, required: true },
-		bap_url: { type: String, required: true },
-		bpp_url: { type: String, required: true },
+		bap_uri: { type: String, required: true },
+		bpp_uri: { type: String, required: true },
 		bap_id: { type: String, required: true },
 		bpp_id: { type: String, required: true },
 		domain: { type: String, required: true },
