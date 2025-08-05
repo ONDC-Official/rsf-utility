@@ -25,7 +25,7 @@ jobs:
           echo "Removing existing repository directory if exists"
           rm -rf \$REPO_DIR
           echo "Cloning repository from deployment branch"
-          git clone --single-branch --branch deployment https://github.com/ONDC-Official/rsf-utility.git \$REPO_DIR
+          git clone --single-branch --branch deployment https://${{ secrets.GITHUB_TOKEN }}@github.com/ONDC-Official/rsf-utility.git \$REPO_DIR
           EOF
 
       - name: Install Docker Compose (if not installed)
