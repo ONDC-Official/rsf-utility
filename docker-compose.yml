@@ -18,7 +18,7 @@ services:
     build: .
     container_name: rsf_utility_container
     ports:
-      - "4000:4000"
+      - "6400:6400"
     env_file:
       - .env
     networks:
