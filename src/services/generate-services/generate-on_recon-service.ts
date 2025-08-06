@@ -1,7 +1,9 @@
 import { SettleType } from "../../schema/models/settle-schema";
 import { GenOnReconBodyObjectType } from "../../types/generate-recon-types";
+import { checkPerfectAck } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { createOnReconPayload } from "../../utils/on_recon_utils/generate-on-recon-payload";
+import { RsfPayloadDbService } from "../rsf-payloadDb-service";
 import { SettleDbManagementService } from "../settle-service";
 import { UserService } from "../user-service";
 
@@ -17,6 +19,7 @@ export class GenerateOnReconService {
 	constructor(
 		private readonly settleService: SettleDbManagementService,
 		private readonly userService: UserService,
+		private readonly rsfPayloadService: RsfPayloadDbService,
 	) {}
 
 	/**
@@ -43,7 +46,35 @@ export class GenerateOnReconService {
 		onReconLogger.info("On-recon data validated and aggregated successfully.", {
 			userId,
 		});
-		return createOnReconPayload(aggregatedData, userConfig);
+		const aggregatedDataFirst = aggregatedData[0];
+		const txId =
+			aggregatedDataFirst.settlement.reconInfo.context?.transaction_id;
+		const messageId =
+			aggregatedDataFirst.settlement.reconInfo.context?.message_id;
+		const reconPayloads = await this.rsfPayloadService.getRsfPayloads({
+			page: 1,
+			limit: 1,
+			action: "recon",
+			transaction_id: txId,
+			message_id: messageId,
+			onlyAck: true,
+		});
+		if (!reconPayloads || reconPayloads.length === 0) {
+			onReconLogger.error(
+				"No recon payloads found for the given transaction and message ID.",
+				{
+					txId,
+					messageId,
+				},
+			);
+			throw new Error(
+				"No recon payloads found for the given transaction and message ID.",
+			);
+		}
+		const ackPayloads = reconPayloads.filter((data) =>
+			checkPerfectAck(data.response.data),
+		);
+		return createOnReconPayload(aggregatedData, userConfig, ackPayloads[0]);
 	}
 
 	/**

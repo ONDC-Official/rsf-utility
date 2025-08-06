@@ -1,3 +1,4 @@
+import { ENUMS } from "../../constants/enums";
 import { SettleType } from "../../schema/models/settle-schema";
 import { UserType } from "../../schema/models/user-schema";
 import { OnReconAggregateObj } from "../../services/generate-services/generate-on_recon-service";
@@ -6,12 +7,49 @@ import { GenOnReconBodyObjectType } from "../../types/generate-recon-types";
 export function createOnReconPayload(
 	aggregatedData: OnReconAggregateObj[],
 	userConfig: UserType,
+	reconPayload: any,
 ) {
 	const firstData = aggregatedData[0];
 	const reconContext = firstData.settlement.reconInfo.context;
 	if (!reconContext) {
 		throw new Error("Recon context is missing in the settlement data.");
 	}
+
+	const extraOrders = reconPayload.message.orders.filter((order: any) =>
+		[ENUMS.RECON_STATUS.SETTLED, ENUMS.RECON_STATUS.TO_BE_INITIATED].includes(
+			order.settlements[0].status,
+		),
+	);
+
+	for (const order of extraOrders) {
+		order.settlements[0].updated_at = new Date().toISOString();
+	}
+
+	const orders = aggregatedData.map((data) => {
+		const settlement = data.settlement;
+		if (
+			!settlement.reconInfo ||
+			!settlement.reconInfo.settlement_id ||
+			!settlement.reconInfo.recon_data
+		) {
+			throw new Error("Settlement ID is missing in the settlement data.");
+		}
+		const settlementPayload = data.onReconData.recon_accord
+			? getAccordResponse(data.settlement, data.onReconData)
+			: getNotAccordResponse(data.settlement, data.onReconData);
+		return {
+			id: data.settlement.order_id,
+			amount: {
+				currency: "INR",
+				value: data.onReconData.recon_accord
+					? settlement.reconInfo.recon_data.amount?.toFixed(2) || "0.00"
+					: data.onReconData.on_recon_data?.settlement_amount?.toFixed(2) ||
+						"0.00",
+			},
+			recon_accord: data.onReconData.recon_accord,
+			settlements: [settlementPayload],
+		};
+	});
 
 	return {
 		context: {
@@ -36,31 +74,7 @@ export function createOnReconPayload(
 			ttl: "P1D",
 		},
 		message: {
-			orders: aggregatedData.map((data) => {
-				const settlement = data.settlement;
-				if (
-					!settlement.reconInfo ||
-					!settlement.reconInfo.settlement_id ||
-					!settlement.reconInfo.recon_data
-				) {
-					throw new Error("Settlement ID is missing in the settlement data.");
-				}
-				const settlementPayload = data.onReconData.recon_accord
-					? getAccordResponse(data.settlement, data.onReconData)
-					: getNotAccordResponse(data.settlement, data.onReconData);
-				return {
-					id: data.settlement.order_id,
-					amount: {
-						currency: "INR",
-						value: data.onReconData.recon_accord
-							? settlement.reconInfo.recon_data.amount?.toFixed(2) || "0.00"
-							: data.onReconData.on_recon_data?.settlement_amount?.toFixed(2) ||
-								"0.00",
-					},
-					recon_accord: data.onReconData.recon_accord,
-					settlements: [settlementPayload],
-				};
-			}),
+			orders: [...orders, ...extraOrders],
 		},
 	};
 }

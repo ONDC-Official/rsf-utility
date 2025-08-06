@@ -71,6 +71,7 @@ const onSettleService = new OnSettleService(settleDbManagementService);
 const reconRequestService = new ReconRequestService(
 	settleDbManagementService,
 	userService,
+	orderService,
 );
 const onReconRequestService = new OnReconRequestService(
 	settleDbManagementService,
@@ -95,6 +96,7 @@ const generateReconService = new GenerateReconService(
 const generateOnReconService = new GenerateOnReconService(
 	settleDbManagementService,
 	userService,
+	rsfPayloadDbService,
 );
 const generateRsfController = new GenerateController(
 	generateSettleService,
