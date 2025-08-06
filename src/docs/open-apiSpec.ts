@@ -20,5 +20,5 @@ export const openApiDocument = generator.generateDocument({
 		title: "ondc-rsf-utility API",
 		description: "backend APIs for ondc-rsf-utility",
 	},
-	servers: [{ url: "/" }],
+	servers: [{ url: "/rsf-utility" }],
 });
