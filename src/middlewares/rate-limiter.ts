@@ -7,7 +7,7 @@ import { send } from "process";
 
 const rateLimiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
-	limit: 10, // Limit each user (config-id) to 1000 requests per min
+	limit: 10, // Limiting requests per min
 	standardHeaders: "draft-8", // Return `RateLimit-*` headers for clarity
 	legacyHeaders: false,
 	keyGenerator: () => "global",
