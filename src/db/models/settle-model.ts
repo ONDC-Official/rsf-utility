@@ -47,6 +47,7 @@ const SettleSchema = new mongoose.Schema(
 		receiver_id: { type: String, required: true },
 		total_order_value: { type: Number, required: true },
 		commission: { type: Number, required: true },
+		collector_settlement: { type: Number, required: true },
 		tax: { type: Number, required: true },
 		withholding_amount: { type: Number, required: true },
 		inter_np_settlement: { type: Number, required: true },

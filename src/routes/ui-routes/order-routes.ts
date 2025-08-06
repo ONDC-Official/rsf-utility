@@ -5,4 +5,5 @@ const orderRoutes = Router();
 const orderController = container.orderController;
 
 orderRoutes.get("/:userId", orderController.getOrders);
+orderRoutes.patch("/:userId",orderController.updateOrders)
 export default orderRoutes;

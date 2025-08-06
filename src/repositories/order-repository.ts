@@ -1,3 +1,4 @@
+import { query } from "winston";
 import { Order } from "../db/models/order-model";
 import { OrderType } from "../schema/models/order-schema";
 import { GetOrderParamsType } from "../types/order-params";
@@ -7,14 +8,16 @@ export class OrderRepository {
 		return await Order.create(data);
 	}
 	async getAllOrders(queryParams: GetOrderParamsType, user_id: string) {
-		if (queryParams.is_completed) {
-			queryParams.status = "Complete";
-		}
 		const { is_completed: isCompleted, page, limit, ...rest } = queryParams;
-		const cleanedQuery = {
+		const cleanedQuery: Record<string, any> = {
 			...rest,
 			user_id: user_id,
 		};
+		if (queryParams.is_completed) {
+			cleanedQuery.status = "Completed";
+		} else {
+			cleanedQuery.status = { $ne: "Completed" };
+		}
 		return await Order.find(cleanedQuery)
 			.skip((page - 1) * limit)
 			.limit(limit)

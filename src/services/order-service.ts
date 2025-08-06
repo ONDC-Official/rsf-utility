@@ -1,6 +1,6 @@
 import { OrderRepository } from "../repositories/order-repository";
 import { OrderType } from "../schema/models/order-schema";
-import { GetOrderParamsType } from "../types/order-params";
+import { GetOrderParamsType, PatchOrderBodyType } from "../types/order-params";
 import logger from "../utils/logger";
 import { UserService } from "./user-service";
 
@@ -56,4 +56,23 @@ export class OrderService {
 	async checkUserById(userId: string) {
 		return await this.userService.checkUserById(userId);
 	}
+	async updateOrders(
+		userId: string,
+		orders: PatchOrderBodyType,
+	) {
+		const updated_orders : OrderType[] = [];
+		for(const order of orders){
+			const {order_id,due_date} = order;
+			const check = await this.orderRepo.checkOrderByUserAndOrderId(userId, order_id);
+			if (!check) {
+				throw new Error(`Order with ID ${order_id} not found for user ${userId}`);
+			}
+			const updated_order = await this.orderRepo.updateOrderByUserAndOrderId(userId, order_id, {due_date: due_date});
+			if(!updated_order) {
+				throw new Error(`Failed to update order with ID ${order_id} for user ${userId}`);
+			}
+			updated_orders.push(updated_order);
+		}
+	}
+		
 }

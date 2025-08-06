@@ -1,6 +1,7 @@
 import winston from "winston";
 import { devFormat, lokiFormat } from "./format";
 import getLoggerTransports from "./transports";
+import logger from "..";
 export interface LoggerConfig {
 	serviceName: string;
 }
@@ -11,7 +12,7 @@ export function createLogger({ serviceName }: LoggerConfig) {
 	}
 	// Determine which format and transports to use based on the environment
 	const isProduction = process.env.NODE_ENV === "production";
-	console.log(
+	console.info(
 		`Logger is running in ${isProduction ? "production" : "development"} mode.`
 	);
 	const format = isProduction ? lokiFormat : devFormat;

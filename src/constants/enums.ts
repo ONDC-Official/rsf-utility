@@ -71,6 +71,7 @@ export const RECON_STATUS = {
 	TO_BE_INITIATED: "TO-BE-INITIATED",
 	SETTLED: "SETTLED",
 	NOT_SETTLED: "NOT-SETTLED",
+	PENDING: "PENDING",
 } as const;
 
 export type ReconStatus = (typeof RECON_STATUS)[keyof typeof RECON_STATUS];

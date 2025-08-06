@@ -2,7 +2,7 @@ import { ENUMS } from "../../../constants/enums";
 
 const onReconSchema = {
   type: "object",
-  required: ["context", "message"],
+  required: ["context"],
   properties: {
     context: {
       type: "object",
@@ -18,7 +18,6 @@ const onReconSchema = {
         "transaction_id",
         "message_id",
         "timestamp",
-        // "ttl",
       ],
       properties: {
         domain: { type: "string", const: "ONDC:NTS10" },

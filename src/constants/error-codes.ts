@@ -60,11 +60,11 @@ export const ERROR_CODES = {
 		httpStatus: 503,
 	},
 
-	// ORDER_NOT_FOUND: {
-	// 	code: "ORD_404",
-	// 	message: "Order not found.",
-	// 	httpStatus: 404,
-	// },
+	ORDER_NOT_FOUND: {
+		code: "ORD_404",
+		message: "Order not found.",
+		httpStatus: 404,
+	},
 
 	// // Settlement-related errors
 	// SETTLEMENT_CREATION_FAILED: {

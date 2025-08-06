@@ -10,7 +10,7 @@ export function calculateSettlementDetails(
 	// logger.warning(
 	// 	"Using dummy values for settlement calculations, please implement proper logic"
 	// );
-
+	
 	const tcs: number = Number(userConfig?.tcs) ?? 0;
 	const tds: number = Number(userConfig?.tds) ?? 0;
 	const commission = order.buyer_finder_fee_amount ?? 0;
