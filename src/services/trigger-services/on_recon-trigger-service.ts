@@ -170,10 +170,20 @@ export class OnReconTriggerService {
 			if (accord) {
 				await this.settleService.updateReconData(userId, orderId, {
 					recon_status: "RECEIVED_ACCEPTED",
+					on_recon_data: {
+						due_date: order.settlements[0].due_date,
+					},
 				});
 			} else {
 				await this.settleService.updateReconData(userId, orderId, {
 					recon_status: "RECEIVED_REJECTED",
+					recon_data: {
+						amount: order.settlements[0].amount.value,
+						commission: order.settlements[0].commission.value,
+						withholding_amount: order.settlements[0].withholding_amount.value,
+						tcs: order.settlements[0].tcs.value,
+						tds: order.settlements[0].tds.value,
+					},
 				});
 			}
 		}

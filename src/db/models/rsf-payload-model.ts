@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ContextSchema } from "./settle-model";
+import { ContextSchema } from "./conetxt-model";
 
 const RequestSchema = new mongoose.Schema(
 	{

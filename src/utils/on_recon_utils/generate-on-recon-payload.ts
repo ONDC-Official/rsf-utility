@@ -12,6 +12,7 @@ export function createOnReconPayload(
 	if (!reconContext) {
 		throw new Error("Recon context is missing in the settlement data.");
 	}
+
 	return {
 		context: {
 			domain: "ONDC:NTS10",
@@ -36,15 +37,23 @@ export function createOnReconPayload(
 		},
 		message: {
 			orders: aggregatedData.map((data) => {
+				const settlement = data.settlement;
+				if (
+					!settlement.reconInfo ||
+					!settlement.reconInfo.settlement_id ||
+					!settlement.reconInfo.recon_data
+				) {
+					throw new Error("Settlement ID is missing in the settlement data.");
+				}
 				const settlementPayload = data.onReconData.recon_accord
-					? getAccordResponse(data.settlement)
+					? getAccordResponse(data.settlement, data.onReconData)
 					: getNotAccordResponse(data.settlement, data.onReconData);
 				return {
 					id: data.settlement.order_id,
 					amount: {
 						currency: "INR",
 						value: data.onReconData.recon_accord
-							? data.settlement.reconInfo.amount?.toFixed(2) || "0.00"
+							? settlement.reconInfo.recon_data.amount?.toFixed(2) || "0.00"
 							: data.onReconData.on_recon_data?.settlement_amount?.toFixed(2) ||
 								"0.00",
 					},
@@ -56,29 +65,37 @@ export function createOnReconPayload(
 	};
 }
 
-function getAccordResponse(settlement: SettleType) {
+function getAccordResponse(
+	settlement: SettleType,
+	reconData: GenOnReconBodyObjectType,
+) {
+	const reconFinData = settlement.reconInfo.recon_data;
+	if (!reconFinData) {
+		throw new Error("recon_data is missing in the settlement data.");
+	}
 	return {
 		id: settlement.reconInfo.settlement_id,
 		status: "PENDING",
+		due_date: reconData.due_date,
 		amount: {
 			currency: "INR",
-			value: settlement.reconInfo.amount?.toFixed(2) || "0.00",
+			value: reconFinData.amount?.toFixed(2) || "0.00",
 		},
 		commission: {
 			currency: "INR",
-			value: settlement.reconInfo.commission?.toFixed(2) || "0.00",
+			value: reconFinData.commission?.toFixed(2) || "0.00",
 		},
 		withholding_amount: {
 			currency: "INR",
-			value: settlement.reconInfo.withholding_amount?.toFixed(2) || "0.00",
+			value: reconFinData.withholding_amount?.toFixed(2) || "0.00",
 		},
 		tcs: {
 			currency: "INR",
-			value: settlement.reconInfo.tcs?.toFixed(2) || "0.00",
+			value: reconFinData.tcs?.toFixed(2) || "0.00",
 		},
 		tds: {
 			currency: "INR",
-			value: settlement.reconInfo.tds?.toFixed(2) || "0.00",
+			value: reconFinData.tds?.toFixed(2) || "0.00",
 		},
 		updated_at: new Date().toISOString(),
 	};
@@ -88,28 +105,32 @@ function getNotAccordResponse(
 	settlement: SettleType,
 	reconData: GenOnReconBodyObjectType,
 ) {
+	const reconFinData = settlement.reconInfo.recon_data;
 	if (!reconData.on_recon_data) {
 		throw new Error("on_recon_data is missing in the recon data.");
 	}
+	if (!reconFinData) {
+		throw new Error("recon_data is missing in the settlement data.");
+	}
 	if (
-		!settlement.reconInfo.amount ||
-		!settlement.reconInfo.commission ||
-		!settlement.reconInfo.withholding_amount ||
-		!settlement.reconInfo.tcs ||
-		!settlement.reconInfo.tds
+		!reconFinData.amount ||
+		!reconFinData.commission ||
+		!reconFinData.withholding_amount ||
+		!reconFinData.tcs ||
+		!reconFinData.tds
 	) {
 		throw new Error("reconInfo is missing in the settlement data.");
 	}
 
 	const diffAmount =
-		reconData.on_recon_data.settlement_amount - settlement.reconInfo.amount;
+		reconData.on_recon_data.settlement_amount - reconFinData.amount;
 	const diffCommission =
-		reconData.on_recon_data.commission_amount - settlement.reconInfo.commission;
+		reconData.on_recon_data.commission_amount - reconFinData.commission;
 	const diffWithholding =
 		reconData.on_recon_data.withholding_amount -
-		settlement.reconInfo.withholding_amount;
-	const diffTCS = reconData.on_recon_data.tcs - settlement.reconInfo.tcs;
-	const diffTDS = reconData.on_recon_data.tds - settlement.reconInfo.tds;
+		reconFinData.withholding_amount;
+	const diffTCS = reconData.on_recon_data.tcs - reconFinData.tcs;
+	const diffTDS = reconData.on_recon_data.tds - reconFinData.tds;
 	return {
 		id: settlement.reconInfo.settlement_id,
 		status: "PENDING",
