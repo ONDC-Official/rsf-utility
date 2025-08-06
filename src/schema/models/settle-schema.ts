@@ -76,25 +76,72 @@ export const SubReconDataSchema = z
 			description: "Status of the reconciliation",
 			example: "PENDING",
 		}),
-		amount: z.number().min(0).optional().nullable().openapi({
-			description: "Amount involved in the reconciliation",
-			example: 100,
+		settlement_id: z.string().optional().nullable().openapi({
+			description: "Unique identifier for the settlement between NP-NP",
+			example: "settlement123",
 		}),
-		commission: z.number().min(0).optional().nullable().openapi({
-			description: "Commission amount",
-			example: 10,
-		}),
-		withholding_amount: z.number().min(0).optional().nullable().openapi({
-			description: "Withholding amount",
-			example: 5,
-		}),
-		tcs: z.number().min(0).optional().nullable().openapi({
-			description: "Tax Collected at Source",
-			example: 2,
-		}),
-		tds: z.number().min(0).optional().nullable().openapi({
-			description: "Tax Deducted at Source",
-			example: 3,
+		recon_data: z
+			.object({
+				amount: z.number().optional().nullable().openapi({
+					description: "Amount involved in the reconciliation",
+					example: 100,
+				}),
+				commission: z.number().optional().nullable().openapi({
+					description: "Commission amount for the reconciliation",
+					example: 10,
+				}),
+				withholding_amount: z.number().optional().nullable().openapi({
+					description: "Withholding amount for the reconciliation",
+					example: 5,
+				}),
+				tcs: z.number().optional().nullable().openapi({
+					description: "TCS amount for the reconciliation",
+					example: 2,
+				}),
+				tds: z.number().optional().nullable().openapi({
+					description: "TDS amount for the reconciliation",
+					example: 3,
+				}),
+			})
+			.optional()
+			.nullable()
+			.openapi({
+				description: "Data related to the reconciliation",
+			}),
+		on_recon_data: z
+			.object({
+				settlement_amount: z.number().optional().nullable().openapi({
+					description: "Settlement amount for the reconciliation",
+					example: 1000,
+				}),
+				commission_amount: z.number().optional().nullable().openapi({
+					description: "Commission amount for the reconciliation",
+					example: 50,
+				}),
+				withholding_amount: z.number().optional().nullable().openapi({
+					description: "Withholding amount for the reconciliation",
+					example: 20,
+				}),
+				tcs: z.number().optional().nullable().openapi({
+					description: "TCS amount for the reconciliation",
+					example: 5,
+				}),
+				tds: z.number().optional().nullable().openapi({
+					description: "TDS amount for the reconciliation",
+					example: 10,
+				}),
+				due_date: z.date().optional().nullable().openapi({
+					description: "Due date for the reconciliation",
+					example: "2025-08-03T00:00:00.000Z",
+				}),
+			})
+			.optional()
+			.nullable()
+			.openapi({
+				description: "Data related to the reconciliation on the provider side",
+			}),
+		context: ContextSchema.optional().nullable().openapi({
+			description: "Context information for the reconciliation",
 		}),
 	})
 	.strict()

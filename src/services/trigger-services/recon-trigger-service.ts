@@ -1,5 +1,5 @@
 import { subscriberConfig } from "../../config/rsf-utility-instance-config";
-import { RECON_STATUS } from "../../constants/enums";
+import { INTERNAL_RECON_STATUS } from "../../constants/enums";
 import { SubReconDataType } from "../../schema/models/settle-schema";
 import { UserType } from "../../schema/models/user-schema";
 import {
@@ -9,6 +9,7 @@ import {
 import { checkPerfectAck } from "../../utils/ackUtils";
 import { createHeader } from "../../utils/header-utils";
 import logger from "../../utils/logger";
+import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
 import { triggerRequest } from "../../utils/trigger-utils";
 import { SettleDbManagementService } from "../settle-service";
 import { UserService } from "../user-service";
@@ -52,10 +53,9 @@ export class ReconTriggerService {
 				`User URI ${userUri} does not match BAP URI ${bapUri} or BPP URI ${bppUri}`,
 			);
 		}
-		const orderIds: string[] =
-			ondcReconPayload.message.orders.settlements.id.map(
-				(order: any) => order.id,
-			);
+		const orderIds: string[] = ondcReconPayload.message.orders.id.map(
+			(order: any) => order.id,
+		);
 		if (orderIds.length === 0) {
 			throw new Error("No order IDs provided for reconciliation check");
 		}
@@ -71,7 +71,7 @@ export class ReconTriggerService {
 			}
 			const settlement = settlements[0];
 			const reconStatus = settlement.reconInfo.recon_status;
-			if (reconStatus === "PENDING" || reconStatus === "ACCEPTED") {
+			if (this.illegalStatuses.includes(reconStatus)) {
 				throw new Error(
 					`CAN'T TRIGGER::Reconciliation for order ID ${orderId} is already ${reconStatus} for user ID: ${userId}`,
 				);
@@ -117,9 +117,6 @@ export class ReconTriggerService {
 		return {
 			action: action,
 			data: ondcReconPayload,
-			privateKey: subscriberConfig.subscriberPrivateKey,
-			subscriberId: subscriberConfig.subscriberId,
-			subscriberUniqueKeyId: subscriberConfig.subscriberUniqueId,
 			forwardingBaseUrl: userUri === bapUri ? bppUri : bapUri,
 		};
 	}
@@ -144,14 +141,11 @@ export class ReconTriggerService {
 			try {
 				const orderId = orderData.id;
 				const settlement = orderData.settlements[0];
-				const reconData: SubReconDataType = {
-					recon_status: "PENDING",
-					amount: parseFloat(settlement.amount.value),
-					commission: parseFloat(settlement.commission.value),
-					withholding_amount: parseFloat(settlement.withholding_amount.value),
-					tcs: parseFloat(settlement.tcs.value),
-					tds: parseFloat(settlement.tds.value),
-				};
+				const reconData = extractReconDetails(
+					settlement,
+					ondcReconPayload,
+					INTERNAL_RECON_STATUS.SENT_PENDING,
+				);
 				await this.settleService.updateReconData(userId, orderId, reconData);
 			} catch (error) {
 				triggerLogger.error(
@@ -169,4 +163,11 @@ export class ReconTriggerService {
 			data: ondcReconPayload,
 		});
 	}
+
+	private illegalStatuses: string[] = [
+		INTERNAL_RECON_STATUS.RECEIVED_PENDING,
+		INTERNAL_RECON_STATUS.SENT_PENDING,
+		INTERNAL_RECON_STATUS.SENT_ACCEPTED,
+		INTERNAL_RECON_STATUS.RECEIVED_ACCEPTED,
+	];
 }

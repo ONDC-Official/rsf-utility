@@ -1,6 +1,7 @@
 import { SA_ERRORS } from "../constants/error-codes";
+import { OndcSyncResponse } from "../types/rsf-type";
 
-export const getNackResponse = (errorCode: string) => {
+export const getNackResponse = (errorCode: string): OndcSyncResponse => {
 	const errorDescription =
 		SA_ERRORS[errorCode as keyof typeof SA_ERRORS]?.Description ||
 		"Unknown error";
@@ -17,7 +18,7 @@ export const getNackResponse = (errorCode: string) => {
 	};
 };
 
-export const getAckResponse = () => {
+export const getAckResponse = (): OndcSyncResponse => {
 	return {
 		message: {
 			ack: {

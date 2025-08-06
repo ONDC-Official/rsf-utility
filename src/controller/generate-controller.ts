@@ -10,14 +10,16 @@ import {
 	MiscSettlementSchema,
 	NilSettlementSchema,
 } from "../types/settle-params";
-import { GenReconBody } from "../types/generate-recon-types";
+import { GenOnReconBody, GenReconBody } from "../types/generate-recon-types";
 import { GenerateReconService } from "../services/generate-services/generate-recon-service";
+import { GenerateOnReconService } from "../services/generate-services/generate-on_recon-service";
 
 const settleLogger = logger.child("generate-controller");
 export class GenerateController {
 	constructor(
 		private generateSettleService: GenerateSettleService,
 		private generateReconService: GenerateReconService,
+		private generateOnReconService: GenerateOnReconService,
 	) {}
 
 	handleSettleNpNp = async (req: Request, res: Response) => {
@@ -252,6 +254,57 @@ export class GenerateController {
 			);
 		} catch (error: any) {
 			settleLogger.error("Error handling recon", getLoggerMeta(req), error);
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+		}
+	};
+
+	handleOnRecon = async (req: Request, res: Response) => {
+		try {
+			// Implementation for handling on-reconciliation requests
+			logger.info("Handling generate on-recon", getLoggerMeta(req));
+			const userId = req.params.userId;
+			if (!validateUserId(userId)) {
+				logger.error("Valid User ID is required", getLoggerMeta(req));
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+			}
+			const validationResult = GenOnReconBody.safeParse(req.body);
+			if (!validationResult.success) {
+				logger.error(
+					"Invalid request body",
+					getLoggerMeta(req),
+					validationResult.error,
+				);
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
+					message: "Invalid request body",
+					errors: z.treeifyError(validationResult.error),
+				});
+			}
+			const onReconData = validationResult.data.on_recon_data;
+			const onReconPayload =
+				await this.generateOnReconService.generateOnReconPayload(
+					userId,
+					onReconData,
+				);
+			logger.info(
+				"On-recon payload generated successfully",
+				getLoggerMeta(req),
+			);
+			return sendSuccess(
+				res,
+				onReconPayload,
+				"On-recon payload generated successfully",
+				201,
+			);
+		} catch (error: any) {
+			logger.error(
+				"Error handling generate on-recon",
+				getLoggerMeta(req),
+				error,
+			);
 			return sendError(res, "INTERNAL_ERROR", undefined, {
 				error: error.message,
 			});

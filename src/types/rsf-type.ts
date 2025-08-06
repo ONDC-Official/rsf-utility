@@ -12,3 +12,18 @@ export const RsfOnActionsSchema = z
 	.openapi("RsfOnActionsSchema");
 
 export type RsfOnAction = z.infer<typeof RsfOnActionsSchema>;
+
+export const OndcSyncResponseSchema = z.object({
+	message: z.object({
+		ack: z.object({
+			status: z.enum(["ACK", "NACK"]),
+		}),
+	}),
+	error: z
+		.object({
+			code: z.string(),
+			message: z.string(),
+		})
+		.optional(),
+});
+export type OndcSyncResponse = z.infer<typeof OndcSyncResponseSchema>;

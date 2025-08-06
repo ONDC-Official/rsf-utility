@@ -49,7 +49,7 @@ export function generateSettlePayload(
 					logger.warning(
 						"Using dummy values for settlement amounts, please implement proper calculations",
 					);
-					const providerDetails = userConfig.provider_details.find(
+					const providerDetails = userConfig.provider_details?.find(
 						(provider) => provider.provider_id === settle.provider_id,
 					);
 					if (!providerDetails) {

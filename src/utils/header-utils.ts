@@ -4,6 +4,7 @@ import {
 } from "ondc-crypto-sdk-nodejs";
 import logger from "./logger";
 import { TriggeringRequirements } from "../types/trigger-types";
+import { subscriberConfig } from "../config/rsf-utility-instance-config";
 
 const headerLogger = logger.child("header-utils");
 
@@ -11,9 +12,9 @@ export const createHeader = async (requirements: TriggeringRequirements) => {
 	try {
 		const header = await createAuthorizationHeader({
 			body: JSON.stringify(requirements.data),
-			privateKey: requirements.privateKey,
-			subscriberId: requirements.subscriberId,
-			subscriberUniqueKeyId: requirements.subscriberUniqueKeyId,
+			privateKey: subscriberConfig.subscriberPrivateKey,
+			subscriberId: subscriberConfig.subscriberId,
+			subscriberUniqueKeyId: subscriberConfig.subscriberUniqueId,
 		});
 		headerLogger.info("Header created successfully", { header });
 		return header;
@@ -25,7 +26,7 @@ export const createHeader = async (requirements: TriggeringRequirements) => {
 export const validateHeader = async (
 	header: any,
 	body: any,
-	publicKey: string
+	publicKey: string,
 ) => {
 	try {
 		const res = await isHeaderValid({

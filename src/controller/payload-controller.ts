@@ -22,7 +22,6 @@ export class PayloadController {
 			const userUris = [bap_user_uri, bpp_user_uri].filter(Boolean);
 
 			for (const user_id of userUris) {
-				console.log("The user_id is", user_id);
 				const order_id = extracted.order_id;
 				const extractedUpdatedAt = new Date(extracted.updated_at);
 				const checkOrder = await this.orderService.checkUniqueOrder(
@@ -53,7 +52,6 @@ export class PayloadController {
 						);
 					}
 				} else {
-					console.log("i am in this function not that function")
 					await this.orderService.createOrder({
 						...extracted,
 						user_id,

@@ -21,6 +21,10 @@ import { SettleTriggerService } from "../services/trigger-services/settle-trigge
 import { TriggerService } from "../services/trigger-services/trigger-service";
 import { UserService } from "../services/user-service";
 import { ReconTriggerService } from "../services/trigger-services/recon-trigger-service";
+import { ReconRequestService } from "../services/rsf-request-api-services/recon-api-service";
+import { GenerateOnReconService } from "../services/generate-services/generate-on_recon-service";
+import { OnReconTriggerService } from "../services/trigger-services/on_recon-trigger-service";
+import { OnReconRequestService } from "../services/rsf-request-api-services/on_recon-service";
 
 const rsfPayloadRepository = new RsfPayloadRepository();
 const rsfPayloadDbService = new RsfPayloadDbService(rsfPayloadRepository);
@@ -52,28 +56,52 @@ const reconTriggerService = new ReconTriggerService(
 	settleDbManagementService,
 	userService,
 );
+const onReconTriggerService = new OnReconTriggerService(
+	settleDbManagementService,
+	userService,
+);
 const triggerService = new TriggerService(
 	settleTriggerService,
 	reconTriggerService,
+	onReconTriggerService,
 );
 const triggerController = new TriggerController(triggerService);
 
 const onSettleService = new OnSettleService(settleDbManagementService);
-const rsfService = new RsfService(onSettleService);
+const reconRequestService = new ReconRequestService(
+	settleDbManagementService,
+	userService,
+	orderService,
+);
+const onReconRequestService = new OnReconRequestService(
+	settleDbManagementService,
+);
+const rsfService = new RsfService(
+	onSettleService,
+	reconRequestService,
+	onReconRequestService,
+);
 const rsfRequestController = new RsfRequestController(rsfService);
 
 const generateSettleService = new GenerateSettleService(
 	settleDbManagementService,
 	userService,
 );
+
 const generateReconService = new GenerateReconService(
 	settleDbManagementService,
 	userService,
 	orderService,
 );
+const generateOnReconService = new GenerateOnReconService(
+	settleDbManagementService,
+	userService,
+	rsfPayloadDbService,
+);
 const generateRsfController = new GenerateController(
 	generateSettleService,
 	generateReconService,
+	generateOnReconService,
 );
 
 // Export all controllers (or services too, if needed)

@@ -1,3 +1,4 @@
+import { getAckResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { SettleDbManagementService } from "../settle-service";
 
@@ -6,7 +7,7 @@ const onSettleLogger = logger.child("on-settle-service");
 export class OnSettleService {
 	constructor(private settleService: SettleDbManagementService) {}
 
-	ingestOnsettlePayload = async (ondcOnSettlePayload: any) => {
+	ingestOnSettlePayload = async (ondcOnSettlePayload: any) => {
 		const txn_id = ondcOnSettlePayload.context.transaction_id;
 		const message_id = ondcOnSettlePayload.context.message_id;
 
@@ -30,17 +31,17 @@ export class OnSettleService {
 						"Settlement not found for the given context and order ID",
 					);
 				}
-				const { interparticipant, self, provider } = order;
+				const { inter_participant, self, provider } = order;
 
 				Object.assign(settlement, {
-					status: interparticipant?.status,
+					status: inter_participant?.status,
 					self_status: self?.status,
 					provider_status: provider?.status,
-					settlement_reference: interparticipant?.settlement_reference,
+					settlement_reference: inter_participant?.settlement_reference,
 					provider_settlement_reference: provider?.settlement_reference,
 					self_settlement_reference: self?.settlement_reference,
 				});
-				return await this.settleService.updateSettlementByOnSettle(
+				await this.settleService.updateSettlementByOnSettle(
 					txn_id,
 					message_id,
 					order.id,
@@ -48,5 +49,6 @@ export class OnSettleService {
 				);
 			}
 		}
+		return getAckResponse();
 	};
 }

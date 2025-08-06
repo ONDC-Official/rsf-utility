@@ -11,17 +11,25 @@ export class SettleRepository {
 		order_id?: string;
 		status?: string;
 	}) {
-		const { limit, skip, counterparty_id, ...query } = queryData;
-		return await Settle.find({
-			...query,
-			$or: [
+		const { limit, skip, counterparty_id, user_id, order_id, status } =
+			queryData;
+		const query: any = { user_id };
+		if (order_id) query.order_id = order_id;
+		if (status) query.status = status;
+		if (counterparty_id) {
+			query.$or = [
 				{ receiver_id: counterparty_id },
 				{ collector_id: counterparty_id },
-			],
-		})
+			];
+		}
+		return await Settle.find(query)
 			.skip(skip)
 			.limit(limit)
 			.sort({ createdAt: -1 });
+	}
+
+	async findSingleSettlement(userId: string, orderId: string) {
+		return await Settle.findOne({ user_id: userId, order_id: orderId });
 	}
 
 	async insertSettlementList(settlements: z.infer<typeof SettleSchema>[]) {
@@ -40,18 +48,13 @@ export class SettleRepository {
 		);
 	}
 
-	async insertSettlement(settlement: z.infer<typeof SettleSchema>) {
-		const newSettlement = new Settle(settlement);
-		return await newSettlement.save();
-	}
-
 	async checkUniqueSettlement(userId: string, orderId: string) {
 		return await Settle.exists({
 			user_id: userId,
 			order_id: orderId,
 		});
 	}
-	async getSettlementByContextAndOrderId(
+	async getSettlementByOnSettle(
 		txn_id: string,
 		message_id: string,
 		order_id: string,
@@ -67,7 +70,7 @@ export class SettleRepository {
 		txn_id: string,
 		message_id: string,
 		orderId: string,
-		settlement: z.infer<typeof SettleSchema>,
+		settlement: Partial<z.infer<typeof SettleSchema>>,
 	) {
 		return await Settle.findOneAndUpdate(
 			{
@@ -79,6 +82,11 @@ export class SettleRepository {
 			{ new: true },
 		);
 	}
+	async getAllSettlementsForRecon(txn_id: string, message_id: string) {
+		const settlements = await Settle.find({
+			"settleInfo.context.transaction_id": txn_id,
+			"settleInfo.context.message_id": message_id,
+		});
+		return settlements;
+	}
 }
-
-// add list of counterparty

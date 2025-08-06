@@ -74,9 +74,6 @@ export class SettleTriggerService {
 		return {
 			action: action,
 			data: data,
-			privateKey: subscriberConfig.subscriberPrivateKey,
-			subscriberId: subscriberConfig.subscriberId,
-			subscriberUniqueKeyId: subscriberConfig.subscriberUniqueId,
 			forwardingBaseUrl: SettleAgencyConfig.agencyUrl,
 		};
 	}

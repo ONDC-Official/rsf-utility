@@ -36,6 +36,7 @@ function saveRsfPayload(req: Request, data: any, res: Response) {
 		res.statusCode,
 	);
 	container.rsfPayloadDbService.saveRsfPayload({
+		headers: req.headers,
 		requestData: req.body,
 		responseData: {
 			body: data,
