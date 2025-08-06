@@ -167,7 +167,7 @@ export class OnReconRequestService {
 	};
 
 	handleOnReconWithError = async (errorPayload: any) => {
-		const context = errorPayload.context as RsfContextType;
+		const context = errorPayload.context;
 		const allRelevantOrders =
 			await this.settleDbManagementService.getAllSettlementsForRecon(
 				context.transaction_id,

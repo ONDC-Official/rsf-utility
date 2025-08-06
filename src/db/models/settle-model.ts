@@ -1,42 +1,5 @@
 import mongoose from "mongoose";
 import { ENUMS } from "../../constants/enums";
-import { ContextSchema } from "./context-model";
-
-const ReconSchema = new mongoose.Schema(
-	{
-		recon_status: {
-			type: String,
-			enum: Object.values(ENUMS.INTERNAL_RECON_STATUS),
-			required: true,
-		},
-		recon_data: {
-			type: {
-				settlement_id: { type: String, required: false },
-				amount: { type: Number, required: false },
-				commission: { type: Number, required: false },
-				withholding_amount: { type: Number, required: false },
-				tcs: { type: Number, required: false },
-				tds: { type: Number, required: false },
-			},
-			required: false,
-		},
-		on_recon_data: {
-			type: {
-				settlement_amount: { type: Number, required: false },
-				commission_amount: { type: Number, required: false },
-				withholding_amount: { type: Number, required: false },
-				tcs: { type: Number, required: false },
-				tds: { type: Number, required: false },
-				due_date: { type: Date, required: false },
-			},
-			required: false,
-		},
-		context: { type: ContextSchema, required: false },
-	},
-	{
-		_id: false,
-	},
-);
 
 const SettleSchema = new mongoose.Schema(
 	{
@@ -77,8 +40,6 @@ const SettleSchema = new mongoose.Schema(
 			required: true,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
-		context: { type: ContextSchema, required: false },
-		reconInfo: { type: ReconSchema, required: true },
 	},
 	{ timestamps: true },
 );

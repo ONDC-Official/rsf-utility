@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ContextSchema } from "./context-model";
+import { ContextSchema } from "./sub-models/context-model";
 
 const RequestSchema = new mongoose.Schema(
 	{
