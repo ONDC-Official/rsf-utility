@@ -62,10 +62,22 @@ export const GetOrdersQuerySchema = z
 	})
 	.strict();
 
+export const PatchOrderBody = z
+	.array(
+		z.object({
+			order_id: z.string(),
+			due_date: z.date(), // or z.coerce.date() if you want strict date parsing
+		})
+	)
+	.min(1)
+	.max(1000)
+	.openapi("PatchOrderBody");
+export type PatchOrderBodyType = z.infer<typeof PatchOrderBody>;
 export type GetOrderParamsType = {
 	page: number;
 	limit: number;
 	status?: string;
 	settle_status?: string;
 	is_completed?: boolean;
+	is_pending?: boolean;
 };

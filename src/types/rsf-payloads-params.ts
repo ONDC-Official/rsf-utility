@@ -31,8 +31,10 @@ export const GetRsfPayloadsParams = z
 			}),
 		action: z.enum(rsfApiList).optional(),
 		transaction_id: z.uuidv4().optional(),
+		message_id: z.string().optional(),
 		settlement_type: z.enum(settleTypes).optional(),
 		settlement_id: z.string().optional(),
+		onlyAck: z.boolean().optional().default(false),
 	})
 	.strict()
 	.openapi("GetRsfPayloadsParams");

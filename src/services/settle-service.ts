@@ -109,7 +109,6 @@ export class SettleDbManagementService {
 			const marked = await this.orderService.updateOrder(userId, orderId, {
 				settle_status: true,
 			});
-			console.log("Marked settled_status of order as", true);
 			settles.push(settleData);
 		}
 		if (settles.length === 0) {
@@ -176,6 +175,7 @@ export class SettleDbManagementService {
 			order,
 			userConfig,
 		);
+
 		return {
 			order_id: order.order_id,
 			user_id: order.user_id,

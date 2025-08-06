@@ -23,7 +23,6 @@ export function buildMiscSettlement(
   const providerValid = input.provider && hasValidAmount(input.provider.amount);
   const selfValid = input.self && hasValidAmount(input.self.amount);
 
-  //   console.log("providerValid", providerValid);
 
   if (!providerValid && !selfValid) {
     throw new Error(

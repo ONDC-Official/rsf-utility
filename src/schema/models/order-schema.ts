@@ -122,7 +122,7 @@ export const OrderSchema = z
 			description: "Transaction id of Payment",
 			example: "transID123",
 		}),
-		due_data: z.date().optional().nullable().openapi({
+		due_date: z.date().optional().nullable().openapi({
 			description: "Due date for the order",
 			example: "2025-08-03T00:00:00.000Z",
 		}),

@@ -10,7 +10,7 @@ jest.mock("./routes/api-routes", () => {
 	const express = require("express");
 	const router = express.Router();
 	router.get("/test-route", (req: Request, res: Response) =>
-		res.status(200).send("API Route OK")
+		res.status(200).send("API Route OK"),
 	);
 	return router;
 });
@@ -84,7 +84,7 @@ describe("Server Creation", () => {
 				logger.error(
 					`Internal Server Error: ${err.message}`,
 					getLoggerMeta(req),
-					err
+					err,
 				);
 				res.status(500).send("INTERNAL SERVER ERROR");
 			});

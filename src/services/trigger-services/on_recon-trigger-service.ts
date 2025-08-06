@@ -89,32 +89,32 @@ export class OnReconTriggerService {
 		if (orderIds.length === 0) {
 			throw new Error("No order IDs provided for reconciliation check");
 		}
-		const { transactionId, messageId } = await this._getReconContext(
-			userId,
-			orderIds[0],
-		);
-		const dbSettlements = await this.settleService.getAllSettlementsForRecon(
-			transactionId,
-			messageId,
-		);
-		if (dbSettlements.length !== orderIds.length) {
-			throw new Error(
-				`Data mismatch: Expected ${dbSettlements.length} settlement records for this batch, but received ${orderIds.length}.`,
-			);
-		}
-		for (const dbSettlement of dbSettlements) {
-			const reconStatus = dbSettlement.reconInfo.recon_status;
-			if (reconStatus != "RECEIVED_PENDING") {
-				throw new Error(
-					`CAN'T TRIGGER:: on_recon is not required for order ID ${dbSettlement.order_id} as it is already ${reconStatus} for user ID: ${userId}`,
-				);
-			}
-			if (orderIds.includes(dbSettlement.order_id) === false) {
-				throw new Error(
-					`Order ID ${dbSettlement.order_id} is not provided, which is required for reconciliation for transaction ID: ${transactionId} and message ID: ${messageId}`,
-				);
-			}
-		}
+		// const { transactionId, messageId } = await this._getReconContext(
+		// 	userId,
+		// 	orderIds[0],
+		// );
+		// const dbSettlements = await this.settleService.getAllSettlementsForRecon(
+		// 	transactionId,
+		// 	messageId,
+		// );
+		// if (dbSettlements.length !== orderIds.length) {
+		// 	throw new Error(
+		// 		`Data mismatch: Expected ${dbSettlements.length} settlement records for this batch, but received ${orderIds.length}.`,
+		// 	);
+		// }
+		// for (const dbSettlement of dbSettlements) {
+		// 	const reconStatus = dbSettlement.reconInfo.recon_status;
+		// 	if (reconStatus != "RECEIVED_PENDING") {
+		// 		throw new Error(
+		// 			`CAN'T TRIGGER:: on_recon is not required for order ID ${dbSettlement.order_id} as it is already ${reconStatus} for user ID: ${userId}`,
+		// 		);
+		// 	}
+		// 	if (orderIds.includes(dbSettlement.order_id) === false) {
+		// 		throw new Error(
+		// 			`Order ID ${dbSettlement.order_id} is not provided, which is required for reconciliation for transaction ID: ${transactionId} and message ID: ${messageId}`,
+		// 		);
+		// 	}
+		// }
 	}
 
 	/**
@@ -170,10 +170,20 @@ export class OnReconTriggerService {
 			if (accord) {
 				await this.settleService.updateReconData(userId, orderId, {
 					recon_status: "RECEIVED_ACCEPTED",
+					on_recon_data: {
+						due_date: order.settlements[0].due_date,
+					},
 				});
 			} else {
 				await this.settleService.updateReconData(userId, orderId, {
 					recon_status: "RECEIVED_REJECTED",
+					recon_data: {
+						amount: order.settlements[0].amount.value,
+						commission: order.settlements[0].commission.value,
+						withholding_amount: order.settlements[0].withholding_amount.value,
+						tcs: order.settlements[0].tcs.value,
+						tds: order.settlements[0].tds.value,
+					},
 				});
 			}
 		}

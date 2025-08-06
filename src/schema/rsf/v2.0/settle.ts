@@ -66,7 +66,7 @@ const settleSchema = {
         receiver_app_id: { type: "string" },
         settlement: {
           type: "object",
-          required: ["type", "id", "orders"],
+          required: ["type"],
           properties: {
             type: {
               type: "string",

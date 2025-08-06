@@ -6,9 +6,12 @@ import { OrderService } from "../services/order-service";
 import {
 	GetOrderParamsType,
 	GetOrdersQuerySchema,
+	PatchOrderBody,
 } from "../types/order-params";
 import z from "zod";
 import { validateUserId } from "../types/user-id-type";
+import { sendError, sendSuccess } from "../utils/resUtils";
+import { or } from "ajv/dist/compile/codegen";
 
 const orderLogger = logger.child("order-controller");
 
@@ -69,4 +72,40 @@ export class OrderController {
 			res.status(500).json({ message: error.message });
 		}
 	};
+	updateOrders = async (req: Request, res: Response) => {
+	const userId = req.params.id;
+	const body = req.body;
+
+	try {
+		if (!validateUserId(userId)) {
+			return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+				message: "Valid User ID is required",
+			});
+		}
+
+		const validationResult = PatchOrderBody.safeParse(body);
+		if (!validationResult.success) {
+			orderLogger.error(
+				"Invalid request body",
+				getLoggerMeta(req),
+				validationResult.error,
+			);
+
+			return sendError(res, "INVALID_REQUEST_BODY", undefined, {
+				message: "Invalid request body",
+				errors: z.treeifyError(validationResult.error),
+			});
+		}
+
+		orderLogger.info("Updating user", getLoggerMeta(req), { userId, body });
+		const updatedUser = await this.orderService.updateOrders(userId, body);
+		return sendSuccess(res, updatedUser);
+
+	} catch (err) {
+		orderLogger.error("Error updating orders", getLoggerMeta(req), err);
+		return sendError(res, "INTERNAL_ERROR", undefined, {
+			message: "Failed to update orders",
+		});
+	}
+};
 }

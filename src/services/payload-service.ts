@@ -1,6 +1,7 @@
 import { JSONPath } from "jsonpath-plus";
 import { OrderType } from "../schema/models/order-schema";
 import { resolve } from "path";
+import logger from "../utils/logger";
 
 export const extractFields = (
 	payload: any,
@@ -49,7 +50,6 @@ export const extractFields = (
 					const npType = resolvedValue
 						? resolvedValue?.trim().toUpperCase()
 						: null;
-					console.log(npType);
 
 					result.msn = npType === "MSN";
 					break;
@@ -79,6 +79,10 @@ export const extractFields = (
 									id: String(item["@ondc/org/item_id"] || ""),
 								}))
 							: [];
+						const item_ids = breakup.reduce((acc: any, item: any) => {
+							if (item.title === "item") acc.push(item.id);
+							return acc;
+						}, []);
 
 						tempQuote = {
 							total_order_value: priceValue,
@@ -87,15 +91,25 @@ export const extractFields = (
 
 						result[key as keyof OrderType] = tempQuote;
 
-						const numericFee = Number(tempBuyerFinderFeeAmountRaw || 0);
+						const numericFee = parseFloat(tempBuyerFinderFeeAmountRaw) || 0;
+						let quoteValueWithoutTax: number = 0;
+
+
+						for (let item of breakup) {
+							if (item.title === "tax" && item_ids.includes(item.id)) {
+								continue;
+							} else quoteValueWithoutTax += item.price;
+						}
+
 						const fee =
 							tempBuyerFinderFeeType === "percent"
-								? (priceValue * numericFee) / 100
+								? (quoteValueWithoutTax * numericFee) / 100
 								: numericFee;
 
-						result["buyer_finder_fee_amount"] = fee;
+						result["buyer_finder_fee_amount"] = Math.round(fee * 1.18 * 100) / 100; // Assuming 18% GST on fee
 						result.withholding_amount =
 							(priceValue * tempWitholdingAmount) / 100;
+
 					} else {
 						result.quote = {
 							total_order_value: 0,
@@ -104,6 +118,7 @@ export const extractFields = (
 						result.buyer_finder_fee_amount = 0;
 						result.withholding_amount = 0;
 					}
+
 					break;
 
 				default:
@@ -113,7 +128,7 @@ export const extractFields = (
 							: "";
 			}
 		} catch (err) {
-			console.error(`Error extracting "${key}" from "${path}":`);
+			logger.error(`Error extracting "${key}" from "${path}":`);
 		}
 	}
 
