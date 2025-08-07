@@ -49,7 +49,10 @@ export class SettleDbManagementService {
 		});
 	}
 
-	async checkSettlementsForUser(userId: string, settleNpNpPayload: any) {
+	async checkSettlementsForUser(
+		userId: string,
+		settleNpNpPayload: SettlePayload,
+	) {
 		settleLogger.info("Checking settlements existence for user", {
 			userId,
 			data: settleNpNpPayload,
@@ -57,13 +60,17 @@ export class SettleDbManagementService {
 		if (!(await this.userService.checkUserById(userId))) {
 			throw new Error("User not found");
 		}
-		const orderIds = settleNpNpPayload.message.settlements.orders.map(
-			(order: any) => order.id,
+
+		const orderIds = settleNpNpPayload.message.settlement.orders?.map(
+			(order) => order.id,
 		);
-		if (orderIds.length === 0) {
+		if (!orderIds || orderIds.length === 0) {
 			throw new Error("No order IDs provided for settlement check");
 		}
 		for (const orderId of orderIds) {
+			if (!orderId) {
+				throw new Error("Order ID is undefined or empty");
+			}
 			if (!(await this.settleRepo.checkUniqueSettlement(userId, orderId))) {
 				throw new Error(
 					`Settlement for order ID ${orderId} does not exist for user ID: ${userId}`,
