@@ -3,22 +3,17 @@ import { GetSettlementsQuerySchema } from "../types/settle-params";
 import { UserService } from "./user-service";
 import { z } from "zod";
 import logger from "../utils/logger";
-import { OrderService } from "./order-service";
-import { OrderType } from "../schema/models/order-schema";
-import {
-	SettleSchema,
-	SettleType,
-	SubReconDataType,
-} from "../schema/models/settle-schema";
-import { UserType } from "../schema/models/user-schema";
-import { calculateSettlementDetails } from "../utils/settle-utils/tax";
+import { SettleSchema, SettleType } from "../schema/models/settle-schema";
+import { SettlePayload } from "../schema/rsf/zod/settle-schema";
+import { TransactionService } from "./transaction-serivce";
+import { checkPerfectAck } from "../utils/ackUtils";
 
 const settleLogger = logger.child("settle-service");
 export class SettleDbManagementService {
 	constructor(
 		private settleRepo: SettleRepository,
 		private userService: UserService,
-		private orderService: OrderService,
+		private transactionService: TransactionService,
 	) {}
 
 	async getSingleSettlement(userId: string, orderId: string) {
@@ -85,59 +80,41 @@ export class SettleDbManagementService {
 		return await this.settleRepo.checkUniqueSettlement(userId, orderId);
 	}
 
-	async prepareSettlements(userId: string, orderIds: string[]) {
-		settleLogger.info("Preparing settlement data for user", {
-			userId,
-			orderIds,
-		});
-		if (!(await this.userService.checkUserById(userId))) {
-			throw new Error("User not found");
-		}
-		const userConfig = await this.userService.getUserById(userId);
-		const settles: SettleType[] = [];
-		for (const orderId of orderIds) {
-			if (!(await this.orderService.checkUniqueOrder(userId, orderId))) {
-				throw new Error(
-					`Order with ID ${orderId} not found for user ${userId}`,
-				);
-			}
-			const order = (await this.orderService.getUniqueOrders(
-				userId,
-				orderId,
-			)) as OrderType;
-			const settleData = this.prepareSingleSettlement(order, userConfig);
-			const marked = await this.orderService.updateOrder(userId, orderId, {
-				settle_status: true,
-			});
-			settles.push(settleData);
-		}
-		if (settles.length === 0) {
-			throw new Error("No settlements to prepare");
-		}
-		const result = await this.settleRepo.insertSettlementList(settles);
-		settleLogger.info("Settlements prepared successfully", {
-			userId,
-			orderIds,
-		});
-		return result;
-	}
-
 	async updateSettlementsViaResponse(
 		userId: string,
-		data: any,
+		settlePayload: SettlePayload,
 		responseData: any,
 	) {
 		const hasError = responseData.error ? true : false;
-		const orderIds = data.message.settlements.orders.map(
-			(order: any) => order.id,
+		let orderIds = settlePayload.message.settlement.orders?.map(
+			(order) => order.id,
 		);
+		if (!orderIds || orderIds.length === 0) {
+			throw new Error("No order IDs found in settlement payload");
+		}
+
 		settleLogger.info("Updating settlements via response", {
 			userId,
 			hasError,
 			orderIds,
 			responseData,
 		});
+
+		let transDbId: string | undefined = undefined;
+		if (checkPerfectAck(responseData)) {
+			const transactionDbSave =
+				await this.transactionService.addSettlePayload(settlePayload);
+			transDbId = transactionDbSave._id.toString();
+		}
+
 		for (const orderId of orderIds) {
+			if (!orderId) {
+				settleLogger.error("Order ID is undefined or empty", {
+					userId,
+					orderId,
+				});
+				continue;
+			}
 			try {
 				const settlement = await this.settleRepo.findWithQuery({
 					user_id: userId,
@@ -152,7 +129,10 @@ export class SettleDbManagementService {
 					continue;
 				}
 				const settleData = settlement[0];
-				settleData.context = data.context;
+				if (transDbId) {
+					settleData.transaction_db_ids.push(transDbId);
+				}
+
 				if (hasError) {
 					settleData.status = "NOT-SETTLED";
 					settleData.error = responseData.error.message || "Unknown error";
@@ -170,31 +150,6 @@ export class SettleDbManagementService {
 		}
 	}
 
-	prepareSingleSettlement(order: OrderType, userConfig: UserType): SettleType {
-		const { commission, tax, inter_np_settlement } = calculateSettlementDetails(
-			order,
-			userConfig,
-		);
-
-		return {
-			order_id: order.order_id,
-			user_id: order.user_id,
-			collector_id: order.collected_by === "BAP" ? order.bap_id : order.bpp_id,
-			receiver_id: order.collected_by === "BAP" ? order.bpp_id : order.bap_id,
-			total_order_value: order.quote.total_order_value, // calc
-			commission: commission, // calc
-			tax: tax, // calc
-			withholding_amount: order.withholding_amount ?? 0,
-			inter_np_settlement: inter_np_settlement, // calc
-			provider_id: order.provider_id,
-			due_date: new Date(),
-			status: "PREPARED",
-			type: "NP-NP",
-			reconInfo: {
-				recon_status: "INACTIVE",
-			},
-		};
-	}
 	async getSettlementByContextAndOrderId(
 		txn_id: string,
 		message_id: string,
@@ -212,66 +167,25 @@ export class SettleDbManagementService {
 		}
 		return settlement;
 	}
-	async updateSettlementByOnSettle(
-		txn_id: string,
-		message_id: string,
+	async updateSettlementData(
+		payload_id: string,
 		orderId: string,
 		settlement: z.infer<typeof SettleSchema>,
 	) {
-		return await this.settleRepo.updateSettlementByOnSettle(
-			txn_id,
-			message_id,
+		return await this.settleRepo.updateSettlementByTransaction(
+			payload_id,
 			orderId,
 			settlement,
 		);
 	}
-	async markOrders(userId: string, orderIds: string[], flag: boolean) {
-		settleLogger.info("Marking settle_status for orders", {
-			userId,
-			orderIds,
-			flag,
-		});
-		if (!(await this.userService.checkUserById(userId))) {
-			throw new Error("User not found");
-		}
-		for (const orderId of orderIds) {
-			if (!(await this.orderService.checkUniqueOrder(userId, orderId))) {
-				throw new Error(
-					`Order with ID ${orderId} not found for user ${userId}`,
-				);
-			}
-			const order = await this.orderService.updateOrder(userId, orderId, {
-				settle_status: flag,
-			});
-			settleLogger.info("Orders marked successfully with flag", { flag });
-			return order;
-		}
-	}
 
-	async updateReconData(
-		userId: string,
-		orderId: string,
-		reconData: SubReconDataType,
-	) {
-		logger.debug("Updating reconciliation data", {
-			userId,
-			orderId,
-			reconData,
+	async insertSettlementList(settlements: SettleType[]) {
+		settleLogger.info("Inserting settlement list", {
+			count: settlements.length,
 		});
-		const update = await this.settleRepo.updateSettlement(userId, orderId, {
-			reconInfo: reconData,
-		});
-		settleLogger.info("Reconciliation data updated successfully", {
-			userId,
-			orderId,
-		});
-		return update;
-	}
-
-	async getAllSettlementsForRecon(transactionId: string, messageId: string) {
-		return await this.settleRepo.getAllSettlementsForRecon(
-			transactionId,
-			messageId,
-		);
+		if (settlements.length === 0) {
+			throw new Error("No settlements to insert");
+		}
+		return await this.settleRepo.insertSettlementList(settlements);
 	}
 }

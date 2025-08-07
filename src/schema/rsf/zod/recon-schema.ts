@@ -11,7 +11,7 @@ const statusList = [
 const reconStatusEnum = z.enum(statusList);
 
 const currencyObject = z.object({
-	currency: z.literal("INR"),
+	currency: z.string(),
 	value: z.string().regex(/^\d+(\.\d{1,2})?$/, "Invalid currency format"), // Ensures value is a valid decimal string
 });
 
@@ -20,23 +20,26 @@ const reconSchema = z
 	.object({
 		context: z.object({
 			domain: z.literal("ONDC:NTS10"),
-			location: z.object({
-				country: z.object({
-					code: z.literal("IND"),
-				}),
-				city: z.object({
-					code: z.string(),
-				}),
-			}),
+			location: z
+				.object({
+					country: z.object({
+						code: z.string(),
+					}),
+					city: z.object({
+						code: z.string(),
+					}),
+				})
+				.optional()
+				.nullable(),
 			version: z.literal("2.0.0"),
-			action: z.literal("recon"),
+			action: z.string(),
 			bap_id: z.string(),
 			bap_uri: z.url(),
 			bpp_id: z.string(),
 			bpp_uri: z.url(),
 			transaction_id: z.string(),
 			message_id: z.string(),
-			timestamp: z.date(), // Validates ISO 8601 date-time string
+			timestamp: z.string(),
 			ttl: z.string(), // Zod doesn't have a specific duration type, string is appropriate
 		}),
 		message: z.object({
@@ -55,7 +58,7 @@ const reconSchema = z
 							tcs: currencyObject,
 							tds: currencyObject,
 							settlement_ref_no: z.string().optional(), // Not in required array, so it's optional
-							updated_at: z.date(),
+							updated_at: z.string(),
 						}),
 					),
 				}),
@@ -65,3 +68,8 @@ const reconSchema = z
 	.strict(); // Corresponds to "additionalProperties": false
 
 export default reconSchema;
+
+export type ReconPayload = z.infer<typeof reconSchema>;
+
+export type ReconPayloadSettlement =
+	ReconPayload["message"]["orders"][number]["settlements"][number];

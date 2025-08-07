@@ -1,4 +1,5 @@
 import { UserType } from "../../schema/models/user-schema";
+import { OnReconPayload } from "../../schema/rsf/zod/on_recon-schema";
 import {
 	TriggerActionType,
 	TriggeringRequirements,
@@ -7,18 +8,21 @@ import { checkPerfectAck } from "../../utils/ackUtils";
 import { createHeader } from "../../utils/header-utils";
 import logger from "../../utils/logger";
 import { triggerRequest } from "../../utils/trigger-utils";
-import { SettleDbManagementService } from "../settle-service";
+import { ReconDbService } from "../recon-service";
 import { UserService } from "../user-service";
 
 const triggerLogger = logger.child("on_recon-trigger-service");
 
 export class OnReconTriggerService {
 	constructor(
-		private settleService: SettleDbManagementService,
+		private reconService: ReconDbService,
 		private userService: UserService,
 	) {}
 
-	async handleOnReconAction(userId: string, ondcOnReconPayload: any) {
+	async handleOnReconAction(
+		userId: string,
+		ondcOnReconPayload: OnReconPayload,
+	) {
 		triggerLogger.info("Handling on recon action", {
 			userId,
 			data: ondcOnReconPayload,
@@ -41,7 +45,10 @@ export class OnReconTriggerService {
 		return responseData;
 	}
 
-	async signAndSendPayload(userConfig: UserType, ondReconPayload: any) {
+	async signAndSendPayload(
+		userConfig: UserType,
+		ondReconPayload: OnReconPayload,
+	) {
 		triggerLogger.info("Signing and sending payload", {
 			userConfig,
 			action: "recon",
@@ -57,7 +64,7 @@ export class OnReconTriggerService {
 
 	getTriggerRequirements(
 		userConfig: UserType,
-		ondcReconPayload: any,
+		ondcReconPayload: OnReconPayload,
 		action: TriggerActionType,
 	): TriggeringRequirements {
 		const bapUri = ondcReconPayload.context.bap_uri;
@@ -73,7 +80,7 @@ export class OnReconTriggerService {
 	async validateOnReconConditions(
 		userId: string,
 		userConfig: UserType,
-		ondcOnReconPayload: any,
+		ondcOnReconPayload: OnReconPayload,
 	) {
 		const bapUri = ondcOnReconPayload.context.bap_uri;
 		const bppUri = ondcOnReconPayload.context.bpp_uri;
@@ -83,70 +90,27 @@ export class OnReconTriggerService {
 				`User URI ${userUri} does not match BAP URI ${bapUri} or BPP URI ${bppUri}`,
 			);
 		}
-		const orderIds: string[] = ondcOnReconPayload.message.orders.map(
-			(order: any) => order.id,
+		const orderIds = ondcOnReconPayload.message?.orders.map(
+			(order) => order.id,
 		);
-		if (orderIds.length === 0) {
+		if (!orderIds || orderIds.length === 0) {
 			throw new Error("No order IDs provided for reconciliation check");
 		}
-		// const { transactionId, messageId } = await this._getReconContext(
-		// 	userId,
-		// 	orderIds[0],
-		// );
-		// const dbSettlements = await this.settleService.getAllSettlementsForRecon(
-		// 	transactionId,
-		// 	messageId,
-		// );
-		// if (dbSettlements.length !== orderIds.length) {
-		// 	throw new Error(
-		// 		`Data mismatch: Expected ${dbSettlements.length} settlement records for this batch, but received ${orderIds.length}.`,
-		// 	);
-		// }
-		// for (const dbSettlement of dbSettlements) {
-		// 	const reconStatus = dbSettlement.reconInfo.recon_status;
-		// 	if (reconStatus != "RECEIVED_PENDING") {
-		// 		throw new Error(
-		// 			`CAN'T TRIGGER:: on_recon is not required for order ID ${dbSettlement.order_id} as it is already ${reconStatus} for user ID: ${userId}`,
-		// 		);
-		// 	}
-		// 	if (orderIds.includes(dbSettlement.order_id) === false) {
-		// 		throw new Error(
-		// 			`Order ID ${dbSettlement.order_id} is not provided, which is required for reconciliation for transaction ID: ${transactionId} and message ID: ${messageId}`,
-		// 		);
-		// 	}
-		// }
-	}
 
-	/**
-	 * Fetches the initial settlement to establish the transaction context (transaction_id, message_id).
-	 */
-	private async _getReconContext(userId: string, orderId: string) {
-		const firstSettlement = await this.settleService.getSingleSettlement(
-			userId,
-			orderId,
-		);
-
-		if (!firstSettlement) {
-			throw new Error(
-				`Settlement not found for order ID: ${orderId}. Cannot establish reconciliation context.`,
-			);
+		// validate if recon accord is true then due date is present
+		for (const order of ondcOnReconPayload.message?.orders || []) {
+			if (order.recon_accord && !order.settlements[0].due_date) {
+				throw new Error("Due date is required when recon accord is true");
+			}
 		}
 
-		const { context } = firstSettlement.reconInfo;
-		const transactionId = context?.transaction_id;
-		const messageId = context?.message_id;
-
-		if (!transactionId || !messageId) {
-			throw new Error(
-				`Transaction ID or Message ID is missing in the settlement for order ID: ${orderId}.`,
-			);
-		}
-
-		return { transactionId, messageId };
+		// const firstOrder = orderIds[0];
+		// const getOrder = await this.reconService.getReconById(userId, firstOrder);
+		triggerLogger.warning("Some Trigger Recon checks are missing!");
 	}
 
 	async updateSettlementTable(
-		ondcReconPayload: any,
+		ondcReconPayload: OnReconPayload,
 		syncResponse: any,
 		userId: string,
 	) {
@@ -163,26 +127,44 @@ export class OnReconTriggerService {
 			);
 			return;
 		}
-		const orders = ondcReconPayload.message.orders;
+		const orders = ondcReconPayload.message?.orders;
+		if (!orders || orders.length === 0) {
+			triggerLogger.warning("No orders found in the payload");
+			return;
+		}
 		for (const order of orders) {
 			const accord = order.recon_accord;
 			const orderId = order.id;
+			const reconExists = await this.reconService.checkReconExists(
+				userId,
+				orderId,
+			);
+			if (!reconExists) {
+				triggerLogger.warning(
+					`Recon record does not exist for order ID: ${orderId}`,
+				);
+				continue;
+			}
 			if (accord) {
-				await this.settleService.updateReconData(userId, orderId, {
+				const dueDate = order.settlements[0].due_date;
+				if (!dueDate) {
+					throw new Error("Due date is missing in the settlement data.");
+				}
+				await this.reconService.updateData(userId, orderId, {
 					recon_status: "RECEIVED_ACCEPTED",
-					on_recon_data: {
-						due_date: order.settlements[0].due_date,
-					},
+					due_date: new Date(dueDate),
 				});
 			} else {
-				await this.settleService.updateReconData(userId, orderId, {
+				await this.reconService.updateData(userId, orderId, {
 					recon_status: "RECEIVED_REJECTED",
-					recon_data: {
-						amount: order.settlements[0].amount.value,
-						commission: order.settlements[0].commission.value,
-						withholding_amount: order.settlements[0].withholding_amount.value,
-						tcs: order.settlements[0].tcs.value,
-						tds: order.settlements[0].tds.value,
+					on_recon_breakdown: {
+						amount: parseFloat(order.settlements[0].amount.value),
+						commission: parseFloat(order.settlements[0].commission.value),
+						withholding_amount: parseFloat(
+							order.settlements[0].withholding_amount.value,
+						),
+						tcs: parseFloat(order.settlements[0].tcs.value),
+						tds: parseFloat(order.settlements[0].tds.value),
 					},
 				});
 			}

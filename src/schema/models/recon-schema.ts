@@ -1,40 +1,36 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../../constants/enums";
 
 extendZodWithOpenApi(z);
 
 const BreakdownSchema = z
 	.object({
-		type: z
-			.object({
-				amount: z.number().openapi({
-					description: "Amount",
-					example: 1000,
-				}),
-				commission: z.number().openapi({
-					description: "Commission",
-					example: 50,
-				}),
-				withholding_amount: z.number().openapi({
-					description: "Withholding amount",
-					example: 200,
-				}),
-				tcs: z.number().openapi({
-					description: "TCS",
-					example: 100,
-				}),
-				tds: z.number().openapi({
-					description: "TDS",
-					example: 50,
-				}),
-			})
-			.strict()
-			.openapi({
-				description: "Breakdown details",
-			}),
+		amount: z.number().openapi({
+			description: "Amount",
+			example: 1000,
+		}),
+		commission: z.number().openapi({
+			description: "Commission",
+			example: 50,
+		}),
+		withholding_amount: z.number().openapi({
+			description: "Withholding amount",
+			example: 200,
+		}),
+		tcs: z.number().openapi({
+			description: "TCS",
+			example: 100,
+		}),
+		tds: z.number().openapi({
+			description: "TDS",
+			example: 50,
+		}),
 	})
 	.strict()
-	.openapi("BreakdownSchema");
+	.openapi({
+		description: "Breakdown details",
+	});
 
 export const ReconSchema = z
 	.object({
@@ -46,13 +42,17 @@ export const ReconSchema = z
 			description: "Order ID",
 			example: "order123",
 		}),
-		recon_status: z.string().openapi({
+		recon_status: z.enum(Object.keys(ENUMS.INTERNAL_RECON_STATUS)).openapi({
 			description: "Recon status",
 			example: "PENDING",
 		}),
 		settlement_id: z.string().openapi({
 			description: "Settlement ID",
 			example: "settlement123",
+		}),
+		payment_id: z.string().optional().nullable().openapi({
+			description: "Payment ID",
+			example: "payment123",
 		}),
 		transaction_db_ids: z.array(z.string()).openapi({
 			description: "Transaction DB IDs",
@@ -61,10 +61,18 @@ export const ReconSchema = z
 		recon_breakdown: BreakdownSchema.openapi({
 			description: "Recon breakdown",
 		}),
-		on_recon_breakdown: BreakdownSchema.optional().openapi({
+		on_recon_breakdown: BreakdownSchema.optional().nullable().openapi({
 			description: "On recon breakdown",
 		}),
-		due_date: z.date().openapi({
+		on_recon_error: z
+			.any()
+			.optional()
+			.nullable()
+			.openapi({
+				description: "On recon error details",
+				example: { error: "Some error occurred" },
+			}),
+		due_date: z.date().optional().nullable().openapi({
 			description: "Due date",
 			example: "2025-08-07T00:00:00.000Z",
 		}),

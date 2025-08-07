@@ -1,26 +1,31 @@
 import { Types } from "mongoose";
 import { UserType } from "../../schema/models/user-schema";
-import { SettleDbManagementService } from "../settle-service";
 import { UserService } from "../user-service";
 import { getAckResponse, getNackResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
-import { SubReconDataType } from "../../schema/models/settle-schema";
 import { INTERNAL_RECON_STATUS } from "../../constants/enums";
 import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
 import { OrderService } from "../order-service";
+import { ReconDbService } from "../recon-service";
+import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
+import { ReconType } from "../../schema/models/recon-schema";
+import { SettleDbManagementService } from "../settle-service";
+import { TransactionService } from "../transaction-serivce";
 
 // A new type to hold the prepared data after successful validation.
 type PreparedUpdate = {
 	userId: string;
 	orderId: string;
-	reconData: SubReconDataType;
+	reconData: ReconType;
 };
 
 export class ReconRequestService {
 	constructor(
+		private reconService: ReconDbService,
 		private settleService: SettleDbManagementService,
 		private userService: UserService,
 		private orderService: OrderService,
+		private transactionService: TransactionService,
 	) {}
 
 	/**
@@ -28,7 +33,7 @@ export class ReconRequestService {
 	 * and only if all are valid, updates them in the database in a second pass.
 	 * This ensures atomicity for the batch of orders.
 	 */
-	async ingestReconPayload(reconPayload: any) {
+	async ingestReconPayload(reconPayload: ReconPayload) {
 		// --- Basic Payload Structure Validation ---
 		const orders = reconPayload.message.orders;
 		if (!orders || !Array.isArray(orders) || orders.length === 0) {
@@ -37,7 +42,9 @@ export class ReconRequestService {
 			});
 			return getNackResponse("70002"); // Invalid payload
 		}
-
+		logger.warning(
+			"TODO: Implement async response for recon errors && mark something processing",
+		);
 		const { bap_uri, bpp_uri } = reconPayload.context;
 		if (!bap_uri || !bpp_uri) {
 			logger.error("BAP URI or BPP URI is missing in the recon payload", {
@@ -66,7 +73,7 @@ export class ReconRequestService {
 				}
 
 				// Find the associated user and settlement for the order.
-				const { user, settlement } = await this.findUserForOrder(
+				const { user, recon } = await this.findUserForOrder(
 					orderId,
 					order.settlements[0].status,
 					bap_uri,
@@ -74,23 +81,21 @@ export class ReconRequestService {
 					allUsers,
 				);
 
-				if (settlement == undefined) {
+				if (recon === null) {
 					logger.info(
-						`No settlement found for order ${orderId} for user ${user._id.toString()}. Skipping update.`,
+						`No recon found for order ${orderId} for user ${user._id.toString()}. Skipping check`,
 					);
 					continue; // Skip to the next order if no settlement exists.
 				}
 
 				// Validate if the settlement is in a state that allows reconciliation.
-				if (
-					this.illegalReconStatus.includes(settlement.reconInfo.recon_status)
-				) {
+				if (this.illegalReconStatus.includes(recon.recon_status)) {
 					logger.error(
 						`Settlement for order ${orderId} is already processed or in a pending state.`,
 						{
 							userId: user._id.toString(),
 							orderId,
-							status: settlement.reconInfo.recon_status,
+							status: recon.recon_status,
 						},
 					);
 					throw new Error(
@@ -105,9 +110,15 @@ export class ReconRequestService {
 						`Settlement data is missing in the payload for order ${orderId}`,
 					);
 				}
+
+				const transactionDb =
+					await this.transactionService.addOnSettlePayload(reconPayload);
+
 				const reconData = extractReconDetails(
 					settleDataInPayload,
-					reconPayload,
+					user._id.toString(),
+					orderId,
+					transactionDb._id.toString(),
 					INTERNAL_RECON_STATUS.RECEIVED_ACCEPTED,
 				);
 
@@ -125,11 +136,7 @@ export class ReconRequestService {
 			);
 
 			const updatePromises = updatesToProcess.map((update) =>
-				this.settleService.updateReconData(
-					update.userId,
-					update.orderId,
-					update.reconData,
-				),
+				this.reconService.createReconOrOverride(update.reconData),
 			);
 
 			// Execute all updates concurrently for better performance.
@@ -161,7 +168,7 @@ export class ReconRequestService {
 	 */
 	async findUserForOrder(
 		order_id: string,
-		recon_status: "PENDING" | "TO-BE-INITIATED" | "SETTLED",
+		recon_status: "PENDING" | "TO-BE-INITIATED" | "SETTLED" | "NOT-SETTLED",
 		bap_uri: string,
 		bpp_uri: string,
 		users: UserWithId[],
@@ -199,16 +206,20 @@ export class ReconRequestService {
 							`Settlement for order ${order_id} is already SETTLED, cannot change to ${recon_status}`,
 						);
 					}
+
+					const recon = await this.reconService.getReconById(user_id, order_id);
+
 					// Assuming getSettlements returns at least one result if checkUniqueSettlement is true
-					return { user, settlement: settlements[0] };
+					return { user, settlement: settlements[0], recon: recon };
 				} else {
 					// fallback to order_table
 					const orderExists = await this.orderService.checkUniqueOrder(
 						user_id,
 						order_id,
 					);
+					const recon = await this.reconService.getReconById(user_id, order_id);
 					if (orderExists && recon_status === "TO-BE-INITIATED") {
-						return { user, settlement: undefined };
+						return { user, settlement: undefined, recon: recon };
 					}
 				}
 			}

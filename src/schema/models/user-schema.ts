@@ -30,10 +30,6 @@ export const UserSchema = z
 			description: "Role of the user",
 			example: "BAP",
 		}),
-		// subscriber_id: z.string().openapi({
-		// 	description: "Subscriber ID",
-		// 	example: "subscriber123",
-		// }),
 		subscriber_url: z.url().openapi({
 			description: "Subscriber URL",
 			example: "https://subscriber.example.com",

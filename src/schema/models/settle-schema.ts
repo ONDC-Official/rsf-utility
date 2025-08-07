@@ -64,19 +64,19 @@ export const SettleSchema = z
 			description: "Settlement type",
 			example: "type123",
 		}),
-		settlement_reference: z.string().optional().openapi({
+		settlement_reference: z.string().optional().nullable().openapi({
 			description: "Settlement reference",
 			example: "reference123",
 		}),
-		provider_settlement_reference: z.string().optional().openapi({
+		provider_settlement_reference: z.string().optional().nullable().openapi({
 			description: "Provider settlement reference",
 			example: "providerReference123",
 		}),
-		self_settlement_reference: z.string().optional().openapi({
+		self_settlement_reference: z.string().optional().nullable().openapi({
 			description: "Self settlement reference",
 			example: "selfReference123",
 		}),
-		error: z.string().optional().openapi({
+		error: z.string().optional().nullable().openapi({
 			description: "Error details",
 			example: "Error occurred",
 		}),
@@ -91,6 +91,10 @@ export const SettleSchema = z
 		self_status: z.enum(statusEnum).openapi({
 			description: "Self settlement status",
 			example: "NOT-SETTLED",
+		}),
+		transaction_db_ids: z.array(z.string()).openapi({
+			description: "Array of transaction internal database IDs",
+			example: ["txn123", "txn456"],
 		}),
 	})
 	.strict()

@@ -172,7 +172,7 @@ const onSettleSchema = {
 												additionalProperties: false,
 											},
 											reference_no: { type: "string" },
-                      name: { type: "string" },
+											name: { type: "string" },
 										},
 										additionalProperties: false,
 									},
@@ -219,15 +219,15 @@ const onSettleSchema = {
 			},
 			additionalProperties: false,
 		},
-  error: {
-      type: "object",
-      required: ["code", "message"],
-      properties: {
-        code: { type: "string" },
-        message: { type: "string" },
-      },
-      additionalProperties: false,
-    }
+		error: {
+			type: "object",
+			required: ["code", "message"],
+			properties: {
+				code: { type: "string" },
+				message: { type: "string" },
+			},
+			additionalProperties: false,
+		},
 	},
 	additionalProperties: false,
 };

@@ -40,6 +40,7 @@ const SettleSchema = new mongoose.Schema(
 			required: true,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
+		transaction_db_ids: { type: [String] },
 	},
 	{ timestamps: true },
 );

@@ -1,18 +1,12 @@
 // src/strategies/settlement-options.types.ts
 
 import { BreakdownType } from "../schema/models/recon-schema";
+import { UserType } from "../schema/models/user-schema";
 
 // Options needed for the ProfileConfigStrategy
 export interface ProfileConfigOptions {
 	type: "USER_CONFIG";
-	profile: {
-		userId: string;
-		extraDetails: {
-			self: number;
-			provider: number;
-			inter_np: number;
-		};
-	};
+	profile: UserType;
 }
 
 // Options needed for the CsvUploadStrategy

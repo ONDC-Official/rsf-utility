@@ -25,6 +25,12 @@ import { ReconRequestService } from "../services/rsf-request-api-services/recon-
 import { GenerateOnReconService } from "../services/generate-services/generate-on_recon-service";
 import { OnReconTriggerService } from "../services/trigger-services/on_recon-trigger-service";
 import { OnReconRequestService } from "../services/rsf-request-api-services/on_recon-service";
+import { SettlePrepareService } from "../services/settle-prepare-service";
+import { SettlePrepareController } from "../controller/prepare-controller";
+import { TransactionService } from "../services/transaction-serivce";
+import { TransactionRepository } from "../repositories/transaction-repository";
+import { ReconDbService } from "../services/recon-service";
+import { ReconRepository } from "../repositories/recon-repository";
 
 const rsfPayloadRepository = new RsfPayloadRepository();
 const rsfPayloadDbService = new RsfPayloadDbService(rsfPayloadRepository);
@@ -38,13 +44,33 @@ const orderRepository = new OrderRepository();
 const orderService = new OrderService(orderRepository, userService);
 const orderController = new OrderController(orderService);
 
+const transactionRepo = new TransactionRepository();
+const transactionService = new TransactionService(transactionRepo);
+
 const settleRepository = new SettleRepository();
 const settleDbManagementService = new SettleDbManagementService(
 	settleRepository,
 	userService,
-	orderService,
+	transactionService,
 );
 const settleController = new SettleController(settleDbManagementService);
+
+const reconRepo = new ReconRepository();
+const reconService = new ReconDbService(
+	reconRepo,
+	userService,
+	transactionService,
+);
+
+const settlePrepareService = new SettlePrepareService(
+	userService,
+	orderService,
+	settleDbManagementService,
+);
+
+const settlePrepareController = new SettlePrepareController(
+	settlePrepareService,
+);
 
 const payloadController = new PayloadController(orderService);
 
@@ -53,11 +79,12 @@ const settleTriggerService = new SettleTriggerService(
 	userService,
 );
 const reconTriggerService = new ReconTriggerService(
-	settleDbManagementService,
+	reconService,
 	userService,
+	transactionService,
 );
 const onReconTriggerService = new OnReconTriggerService(
-	settleDbManagementService,
+	reconService,
 	userService,
 );
 const triggerService = new TriggerService(
@@ -67,14 +94,20 @@ const triggerService = new TriggerService(
 );
 const triggerController = new TriggerController(triggerService);
 
-const onSettleService = new OnSettleService(settleDbManagementService);
+const onSettleService = new OnSettleService(
+	settleDbManagementService,
+	transactionService,
+);
 const reconRequestService = new ReconRequestService(
+	reconService,
 	settleDbManagementService,
 	userService,
 	orderService,
+	transactionService,
 );
 const onReconRequestService = new OnReconRequestService(
-	settleDbManagementService,
+	reconService,
+	transactionService,
 );
 const rsfService = new RsfService(
 	onSettleService,
@@ -94,9 +127,9 @@ const generateReconService = new GenerateReconService(
 	orderService,
 );
 const generateOnReconService = new GenerateOnReconService(
-	settleDbManagementService,
+	reconService,
 	userService,
-	rsfPayloadDbService,
+	transactionService,
 );
 const generateRsfController = new GenerateController(
 	generateSettleService,
@@ -110,6 +143,7 @@ export const container = {
 	orderController,
 	triggerController,
 	settleController,
+	settlePrepareController,
 	payloadController,
 	rsfRequestController,
 	rsfPayloadDbController,
