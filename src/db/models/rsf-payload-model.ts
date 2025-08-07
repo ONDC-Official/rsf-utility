@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ContextSchema } from "./conetxt-model";
+import { ContextSchema } from "./context-model";
 
 const RequestSchema = new mongoose.Schema(
 	{
@@ -34,5 +34,14 @@ const RsfPayloadSchema = new mongoose.Schema(
 	},
 	{ timestamps: true, strict: false },
 );
+
+// RsfPayloadSchema.index(
+// 	{
+// 		"request.context.transaction_id": 1,
+// 		"request.context.message_id": 1,
+// 		"request.context.action": 1,
+// 	},
+// 	{ unique: true },
+// );
 
 export const RsfPayload = mongoose.model("RsfPayload", RsfPayloadSchema);

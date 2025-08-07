@@ -21,6 +21,12 @@ export class RsfPayloadRepository {
 		if (params.settlement_id) {
 			query["request.message.settlement.id"] = params.settlement_id;
 		}
+		if (params.message_id) {
+			query["request.context.message_id"] = params.message_id;
+		}
+		if (params.onlyAck) {
+			query["response.message.ack.status"] = "ACK";
+		}
 		logger.debug("get RsfPayloads query", query);
 		return await RsfPayload.find(query)
 			.skip(skip)

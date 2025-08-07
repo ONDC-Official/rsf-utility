@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { ENUMS } from "../../constants/enums";
-import { ContextSchema } from "./conetxt-model";
+import { ContextSchema } from "./context-model";
 
 const ReconSchema = new mongoose.Schema(
 	{

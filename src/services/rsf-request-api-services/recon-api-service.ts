@@ -7,6 +7,7 @@ import logger from "../../utils/logger";
 import { SubReconDataType } from "../../schema/models/settle-schema";
 import { INTERNAL_RECON_STATUS } from "../../constants/enums";
 import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
+import { OrderService } from "../order-service";
 
 // A new type to hold the prepared data after successful validation.
 type PreparedUpdate = {
@@ -19,6 +20,7 @@ export class ReconRequestService {
 	constructor(
 		private settleService: SettleDbManagementService,
 		private userService: UserService,
+		private orderService: OrderService,
 	) {}
 
 	/**
@@ -56,14 +58,28 @@ export class ReconRequestService {
 					// Fail fast if a fundamental field is missing.
 					throw new Error("Order ID is missing in one of the orders");
 				}
+				if (!order.settlements || order.settlements.length === 0) {
+					// Fail fast if settlements are missing.
+					throw new Error(
+						`Settlement data is missing for order ${orderId} in the payload`,
+					);
+				}
 
 				// Find the associated user and settlement for the order.
 				const { user, settlement } = await this.findUserForOrder(
 					orderId,
+					order.settlements[0].status,
 					bap_uri,
 					bpp_uri,
 					allUsers,
 				);
+
+				if (settlement == undefined) {
+					logger.info(
+						`No settlement found for order ${orderId} for user ${user._id.toString()}. Skipping update.`,
+					);
+					continue; // Skip to the next order if no settlement exists.
+				}
 
 				// Validate if the settlement is in a state that allows reconciliation.
 				if (
@@ -145,6 +161,7 @@ export class ReconRequestService {
 	 */
 	async findUserForOrder(
 		order_id: string,
+		recon_status: "PENDING" | "TO-BE-INITIATED" | "SETTLED",
 		bap_uri: string,
 		bpp_uri: string,
 		users: UserWithId[],
@@ -160,13 +177,39 @@ export class ReconRequestService {
 					order_id,
 					user_id,
 				);
+				// no settlement
 
 				if (settlementExists) {
 					const settlements = await this.settleService.getSettlements(user_id, {
 						order_id: order_id,
 					});
+					if (!settlements || settlements.length === 0) {
+						throw new Error(
+							`No settlements found for order ${order_id} for user ${user_id}`,
+						);
+					}
+					const dbState = settlements[0].status;
+					if (recon_status === "SETTLED" && dbState !== "SETTLED") {
+						throw new Error(
+							`Settlement for order ${order_id} is not in SETTLED state, current state: ${dbState}`,
+						);
+					}
+					if (dbState === "SETTLED" && recon_status !== "SETTLED") {
+						throw new Error(
+							`Settlement for order ${order_id} is already SETTLED, cannot change to ${recon_status}`,
+						);
+					}
 					// Assuming getSettlements returns at least one result if checkUniqueSettlement is true
 					return { user, settlement: settlements[0] };
+				} else {
+					// fallback to order_table
+					const orderExists = await this.orderService.checkUniqueOrder(
+						user_id,
+						order_id,
+					);
+					if (orderExists && recon_status === "TO-BE-INITIATED") {
+						return { user, settlement: undefined };
+					}
 				}
 			}
 		}

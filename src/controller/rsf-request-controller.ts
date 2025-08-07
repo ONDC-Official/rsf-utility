@@ -39,11 +39,6 @@ export class RsfRequestController {
 				);
 
 				return res.status(200).send(getNackResponse("70002"));
-
-				// return res.status(400).json({
-				// 	message: "Invalid action for RSF payload",
-				// 	errors: z.treeifyError(actionValidationResult.error),
-				// });
 			}
 			const auth = req.headers.authorization;
 			if (!auth) {

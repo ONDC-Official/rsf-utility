@@ -90,7 +90,12 @@ export class SettleTriggerService {
 					);
 				};
 		}
-		throw new Error(`Unsupported settle type: ${settleType}`);
+		// throw new Error(`Unsupported settle type: ${settleType}`);
+		return async () => {
+			triggerLogger.warning("No post request actions defined for settle type", {
+				settleType,
+			});
+		};
 	}
 
 	validateUserConfigData(userConfig: UserType, ondcSettlePayload: any) {
@@ -116,6 +121,10 @@ export class SettleTriggerService {
 					await this.settleService.checkSettlementsForUser(userId, data);
 				};
 		}
-		throw new Error(`Unsupported settle type: ${settleType}`);
+		return async () => {
+			triggerLogger.warning("No pre-response actions defined for settle type", {
+				settleType,
+			});
+		};
 	}
 }
