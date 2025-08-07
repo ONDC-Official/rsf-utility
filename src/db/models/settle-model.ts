@@ -80,7 +80,7 @@ const SettleSchema = new mongoose.Schema(
 		context: { type: ContextSchema, required: false },
 		reconInfo: { type: ReconSchema, required: true },
 	},
-	{ timestamps: true },
+	{ timestamps: true, strict: false },
 );
 
 SettleSchema.index({ user_id: 1, order_id: 1 }, { unique: true }); // Ensure unique settlement per user and order
