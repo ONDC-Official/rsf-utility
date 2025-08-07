@@ -6,7 +6,7 @@ const settleRouter = Router();
 settleRouter.get("/:userId", container.settleController.getSettlements); // all(counterNPId(calc),)
 settleRouter.post(
 	"/:userId/prepare",
-	container.settleController.prepareSettlement,
+	container.settlePrepareController.prepareSettlement,
 );
 
 export default settleRouter;

@@ -1,7 +1,6 @@
-import { subscriberConfig } from "../../config/rsf-utility-instance-config";
 import { INTERNAL_RECON_STATUS } from "../../constants/enums";
-import { SubReconDataType } from "../../schema/models/settle-schema";
 import { UserType } from "../../schema/models/user-schema";
+import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
 import {
 	TriggerActionType,
 	TriggeringRequirements,
@@ -11,17 +10,19 @@ import { createHeader } from "../../utils/header-utils";
 import logger from "../../utils/logger";
 import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
 import { triggerRequest } from "../../utils/trigger-utils";
-import { SettleDbManagementService } from "../settle-service";
+import { ReconDbService } from "../recon-service";
+import { TransactionService } from "../transaction-serivce";
 import { UserService } from "../user-service";
 
 const triggerLogger = logger.child("recon-trigger-service");
 export class ReconTriggerService {
 	constructor(
-		private settleService: SettleDbManagementService,
+		private reconService: ReconDbService,
 		private userService: UserService,
+		private transactionService: TransactionService,
 	) {}
 
-	async handleReconAction(userId: string, ondcReconPayload: any) {
+	async handleReconAction(userId: string, ondcReconPayload: ReconPayload) {
 		triggerLogger.info("Handling recon action", {
 			userId,
 			data: ondcReconPayload,
@@ -43,7 +44,7 @@ export class ReconTriggerService {
 	async validateReconConditions(
 		userId: string,
 		userConfig: UserType,
-		ondcReconPayload: any,
+		ondcReconPayload: ReconPayload,
 	) {
 		const bapUri = ondcReconPayload.context.bap_uri;
 		const bppUri = ondcReconPayload.context.bpp_uri;
@@ -53,38 +54,25 @@ export class ReconTriggerService {
 				`User URI ${userUri} does not match BAP URI ${bapUri} or BPP URI ${bppUri}`,
 			);
 		}
-		const orderIds: string[] = ondcReconPayload.message.orders.id.map(
-			(order: any) => order.id,
-		);
+		const orderIds: string[] = ondcReconPayload.message.orders.map((o) => o.id);
 		if (orderIds.length === 0) {
 			throw new Error("No order IDs provided for reconciliation check");
 		}
-		let constantReconId = "";
 		for (const orderId of orderIds) {
-			const settlements = await this.settleService.getSettlements(userId, {
-				order_id: orderId,
-			});
-			if (settlements.length === 0) {
-				throw new Error(
-					`Settlement for order ID ${orderId} does not exist for user ID: ${userId}`,
-				);
+			const recon = await this.reconService.getReconById(userId, orderId);
+			if (!recon) {
+				logger.warning("New reconciliation order found", {
+					userId,
+					orderId,
+				});
+				continue;
 			}
-			const settlement = settlements[0];
-			const reconStatus = settlement.reconInfo.recon_status;
+			const reconStatus = recon.recon_status;
 			if (this.illegalStatuses.includes(reconStatus)) {
 				throw new Error(
 					`CAN'T TRIGGER::Reconciliation for order ID ${orderId} is already ${reconStatus} for user ID: ${userId}`,
 				);
 			}
-			const reconId = `${settlement.receiver_id}-${settlement.collector_id}`;
-			if (constantReconId != "" && constantReconId !== reconId) {
-				throw new Error(
-					`collector_id & receiver_id do not match for all order IDs: ${orderIds.join(
-						", ",
-					)} for user-config ID: ${userId}`,
-				);
-			}
-			constantReconId = reconId;
 		}
 		triggerLogger.info("Reconciliation conditions validated successfully", {
 			userId,
@@ -122,7 +110,7 @@ export class ReconTriggerService {
 	}
 
 	async updateSettlementTable(
-		ondcReconPayload: any,
+		ondcReconPayload: ReconPayload,
 		syncResponse: any,
 		userId: string,
 	) {
@@ -137,16 +125,23 @@ export class ReconTriggerService {
 			);
 			return;
 		}
-		for (const orderData of ondcReconPayload.message.orders.settlements) {
+		const dbPayload =
+			await this.transactionService.addReconPayload(ondcReconPayload);
+		const orders = ondcReconPayload.message.orders;
+		for (const orderData of orders) {
 			try {
-				const orderId = orderData.id;
 				const settlement = orderData.settlements[0];
 				const reconData = extractReconDetails(
 					settlement,
-					ondcReconPayload,
+					userId,
+					orderData.id,
+					dbPayload._id.toString(),
 					INTERNAL_RECON_STATUS.SENT_PENDING,
 				);
-				await this.settleService.updateReconData(userId, orderId, reconData);
+				if (settlement.payment_id) {
+					reconData.payment_id = settlement.payment_id;
+				}
+				await this.reconService.createReconOrOverride(reconData);
 			} catch (error) {
 				triggerLogger.error(
 					`Error updating settlement for order ID ${orderData.id}`,
@@ -158,7 +153,7 @@ export class ReconTriggerService {
 				);
 			}
 		}
-		triggerLogger.info("Settlement table updated successfully", {
+		triggerLogger.info("Completed Settlement table update", {
 			userId,
 			data: ondcReconPayload,
 		});

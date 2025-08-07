@@ -1,48 +1,48 @@
 import { ENUMS } from "../../constants/enums";
-import { SettleType } from "../../schema/models/settle-schema";
+import { ReconType } from "../../schema/models/recon-schema";
 import { UserType } from "../../schema/models/user-schema";
+import {
+	OnReconPayload,
+	OnReconPayloadOrders,
+	OnReconPayloadSettlement,
+} from "../../schema/rsf/zod/on_recon-schema";
+import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
 import { OnReconAggregateObj } from "../../services/generate-services/generate-on_recon-service";
 import { GenOnReconBodyObjectType } from "../../types/generate-recon-types";
 
 export function createOnReconPayload(
 	aggregatedData: OnReconAggregateObj[],
 	userConfig: UserType,
-	reconPayload: any,
-) {
-	const firstData = aggregatedData[0];
-	const reconContext = firstData.settlement.reconInfo.context;
-	if (!reconContext) {
-		throw new Error("Recon context is missing in the settlement data.");
-	}
-
+	reconPayload: ReconPayload,
+): OnReconPayload {
 	const extraOrders = reconPayload.message.orders.filter((order: any) =>
 		[ENUMS.RECON_STATUS.SETTLED, ENUMS.RECON_STATUS.TO_BE_INITIATED].includes(
 			order.settlements[0].status,
 		),
 	);
 
+	const extraOnRecons: OnReconPayloadOrders[] = [];
 	for (const order of extraOrders) {
-		order.settlements[0].updated_at = new Date().toISOString();
+		const obj = {
+			...order,
+			recon_accord: false,
+		};
+		obj.settlements[0].updated_at = new Date().toISOString();
+		extraOnRecons.push(obj);
 	}
 
-	const orders = aggregatedData.map((data) => {
-		const settlement = data.settlement;
-		if (
-			!settlement.reconInfo ||
-			!settlement.reconInfo.settlement_id ||
-			!settlement.reconInfo.recon_data
-		) {
-			throw new Error("Settlement ID is missing in the settlement data.");
-		}
+	const orders: OnReconPayloadOrders[] = aggregatedData.map((data) => {
+		const recon = data.recon;
+
 		const settlementPayload = data.onReconData.recon_accord
-			? getAccordResponse(data.settlement, data.onReconData)
-			: getNotAccordResponse(data.settlement, data.onReconData);
+			? getAccordResponse(recon, data.onReconData)
+			: getNotAccordResponse(recon, data.onReconData);
 		return {
-			id: data.settlement.order_id,
+			id: recon.order_id,
 			amount: {
 				currency: "INR",
 				value: data.onReconData.recon_accord
-					? settlement.reconInfo.recon_data.amount?.toFixed(2) || "0.00"
+					? recon.recon_breakdown.amount?.toFixed(2) || "0.00"
 					: data.onReconData.on_recon_data?.settlement_amount?.toFixed(2) ||
 						"0.00",
 			},
@@ -64,33 +64,37 @@ export function createOnReconPayload(
 			},
 			version: "2.0.0",
 			action: "on_recon",
-			bap_id: reconContext.bap_id,
-			bap_uri: reconContext.bap_uri,
-			bpp_id: reconContext.bpp_id,
-			bpp_uri: reconContext.bpp_uri,
-			transaction_id: reconContext.transaction_id,
-			message_id: reconContext.message_id,
+			bap_id: reconPayload.context.bap_id,
+			bap_uri: reconPayload.context.bap_uri,
+			bpp_id: reconPayload.context.bpp_id,
+			bpp_uri: reconPayload.context.bpp_uri,
+			transaction_id: reconPayload.context.transaction_id,
+			message_id: reconPayload.context.message_id,
 			timestamp: new Date().toISOString(),
 			ttl: "P1D",
 		},
 		message: {
-			orders: [...orders, ...extraOrders],
+			orders: [...orders, ...extraOnRecons],
 		},
 	};
 }
 
 function getAccordResponse(
-	settlement: SettleType,
+	recon: ReconType,
 	reconData: GenOnReconBodyObjectType,
-) {
-	const reconFinData = settlement.reconInfo.recon_data;
+): OnReconPayloadSettlement {
+	const reconFinData = recon.recon_breakdown;
 	if (!reconFinData) {
 		throw new Error("recon_data is missing in the settlement data.");
 	}
+	const due_date = reconData.due_date;
+	if (!due_date) {
+		throw new Error("due_date is missing in the settlement data.");
+	}
 	return {
-		id: settlement.reconInfo.settlement_id,
+		id: recon.settlement_id,
 		status: "PENDING",
-		due_date: reconData.due_date,
+		due_date: due_date.toISOString(),
 		amount: {
 			currency: "INR",
 			value: reconFinData.amount?.toFixed(2) || "0.00",
@@ -116,10 +120,10 @@ function getAccordResponse(
 }
 
 function getNotAccordResponse(
-	settlement: SettleType,
+	recon: ReconType,
 	reconData: GenOnReconBodyObjectType,
-) {
-	const reconFinData = settlement.reconInfo.recon_data;
+): OnReconPayloadSettlement {
+	const reconFinData = recon.recon_breakdown;
 	if (!reconData.on_recon_data) {
 		throw new Error("on_recon_data is missing in the recon data.");
 	}
@@ -145,8 +149,8 @@ function getNotAccordResponse(
 		reconFinData.withholding_amount;
 	const diffTCS = reconData.on_recon_data.tcs - reconFinData.tcs;
 	const diffTDS = reconData.on_recon_data.tds - reconFinData.tds;
-	return {
-		id: settlement.reconInfo.settlement_id,
+	const obj: OnReconPayloadSettlement = {
+		id: recon.settlement_id,
 		status: "PENDING",
 		amount: {
 			currency: "INR",
@@ -175,4 +179,8 @@ function getNotAccordResponse(
 		},
 		updated_at: new Date().toISOString(),
 	};
+	if (recon.payment_id) {
+		obj.payment_id = recon.payment_id;
+	}
+	return obj;
 }
