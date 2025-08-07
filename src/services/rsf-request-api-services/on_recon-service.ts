@@ -1,15 +1,24 @@
-import { SettleDbManagementService } from "../settle-service";
 import logger from "../../utils/logger";
 import { getAckResponse, getNackResponse } from "../../utils/ackUtils";
-import { RsfContextType, SettleType } from "../../schema/models/settle-schema";
 import { OnReconAggregateObj } from "../generate-services/generate-on_recon-service";
 import { GenOnReconBodyObjectType } from "../../types/generate-recon-types";
+import { ReconDbService } from "../recon-service";
+import { TransactionService } from "../transaction-serivce";
+import { ReconType } from "../../schema/models/recon-schema";
+import {
+	OnReconPayload,
+	OnReconPayloadOrders,
+} from "../../schema/rsf/zod/on_recon-schema";
+import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
 
 const rsfLogger = logger.child("on-recon-request-service");
 export class OnReconRequestService {
-	constructor(private settleDbManagementService: SettleDbManagementService) {}
+	constructor(
+		private reconService: ReconDbService,
+		private transactionService: TransactionService,
+	) {}
 
-	ingestOnReconPayload = async (onReconPayload: any) => {
+	ingestOnReconPayload = async (onReconPayload: OnReconPayload) => {
 		rsfLogger.info("Ingesting on recon payload");
 
 		const { bap_uri, bpp_uri, transaction_id, message_id } =
@@ -24,14 +33,38 @@ export class OnReconRequestService {
 			return getNackResponse("70002"); // Invalid payload
 		}
 
+		const reconPayload = await this.transactionService.getReconByContext(
+			transaction_id,
+			message_id,
+		);
+
+		if (!reconPayload) {
+			rsfLogger.error(
+				"No recon payload found for the given transaction_id and message_id",
+				{
+					transaction_id,
+					message_id,
+				},
+			);
+			return getNackResponse("503"); // No recon payload found
+		}
+
 		if (onReconPayload.error) {
 			rsfLogger.warning("Error found in on recon payload", {
 				error: onReconPayload.error,
 			});
-			return this.handleOnReconWithError(onReconPayload);
+			return this.handleOnReconWithError(
+				onReconPayload,
+				reconPayload._id.toString(),
+			);
 		}
-		const orders = onReconPayload.message.orders;
-		if (!orders || !Array.isArray(orders) || orders.length === 0) {
+
+		const payloadOrders = onReconPayload.message?.orders;
+		if (
+			!payloadOrders ||
+			!Array.isArray(payloadOrders) ||
+			payloadOrders.length === 0
+		) {
 			rsfLogger.error(
 				"No orders found or invalid format in the on recon payload",
 				{
@@ -43,8 +76,7 @@ export class OnReconRequestService {
 
 		try {
 			const filteredOrders = await this.getOrdersFromDbWith(
-				transaction_id,
-				message_id,
+				reconPayload._id.toString(),
 				"SENT_PENDING",
 			);
 			if (filteredOrders.length === 0) {
@@ -57,7 +89,11 @@ export class OnReconRequestService {
 				);
 				return getNackResponse("503"); // No orders found
 			}
-			const aggData = this.validateSettlements(filteredOrders, orders);
+			const aggData = this.validateRecons(
+				filteredOrders,
+				payloadOrders,
+				reconPayload,
+			);
 			await this.updateSettlementsInDb(aggData);
 			rsfLogger.info("On recon payload processed successfully");
 		} catch (error) {
@@ -68,113 +104,129 @@ export class OnReconRequestService {
 	};
 
 	async getOrdersFromDbWith(
-		transaction_id: string,
-		message_id: string,
-		recon_status: SettleType["reconInfo"]["recon_status"],
+		dbId: string,
+		recon_status: ReconType["recon_status"],
 	) {
-		const orders =
-			await this.settleDbManagementService.getAllSettlementsForRecon(
-				transaction_id,
-				message_id,
-			);
+		const orders = await this.reconService.getReconByTransaction(dbId);
 		if (!orders || orders.length === 0) {
 			rsfLogger.error(
 				"No orders found for the given transaction_id and message_id",
 				{
-					transaction_id,
-					message_id,
+					dbId: dbId,
 				},
 			);
 			throw new Error(
 				"No orders found for the given transaction_id and message_id",
 			);
 		}
-		return orders.filter((o) => o.reconInfo.recon_status === recon_status);
+		return orders.filter((o) => o.recon_status === recon_status);
 	}
 
-	validateSettlements(settlements: SettleType[], onReconOrders: any[]) {
-		const onReconDataMap = new Map(
-			onReconOrders.map((data) => [data.id, data]),
+	validateRecons(
+		recons: ReconType[],
+		onReconOrders: OnReconPayloadOrders[],
+		reconPayload: ReconPayload,
+	) {
+		// 1. all recon payloads order match on_recon orders
+		// 2. all recons are present in on_recon orders
+		// 3. states of all recons are SENT_PENDING
+		const finalData: OnReconAggregateObj[] = [];
+
+		const reconPayloadOrders = reconPayload.message.orders;
+
+		// Create sets for efficient lookup and better error reporting
+		const onReconOrderIds = new Set(
+			onReconOrders.map((order) => order.id).filter(Boolean),
 		);
-		const aggregatedData: OnReconAggregateObj[] = [];
-		for (const settlement of settlements) {
-			const orderId = settlement.order_id;
-			const reconData = onReconDataMap.get(orderId);
+		const reconPayloadOrderIds = reconPayloadOrders.map((order) => order.id);
+		const reconOrderIds = recons.map((recon) => recon.order_id);
 
-			// VALIDATION 1: All recon orders from the DB must be present in the API payload.
-			if (!reconData) {
-				throw new Error(
-					`Mismatch: Settlement for order ID ${orderId} exists in the batch, but was not found in your provided data.`,
-				);
-			}
-
-			const accord = reconData.recon_accord;
-
-			const onReconData: GenOnReconBodyObjectType = {
-				order_id: orderId,
-				recon_accord: accord,
-			};
-
-			if (accord) {
-				onReconData.due_date = reconData.settlements[0].due_date;
-			} else {
-				onReconData.on_recon_data = {
-					settlement_amount: reconData.settlements[0].amount.value,
-					commission_amount: reconData.settlements[0].commission.value,
-					withholding_amount: reconData.settlements[0].withholding_amount.value,
-					tcs: reconData.settlements[0].tcs.value,
-					tds: reconData.settlements[0].tds.value,
-				};
-			}
-
-			aggregatedData.push({
-				orderId: orderId,
-				onReconData: reconData,
-				settlement: settlement,
+		// Check if all recon payload orders are present in on_recon orders
+		const missingReconPayloadOrders = reconPayloadOrderIds.filter(
+			(orderId) => !onReconOrderIds.has(orderId),
+		);
+		if (missingReconPayloadOrders.length > 0) {
+			const errorMsg = `Recon payload orders not found in on_recon orders: [${missingReconPayloadOrders.join(", ")}]. Available on_recon orders: [${Array.from(onReconOrderIds).join(", ")}]`;
+			rsfLogger.error(errorMsg, {
+				missing_orders: missingReconPayloadOrders,
+				available_on_recon_orders: Array.from(onReconOrderIds),
+				recon_payload_orders: reconPayloadOrderIds,
 			});
+			throw new Error(errorMsg);
 		}
-		return aggregatedData;
+
+		// Check if all recons are present in on_recon orders
+		const missingReconOrders = reconOrderIds.filter(
+			(orderId) => !onReconOrderIds.has(orderId),
+		);
+		if (missingReconOrders.length > 0) {
+			const errorMsg = `Recon orders not found in on_recon orders: [${missingReconOrders.join(", ")}]. Available on_recon orders: [${Array.from(onReconOrderIds).join(", ")}]`;
+			rsfLogger.error(errorMsg, {
+				missing_recon_orders: missingReconOrders,
+				available_on_recon_orders: Array.from(onReconOrderIds),
+				recon_orders: reconOrderIds,
+			});
+			throw new Error(errorMsg);
+		}
+
+		// Check states of all recons are SENT_PENDING
+		const invalidStatusRecons = recons.filter(
+			(recon) => recon.recon_status !== "SENT_PENDING",
+		);
+		if (invalidStatusRecons.length > 0) {
+			const errorMsg = `Found recons with invalid status. Expected: SENT_PENDING. Invalid recons: ${invalidStatusRecons.map((r) => `${r.order_id}(${r.recon_status})`).join(", ")}`;
+			rsfLogger.error(errorMsg, {
+				invalid_recons: invalidStatusRecons.map((r) => ({
+					order_id: r.order_id,
+					current_status: r.recon_status,
+					expected_status: "SENT_PENDING",
+				})),
+			});
+			throw new Error(errorMsg);
+		}
+
+		rsfLogger.info("Recon validation completed successfully", {
+			total_recon_payload_orders: reconPayloadOrderIds.length,
+			total_recons: recons.length,
+			total_on_recon_orders: onReconOrders.length,
+			validation_passed: true,
+		});
+
+		return finalData;
 	}
 
 	updateSettlementsInDb = async (finalData: OnReconAggregateObj[]) => {
 		rsfLogger.info("Updating settlements in DB for on recon payload");
 		for (const data of finalData) {
-			const userId = data.settlement.user_id;
-			const orderId = data.settlement.order_id;
+			const userId = data.recon.user_id;
+			const orderId = data.recon.order_id;
 			if (data.onReconData.recon_accord) {
-				await this.settleDbManagementService.updateReconData(userId, orderId, {
+				await this.reconService.updateData(userId, orderId, {
 					recon_status: "SENT_ACCEPTED",
-					on_recon_data: {
-						due_date: data.onReconData.due_date,
-					},
+					due_date: data.onReconData.due_date,
 				});
 			} else {
-				await this.settleDbManagementService.updateReconData(userId, orderId, {
+				await this.reconService.updateData(userId, orderId, {
 					recon_status: "SENT_REJECTED",
-					on_recon_data: {
-						settlement_amount:
-							data.onReconData.on_recon_data?.settlement_amount,
-						commission_amount:
-							data.onReconData.on_recon_data?.commission_amount,
+					on_recon_breakdown: {
+						amount: data.onReconData.on_recon_data?.settlement_amount ?? 0,
+						commission: data.onReconData.on_recon_data?.commission_amount ?? 0,
 						withholding_amount:
-							data.onReconData.on_recon_data?.withholding_amount,
-						tcs: data.onReconData.on_recon_data?.tcs,
-						tds: data.onReconData.on_recon_data?.tds,
+							data.onReconData.on_recon_data?.withholding_amount ?? 0,
+						tcs: data.onReconData.on_recon_data?.tcs ?? 0,
+						tds: data.onReconData.on_recon_data?.tds ?? 0,
 					},
 				});
 			}
 		}
 	};
 
-	handleOnReconWithError = async (errorPayload: any) => {
-		const context = errorPayload.context as RsfContextType;
+	handleOnReconWithError = async (errorPayload: any, dbId: string) => {
+		const context = errorPayload.context;
 		const allRelevantOrders =
-			await this.settleDbManagementService.getAllSettlementsForRecon(
-				context.transaction_id,
-				context.message_id,
-			);
+			await this.reconService.getReconByTransaction(dbId);
 		const filteredOrders = allRelevantOrders.filter(
-			(order) => order.reconInfo.recon_status === "SENT_PENDING",
+			(order) => order.recon_status === "SENT_PENDING",
 		);
 		if (filteredOrders.length === 0) {
 			rsfLogger.error(
@@ -190,13 +242,10 @@ export class OnReconRequestService {
 			"Handling on recon payload with error, updating settlements in DB with Inactives",
 		);
 		for (const order of filteredOrders) {
-			await this.settleDbManagementService.updateReconData(
-				order.user_id,
-				order.order_id,
-				{
-					recon_status: "INACTIVE",
-				},
-			);
+			await this.reconService.updateData(order.user_id, order.order_id, {
+				recon_status: "INACTIVE",
+				on_recon_error: errorPayload.error,
+			});
 		}
 		return getAckResponse();
 	};
@@ -208,4 +257,13 @@ export class OnReconRequestService {
 	3. context validations 
 	4. update data in db
 	orders: => only and all which are sent_pending
+*/
+
+/*
+1. fetch recon payload
+2. check all order_ids are present 
+3. check thier states are SEND_PENDING
+4. update data in db
+5. context validations
+6. nack if no due data and accord is true
 */

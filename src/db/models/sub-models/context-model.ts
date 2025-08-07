@@ -7,7 +7,7 @@ const subLocationSchema = new mongoose.Schema(
 	{ _id: false },
 );
 
-const locationSchema = new mongoose.Schema(
+export const locationSchema = new mongoose.Schema(
 	{
 		country: {
 			type: subLocationSchema,

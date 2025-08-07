@@ -1,25 +1,26 @@
+import { ReconType } from "../../schema/models/recon-schema";
 import { SettleType } from "../../schema/models/settle-schema";
 import { GenOnReconBodyObjectType } from "../../types/generate-recon-types";
 import { checkPerfectAck } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { createOnReconPayload } from "../../utils/on_recon_utils/generate-on-recon-payload";
-import { RsfPayloadDbService } from "../rsf-payloadDb-service";
-import { SettleDbManagementService } from "../settle-service";
+import { ReconDbService } from "../recon-service";
+import { TransactionService } from "../transaction-serivce";
 import { UserService } from "../user-service";
 
 const onReconLogger = logger.child("generate-on-recon-service");
 
 export type OnReconAggregateObj = {
-	settlement: SettleType;
+	recon: ReconType;
 	onReconData: GenOnReconBodyObjectType;
 	orderId: string;
 };
 
 export class GenerateOnReconService {
 	constructor(
-		private readonly settleService: SettleDbManagementService,
+		private readonly reconService: ReconDbService,
 		private readonly userService: UserService,
-		private readonly rsfPayloadService: RsfPayloadDbService,
+		private readonly transactionService: TransactionService,
 	) {}
 
 	/**
@@ -31,50 +32,26 @@ export class GenerateOnReconService {
 		onReconData: GenOnReconBodyObjectType[],
 	) {
 		onReconLogger.info("Starting on-recon payload generation.", { userId });
-
 		const userConfig = await this.userService.getUserById(userId);
 		if (!userConfig) {
 			onReconLogger.error("User validation failed.", { userId });
 			throw new Error(`User with ID: ${userId} not found.`);
 		}
+		const firstData = await this._getReconContext(userId, onReconData[0]);
 
 		const aggregatedData = await this.validateAndAggregateReconData(
 			userId,
+			firstData.reconPayload._id.toString(),
 			onReconData,
 		);
 
 		onReconLogger.info("On-recon data validated and aggregated successfully.", {
 			userId,
 		});
-		const aggregatedDataFirst = aggregatedData[0];
-		const txId =
-			aggregatedDataFirst.settlement.reconInfo.context?.transaction_id;
-		const messageId =
-			aggregatedDataFirst.settlement.reconInfo.context?.message_id;
-		const reconPayloads = await this.rsfPayloadService.getRsfPayloads({
-			page: 1,
-			limit: 1,
-			action: "recon",
-			transaction_id: txId,
-			message_id: messageId,
-			onlyAck: true,
-		});
-		if (!reconPayloads || reconPayloads.length === 0) {
-			onReconLogger.error(
-				"No recon payloads found for the given transaction and message ID.",
-				{
-					txId,
-					messageId,
-				},
-			);
-			throw new Error(
-				"No recon payloads found for the given transaction and message ID.",
-			);
-		}
-		const ackPayloads = reconPayloads.filter((data) =>
-			checkPerfectAck(data.response.data),
-		);
-		return createOnReconPayload(aggregatedData, userConfig, ackPayloads[0]);
+
+		const reconPayload = firstData.reconPayload;
+
+		return createOnReconPayload(aggregatedData, userConfig, reconPayload);
 	}
 
 	/**
@@ -86,6 +63,7 @@ export class GenerateOnReconService {
 	 */
 	private async validateAndAggregateReconData(
 		userId: string,
+		dbId: string,
 		onReconData: GenOnReconBodyObjectType[],
 	): Promise<OnReconAggregateObj[]> {
 		onReconLogger.info("Validating on-recon data batch.", {
@@ -97,27 +75,11 @@ export class GenerateOnReconService {
 			throw new Error("Reconciliation data cannot be empty.");
 		}
 
-		// 1. Get the transaction context from the first record to identify the batch.
-		const { transactionId, messageId } = await this._getReconContext(
-			userId,
-			onReconData[0],
-		);
-
 		// 2. Fetch all settlements from the DB that are part of this transaction batch.
-		const dbSettlements = await this.settleService.getAllSettlementsForRecon(
-			transactionId,
-			messageId,
-		);
-
-		// 3. Ensure the provided data and the DB records are for the same set of orders.
-		if (dbSettlements.length !== onReconData.length) {
-			throw new Error(
-				`Data mismatch: Expected ${dbSettlements.length} settlement records for this batch, but received ${onReconData.length}.`,
-			);
-		}
+		const dbRecons = await this.reconService.getReconByTransaction(dbId);
 
 		// 4. Perform detailed validation on each item and aggregate the results.
-		return this._aggregateAndValidateItems(onReconData, dbSettlements);
+		return this._aggregateAndValidateItems(onReconData, dbRecons);
 	}
 
 	/**
@@ -127,28 +89,39 @@ export class GenerateOnReconService {
 		userId: string,
 		firstRecord: GenOnReconBodyObjectType,
 	) {
-		const firstSettlement = await this.settleService.getSingleSettlement(
+		const firstRecon = await this.reconService.getReconById(
 			userId,
 			firstRecord.order_id,
 		);
 
-		if (!firstSettlement) {
+		if (!firstRecon) {
 			throw new Error(
-				`Settlement not found for order ID: ${firstRecord.order_id}. Cannot establish reconciliation context.`,
+				`Reconciliation record not found for order ID: ${firstRecord.order_id}. Cannot establish reconciliation context.`,
 			);
 		}
 
-		const { context } = firstSettlement.reconInfo;
-		const transactionId = context?.transaction_id;
-		const messageId = context?.message_id;
+		const { transaction_db_ids } = firstRecon;
 
-		if (!transactionId || !messageId) {
+		if (!transaction_db_ids || transaction_db_ids.length === 0) {
 			throw new Error(
-				`Transaction ID or Message ID is missing in the settlement for order ID: ${firstRecord.order_id}.`,
+				`No transaction DB IDs found for order ID: ${firstRecord.order_id}. Cannot establish reconciliation context.`,
 			);
 		}
 
-		return { transactionId, messageId };
+		const latestId = transaction_db_ids[transaction_db_ids.length - 1];
+		const completeReconPayload =
+			await this.transactionService.getReconById(latestId);
+		if (!completeReconPayload) {
+			throw new Error(
+				`Complete reconciliation payload not found for transaction DB ID: ${latestId}. Cannot establish reconciliation context.`,
+			);
+		}
+		const { transaction_id, message_id } = completeReconPayload.context || {};
+		return {
+			transactionId: transaction_id,
+			messageId: message_id,
+			reconPayload: completeReconPayload,
+		};
 	}
 
 	/**
@@ -159,15 +132,15 @@ export class GenerateOnReconService {
 	 */
 	private _aggregateAndValidateItems(
 		onReconData: GenOnReconBodyObjectType[],
-		dbSettlements: SettleType[],
+		dbRecons: ReconType[],
 	): OnReconAggregateObj[] {
 		// Create a Map for efficient O(1) lookups instead of using find() in a loop.
 		const onReconDataMap = new Map(
 			onReconData.map((data) => [data.order_id, data]),
 		);
 
-		return dbSettlements.map((settlement) => {
-			const { order_id } = settlement;
+		return dbRecons.map((recon) => {
+			const order_id = recon.order_id;
 			const reconData = onReconDataMap.get(order_id);
 
 			// VALIDATION 1: All recon orders from the DB must be present in the API payload.
@@ -178,14 +151,14 @@ export class GenerateOnReconService {
 			}
 
 			// VALIDATION 2: All recon states must be 'RECEIVED_PENDING'.
-			if (settlement.reconInfo.recon_status !== "RECEIVED_PENDING") {
+			if (recon.recon_status !== "RECEIVED_PENDING") {
 				throw new Error(
-					`Invalid Status: The settlement for order ID ${order_id} has a status of '${settlement.reconInfo.recon_status}' but must be 'RECEIVED_PENDING'.`,
+					`Invalid Status: The settlement for order ID ${order_id} has a status of '${recon.recon_status}' but must be 'RECEIVED_PENDING'.`,
 				);
 			}
 
 			return {
-				settlement,
+				recon,
 				onReconData: reconData,
 				orderId: order_id,
 			};

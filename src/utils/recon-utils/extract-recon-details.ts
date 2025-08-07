@@ -1,20 +1,25 @@
-import { SubReconDataType } from "../../schema/models/settle-schema";
+import { ReconType } from "../../schema/models/recon-schema";
+import { ReconPayloadSettlement } from "../../schema/rsf/zod/recon-schema";
 
 export const extractReconDetails = (
-	settlement: any,
-	reconPayload: any,
-	reconStatus: SubReconDataType["recon_status"],
-): SubReconDataType => {
+	settlement: ReconPayloadSettlement,
+	userId: string,
+	orderId: string,
+	dbId: string,
+	reconStatus: string,
+): ReconType => {
 	return {
+		user_id: userId,
+		order_id: orderId,
 		recon_status: reconStatus,
 		settlement_id: settlement.id,
-		recon_data: {
+		transaction_db_ids: [dbId],
+		recon_breakdown: {
 			amount: parseFloat(settlement.amount.value),
 			commission: parseFloat(settlement.commission.value),
 			withholding_amount: parseFloat(settlement.withholding_amount.value),
 			tcs: parseFloat(settlement.tcs.value),
 			tds: parseFloat(settlement.tds.value),
 		},
-		context: reconPayload.context,
 	};
 };

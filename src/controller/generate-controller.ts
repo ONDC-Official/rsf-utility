@@ -47,11 +47,6 @@ export class GenerateController {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
-				// res.status(400).json({
-				// 	message: "Invalid request body",
-				// 	errors: z.treeifyError(validationResult.error),
-				// });
-				// return;
 			}
 			const settlementPayload =
 				await this.generateSettleService.generateSettlePayloads(

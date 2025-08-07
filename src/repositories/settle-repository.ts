@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Settle } from "../db/models/settle-model";
-import { SettleSchema } from "../schema/models/settle-schema";
+import { SettleSchema, SettleType } from "../schema/models/settle-schema";
 
 export class SettleRepository {
 	async findWithQuery(queryData: {
@@ -39,7 +39,7 @@ export class SettleRepository {
 	async updateSettlement(
 		userId: string,
 		orderId: string,
-		settlement: Partial<z.infer<typeof SettleSchema>>,
+		settlement: Partial<SettleType>,
 	) {
 		return await Settle.findOneAndUpdate(
 			{ user_id: userId, order_id: orderId },
@@ -66,27 +66,18 @@ export class SettleRepository {
 		});
 		return settlement;
 	}
-	async updateSettlementByOnSettle(
+	async updateSettlementByTransaction(
 		txn_id: string,
-		message_id: string,
 		orderId: string,
 		settlement: Partial<z.infer<typeof SettleSchema>>,
 	) {
 		return await Settle.findOneAndUpdate(
 			{
-				"context.transaction_id": txn_id,
-				"context.message_id": message_id,
+				transaction_db_ids: txn_id,
 				order_id: orderId,
 			},
 			{ $set: settlement },
 			{ new: true },
 		);
-	}
-	async getAllSettlementsForRecon(txn_id: string, message_id: string) {
-		const settlements = await Settle.find({
-			"settleInfo.context.transaction_id": txn_id,
-			"settleInfo.context.message_id": message_id,
-		});
-		return settlements;
 	}
 }

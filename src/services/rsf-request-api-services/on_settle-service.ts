@@ -1,15 +1,46 @@
-import { getAckResponse } from "../../utils/ackUtils";
+import { OnSettlePayload } from "../../schema/rsf/zod/on_settle-schema";
+import { getAckResponse, getNackResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { SettleDbManagementService } from "../settle-service";
+import { TransactionService } from "../transaction-serivce";
 
 const onSettleLogger = logger.child("on-settle-service");
 
 export class OnSettleService {
-	constructor(private settleService: SettleDbManagementService) {}
+	constructor(
+		private settleService: SettleDbManagementService,
+		private transactionService: TransactionService,
+	) {}
 
-	ingestOnSettlePayload = async (ondcOnSettlePayload: any) => {
+	ingestOnSettlePayload = async (ondcOnSettlePayload: OnSettlePayload) => {
 		const txn_id = ondcOnSettlePayload.context.transaction_id;
 		const message_id = ondcOnSettlePayload.context.message_id;
+
+		const settlePayload =
+			await this.transactionService.getSettleByTransactionIdAndMessageId(
+				txn_id,
+				message_id,
+			);
+
+		if (!settlePayload) {
+			onSettleLogger.error("Settle payload not found for on_settle request", {
+				txn_id,
+				message_id,
+			});
+			return getNackResponse("503");
+		}
+
+		if (ondcOnSettlePayload.error) {
+			onSettleLogger.error(
+				"handling error in on_settle in not implemented yet",
+				{
+					txn_id,
+					message_id,
+					error: ondcOnSettlePayload.error,
+				},
+			);
+			throw new Error("Error in on settle payload");
+		}
 
 		if (!txn_id || !message_id) {
 			onSettleLogger.error("Transaction ID or Message ID is missing", {
@@ -18,7 +49,15 @@ export class OnSettleService {
 			});
 			throw new Error("Transaction ID or Message ID is missing");
 		}
-		for (const order of ondcOnSettlePayload.message.settlement.orders) {
+		const orders = ondcOnSettlePayload.message?.settlement.orders;
+		if (!orders || orders.length === 0) {
+			onSettleLogger.error("No orders found in the settlement message", {
+				txn_id,
+				message_id,
+			});
+			throw new Error("No orders found in the settlement message");
+		}
+		for (const order of orders) {
 			if (order.id) {
 				const settlement =
 					await this.settleService.getSettlementByContextAndOrderId(
@@ -37,13 +76,12 @@ export class OnSettleService {
 					status: inter_participant?.status,
 					self_status: self?.status,
 					provider_status: provider?.status,
-					settlement_reference: inter_participant?.settlement_reference,
-					provider_settlement_reference: provider?.settlement_reference,
-					self_settlement_reference: self?.settlement_reference,
+					settlement_reference: inter_participant?.reference_no,
+					provider_settlement_reference: provider?.reference_no,
+					self_settlement_reference: self?.reference_no,
 				});
-				await this.settleService.updateSettlementByOnSettle(
-					txn_id,
-					message_id,
+				await this.settleService.updateSettlementData(
+					settlePayload._id.toString(),
 					order.id,
 					settlement,
 				);

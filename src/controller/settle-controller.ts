@@ -1,18 +1,11 @@
 import { SettleDbManagementService } from "../services/settle-service";
 import logger from "../utils/logger";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { getLoggerMeta } from "../utils/utility";
-import {
-	GenerateSettlementsBody,
-	GetSettlementsQuerySchema,
-	MiscSettlementSchema,
-	NilSettlementSchema,
-	PrepareSettlementsBody,
-} from "../types/settle-params";
+import { GetSettlementsQuerySchema } from "../types/settle-params";
 import { z } from "zod";
 import { validateUserId } from "../types/user-id-type";
 import { sendError, sendSuccess } from "../utils/resUtils";
-import { send } from "process";
 
 const settleLogger = logger.child("settle-controller");
 
@@ -73,67 +66,5 @@ export class SettleController {
 			// res.status(500).json({ message: error.message });
 		}
 		// res.status(500).json({ message: error.message });
-	};
-
-	prepareSettlement = async (req: Request, res: Response) => {
-		try {
-			settleLogger.info("Preparing settlement", getLoggerMeta(req));
-			const userId = req.params.userId;
-			if (!userId) {
-				settleLogger.error("User ID is required", getLoggerMeta(req));
-
-				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
-					message: "User ID is required",
-				});
-
-				// res.status(400).json({ message: "User ID is required" });
-				// return;
-			}
-			const validationResult = PrepareSettlementsBody.safeParse(req.body);
-			if (!validationResult.success) {
-				settleLogger.error(
-					"Invalid request body",
-					getLoggerMeta(req),
-					validationResult.error,
-				);
-
-				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
-					message: "Invalid request body",
-					errors: z.treeifyError(validationResult.error),
-				});
-
-				// res.status(400).json({
-				// 	message: "Invalid request body",
-				// 	errors: z.treeifyError(validationResult.error),
-				// });
-				// return;
-			}
-			const settlements = await this.settleService.prepareSettlements(
-				userId,
-				validationResult.data.order_ids,
-			);
-			settleLogger.info(
-				"Settlement prepared successfully, new settlements created in the DB",
-				getLoggerMeta(req),
-			);
-			return sendSuccess(
-				res,
-				settlements,
-				"Settlement prepared successfully",
-				201,
-			);
-			//
-			// res.status(201).json(settlements);
-		} catch (error: any) {
-			settleLogger.error(
-				"Error preparing settlement",
-				getLoggerMeta(req),
-				error,
-			);
-			return sendError(res, "INTERNAL_ERROR", undefined, {
-				error: error.message,
-			});
-			// res.status(500).json({ message: error.message });
-		}
 	};
 }
