@@ -17,12 +17,9 @@ registry.registerPath({
 			description: "List of reconciliation records",
 			content: {
 				"application/json": {
-					schema: {
-						type: "array",
-						items: {
-							$ref: "#/components/schemas/Recon",
-						},
-					},
+					schema: z.array(z.any()).openapi({
+						description: "An array of reconciliation records for the user",
+					}),
 				},
 			},
 		},
