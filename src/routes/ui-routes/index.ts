@@ -6,6 +6,7 @@ import orderRoutes from "./order-routes";
 import triggerRoutes from "./trigger-routes";
 import rsfPayloadRoutes from "./rsf-payload-routes";
 import generateRoutes from "./generate-routes";
+import authRoutes from "./auth-routes";
 
 const uiRoutes = Router();
 
@@ -16,4 +17,5 @@ uiRoutes.use("/settle", settleRouter);
 uiRoutes.use("/trigger", triggerRoutes);
 uiRoutes.use("/rsf-payloads", rsfPayloadRoutes);
 uiRoutes.use("/generate", generateRoutes);
+uiRoutes.use("/auth", authRoutes);
 export default uiRoutes;
