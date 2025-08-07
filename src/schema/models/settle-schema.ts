@@ -170,8 +170,7 @@ export const SettleSchema = z
 			.openapi({
 				description: "Unique identifier for the settlement",
 				example: "settlement123",
-			})
-			.optional(),
+			}),
 		total_order_value: z.number().openapi({
 			description: "Total order value",
 			example: 1000,
@@ -211,6 +210,18 @@ export const SettleSchema = z
 		status: z.enum(Object.values(ENUMS.SETTLEMENT_STATUS)).openapi({
 			description: "Settlement status",
 			example: "PENDING",
+		}),
+		self_status: z.enum(Object.values(ENUMS.SETTLEMENT_STATUS)).openapi({
+			description: "Self Settlement status",
+			example: "PENDING",
+		}),
+		provider_status: z.enum(Object.values(ENUMS.SETTLEMENT_STATUS)).openapi({
+			description: "Provider Settlement status",
+			example: "PENDING",
+		}),
+		collector_settlement: z.number().openapi({
+			description: "Collector settlement amount",
+			example: 300,
 		}),
 		type: z.enum(Object.values(ENUMS.SETTLEMENT_TYPE)).openapi({
 			description: "Type of settlement",

@@ -171,7 +171,7 @@ export class SettleDbManagementService {
 	}
 
 	prepareSingleSettlement(order: OrderType, userConfig: UserType): SettleType {
-		const { commission, tax, inter_np_settlement } = calculateSettlementDetails(
+		const { commission, tax, inter_np_settlement } =  calculateSettlementDetails(
 			order,
 			userConfig,
 		);
@@ -188,6 +188,10 @@ export class SettleDbManagementService {
 			inter_np_settlement: inter_np_settlement, // calc
 			provider_id: order.provider_id,
 			due_date: new Date(),
+			self_status: "PENDING",
+			provider_status:"PENDING",
+			collector_settlement: "PENDING",
+			settlement_id: "12345",
 			status: "PREPARED",
 			type: "NP-NP",
 			reconInfo: {
