@@ -190,7 +190,7 @@ export class SettleDbManagementService {
 			due_date: new Date(),
 			self_status: "PENDING",
 			provider_status:"PENDING",
-			collector_settlement: "PENDING",
+			collector_settlement: 0,
 			settlement_id: "12345",
 			status: "PREPARED",
 			type: "NP-NP",
