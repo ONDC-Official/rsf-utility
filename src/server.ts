@@ -9,15 +9,15 @@ import uiRoutes from "./routes/ui-routes";
 import { openApiDocument } from "./docs/open-apiSpec";
 import apiRoutes from "./routes/api-routes";
 import swaggerUi from "swagger-ui-express";
-import { send } from "process";
 import { sendError, sendSuccess } from "./utils/resUtils";
+import { correlationIdMiddleware } from "./utils/logger/middleware/correlation-middleware";
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
 
 	const app = express();
 
-	app.use(logger.getCorrelationIdMiddleware());
+	app.use(correlationIdMiddleware);
 	app.use(cors());
 	app.use(express.json({ limit: "50mb" }));
 

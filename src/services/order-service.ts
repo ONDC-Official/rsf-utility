@@ -6,27 +6,34 @@ import { UserService } from "./user-service";
 
 const orderLogger = logger.child("order-service");
 export class OrderService {
-	constructor(private orderRepo: OrderRepository,private userService: UserService) {}
+	constructor(
+		private orderRepo: OrderRepository,
+		private userService: UserService,
+	) {}
 
 	async createOrder(orderData: OrderType) {
-		return await this.orderRepo.createOrder(orderData);
+		const order = await this.orderRepo.createOrder(orderData);
+		await this.userService.pushCounterpartyId(orderData.user_id, [
+			orderData.bap_id,
+			orderData.bpp_id,
+		]);
+		return order;
 	}
-	async getOrders(queryParams: GetOrderParamsType,user_id: string) {
+	async getOrders(queryParams: GetOrderParamsType, user_id: string) {
 		orderLogger.info("Fetching settlements for user", { user_id, queryParams });
 		if (!(await this.userService.checkUserById(user_id))) {
 			throw new Error("User not found");
 		}
-
-		return await this.orderRepo.getAllOrders(queryParams,user_id);
+		return await this.orderRepo.getAllOrders(queryParams, user_id);
 	}
 	async getUniqueOrders(user_id: string, order_id: string) {
 		const order = await this.orderRepo.findOrderByUserAndOrderId(
 			user_id,
-			order_id
+			order_id,
 		);
 		if (!order) {
 			throw new Error(
-				`Order with ID ${order_id} not found for user ${user_id}`
+				`Order with ID ${order_id} not found for user ${user_id}`,
 			);
 		}
 		return order;
@@ -39,16 +46,16 @@ export class OrderService {
 	async updateOrder(
 		user_id: string,
 		order_id: string,
-		updateData: Partial<OrderType>
+		updateData: Partial<OrderType>,
 	) {
 		const updatedOrder = await this.orderRepo.updateOrderByUserAndOrderId(
 			user_id,
 			order_id,
-			updateData
+			updateData,
 		);
 		if (!updatedOrder) {
 			throw new Error(
-				`Failed to update order with ID ${order_id} for user ${user_id}`
+				`Failed to update order with ID ${order_id} for user ${user_id}`,
 			);
 		}
 		return updatedOrder;
@@ -56,23 +63,30 @@ export class OrderService {
 	async checkUserById(userId: string) {
 		return await this.userService.checkUserById(userId);
 	}
-	async updateOrders(
-		userId: string,
-		orders: PatchOrderBodyType,
-	) {
-		const updated_orders : OrderType[] = [];
-		for(const order of orders){
-			const {order_id,due_date} = order;
-			const check = await this.orderRepo.checkOrderByUserAndOrderId(userId, order_id);
+	async updateOrders(userId: string, orders: PatchOrderBodyType) {
+		const updated_orders: OrderType[] = [];
+		for (const order of orders) {
+			const { order_id, due_date } = order;
+			const check = await this.orderRepo.checkOrderByUserAndOrderId(
+				userId,
+				order_id,
+			);
 			if (!check) {
-				throw new Error(`Order with ID ${order_id} not found for user ${userId}`);
+				throw new Error(
+					`Order with ID ${order_id} not found for user ${userId}`,
+				);
 			}
-			const updated_order = await this.orderRepo.updateOrderByUserAndOrderId(userId, order_id, {due_date: due_date});
-			if(!updated_order) {
-				throw new Error(`Failed to update order with ID ${order_id} for user ${userId}`);
+			const updated_order = await this.orderRepo.updateOrderByUserAndOrderId(
+				userId,
+				order_id,
+				{ due_date: due_date },
+			);
+			if (!updated_order) {
+				throw new Error(
+					`Failed to update order with ID ${order_id} for user ${userId}`,
+				);
 			}
 			updated_orders.push(updated_order);
 		}
 	}
-		
 }

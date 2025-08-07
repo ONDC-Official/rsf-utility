@@ -53,6 +53,14 @@ export const UserSchema = z
 		provider_details: z.array(ProviderDetailsSchema).optional().openapi({
 			description: "Details of providers",
 		}),
+		counterparty_ids: z
+			.array(z.string())
+			.optional()
+			.default([])
+			.openapi({
+				description: "List of counterparty IDs",
+				example: ["counterparty1", "counterparty2"],
+			}),
 	})
 	.strict()
 	.openapi("UserSchema");

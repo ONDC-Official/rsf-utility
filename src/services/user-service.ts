@@ -1,5 +1,6 @@
 import { UserRepository } from "../repositories/user-repository";
 import { UserType } from "../schema/models/user-schema";
+import logger from "../utils/logger";
 
 export class UserService {
 	constructor(private userRepo: UserRepository) {}
@@ -92,4 +93,16 @@ export class UserService {
 		}
 		return { bap_user_uri, bpp_user_uri };
 	};
+
+	async pushCounterpartyId(userId: string, counterpartyIds: string[]) {
+		try {
+			return await this.userRepo.pushCounterpartyIds(userId, counterpartyIds);
+		} catch (error) {
+			logger.error(
+				"Error pushing counterparty ID:",
+				{ userId, counterpartyIds },
+				error,
+			);
+		}
+	}
 }

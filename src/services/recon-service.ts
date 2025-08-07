@@ -1,7 +1,11 @@
-import { ReconRepository } from "../repositories/recon-repository";
+import {
+	ReconRepository,
+	ReconQueryParams,
+} from "../repositories/recon-repository";
 import { ReconType } from "../schema/models/recon-schema";
 import { TransactionService } from "./transaction-serivce";
 import { UserService } from "./user-service";
+import { GetReconsQuery } from "../types/recon-params";
 
 export class ReconDbService {
 	constructor(
@@ -9,6 +13,82 @@ export class ReconDbService {
 		private userService: UserService,
 		private transactionService: TransactionService,
 	) {}
+
+	async getRecons(userId: string, queryParams: GetReconsQuery) {
+		// Validate user exists
+		const userExists = await this.userService.checkUserById(userId);
+		if (!userExists) {
+			throw new Error(`User with ID ${userId} not found`);
+		}
+
+		const {
+			page = 1,
+			limit = 10,
+			order_id,
+			settlement_id,
+			recon_status,
+			due_date_from,
+			due_date_to,
+			sort_by = "createdAt",
+			sort_order = "desc",
+			include_overdue,
+		} = queryParams;
+
+		const skip = (page - 1) * limit;
+
+		// Build repository query params
+		const repoQueryParams: ReconQueryParams = {
+			user_id: userId,
+			skip,
+			limit,
+			order_id,
+			settlement_id,
+			recon_status,
+			due_date_from,
+			due_date_to,
+			sort_by,
+			sort_order,
+		};
+
+		// If include_overdue is true, get only overdue recons
+		if (include_overdue) {
+			const overdueRecons = await this.reconRepo.getOverdueRecons(userId);
+			const totalCount = overdueRecons.length;
+
+			return {
+				data: overdueRecons.slice(skip, skip + limit),
+				pagination: {
+					total: totalCount,
+					page,
+					limit,
+					totalPages: Math.ceil(totalCount / limit),
+				},
+			};
+		}
+
+		// Get recons and total count
+		const [recons, totalCount] = await Promise.all([
+			this.reconRepo.findWithQuery(repoQueryParams),
+			this.reconRepo.getCountWithQuery({
+				user_id: userId,
+				order_id,
+				settlement_id,
+				recon_status,
+				due_date_from,
+				due_date_to,
+			}),
+		]);
+
+		return {
+			data: recons,
+			pagination: {
+				total: totalCount,
+				page,
+				limit,
+				totalPages: Math.ceil(totalCount / limit),
+			},
+		};
+	}
 
 	getReconById(userId: string, orderId: string) {
 		return this.reconRepo.findByUserAndOrder(userId, orderId);

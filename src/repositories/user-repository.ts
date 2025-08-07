@@ -42,4 +42,12 @@ export class UserRepository {
 	async deleteUser(id: string) {
 		return await User.findByIdAndDelete(id);
 	}
+
+	async pushCounterpartyIds(userId: string, counterpartyIds: string[]) {
+		return await User.findByIdAndUpdate(
+			userId,
+			{ $addToSet: { counterparty_ids: { $each: counterpartyIds } } },
+			{ new: true, runValidators: true },
+		);
+	}
 }

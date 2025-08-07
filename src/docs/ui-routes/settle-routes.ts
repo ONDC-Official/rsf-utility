@@ -1,11 +1,11 @@
 import {
 	GetSettlementsQuerySchema,
 	PrepareSettlementsBody,
-} from "../types/settle-params";
-import { SettleSchema } from "../schema/models/settle-schema";
-import { objectIdSchema } from "../types/user-id-type";
+} from "../../types/settle-params";
+import { SettleSchema } from "../../schema/models/settle-schema";
+import { objectIdSchema } from "../../types/user-id-type";
 import { z } from "zod";
-import { registry } from "./open-api-registry";
+import { registry } from "../open-api-registry";
 
 // GET /ui/settle/{userId}
 registry.registerPath({

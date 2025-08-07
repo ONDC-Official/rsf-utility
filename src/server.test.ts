@@ -35,8 +35,9 @@ describe("Server Creation", () => {
 			const response = await request(app).get("/health");
 
 			expect(response.status).toBe(200);
-			expect(response.body.status).toBe("ok");
-			expect(response.body.db).toBe("connected"); // From our mock
+			console.log(response.body, " Health Check Response");
+			expect(response.body.message).toBe("OK");
+			expect(response.body.data.db).toBe("connected"); // From our mock
 		});
 	});
 
