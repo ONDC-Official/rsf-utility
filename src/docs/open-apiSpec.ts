@@ -9,6 +9,7 @@ import "./settle-routes";
 import "./generate-routes";
 import "./trigger-routes";
 import "./rsf-payloads";
+import "./auth-routes";
 
 // Generate the OpenAPI document from the populated registry
 const generator = new OpenApiGeneratorV31(registry.definitions);
@@ -20,5 +21,5 @@ export const openApiDocument = generator.generateDocument({
 		title: "ondc-rsf-utility API",
 		description: "backend APIs for ondc-rsf-utility",
 	},
-	servers: [{ url: "/" }],
+	servers: [{ url: "/rsf-utility" }],
 });

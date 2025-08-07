@@ -42,7 +42,7 @@ const SettleSchema = new mongoose.Schema(
 		},
 		transaction_db_ids: { type: [String] },
 	},
-	{ timestamps: true },
+	{ timestamps: true, strict: false },
 );
 
 SettleSchema.index({ user_id: 1, order_id: 1 }, { unique: true }); // Ensure unique settlement per user and order

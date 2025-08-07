@@ -65,6 +65,11 @@ export const ERROR_CODES = {
 		message: "Order not found.",
 		httpStatus: 404,
 	},
+	INVALID_CLIENT_ID: {
+		code: "AUTH_001",
+		message: "Invalid client ID.",
+		httpStatus: 403,
+	},
 
 	// // Settlement-related errors
 	// SETTLEMENT_CREATION_FAILED: {

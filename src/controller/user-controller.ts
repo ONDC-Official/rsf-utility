@@ -195,9 +195,14 @@ export class UserController {
 			const payload = req.body;
 			const { domain, bap_uri, bpp_uri } = payload.context;
 			if (!domain || !bap_uri || !bpp_uri) {
-				return res.status(400).json({
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Domain, BAP URL, and BPP URL are required in the context",
 				});
+				// logger.error("Domain, BAP URL, and BPP URL are required in the context", getLoggerMeta(req));
+				//
+				// return res.status(400).json({
+				// 	message: "Domain, BAP URL, and BPP URL are required in the context",
+				// });
 				// return res.status(400).json({
 				// 	message: "Domain, BAP URL, and BPP URL are required in the context",
 				// });
@@ -209,7 +214,7 @@ export class UserController {
 					bpp_uri,
 				);
 			if (!bap_user_uri && !bpp_user_uri) {
-				return res.status(400).json({
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
 					message: "Cannot find user for this domain and uri.",
 				});
 				// return res.status(400).json({
