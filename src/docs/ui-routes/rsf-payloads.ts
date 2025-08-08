@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { registry } from "./open-api-registry";
-import { GetRsfPayloadsParams } from "../types/rsf-payloads-params";
+import { registry } from "../open-api-registry";
+import { GetRsfPayloadsParams } from "../../types/rsf-payloads-params";
 
 // GET /ui/rsf-payloads/
 registry.registerPath({

@@ -244,11 +244,6 @@ baseReconSchema.index({
 	"context.action": 1,
 	"context.message_id": 1,
 });
-baseReconSchema.index({ "context.bap_id": 1, "context.bpp_id": 1 });
-baseReconSchema.index({ "context.timestamp": 1 });
-baseReconSchema.index({ "message.orders.id": 1 });
-baseReconSchema.index({ "message.orders.settlements.id": 1 });
-baseReconSchema.index({ "message.settlement.id": 1 });
 
 // Create the base model from the base schema
 const TransactionModel = model("Transaction", baseReconSchema);

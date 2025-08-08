@@ -27,11 +27,6 @@ export class UserController {
 				return sendError(res, "INVALID_USER_DATA", undefined, {
 					errors: z.treeifyError(validationResult.error),
 				});
-				// res.status(400).json({
-				// 	message: "Invalid user data",
-				// 	errors: z.treeifyError(validationResult.error),
-				// });
-				// return;
 			}
 			userLogger.info(
 				"Creating user",

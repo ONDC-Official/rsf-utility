@@ -23,6 +23,11 @@ const UserSchema = new mongoose.Schema(
 		tds: { type: Number, required: true },
 		msn: { type: Boolean, required: true },
 		provider_details: { type: [ProviderDetails], required: true },
+		counterparty_ids: {
+			type: [String],
+			required: true,
+			default: [],
+		},
 	},
 	{ timestamps: true },
 );

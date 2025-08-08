@@ -1,6 +1,7 @@
 import { GenerateController } from "../controller/generate-controller";
 import { OrderController } from "../controller/order-controller";
 import { PayloadController } from "../controller/payload-controller";
+import { ReconController } from "../controller/recon-controller";
 import { RsfPayloadDbController } from "../controller/rsf-db-controller";
 import { RsfRequestController } from "../controller/rsf-request-controller";
 import { SettleController } from "../controller/settle-controller";
@@ -61,6 +62,7 @@ const reconService = new ReconDbService(
 	userService,
 	transactionService,
 );
+const reconController = new ReconController(reconService);
 
 const settlePrepareService = new SettlePrepareService(
 	userService,
@@ -144,6 +146,7 @@ export const container = {
 	triggerController,
 	settleController,
 	settlePrepareController,
+	reconController,
 	payloadController,
 	rsfRequestController,
 	rsfPayloadDbController,

@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { UserSchema } from "../schema/models/user-schema";
-import { objectIdSchema } from "../types/user-id-type";
-import { registry } from "./open-api-registry";
+import { UserSchema } from "../../schema/models/user-schema";
+import { objectIdSchema } from "../../types/user-id-type";
+import { registry } from "../open-api-registry";
 
 // GET /ui/users/
 registry.registerPath({

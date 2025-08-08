@@ -1,4 +1,4 @@
-import { registry } from "./open-api-registry";
+import { registry } from "../open-api-registry";
 import { z } from "zod";
 
 const TokenRequestSchema = z

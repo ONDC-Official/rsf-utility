@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { objectIdSchema } from "../types/user-id-type";
-import { TriggerActionSchema } from "../types/trigger-types";
-import { registry } from "./open-api-registry";
+import { objectIdSchema } from "../../types/user-id-type";
+import { TriggerActionSchema } from "../../types/trigger-types";
+import { registry } from "../open-api-registry";
 
 // POST /ui/trigger/{userId}/{action}
 registry.registerPath({

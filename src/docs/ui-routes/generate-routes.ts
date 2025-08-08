@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { registry } from "./open-api-registry";
-import { objectIdSchema } from "../types/user-id-type";
+import { registry } from "../open-api-registry";
+import { objectIdSchema } from "../../types/user-id-type";
 import {
 	GenerateSettlementsBody,
 	MiscSettlementSchema,
 	NilSettlementSchema,
-} from "../types/settle-params";
-import { GenReconBody } from "../types/generate-recon-types";
+} from "../../types/settle-params";
+import { GenOnReconBody, GenReconBody } from "../../types/generate-recon-types";
 
 // POST /ui/generate/{userId}/settle/np-np
 registry.registerPath({
@@ -103,6 +103,33 @@ registry.registerPath({
 	responses: {
 		200: {
 			description: "Reconciliation generated successfully.",
+			content: {
+				"application/json": {
+					schema: z.object({
+						data: z
+							.any()
+							.openapi({ description: "valid settle ondc rsf payload" }),
+					}),
+				},
+			},
+		},
+	},
+});
+
+// POST /ui/generate/{userId}/on_recon
+registry.registerPath({
+	method: "post",
+	path: "/ui/generate/{userId}/on_recon",
+	summary: "Generate an ON-RECON for a user",
+	request: {
+		params: z.object({ userId: objectIdSchema }),
+		body: {
+			content: { "application/json": { schema: GenOnReconBody } },
+		},
+	},
+	responses: {
+		200: {
+			description: "ON-RECON generated successfully.",
 			content: {
 				"application/json": {
 					schema: z.object({

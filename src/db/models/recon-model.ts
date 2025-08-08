@@ -71,10 +71,5 @@ const ReconTableSchema = new mongoose.Schema(
 
 // Indexes for better performance
 ReconTableSchema.index({ user_id: 1, order_id: 1 }, { unique: true });
-ReconTableSchema.index({ settlement_id: 1 });
-ReconTableSchema.index({ recon_status: 1 });
-ReconTableSchema.index({ due_date: 1 });
-ReconTableSchema.index({ user_id: 1, recon_status: 1 });
-ReconTableSchema.index({ user_id: 1, due_date: 1 });
 
 export const Recon = mongoose.model("Recon", ReconTableSchema);

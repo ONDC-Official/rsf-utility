@@ -44,7 +44,7 @@ export const ReconSchema = z
 		}),
 		recon_status: z.enum(Object.keys(ENUMS.INTERNAL_RECON_STATUS)).openapi({
 			description: "Recon status",
-			example: "PENDING",
+			example: "SENT_PENDING",
 		}),
 		settlement_id: z.string().openapi({
 			description: "Settlement ID",
