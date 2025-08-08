@@ -48,20 +48,20 @@ export class RsfRequestController {
 			}
 
 			// perform header-validations
-			if (["on_settle", "on_report"].includes(action)) {
-				const isHeaderValid = validateHeader(
-					req.headers,
-					payload,
-					SettleAgencyConfig.agencyKey,
-				);
-				if (!isHeaderValid) {
-					rsfLogger.error("Invalid header", getLoggerMeta(req));
-					res.status(200).send(getNackResponse("70000"));
-					return;
-				}
-			} else {
-				// ! TODO: implement header validations for on_recon
-			}
+			// if (["on_settle", "on_report"].includes(action)) {
+			// 	const isHeaderValid = validateHeader(
+			// 		req.headers,
+			// 		payload,
+			// 		SettleAgencyConfig.agencyKey,
+			// 	);
+			// 	if (!isHeaderValid) {
+			// 		rsfLogger.error("Invalid header", getLoggerMeta(req));
+			// 		res.status(200).send(getNackResponse("70000"));
+			// 		return;
+			// 	}
+			// } else {
+			// 	// ! TODO: implement header validations for on_recon
+			// }
 			logger.info("Valid RSF payload received", getLoggerMeta(req), {
 				action,
 				payload,
