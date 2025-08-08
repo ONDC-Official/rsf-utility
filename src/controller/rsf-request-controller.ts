@@ -70,9 +70,7 @@ export class RsfRequestController {
 				payload,
 				actionValidationResult.data,
 			);
-			if (response.error) {
-			}
-			res.status(200).send(getAckResponse());
+			return res.send(response);
 		} catch (error) {
 			rsfLogger.error("Error handling RSF payload", getLoggerMeta(req), {
 				error,

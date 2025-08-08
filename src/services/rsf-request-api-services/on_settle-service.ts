@@ -69,7 +69,7 @@ export class OnSettleService {
 					return getNackResponse("503");
 				}
 				const { inter_participant, self, provider } = order;
-
+				logger.info("updating data", order);
 				Object.assign(settlement, {
 					status: inter_participant?.status,
 					self_status: self?.status,

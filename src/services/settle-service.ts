@@ -183,6 +183,7 @@ export class SettleDbManagementService {
 		orderId: string,
 		settlement: Partial<SettleType>,
 	) {
+		logger.info("updating...setlement", settlement);
 		return await this.settleRepo.updateSettlementByTransaction(
 			payload_id,
 			orderId,
