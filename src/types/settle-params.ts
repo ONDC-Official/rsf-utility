@@ -1,4 +1,5 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
+import { strict } from "assert/strict";
 import { z } from "zod";
 
 extendZodWithOpenApi(z);
@@ -209,3 +210,5 @@ export const NilSettlementSchema = z
 	.openapi({
 		description: "Miscellaneous settlement payload structure",
 	});
+
+// export const UpdateSettlementSchema = z

@@ -66,9 +66,7 @@ export class OnSettleService {
 						order.id,
 					);
 				if (!settlement) {
-					throw new Error(
-						"Settlement not found for the given context and order ID",
-					);
+					return getNackResponse("503");
 				}
 				const { inter_participant, self, provider } = order;
 

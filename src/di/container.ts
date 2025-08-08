@@ -32,6 +32,7 @@ import { TransactionService } from "../services/transaction-serivce";
 import { TransactionRepository } from "../repositories/transaction-repository";
 import { ReconDbService } from "../services/recon-service";
 import { ReconRepository } from "../repositories/recon-repository";
+import { RsfOrchestratorService } from "../services/rsf-orchestrator-service";
 
 const rsfPayloadRepository = new RsfPayloadRepository();
 const rsfPayloadDbService = new RsfPayloadDbService(rsfPayloadRepository);
@@ -62,7 +63,17 @@ const reconService = new ReconDbService(
 	userService,
 	transactionService,
 );
-const reconController = new ReconController(reconService);
+
+const rsfOrchestratorService = new RsfOrchestratorService(
+	reconService,
+	settleDbManagementService,
+	orderService,
+	userService,
+);
+const reconController = new ReconController(
+	reconService,
+	rsfOrchestratorService,
+);
 
 const settlePrepareService = new SettlePrepareService(
 	userService,

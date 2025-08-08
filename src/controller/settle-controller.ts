@@ -22,8 +22,6 @@ export class SettleController {
 				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
 					message: "Valid User ID is required",
 				});
-				// res.status(400).json({ message: "Valid User ID is required" });
-				// return;
 			}
 			const validationResult = GetSettlementsQuerySchema.safeParse(req.query);
 			if (!validationResult.success) {
@@ -56,8 +54,47 @@ export class SettleController {
 			return sendError(res, "INTERNAL_ERROR", undefined, {
 				error: error.message,
 			});
-			// res.status(500).json({ message: error.message });
 		}
-		// res.status(500).json({ message: error.message });
+	};
+
+	updateSettlement = async (req: Request, res: Response) => {
+		try {
+			settleLogger.info("Updating settlement", getLoggerMeta(req));
+			const userId = req.params.userId;
+			if (!validateUserId(userId)) {
+				settleLogger.error("Valid User ID is required", getLoggerMeta(req));
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Valid User ID is required",
+				});
+			}
+			const validationResult = GetSettlementsQuerySchema.safeParse(req.query);
+			if (!validationResult.success) {
+				settleLogger.error(
+					"Invalid query parameters",
+					getLoggerMeta(req),
+					validationResult.error,
+				);
+
+				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
+					message: "Invalid query parameters",
+					errors: z.treeifyError(validationResult.error),
+				});
+			}
+			// const data = await this.settleService.updateSettlement(
+			// 	userId,
+			// 	validationResult.data,
+			// );
+		} catch (error: any) {
+			settleLogger.error(
+				"Error updating settlement",
+				getLoggerMeta(req),
+				error,
+			);
+
+			return sendError(res, "INTERNAL_ERROR", undefined, {
+				error: error.message,
+			});
+		}
 	};
 }

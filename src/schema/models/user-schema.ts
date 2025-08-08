@@ -38,12 +38,20 @@ export const UserSchema = z
 			description: "Domain",
 			example: "retail",
 		}),
-		tcs: z.number().openapi({
+		np_tcs: z.number().openapi({
 			description: "TCS",
 			example: 2.5,
 		}),
-		tds: z.number().openapi({
+		np_tds: z.number().openapi({
 			description: "TDS",
+			example: 10,
+		}),
+		pr_tcs: z.number().optional().nullable().openapi({
+			description: "Provider TCS",
+			example: 2.5,
+		}),
+		pr_tds: z.number().optional().nullable().openapi({
+			description: "Provider TDS",
 			example: 10,
 		}),
 		msn: z.boolean().openapi({
