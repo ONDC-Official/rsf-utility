@@ -7,6 +7,7 @@ import triggerRoutes from "./trigger-routes";
 import rsfPayloadRoutes from "./rsf-payload-routes";
 import generateRoutes from "./generate-routes";
 import authRoutes from "./auth-routes";
+import reconRouter from "./recon-routes";
 
 const uiRoutes = Router();
 
@@ -18,4 +19,5 @@ uiRoutes.use("/trigger", triggerRoutes);
 uiRoutes.use("/rsf-payloads", rsfPayloadRoutes);
 uiRoutes.use("/generate", generateRoutes);
 uiRoutes.use("/auth", authRoutes);
+uiRoutes.use("/recon", reconRouter);
 export default uiRoutes;
