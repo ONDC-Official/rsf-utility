@@ -199,4 +199,12 @@ export class SettleDbManagementService {
 		}
 		return await this.settleRepo.insertSettlementList(settlements);
 	}
+
+	async deleteSettlement(userId: string, orderId: string): Promise<void> {
+		settleLogger.info("Deleting settlement", {
+			userId,
+			orderId,
+		});
+		await this.settleRepo.deleteSettlement(userId, orderId);
+	}
 }

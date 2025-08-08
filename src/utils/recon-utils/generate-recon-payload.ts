@@ -40,8 +40,8 @@ export function reconBuilder(
 				const withholdingAmount =
 					apiData.recon_data?.withholding_amount ??
 					settleData.withholding_amount;
-				const tcs = apiData.recon_data?.tcs ?? userConfig.tcs;
-				const tds = apiData.recon_data?.tds ?? userConfig.tds;
+				const tcs = apiData.recon_data?.tcs ?? userConfig.np_tcs;
+				const tds = apiData.recon_data?.tds ?? userConfig.np_tds;
 				return {
 					id: settleData.order_id,
 					amount: {

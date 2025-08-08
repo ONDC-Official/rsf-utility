@@ -19,8 +19,10 @@ const UserSchema = new mongoose.Schema(
 		},
 		subscriber_url: { type: String, required: true },
 		domain: { type: String, required: true },
-		tcs: { type: Number, required: true },
-		tds: { type: Number, required: true },
+		np_tcs: { type: Number, required: true },
+		np_tds: { type: Number, required: true },
+		pr_tcs: { type: Number, required: false },
+		pr_tds: { type: Number, required: false },
 		msn: { type: Boolean, required: true },
 		provider_details: { type: [ProviderDetails], required: true },
 		counterparty_ids: {
