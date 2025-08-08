@@ -37,13 +37,6 @@ export class SettleController {
 					message: "Invalid query parameters",
 					errors: z.treeifyError(validationResult.error),
 				});
-				// return res.status(400).json({
-
-				// res.status(400).json({
-				// 	message: "Invalid query parameters",
-				// 	errors: z.treeifyError(validationResult.error),
-				// });
-				// return;
 			}
 			const data = await this.settleService.getSettlements(
 				userId,
