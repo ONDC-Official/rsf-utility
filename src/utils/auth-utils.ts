@@ -5,7 +5,7 @@ import { StringValue } from "ms";
 
 export function signJwt(
 	payload: Record<string, any>,
-	expiresIn: StringValue = "7d",
+	expiresIn?: StringValue,
 ): string {
 	const { JWT_SECRET } = config;
 	const ALGORITHM = "HS256";
@@ -15,9 +15,13 @@ export function signJwt(
 	}
 
 	const options: SignOptions = {
-		expiresIn,
+		// expiresIn,
 		algorithm: ALGORITHM,
 	};
+
+	if (expiresIn) {
+		options.expiresIn = expiresIn;
+	}
 
 	return jwt.sign(payload, JWT_SECRET as Secret, options);
 }

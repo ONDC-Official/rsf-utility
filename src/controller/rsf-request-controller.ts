@@ -40,12 +40,12 @@ export class RsfRequestController {
 
 				return res.status(200).send(getNackResponse("70002"));
 			}
-			const auth = req.headers.authorization;
-			if (!auth) {
-				logger.warning("Authorization header is missing", getLoggerMeta(req));
-				res.status(200).send(getNackResponse("70001"));
-				return;
-			}
+			// const auth = req.headers.authorization;
+			// if (!auth) {
+			// 	logger.warning("Authorization header is missing", getLoggerMeta(req));
+			// 	res.status(200).send(getNackResponse("70001"));
+			// 	return;
+			// }
 
 			// perform header-validations
 			// if (["on_settle", "on_report"].includes(action)) {
