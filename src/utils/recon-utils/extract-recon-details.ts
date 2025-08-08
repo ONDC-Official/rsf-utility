@@ -6,7 +6,7 @@ export const extractReconDetails = (
 	userId: string,
 	orderId: string,
 	dbId: string,
-	reconStatus: string,
+	reconStatus: ReconType["recon_status"],
 ): ReconType => {
 	return {
 		user_id: userId,

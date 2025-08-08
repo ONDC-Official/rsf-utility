@@ -42,7 +42,7 @@ export const ReconSchema = z
 			description: "Order ID",
 			example: "order123",
 		}),
-		recon_status: z.enum(Object.keys(ENUMS.INTERNAL_RECON_STATUS)).openapi({
+		recon_status: z.enum(Object.values(ENUMS.INTERNAL_RECON_STATUS)).openapi({
 			description: "Recon status",
 			example: "SENT_PENDING",
 		}),

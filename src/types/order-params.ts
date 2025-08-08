@@ -1,11 +1,14 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../constants/enums";
 
 extendZodWithOpenApi(z);
 
-const allowedStatuses = ["In-progress", "Completed"] as const;
+const allowedStatuses = Object.values(ENUMS.ORDER_STATE);
 
-const allowedSettlementStatuses = ["true", "false"] as const;
+const allowedSettlementStatuses = Object.values(
+	ENUMS.INTERNAL_ORDER_SETTLE_STATUS,
+);
 
 export const GetOrdersQuerySchema = z
 	.object({
@@ -35,30 +38,26 @@ export const GetOrdersQuerySchema = z
 			})
 			.optional(),
 
-		status: z
-			.enum(allowedStatuses)
+		state: z
+			.preprocess(
+				(val) => (Array.isArray(val) ? val : [val]),
+				z.array(z.enum(allowedStatuses)).min(1),
+			)
 			.openapi({
-				description: "Settlement status to filter",
+				description: "Settlement state to filter",
 				example: "PENDING",
 			})
 			.optional(),
 		settle_status: z
-			.enum(allowedSettlementStatuses)
+			.preprocess(
+				(val) => (Array.isArray(val) ? val : [val]),
+				z.array(z.enum(allowedSettlementStatuses)).min(1),
+			)
 			.openapi({
 				description: "Order status to filter",
 				example: false,
 			})
 			.optional(),
-		is_completed: z
-			.string()
-			.optional()
-			.transform((val) => val === "true")
-			.openapi({
-				description: "Check for completed orders",
-				example: false,
-			})
-			.optional()
-			.default(false),
 	})
 	.strict();
 
@@ -67,7 +66,7 @@ export const PatchOrderBody = z
 		z.object({
 			order_id: z.string(),
 			due_date: z.date(), // or z.coerce.date() if you want strict date parsing
-		})
+		}),
 	)
 	.min(1)
 	.max(1000)
@@ -76,8 +75,6 @@ export type PatchOrderBodyType = z.infer<typeof PatchOrderBody>;
 export type GetOrderParamsType = {
 	page: number;
 	limit: number;
-	status?: string;
-	settle_status?: string;
-	is_completed?: boolean;
-	is_pending?: boolean;
+	state?: string[];
+	settle_status?: string[];
 };

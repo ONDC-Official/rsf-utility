@@ -34,3 +34,7 @@ bap_id from userProfile , bpp_id fixed
 recon
 
 \*/
+
+move to ready
+: delete orders from settle
+: un-mark orders: [READY,SETTLE,RECON]

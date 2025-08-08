@@ -8,17 +8,19 @@ export class OrderRepository {
 		return await Order.create(data);
 	}
 	async getAllOrders(queryParams: GetOrderParamsType, user_id: string) {
-		const { is_completed: isCompleted, page, limit, ...rest } = queryParams;
-		const cleanedQuery: Record<string, any> = {
-			...rest,
-			user_id: user_id,
-		};
-		if (queryParams.is_completed) {
-			cleanedQuery.status = "Completed";
-		} else {
-			cleanedQuery.status = { $ne: "Completed" };
+		const { page, limit, state, settle_status } = queryParams;
+		const query: any = {};
+		if (user_id) {
+			query.user_id = user_id;
 		}
-		return await Order.find(cleanedQuery)
+		if (state && state.length > 0) {
+			query.state = { $in: state };
+		}
+		if (settle_status && settle_status.length > 0) {
+			query.settle_status = { $in: settle_status };
+		}
+
+		return await Order.find(query)
 			.skip((page - 1) * limit)
 			.limit(limit)
 			.sort({ createdAt: -1 });

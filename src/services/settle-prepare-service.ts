@@ -1,3 +1,4 @@
+import { ENUMS } from "../constants/enums";
 import { OrderType } from "../schema/models/order-schema";
 import { SettleType } from "../schema/models/settle-schema";
 import { ISettlementStrategy } from "../strategies/iprepare-settlements";
@@ -59,7 +60,7 @@ export class SettlePrepareService {
 				},
 			);
 			await this.orderService.updateOrder(userId, orderId, {
-				settle_status: true,
+				settle_status: ENUMS.INTERNAL_ORDER_SETTLE_STATUS.SETTLE,
 			});
 			settles.push(settleData);
 		}
