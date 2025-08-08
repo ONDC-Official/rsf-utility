@@ -2,10 +2,15 @@ import { subscriberConfig } from "../../config/rsf-utility-instance-config";
 import { UserType } from "../../schema/models/user-schema";
 import { ReconAggregateData } from "../../types/generate-recon-types";
 import { v4 as uuidv4 } from "uuid";
+import logger from "../logger";
 export function reconBuilder(
 	userConfig: UserType,
 	reconData: ReconAggregateData,
 ) {
+	logger.debug(
+		`Recon Builder called with data: ${JSON.stringify(reconData)}`,
+		reconData,
+	);
 	return {
 		context: {
 			domain: "ONDC:NTS10",
@@ -40,8 +45,9 @@ export function reconBuilder(
 				const withholdingAmount =
 					apiData.recon_data?.withholding_amount ??
 					settleData.withholding_amount;
-				const tcs = apiData.recon_data?.tcs ?? userConfig.np_tcs;
-				const tds = apiData.recon_data?.tds ?? userConfig.np_tds;
+				const tcs: number = apiData.recon_data?.tcs ?? userConfig.np_tcs;
+				const tds: number = apiData.recon_data?.tds ?? userConfig.np_tds;
+				console.log(`TCS: ${tcs}, TDS: ${tds}`);
 				return {
 					id: settleData.order_id,
 					amount: {

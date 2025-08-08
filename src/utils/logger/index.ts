@@ -55,61 +55,27 @@ class AutomationLogger {
 		return AutomationLogger.instance;
 	}
 
-	/**
-	 * Recursively removes keys containing 'private_key' or 'privateKey' from an object.
-	 * This method is case-insensitive.
-	 * @param obj The object to sanitize.
-	 * @returns A new object with sensitive keys removed.
-	 */
-	private _sanitizeObject(obj: any): any {
-		if (obj === null || typeof obj !== "object") {
-			return obj;
-		}
-
-		if (Array.isArray(obj)) {
-			return obj.map((item) => this._sanitizeObject(item));
-		}
-
-		const sanitizedObj: { [key: string]: any } = {};
-		for (const key in obj) {
-			if (Object.prototype.hasOwnProperty.call(obj, key)) {
-				const lowerCaseKey = key.toLowerCase();
-				if (
-					lowerCaseKey.includes("private_key") ||
-					lowerCaseKey.includes("privatekey")
-				) {
-					continue; // Skip sensitive key
-				}
-				sanitizedObj[key] = this._sanitizeObject(obj[key]);
-			}
-		}
-		return sanitizedObj;
-	}
-
 	info(message: string, ...args: any[]) {
-		const sanitizedArgs = args.map((arg) => this._sanitizeObject(arg));
-
-		const processedArgs = sanitizedArgs.map((arg, index) => {
+		args = args.map((arg, index) => {
 			if (typeof arg === "string") {
 				return { [`message_${index + 2}`]: arg };
 			}
 			return arg;
 		});
-		message = this.getFormattedMessage(message, "info", ...processedArgs);
-		this.logger.info(message, ...processedArgs);
+		message = this.getFormattedMessage(message, "info", ...args);
+		this.logger.info(message, ...args);
 	}
 
 	error(message: string, meta?: any, error?: unknown) {
-		// Use original meta to find correlationId before it's sanitized
 		message = this.getFormattedMessage(message, "error", meta);
-		let logObject: any = { ...meta };
-
 		if (isAxiosError(error)) {
-			logObject = {
-				...logObject,
+			this.logger.error(message, {
+				// By including the error's stack, you ensure it gets logged correctly
 				stack: error.stack,
+
+				// Add rich, structured context from the Axios error
 				axios_error: {
-					code: error.code,
+					code: error.code, // e.g., 'ECONNABORTED', 'ERR_BAD_REQUEST'
 					request: {
 						method: error.config?.method,
 						url: error.config?.url,
@@ -120,57 +86,54 @@ class AutomationLogger {
 						data: error.response?.data,
 					},
 				},
-			};
-		} else if (error instanceof Error) {
-			logObject = {
-				...logObject,
+			});
+			return;
+		}
+		if (error instanceof Error) {
+			this.logger.error(message, {
 				error: error.message,
 				stack: error.stack,
-			};
-		} else if (error !== undefined && error !== null) {
-			logObject = {
-				...logObject,
-				error,
-			};
+				...meta,
+			});
+			return;
 		}
-		// Sanitize the final constructed object before logging
-		this.logger.error(message, logObject);
+		if (
+			typeof error === "string" ||
+			typeof error === "number" ||
+			typeof error === "boolean" ||
+			typeof error === "object"
+		) {
+			this.logger.error(message, {
+				error: error,
+				...meta,
+			});
+			return;
+		}
+		this.logger.error(message, {
+			...meta,
+		});
 	}
 
 	debug(message: string, ...args: any[]) {
-		const sanitizedArgs = args.map((arg) => this._sanitizeObject(arg));
-
-		const processedArgs = sanitizedArgs.map((arg, index) => {
+		args = args.map((arg, index) => {
 			if (typeof arg === "string") {
 				return { [`debug_${index + 1}`]: arg };
 			}
 			return arg;
 		});
-		message = this.getFormattedMessage(message, "debug", ...processedArgs);
-		this.logger.debug(message, ...processedArgs);
+		message = this.getFormattedMessage(message, "debug", ...args);
+		this.logger.debug(message, ...args);
 	}
 
 	warning(message: string, ...args: any[]) {
-		const sanitizedArgs = args.map((arg) => this._sanitizeObject(arg));
-
-		const processedArgs = sanitizedArgs.map((arg, index) => {
+		args = args.map((arg, index) => {
 			if (typeof arg === "string") {
 				return { [`warning_${index + 1}`]: arg };
 			}
 			return arg;
 		});
-		message = this.getFormattedMessage(message, "warning", ...processedArgs);
-		this.logger.warn(message, ...processedArgs);
-	}
-
-	child(scope: string, meta?: any): AutomationLogger {
-		// Sanitize metadata before attaching it to the child logger
-		const sanitizedMeta = this._sanitizeObject(meta);
-
-		const winstonChild = this.logger.child({ scope: scope, ...sanitizedMeta });
-		const childLogger = Object.create(this);
-		childLogger.logger = winstonChild;
-		return childLogger;
+		message = this.getFormattedMessage(message, "warning", ...args);
+		this.logger.warn(message, ...args);
 	}
 
 	startTimer(): winston.Profiler {
@@ -179,6 +142,15 @@ class AutomationLogger {
 
 	getCorrelationIdMiddleware() {
 		return correlationIdMiddleware;
+	}
+
+	child(scope: string, meta?: any): AutomationLogger {
+		// Sanitize metadata before attaching it to the child logger
+
+		const winstonChild = this.logger.child({ scope: scope, ...meta });
+		const childLogger = Object.create(this);
+		childLogger.logger = winstonChild;
+		return childLogger;
 	}
 
 	getFormattedMessage(
