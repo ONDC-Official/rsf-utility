@@ -114,10 +114,13 @@ export const OrderSchema = z
 		quote: QuoteSchema.openapi({
 			description: "Quote details",
 		}),
-		settle_status: z.boolean().openapi({
-			description: "Status of settlement for an order",
-			example: false,
-		}),
+		settle_status: z
+			.enum(Object.values(ENUMS.INTERNAL_ORDER_SETTLE_STATUS))
+			.default(ENUMS.INTERNAL_ORDER_SETTLE_STATUS.READY)
+			.openapi({
+				description: "Status of settlement for an order",
+				example: ENUMS.INTERNAL_ORDER_SETTLE_STATUS.READY,
+			}),
 		payment_transaction_id: z.string().optional().nullable().openapi({
 			description: "Transaction id of Payment",
 			example: "transID123",

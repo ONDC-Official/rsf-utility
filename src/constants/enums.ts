@@ -134,6 +134,12 @@ export const INTERNAL_RECON_STATUS = {
 	RECEIVED_REJECTED: "RECEIVED_REJECTED",
 } as const;
 
+export const INTERNAL_ORDER_SETTLE_STATUS = {
+	READY: "READY", // new order added in db
+	SETTLE: "SETTLE", // order prepared for settlement
+	RECON: "RECON", // order after successful recon
+};
+
 export const ENUMS = {
 	ORDER_STATE,
 	NP_TYPE,
@@ -148,4 +154,5 @@ export const ENUMS = {
 	PARTICIPANT_TYPE,
 	SETTLEMENT_BASIS,
 	INTERNAL_RECON_STATUS,
+	INTERNAL_ORDER_SETTLE_STATUS,
 };
