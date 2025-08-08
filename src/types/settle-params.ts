@@ -24,7 +24,17 @@ export const GetSettlementsQuerySchema = z
 				example: 1,
 			})
 			.optional(),
-
+		order_id: z
+			.string()
+			.openapi({
+				param: {
+					name: "order_id",
+					in: "query",
+				},
+				description: "Filter by specific order ID",
+				example: "order123",
+			})
+			.optional(),
 		limit: z.coerce
 			.number()
 			.positive()
