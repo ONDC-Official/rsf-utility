@@ -139,7 +139,41 @@ export class OnReconRequestService {
 		this.validateReconStatuses(recons);
 
 		this.logValidationSuccess(recons, onReconOrders, reconPayload);
-		return [];
+
+		// Aggregate and return the validated data
+		const aggregatedData: OnReconAggregateObj[] = onReconOrders.map((order) => {
+			const recon = savedReconsMap.get(order.id);
+			if (!recon) {
+				rsfLogger.error(
+					`Recon not found for order ${order.id} in saved recons`,
+				);
+				throw new Error(`Recon not found for order ${order.id}`);
+			}
+			return {
+				recon: recon,
+				orderId: order.id,
+				onReconData: {
+					order_id: order.id,
+					recon_accord: order.recon_accord,
+					due_date: order.recon_accord
+						? new Date(order.settlements?.[0]?.due_date || "")
+						: undefined,
+					on_recon_data: {
+						settlement_amount:
+							parseFloat(order.settlements?.[0]?.amount?.value) || 0,
+						commission_amount:
+							parseFloat(order.settlements?.[0]?.commission?.value) || 0,
+						withholding_amount:
+							parseFloat(order.settlements?.[0]?.withholding_amount?.value) ||
+							0,
+						tcs: parseFloat(order.settlements?.[0]?.tcs?.value) || 0,
+						tds: parseFloat(order.settlements?.[0]?.tds?.value) || 0,
+					},
+				},
+			};
+		});
+
+		return aggregatedData;
 	}
 
 	private createReconsMap(recons: ReconType[]): Map<string, ReconType> {
@@ -289,7 +323,7 @@ export class OnReconRequestService {
 	}
 
 	updateSettlementsInDb = async (finalData: OnReconAggregateObj[]) => {
-		rsfLogger.info("Updating settlements in DB for on recon payload");
+		rsfLogger.info("Updating recon in DB for on_recon payload", finalData);
 		for (const data of finalData) {
 			const userId = data.recon.user_id;
 			const orderId = data.recon.order_id;
