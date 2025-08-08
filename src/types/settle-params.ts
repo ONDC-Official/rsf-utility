@@ -1,5 +1,4 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
-import { strict } from "assert/strict";
 import { z } from "zod";
 
 extendZodWithOpenApi(z);
@@ -211,4 +210,44 @@ export const NilSettlementSchema = z
 		description: "Miscellaneous settlement payload structure",
 	});
 
-// export const UpdateSettlementSchema = z
+export const UpdateSettlementSchema = z
+	.object({
+		order_id: z.string().openapi({
+			description: "Unique identifier for the order",
+			example: "order123",
+		}),
+		total_order_value: z.number().optional().openapi({
+			description: "Total order value for the settlement",
+			example: 1000,
+		}),
+		commission: z.number().optional().openapi({
+			description: "Commission amount for the settlement",
+			example: 50,
+		}),
+		collector_settlement: z.number().optional().openapi({
+			description: "Collector settlement amount",
+			example: 500,
+		}),
+		tds: z.number().optional().openapi({
+			description: "Tax Deducted at Source (TDS) amount",
+			example: 100,
+		}),
+		tcs: z.number().optional().openapi({
+			description: "Tax Collected at Source (TCS) amount",
+			example: 150,
+		}),
+		withholding_amount: z.number().optional().openapi({
+			description: "Withholding amount for the settlement",
+			example: 200,
+		}),
+		inter_np_settlement: z.number().optional().openapi({
+			description: "Inter NP settlement amount",
+			example: 300,
+		}),
+	})
+	.strict()
+	.openapi({
+		description: "Schema for updating settlement details",
+	});
+
+export type UpdateSettlementType = z.infer<typeof UpdateSettlementSchema>;

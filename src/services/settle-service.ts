@@ -181,7 +181,7 @@ export class SettleDbManagementService {
 	async updateSettlementData(
 		payload_id: string,
 		orderId: string,
-		settlement: z.infer<typeof SettleSchema>,
+		settlement: Partial<SettleType>,
 	) {
 		return await this.settleRepo.updateSettlementByTransaction(
 			payload_id,
