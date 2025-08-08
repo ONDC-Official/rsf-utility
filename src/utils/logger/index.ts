@@ -87,16 +87,14 @@ class AutomationLogger {
 	}
 
 	info(message: string, ...args: any[]) {
-		const sanitizedArgs = args.map((arg) => this._sanitizeObject(arg));
-
-		const processedArgs = sanitizedArgs.map((arg, index) => {
+		args = args.map((arg, index) => {
 			if (typeof arg === "string") {
 				return { [`message_${index + 2}`]: arg };
 			}
 			return arg;
 		});
-		message = this.getFormattedMessage(message, "info", ...processedArgs);
-		this.logger.info(message, ...processedArgs);
+		message = this.getFormattedMessage(message, "info", ...args);
+		this.logger.info(message, ...args);
 	}
 
 	error(message: string, meta?: any, error?: unknown) {
