@@ -172,7 +172,12 @@ export class OnReconRequestService {
 				},
 			};
 		});
-
+		rsfLogger.debug("Reconciliation validation completed successfully", {
+			total_recons: recons.length,
+			total_on_recon_orders: onReconOrders.length,
+			total_aggregated_data: aggregatedData.length,
+			aggregatedData: aggregatedData,
+		});
 		return aggregatedData;
 	}
 
