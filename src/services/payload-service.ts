@@ -63,7 +63,9 @@ export const extractFields = (
 				case "buyer_finder_fee_amount":
 					tempBuyerFinderFeeAmountRaw = resolvedValue;
 					break;
-
+				case "collected_by": 
+					result["collected_by"] = resolvedValue
+					break;
 				case "quote":
 					if (typeof resolvedValue === "object" && resolvedValue !== null) {
 						const priceValue = Number(resolvedValue?.price?.value || 0);
@@ -93,11 +95,10 @@ export const extractFields = (
 
 						const numericFee = parseFloat(tempBuyerFinderFeeAmountRaw) || 0;
 						let quoteValueWithoutTax: number = 0;
-
-
+						let item_tax = 0;
 						for (let item of breakup) {
 							if (item.title === "tax" && item_ids.includes(item.id)) {
-								continue;
+								result["item_tax"] = (result["item_tax"] || 0) + parseFloat(item.price);
 							} else quoteValueWithoutTax += item.price;
 						}
 
@@ -106,10 +107,10 @@ export const extractFields = (
 								? (quoteValueWithoutTax * numericFee) / 100
 								: numericFee;
 
-						result["buyer_finder_fee_amount"] = Math.round(fee * 1.18 * 100) / 100; // Assuming 18% GST on fee
+						result["buyer_finder_fee_amount"] =
+							Math.round(fee * 1.18 * 100) / 100; // Assuming 18% GST on fee
 						result.withholding_amount =
 							(priceValue * tempWitholdingAmount) / 100;
-
 					} else {
 						result.quote = {
 							total_order_value: 0,
@@ -118,9 +119,7 @@ export const extractFields = (
 						result.buyer_finder_fee_amount = 0;
 						result.withholding_amount = 0;
 					}
-
 					break;
-
 				default:
 					result[key as keyof OrderType] =
 						resolvedValue !== undefined && resolvedValue !== null

@@ -129,6 +129,10 @@ export const OrderSchema = z
 			description: "Due date for the order",
 			example: "2025-08-03T00:00:00.000Z",
 		}),
+		item_tax: z.number().optional().nullable().openapi({
+			description: "Tax amount for the items in the order",
+			example: 50
+		})
 	})
 	.strict()
 	.openapi("OrderSchema");

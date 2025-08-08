@@ -41,6 +41,7 @@ const OrderSchema = new mongoose.Schema(
 		settlement_basis: { type: String, required: false },
 		settlement_window: { type: String, required: false },
 		withholding_amount: { type: Number, required: false },
+		item_tax: { type: Number, required: false, default: 0 },
 		settle_status: {
 			type: String,
 			enum: Object.values(ENUMS.INTERNAL_ORDER_SETTLE_STATUS),

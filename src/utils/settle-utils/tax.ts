@@ -1,5 +1,7 @@
+import { string } from "zod";
 import { OrderType } from "../../schema/models/order-schema";
 import { UserType } from "../../schema/models/user-schema";
+import { TaxEngine } from "../../services/tax-engine";
 import logger from "../logger";
 
 export function calculateSettlementDetails(
@@ -10,22 +12,18 @@ export function calculateSettlementDetails(
 	// logger.warning(
 	// 	"Using dummy values for settlement calculations, please implement proper logic"
 	// );
-	
-	const tcs: number = Number(userConfig?.tcs) ?? 0;
-	const tds: number = Number(userConfig?.tds) ?? 0;
-	const commission = order.buyer_finder_fee_amount ?? 0;
-	const total_order_value = order?.quote?.total_order_value ?? 0;
-	const domain = order?.domain ?? "";
-	const role = userConfig?.role ?? "";
-	let calculatedTax: number = 0;
-	if (role == "BAP" && domain === "ONDC:RET11" && order.msn == false) {
-		calculatedTax = ((total_order_value - commission) * tds) / 100;
-	}
-	const inter_np_settlement = total_order_value - commission - calculatedTax;
+	const taxEngine = new TaxEngine(order, userConfig);
+
+	const tcs = taxEngine.calculateTcs();
+	const tds = taxEngine.calculateTds();
+	const total_tax = tcs + tds;
+
+	const commission = taxEngine.collectorSettlement();
+	const inter_np_settlement = taxEngine.interNpSettlement();
 
 	return {
 		commission: commission,
-		tax: calculatedTax,
+		tax: total_tax,
 		inter_np_settlement: inter_np_settlement,
 	};
 }

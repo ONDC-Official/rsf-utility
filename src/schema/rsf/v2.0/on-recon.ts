@@ -163,6 +163,15 @@ const onReconSchema = {
             },
           },
         },
+      error: {
+      type: "object",
+      required: ["code", "message"],
+      properties: {
+        code: { type: "string" },
+        message: { type: "string" },
+      },
+      additionalProperties: false,
+    }
       },
     },
   },
