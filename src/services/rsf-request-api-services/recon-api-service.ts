@@ -119,7 +119,7 @@ export class ReconRequestService {
 					user._id.toString(),
 					orderId,
 					transactionDb._id.toString(),
-					INTERNAL_RECON_STATUS.RECEIVED_ACCEPTED,
+					INTERNAL_RECON_STATUS.RECEIVED_PENDING,
 				);
 
 				updatesToProcess.push({

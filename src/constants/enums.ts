@@ -125,7 +125,8 @@ export type SettlementBasis =
 	(typeof SETTLEMENT_BASIS)[keyof typeof SETTLEMENT_BASIS];
 
 export const INTERNAL_RECON_STATUS = {
-	INACTIVE: "INACTIVE",
+	INACTIVE: "INACTIVE", // move to ready
+	ERROR: "ERROR", // on-recon error
 	SENT_PENDING: "SENT_PENDING",
 	SENT_ACCEPTED: "SENT_ACCEPTED",
 	SENT_REJECTED: "SENT_REJECTED",

@@ -95,5 +95,9 @@ export class RsfOrchestratorService {
 			due_date: recon.due_date,
 			settle_status: ENUMS.INTERNAL_ORDER_SETTLE_STATUS.RECON,
 		});
+
+		await this.reconService.updateData(userId, order.order_id, {
+			recon_status: ENUMS.INTERNAL_RECON_STATUS.INACTIVE,
+		});
 	}
 }

@@ -40,9 +40,13 @@ export const SettleSchema = z
 			description: "Collector settlement amount",
 			example: 500,
 		}),
-		tax: z.number().openapi({
-			description: "Tax amount",
+		tds: z.number().openapi({
+			description: "Tax Deducted at Source (TDS) amount",
 			example: 100,
+		}),
+		tcs: z.number().openapi({
+			description: "Tax Collected at Source (TCS) amount",
+			example: 150,
 		}),
 		withholding_amount: z.number().openapi({
 			description: "Withholding amount",
