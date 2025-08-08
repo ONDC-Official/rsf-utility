@@ -161,22 +161,9 @@ export class SettleDbManagementService {
 		}
 	}
 
-	async getSettlementByContextAndOrderId(
-		txn_id: string,
-		message_id: string,
-		order_id: string,
-	) {
-		const settlement = this.settleRepo.getSettlementByOnSettle(
-			txn_id,
-			message_id,
-			order_id,
-		);
-		if (!settlement) {
-			throw new Error(
-				"Settlement not found for the given transaction and message ID",
-			);
-		}
-		return settlement;
+	async getSettlementByDbId(dbId: string) {
+		settleLogger.info("Fetching settlement by database ID");
+		return await this.settleRepo.getByTransactionDbId(dbId);
 	}
 	async updateSettlementData(
 		payload_id: string,

@@ -53,12 +53,7 @@ const onSettleSchema = z
 									.object({
 										settled_amount: currencyObject,
 										amount: currencyObject,
-										status: z.enum(
-											Object.values(ENUMS.REPORT_STATUS) as [
-												string,
-												...string[],
-											],
-										),
+										status: z.enum(["SETTLED", "NOT_SETTLED", "PENDING"]),
 										error: errorObject.optional(),
 										reference_no: z.string().optional(),
 									})
@@ -73,21 +68,14 @@ const onSettleSchema = z
 										id: z.string(),
 										name: z.string().optional(),
 										amount: currencyObject,
-										status: z.enum(
-											Object.values(ENUMS.REPORT_STATUS) as [
-												string,
-												...string[],
-											],
-										),
+										status: z.enum(["SETTLED", "NOT_SETTLED", "PENDING"]),
 										error: errorObject.optional(),
 										reference_no: z.string().optional(),
 									})
 									.optional(),
 								self: z.object({
 									amount: currencyObject,
-									status: z.enum(
-										Object.values(ENUMS.REPORT_STATUS) as [string, ...string[]],
-									),
+									status: z.enum(["SETTLED", "NOT_SETTLED", "PENDING"]),
 									reference_no: z.string().optional(),
 									error: errorObject.optional(),
 								}),
