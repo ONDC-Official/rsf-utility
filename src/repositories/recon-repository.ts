@@ -9,7 +9,7 @@ export interface ReconQueryParams {
 	limit?: number;
 	order_id?: string;
 	settlement_id?: string;
-	recon_status?: string;
+	recon_status?: string[];
 	due_date_from?: Date;
 	due_date_to?: Date;
 	sort_by?: string;
