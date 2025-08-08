@@ -18,16 +18,38 @@ const server = app.listen(config.port, async () => {
 		"For more information, visit the API documentation at /api-docs",
 	);
 });
-// Graceful shutdown
-const shutdown = async () => {
+
+const shutdown = async (exitCode: number, err?: Error) => {
+	if (err) {
+		logger.error(`Fatal error: ${err.message}`);
+		logger.error(err.stack || "");
+	}
+
 	logger.info("Shutdown signal received: closing HTTP server");
+
 	server.close(async () => {
-		await mongoose.connection.close();
-		logger.info("HTTP server closed");
-		logger.info("MongoDB connection closed");
-		process.exit(0);
+		try {
+			await mongoose.connection.close();
+			logger.info("MongoDB connection closed");
+		} catch (dbErr) {
+			logger.error("Error closing MongoDB:", dbErr);
+		}
+
+		logger.info("HTTP server closed!");
+		process.exit(exitCode);
 	});
 };
 
-process.on("SIGTERM", shutdown);
-process.on("SIGINT", shutdown);
+// ---- Graceful shutdown signals ----
+process.on("SIGTERM", () => shutdown(0));
+process.on("SIGINT", () => shutdown(0));
+
+// ---- Fatal error handlers ----
+process.on("uncaughtException", (err) => {
+	shutdown(1, err);
+});
+
+process.on("unhandledRejection", (reason: any) => {
+	const error = reason instanceof Error ? reason : new Error(String(reason));
+	shutdown(1, error);
+});
