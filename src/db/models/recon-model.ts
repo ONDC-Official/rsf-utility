@@ -59,7 +59,7 @@ const ReconTableSchema = new mongoose.Schema(
 		},
 		due_date: {
 			type: Date,
-			required: true,
+			required: false,
 			index: true,
 		},
 	},
