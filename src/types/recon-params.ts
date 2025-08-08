@@ -74,7 +74,7 @@ export const GetReconsQuerySchema = z
 			.optional(),
 
 		recon_status: z
-			.enum(allowedReconStatuses)
+			.array(z.enum(allowedReconStatuses))
 			.openapi({
 				param: {
 					name: "recon_status",
