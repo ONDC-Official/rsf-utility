@@ -108,7 +108,7 @@ export const GetSettlementsQuerySchema = z
 
 export const PrepareSettlementsBody = z
 	.object({
-		order_ids: z
+		prepare_data: z
 			.array(
 				z.object({
 					id: z.string().openapi({
@@ -122,7 +122,10 @@ export const PrepareSettlementsBody = z
 			.max(1000)
 			.openapi({
 				description: "List of order IDs to prepare settlements for",
-				example: ["order1", "order2"],
+				example: [
+					{ id: "order123", strategy: "USER" },
+					{ id: "order456", strategy: "RECON" },
+				],
 			}),
 	})
 	.strict()
@@ -130,7 +133,7 @@ export const PrepareSettlementsBody = z
 
 export type PrepareSettleParams = z.infer<
 	typeof PrepareSettlementsBody
->["order_ids"];
+>["prepare_data"];
 
 export const GenSettlementsBodyObject = z.object({
 	order_id: z.string().openapi({
