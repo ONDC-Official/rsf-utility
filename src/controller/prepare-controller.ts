@@ -47,7 +47,7 @@ export class SettlePrepareController {
 
 			const settlements = await this.settlePrepareService.prepareSettlements(
 				userId,
-				validationResult.data.order_ids,
+				validationResult.data.prepare_data,
 			);
 
 			settleLogger.info(
