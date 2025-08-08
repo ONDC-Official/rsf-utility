@@ -76,7 +76,7 @@ export const GenOnReconBodyObject = z
 			description: "Indicates if the reconciliation is in accord",
 			example: true,
 		}),
-		due_date: z.date().optional().openapi({
+		due_date: z.coerce.date().optional().openapi({
 			description: "Due date for the reconciliation",
 			example: "2023-10-01T00:00:00Z",
 		}),

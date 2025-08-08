@@ -140,15 +140,18 @@ function getNotAccordResponse(
 		throw new Error("reconInfo is missing in the settlement data.");
 	}
 
-	const diffAmount =
-		reconData.on_recon_data.settlement_amount - reconFinData.amount;
-	const diffCommission =
-		reconData.on_recon_data.commission_amount - reconFinData.commission;
-	const diffWithholding =
+	const diffAmount = Math.abs(
+		reconData.on_recon_data.settlement_amount - reconFinData.amount,
+	);
+	const diffCommission = Math.abs(
+		reconData.on_recon_data.commission_amount - reconFinData.commission,
+	);
+	const diffWithholding = Math.abs(
 		reconData.on_recon_data.withholding_amount -
-		reconFinData.withholding_amount;
-	const diffTCS = reconData.on_recon_data.tcs - reconFinData.tcs;
-	const diffTDS = reconData.on_recon_data.tds - reconFinData.tds;
+			reconFinData.withholding_amount,
+	);
+	const diffTCS = Math.abs(reconData.on_recon_data.tcs - reconFinData.tcs);
+	const diffTDS = Math.abs(reconData.on_recon_data.tds - reconFinData.tds);
 	const obj: OnReconPayloadSettlement = {
 		id: recon.settlement_id,
 		status: "PENDING",

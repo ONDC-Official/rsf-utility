@@ -2,6 +2,7 @@ import { z } from "zod";
 import { Recon } from "../db/models/recon-model";
 import { ReconSchema } from "../schema/models/recon-schema";
 import { ENUMS } from "../constants/enums";
+import logger from "../utils/logger";
 
 export interface ReconQueryParams {
 	user_id: string;
@@ -30,6 +31,9 @@ export class ReconRepository {
 	 * Create a new recon record
 	 */
 	async createRecon(data: z.infer<typeof ReconSchema>) {
+		logger.debug(
+			`Creating new recon record for user ${data.user_id} and order ${data.order_id}`,
+		);
 		return await Recon.create(data);
 	}
 
