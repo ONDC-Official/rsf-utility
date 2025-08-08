@@ -39,24 +39,20 @@ export const GetSettlementsQuerySchema = z
 			.optional(),
 
 		status: z
-			.enum(allowedStatuses)
+			.preprocess(
+				(val) => (Array.isArray(val) ? val : [val]),
+				z.array(z.enum(allowedStatuses)).min(1),
+			)
 			.openapi({
 				param: {
 					name: "status",
 					in: "query",
+					style: "form", // Good practice to specify style for array params
+					explode: true, // Allows for ?status=A&status=B format
 				},
-				description: "Settlement status to filter",
-				example: "PENDING",
-			})
-			.optional(),
-		order_id: z
-			.string()
-			.openapi({
-				param: {
-					name: "order_id",
-					in: "query",
-				},
-				description: "Filter by order ID",
+				description:
+					"Settlement status to filter. Can be provided multiple times.",
+				example: "PENDING", // Example can remain a single value
 			})
 			.optional(),
 		counterparty_id: z
@@ -68,6 +64,32 @@ export const GetSettlementsQuerySchema = z
 				},
 				description: "Filter by counterparty ID",
 				example: "example-counterparty-id",
+			})
+			.optional(),
+		due_date_from: z.coerce
+			.string()
+			.regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+			.transform((str) => new Date(str))
+			.openapi({
+				param: {
+					name: "due_date_from",
+					in: "query",
+				},
+				description: "Filter settlements due from this date (YYYY-MM-DD)",
+				example: "2025-08-01",
+			})
+			.optional(),
+		due_date_to: z.coerce
+			.string()
+			.regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+			.transform((str) => new Date(str))
+			.openapi({
+				param: {
+					name: "due_date_to",
+					in: "query",
+				},
+				description: "Filter settlements due to this date",
+				example: "2023-12-31",
 			})
 			.optional(),
 	})

@@ -9,10 +9,20 @@ export class SettleRepository {
 		limit: number;
 		counterparty_id?: string;
 		order_id?: string;
-		status?: string;
+		status?: string[];
+		due_date_from?: Date;
+		due_date_to?: Date;
 	}) {
-		const { limit, skip, counterparty_id, user_id, order_id, status } =
-			queryData;
+		const {
+			limit,
+			skip,
+			counterparty_id,
+			user_id,
+			order_id,
+			status,
+			due_date_from,
+			due_date_to,
+		} = queryData;
 		const query: any = { user_id };
 		if (order_id) query.order_id = order_id;
 		if (status) query.status = status;
@@ -21,6 +31,12 @@ export class SettleRepository {
 				{ receiver_id: counterparty_id },
 				{ collector_id: counterparty_id },
 			];
+		}
+		// Date range filter
+		if (due_date_from || due_date_to) {
+			query.due_date = {};
+			if (due_date_from) query.due_date.$gte = due_date_from;
+			if (due_date_to) query.due_date.$lte = due_date_to;
 		}
 		return await Settle.find(query)
 			.skip(skip)
