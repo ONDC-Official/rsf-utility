@@ -32,7 +32,7 @@ export function reconBuilder(
 			orders: reconData.map((data) => {
 				const settleData = data.settleData;
 				const apiData = data.reconData;
-				const totalAmount =
+				const settlementAmount =
 					apiData.recon_data?.settlement_amount ??
 					settleData.inter_np_settlement;
 				const commission =
@@ -46,7 +46,7 @@ export function reconBuilder(
 					id: settleData.order_id,
 					amount: {
 						currency: "INR",
-						value: totalAmount.toFixed(2),
+						value: settleData.total_order_value.toFixed(2),
 					},
 					settlements: [
 						{
@@ -55,7 +55,7 @@ export function reconBuilder(
 							status: "PENDING",
 							amount: {
 								currency: "INR",
-								value: totalAmount.toFixed(2),
+								value: settlementAmount.toFixed(2),
 							},
 							commission: {
 								currency: "INR",

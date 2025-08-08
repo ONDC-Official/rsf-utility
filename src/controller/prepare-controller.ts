@@ -19,9 +19,6 @@ export class SettlePrepareController {
 				return sendError(res, "INVALID_QUERY_PARAMS", undefined, {
 					message: "User ID is required",
 				});
-
-				// res.status(400).json({ message: "User ID is required" });
-				// return;
 			}
 			const validationResult = PrepareSettlementsBody.safeParse(req.body);
 			if (!validationResult.success) {
@@ -35,18 +32,19 @@ export class SettlePrepareController {
 					message: "Invalid request body",
 					errors: z.treeifyError(validationResult.error),
 				});
-
-				// res.status(400).json({
-				// 	message: "Invalid request body",
-				// 	errors: z.treeifyError(validationResult.error),
-				// });
-				// return;
 			}
+
 			const settlements =
-				await this.settlePrepareService.prepareSettlementsWithUser(
-					userId,
-					validationResult.data.order_ids,
-				);
+				validationResult.data.strategy === "USER"
+					? await this.settlePrepareService.prepareSettlementsWithUser(
+							userId,
+							validationResult.data.order_ids,
+						)
+					: await this.settlePrepareService.prepareSettlementsWithRecon(
+							userId,
+							validationResult.data.order_ids,
+						);
+
 			settleLogger.info(
 				"Settlement prepared successfully, new settlements created in the DB",
 				getLoggerMeta(req),

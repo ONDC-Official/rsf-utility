@@ -8,13 +8,6 @@ import { v4 as uuidv4 } from "uuid";
 export class UserConfigStrategy
 	implements ISettlementStrategy<ProfileConfigOptions>
 {
-	// prepare(
-	// 	order: OrderType,
-	// 	options: ProfileConfigOptions,
-	// ): Promise<SettleType> {
-	// 	throw new Error("Method not implemented.");
-	// }
-
 	async prepare(
 		order: OrderType,
 		options: ProfileConfigOptions,

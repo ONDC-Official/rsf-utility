@@ -3,7 +3,7 @@ import { UserType } from "../../schema/models/user-schema";
 import { UserService } from "../user-service";
 import { getAckResponse, getNackResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
-import { INTERNAL_RECON_STATUS } from "../../constants/enums";
+import { ENUMS, INTERNAL_RECON_STATUS } from "../../constants/enums";
 import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
 import { OrderService } from "../order-service";
 import { ReconDbService } from "../recon-service";
@@ -11,6 +11,7 @@ import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
 import { ReconType } from "../../schema/models/recon-schema";
 import { SettleDbManagementService } from "../settle-service";
 import { TransactionService } from "../transaction-serivce";
+import { SettleType } from "../../schema/models/settle-schema";
 
 // A new type to hold the prepared data after successful validation.
 type PreparedUpdate = {
@@ -168,7 +169,7 @@ export class ReconRequestService {
 	 */
 	async findUserForOrder(
 		order_id: string,
-		recon_status: "PENDING" | "TO_BE_INITIATED" | "SETTLED" | "NOT_SETTLED",
+		recon_status: (typeof reconStatuses)[number],
 		bap_uri: string,
 		bpp_uri: string,
 		users: UserWithId[],
@@ -239,3 +240,5 @@ export class ReconRequestService {
 }
 
 type UserWithId = UserType & { _id: Types.ObjectId };
+
+const reconStatuses = Object.values(ENUMS.RECON_STATUS);

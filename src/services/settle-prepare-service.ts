@@ -2,10 +2,12 @@ import { ENUMS } from "../constants/enums";
 import { OrderType } from "../schema/models/order-schema";
 import { SettleType } from "../schema/models/settle-schema";
 import { ISettlementStrategy } from "../strategies/iprepare-settlements";
+import { ReconPrepareStrategy } from "../strategies/recon-strat";
 import { SettlementStrategyOptions } from "../strategies/settlement-stratergy-options";
 import { UserConfigStrategy } from "../strategies/user-config-strat";
 import logger from "../utils/logger";
 import { OrderService } from "./order-service";
+import { ReconDbService } from "./recon-service";
 import { SettleDbManagementService } from "./settle-service";
 import { UserService } from "./user-service";
 
@@ -16,6 +18,7 @@ export class SettlePrepareService {
 		private userService: UserService,
 		private orderService: OrderService,
 		private settleService: SettleDbManagementService,
+		private reconService: ReconDbService,
 	) {}
 
 	public async prepareSettlement<T extends SettlementStrategyOptions>(
@@ -29,74 +32,101 @@ export class SettlePrepareService {
 		return settlement;
 	}
 
-	async prepareSettlementsWithUser(userId: string, orderIds: string[]) {
-		settleLogger.info("Preparing settlement data for user", {
+	private async prepareSettlementsGeneric<T extends SettlementStrategyOptions>(
+		userId: string,
+		orderIds: string[],
+		getStrategyAndOptions: (orderId: string) => Promise<{
+			strategy: ISettlementStrategy<T>;
+			options: T;
+		}>,
+		logLabel: string,
+	) {
+		settleLogger.info(`Preparing settlement data (${logLabel})`, {
 			userId,
 			orderIds,
 		});
+
 		if (!(await this.userService.checkUserById(userId))) {
 			throw new Error("User not found");
 		}
-		const userConfig = await this.userService.getUserById(userId);
+
 		const settles: SettleType[] = [];
+
 		for (const orderId of orderIds) {
 			if (!(await this.orderService.checkUniqueOrder(userId, orderId))) {
 				throw new Error(
 					`Order with ID ${orderId} not found for user ${userId}`,
 				);
 			}
-			const order = (await this.orderService.getUniqueOrders(
-				userId,
-				orderId,
-			)) as OrderType;
-			const userStrategy = new UserConfigStrategy();
+
+			const { strategy, options } = await getStrategyAndOptions(orderId);
+
 			const settleData = await this.prepareSettlement(
 				userId,
 				orderId,
-				userStrategy,
-				{
-					type: "USER_CONFIG",
-					profile: userConfig,
-				},
+				strategy,
+				options,
 			);
+
 			await this.orderService.updateOrder(userId, orderId, {
 				settle_status: ENUMS.INTERNAL_ORDER_SETTLE_STATUS.SETTLE,
 			});
+
 			settles.push(settleData);
 		}
+
 		if (settles.length === 0) {
 			throw new Error("No settlements to prepare");
 		}
+
 		const result = await this.settleService.insertSettlementList(settles);
-		settleLogger.info("Settlements prepared successfully", {
+
+		settleLogger.info(`Settlements (${logLabel}) prepared successfully`, {
 			userId,
 			orderIds,
 		});
+
 		return result;
 	}
 
-	// private sampleUsage() {
-	// 	// Example usage of the prepareSettlement method
-	// 	const userId = "user123";
-	// 	const orderId = "order456";
-	// 	const strategy = new UserConfigStrategy();
+	public async prepareSettlementsWithUser(userId: string, orderIds: string[]) {
+		const userConfig = await this.userService.getUserById(userId);
+		return this.prepareSettlementsGeneric(
+			userId,
+			orderIds,
+			async (_orderId) => {
+				return {
+					strategy: new UserConfigStrategy(),
+					options: {
+						type: "USER_CONFIG",
+						profile: userConfig,
+					},
+				};
+			},
+			"USER_CONFIG",
+		);
+	}
 
-	// 	this.prepareSettlement(userId, orderId, strategy, {
-	// 		type: "USER_CONFIG",
-	// 		profile: {
-	// 			userId: userId,
-	// 			extraDetails: {
-	// 				self: 100,
-	// 				provider: 200,
-	// 				inter_np: 50,
-	// 			},
-	// 		},
-	// 	})
-	// 		.then((settlement) => {
-	// 			console.log("Settlement prepared:", settlement);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error("Error preparing settlement:", error);
-	// 		});
-	// }
+	public async prepareSettlementsWithRecon(userId: string, orderIds: string[]) {
+		return this.prepareSettlementsGeneric(
+			userId,
+			orderIds,
+			async (orderId) => {
+				const reconData = await this.reconService.getReconById(userId, orderId);
+				if (!reconData) {
+					throw new Error(
+						`Recon data for order ${orderId} not found for user ${userId}`,
+					);
+				}
+				return {
+					strategy: new ReconPrepareStrategy(),
+					options: {
+						type: "RECON_DATA",
+						data: reconData,
+					},
+				};
+			},
+			"RECON_DATA",
+		);
+	}
 }

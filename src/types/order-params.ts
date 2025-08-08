@@ -58,6 +58,13 @@ export const GetOrdersQuerySchema = z
 				example: false,
 			})
 			.optional(),
+		counterparty_id: z
+			.string()
+			.openapi({
+				description: "Counterparty ID to filter orders",
+				example: "counterparty123",
+			})
+			.optional(),
 	})
 	.strict();
 
@@ -77,4 +84,5 @@ export type GetOrderParamsType = {
 	limit: number;
 	state?: string[];
 	settle_status?: string[];
+	counterparty_id?: string;
 };

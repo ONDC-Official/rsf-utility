@@ -108,6 +108,7 @@ export const GetSettlementsQuerySchema = z
 
 export const PrepareSettlementsBody = z
 	.object({
+		strategy: z.enum(["USER", "RECON"]),
 		order_ids: z
 			.array(z.string())
 			.min(1)
