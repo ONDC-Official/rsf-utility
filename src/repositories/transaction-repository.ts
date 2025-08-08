@@ -5,6 +5,7 @@ import {
 	SettleModel,
 	OnSettleModel,
 } from "../db/models/transaction-model";
+import logger from "../utils/logger";
 
 export type TransactionAction = "recon" | "on_recon" | "settle" | "on_settle";
 
@@ -44,6 +45,11 @@ export class TransactionRepository {
 		transactionId: string,
 		messageId: string,
 	) {
+		logger.info("Finding transaction by context", {
+			action,
+			transactionId,
+			messageId,
+		});
 		return await TransactionModel.findOne({
 			"context.action": action,
 			"context.transaction_id": transactionId,
@@ -52,9 +58,14 @@ export class TransactionRepository {
 	}
 
 	async findSettleByContext(transactionId: string, messageId: string) {
+		logger.info("Finding transaction by context", {
+			transactionId,
+			messageId,
+		});
 		return await SettleModel.findOne({
 			"context.transaction_id": transactionId,
 			"context.message_id": messageId,
+			"context.action": "settle",
 		});
 	}
 
