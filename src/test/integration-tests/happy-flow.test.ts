@@ -1,18 +1,18 @@
-// /*
-//     1. Create a new user
-//     2. create a order
-//     3. prepare a settlement
-//     4. generate & trigger a settlement
-//     5. get on_settle with "NOT_SETTLED"
-//     6. generate & trigger recon
-//     7. get on_recon
-//     8. move to ready
-// */
+// // /*
+// //     1. Create a new user
+// //     2. create a order
+// //     3. prepare a settlement
+// //     4. generate & trigger a settlement
+// //     5. get on_settle with "NOT_SETTLED"
+// //     6. generate & trigger recon
+// //     7. get on_recon
+// //     8. move to ready
+// // */
 // import request from "supertest";
 // import { createServer } from "http";
 // import { UserType } from "../../schema/models/user-schema";
 
-// describe("Happy Flow Integration Tests", () => {
+// describe("Happy Flow Integration Tests", async () => {
 // 	const app = createServer();
 // 	const userData: UserType = {
 // 		title: "TEST_DOMAIN",
@@ -35,5 +35,6 @@
 // 		counterparty_ids: [],
 // 	};
 
-// 	const userResponse = await request(app).
+// 	const userResponse = await request(app).post("/users").send(userData);
+// 	console.log("User created:", userResponse.body);
 // });
