@@ -1,5 +1,8 @@
 import { SettleRepository } from "../repositories/settle-repository";
-import { GetSettlementsQuerySchema } from "../types/settle-params";
+import {
+	GetSettlementsQuerySchema,
+	UpdateSettlementSchema,
+} from "../types/settle-params";
 import { UserService } from "./user-service";
 import { z } from "zod";
 import logger from "../utils/logger";
@@ -176,6 +179,15 @@ export class SettleDbManagementService {
 			orderId,
 			settlement,
 		);
+	}
+
+	async updateMultipleSettlements(
+		userId: string,
+		data: { orderId: string; settlement: Partial<SettleType> }[],
+	) {
+		for (const { orderId, settlement } of data) {
+			await this.updateSettlementData(userId, orderId, settlement);
+		}
 	}
 
 	async insertSettlementList(settlements: SettleType[]) {

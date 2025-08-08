@@ -11,6 +11,7 @@ import { z } from "zod";
 import { validateUserId } from "../types/user-id-type";
 import { sendError, sendSuccess } from "../utils/resUtils";
 import { SettleType } from "../schema/models/settle-schema";
+import { or } from "ajv/dist/compile/codegen";
 
 const settleLogger = logger.child("settle-controller");
 
@@ -62,7 +63,7 @@ export class SettleController {
 		}
 	};
 
-	updateSettlement = async (req: Request, res: Response) => {
+	updateSettlements = async (req: Request, res: Response) => {
 		try {
 			settleLogger.info("Updating settlement", getLoggerMeta(req));
 			const userId = req.params.userId;
@@ -87,10 +88,16 @@ export class SettleController {
 				});
 			}
 
-			const updated = await this.settleService.updateSettlementData(
+			const convertedData = validationResult.data.settlements.map(
+				(settlement) => ({
+					orderId: settlement.order_id,
+					settlement: this.getUpdateData(settlement),
+				}),
+			);
+
+			const updated = await this.settleService.updateMultipleSettlements(
 				userId,
-				validationResult.data.order_id,
-				this.getUpdateData(validationResult.data),
+				convertedData,
 			);
 			return sendSuccess(res, updated, "Settlement updated successfully");
 		} catch (error: any) {
@@ -106,7 +113,7 @@ export class SettleController {
 		}
 	};
 
-	private getUpdateData(data: UpdateSettlementType) {
+	private getUpdateData(data: UpdateSettlementType["settlements"][number]) {
 		const settlePartialData: Partial<SettleType> = {};
 		if (data.total_order_value) {
 			settlePartialData.total_order_value = data.total_order_value;

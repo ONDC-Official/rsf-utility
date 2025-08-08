@@ -34,17 +34,6 @@ export class SettlePrepareController {
 				});
 			}
 
-			// const settlements =
-			// 	validationResult.data.strategy === "USER"
-			// 		? await this.settlePrepareService.prepareSettlementsWithUser(
-			// 				userId,
-			// 				validationResult.data.order_ids,
-			// 			)
-			// 		: await this.settlePrepareService.prepareSettlementsWithRecon(
-			// 				userId,
-			// 				validationResult.data.order_ids,
-			// 			);
-
 			const settlements = await this.settlePrepareService.prepareSettlements(
 				userId,
 				validationResult.data.prepare_data,
