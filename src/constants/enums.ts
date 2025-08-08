@@ -61,16 +61,16 @@ export const SETTLEMENT_STATUS = {
 	PREPARED: "PREPARED", //INTERNAL USE ONLY
 	PENDING: "PENDING",
 	SETTLED: "SETTLED",
-	NOT_SETTLED: "NOT-SETTLED",
+	NOT_SETTLED: "NOT_SETTLED",
 } as const;
 
 export type SettlementStatus =
 	(typeof SETTLEMENT_STATUS)[keyof typeof SETTLEMENT_STATUS];
 
 export const RECON_STATUS = {
-	TO_BE_INITIATED: "TO-BE-INITIATED",
+	TO_BE_INITIATED: "TO_BE_INITIATED",
 	SETTLED: "SETTLED",
-	NOT_SETTLED: "NOT-SETTLED",
+	NOT_SETTLED: "NOT_SETTLED",
 	PENDING: "PENDING",
 } as const;
 
@@ -78,7 +78,7 @@ export type ReconStatus = (typeof RECON_STATUS)[keyof typeof RECON_STATUS];
 
 export const REPORT_STATUS = {
 	SETTLED: "SETTLED",
-	NOT_SETTLED: "NOT-SETTLED",
+	NOT_SETTLED: "NOT_SETTLED",
 } as const;
 
 export type ReportStatus = (typeof REPORT_STATUS)[keyof typeof REPORT_STATUS];

@@ -168,7 +168,7 @@ export class ReconRequestService {
 	 */
 	async findUserForOrder(
 		order_id: string,
-		recon_status: "PENDING" | "TO-BE-INITIATED" | "SETTLED" | "NOT-SETTLED",
+		recon_status: "PENDING" | "TO_BE_INITIATED" | "SETTLED" | "NOT_SETTLED",
 		bap_uri: string,
 		bpp_uri: string,
 		users: UserWithId[],
@@ -218,7 +218,7 @@ export class ReconRequestService {
 						order_id,
 					);
 					const recon = await this.reconService.getReconById(user_id, order_id);
-					if (orderExists && recon_status === "TO-BE-INITIATED") {
+					if (orderExists && recon_status === "TO_BE_INITIATED") {
 						return { user, settlement: undefined, recon: recon };
 					}
 				}

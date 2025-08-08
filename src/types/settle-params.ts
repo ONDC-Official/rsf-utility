@@ -7,7 +7,7 @@ const allowedStatuses = [
 	"PREPARED",
 	"PENDING",
 	"SETTLED",
-	"NOT-SETTLED",
+	"NOT_SETTLED",
 ] as const;
 
 export const GetSettlementsQuerySchema = z
