@@ -96,4 +96,8 @@ export class SettleRepository {
 			{ new: true },
 		);
 	}
+
+	async deleteSettlement(userId: string, orderId: string) {
+		return await Settle.deleteOne({ user_id: userId, order_id: orderId });
+	}
 }
