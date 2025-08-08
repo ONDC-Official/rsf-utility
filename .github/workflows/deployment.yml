@@ -59,6 +59,8 @@ jobs:
           echo "SUBSCRIBER_UNIQUE_ID=${{ vars.SUBSCRIBER_UNIQUE_ID }}" >> \$REPO_DIR/.env
           echo "SUBSCRIBER_PRIVATE_KEY=${{ secrets.SUBSCRIBER_PRIVATE_KEY }}" >> \$REPO_DIR/.env
           echo "LOKI_HOST=${{ vars.LOKI_HOST }}" >> \$REPO_DIR/.env
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> \$REPO_DIR/.env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> \$REPO_DIR/.env
           EOF
 
       - name: Verify .env and docker-compose.yml files
