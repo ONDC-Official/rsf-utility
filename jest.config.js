@@ -17,5 +17,5 @@ module.exports = {
 	verbose: true,
 	forceExit: true,
 	clearMocks: true, // Optional: Automatically clear mock calls and instances between every test
-	testTimeout: 10000,
+	// testTimeout: 10000,
 };

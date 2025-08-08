@@ -187,11 +187,14 @@ export class ReconRequestService {
 				);
 				// If it matches, check if a unique settlement exists for this user and order
 				const settlementExists = await this.settleService.checkUniqueSettlement(
-					order_id,
 					user_id,
+					order_id,
 				);
 				// no settlement
-
+				logger.debug(
+					`Settlement existence check for user ${user_id} and order ${order_id}`,
+					settlementExists,
+				);
 				if (settlementExists) {
 					const settlements = await this.settleService.getSettlements(user_id, {
 						order_id: order_id,
