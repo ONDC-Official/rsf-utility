@@ -9,6 +9,7 @@ import {
 	OnReconPayloadOrders,
 } from "../../schema/rsf/zod/on_recon-schema";
 import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
+import { ENUMS } from "../../constants/enums";
 
 const rsfLogger = logger.child("on-recon-request-service");
 export class OnReconRequestService {
@@ -335,7 +336,7 @@ export class OnReconRequestService {
 		);
 		for (const order of filteredOrders) {
 			await this.reconService.updateData(order.user_id, order.order_id, {
-				recon_status: "INACTIVE",
+				recon_status: ENUMS.INTERNAL_RECON_STATUS.ERROR,
 				on_recon_error: errorPayload.error,
 			});
 		}

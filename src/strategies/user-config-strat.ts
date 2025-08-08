@@ -19,10 +19,8 @@ export class UserConfigStrategy
 		order: OrderType,
 		options: ProfileConfigOptions,
 	): Promise<SettleType> {
-		const { commission, tax, inter_np_settlement } = calculateSettlementDetails(
-			order,
-			options.profile,
-		);
+		const { commission, tds, tcs, inter_np_settlement } =
+			calculateSettlementDetails(order, options.profile);
 
 		return {
 			order_id: order.order_id,
@@ -33,7 +31,8 @@ export class UserConfigStrategy
 			total_order_value: order.quote.total_order_value, // calc
 			commission: commission, // calc
 			collector_settlement: 0,
-			tax: tax, // calc
+			tds: tds, // calc
+			tcs: tcs, // calc
 			withholding_amount: order.withholding_amount ?? 0,
 			inter_np_settlement: inter_np_settlement, // calc
 			provider_id: order.provider_id,

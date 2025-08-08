@@ -1,6 +1,7 @@
 import {
 	GetSettlementsQuerySchema,
 	PrepareSettlementsBody,
+	UpdateSettlementSchema,
 } from "../../types/settle-params";
 import { SettleSchema } from "../../schema/models/settle-schema";
 import { objectIdSchema } from "../../types/user-id-type";
@@ -39,6 +40,25 @@ registry.registerPath({
 		200: {
 			description: "Settlements prepared successfully.",
 			content: { "application/json": { schema: SettleSchema.array() } },
+		},
+	},
+});
+
+// PATCH /ui/settle/{userId}
+registry.registerPath({
+	method: "patch",
+	path: "/ui/settle/{userId}",
+	summary: "Update a settlement for a user",
+	request: {
+		params: z.object({ userId: objectIdSchema }),
+		body: {
+			content: { "application/json": { schema: UpdateSettlementSchema } },
+		},
+	},
+	responses: {
+		200: {
+			description: "Settlement updated successfully.",
+			content: { "application/json": { schema: SettleSchema } },
 		},
 	},
 });

@@ -23,7 +23,8 @@ export function calculateSettlementDetails(
 
 	return {
 		commission: commission,
-		tax: total_tax,
+		tds: tds,
+		tcs: tcs,
 		inter_np_settlement: inter_np_settlement,
 	};
 }
