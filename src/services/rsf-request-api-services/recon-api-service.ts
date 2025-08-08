@@ -113,7 +113,7 @@ export class ReconRequestService {
 				}
 
 				const transactionDb =
-					await this.transactionService.addOnSettlePayload(reconPayload);
+					await this.transactionService.addReconPayload(reconPayload);
 
 				const reconData = extractReconDetails(
 					settleDataInPayload,
