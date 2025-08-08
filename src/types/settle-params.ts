@@ -51,7 +51,7 @@ export const GetSettlementsQuerySchema = z
 		status: z
 			.preprocess(
 				(val) => (Array.isArray(val) ? val : [val]),
-				z.array(z.enum(allowedStatuses)).min(1),
+				z.array(z.enum(allowedStatuses)),
 			)
 			.openapi({
 				param: {
@@ -108,9 +108,16 @@ export const GetSettlementsQuerySchema = z
 
 export const PrepareSettlementsBody = z
 	.object({
-		strategy: z.enum(["USER", "RECON"]),
 		order_ids: z
-			.array(z.string())
+			.array(
+				z.object({
+					id: z.string().openapi({
+						description: "Order ID",
+						example: "order123",
+					}),
+					strategy: z.enum(["USER", "RECON"]),
+				}),
+			)
 			.min(1)
 			.max(1000)
 			.openapi({
@@ -120,6 +127,10 @@ export const PrepareSettlementsBody = z
 	})
 	.strict()
 	.openapi("PrepareSettlementsBody");
+
+export type PrepareSettleParams = z.infer<
+	typeof PrepareSettlementsBody
+>["order_ids"];
 
 export const GenSettlementsBodyObject = z.object({
 	order_id: z.string().openapi({

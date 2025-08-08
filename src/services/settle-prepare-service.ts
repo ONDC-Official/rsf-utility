@@ -5,6 +5,7 @@ import { ISettlementStrategy } from "../strategies/iprepare-settlements";
 import { ReconPrepareStrategy } from "../strategies/recon-strat";
 import { SettlementStrategyOptions } from "../strategies/settlement-stratergy-options";
 import { UserConfigStrategy } from "../strategies/user-config-strat";
+import { PrepareSettleParams } from "../types/settle-params";
 import logger from "../utils/logger";
 import { OrderService } from "./order-service";
 import { ReconDbService } from "./recon-service";
@@ -128,5 +129,29 @@ export class SettlePrepareService {
 			},
 			"RECON_DATA",
 		);
+	}
+
+	public async prepareSettlements(
+		userId: string,
+		orderIds: PrepareSettleParams,
+	) {
+		settleLogger.info("Preparing settlements for multiple orders", {
+			userId,
+			orderIds,
+		});
+		if (!(await this.userService.checkUserById(userId))) {
+			throw new Error("User not found");
+		}
+		if (orderIds.length === 0) {
+			throw new Error("No order IDs provided for settlement preparation");
+		}
+		for (const data of orderIds) {
+			if (data.strategy === "USER") {
+				await this.prepareSettlementsWithUser(userId, [data.id]);
+			}
+			if (data.strategy === "RECON") {
+				await this.prepareSettlementsWithRecon(userId, [data.id]);
+			}
+		}
 	}
 }

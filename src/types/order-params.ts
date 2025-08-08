@@ -41,7 +41,7 @@ export const GetOrdersQuerySchema = z
 		state: z
 			.preprocess(
 				(val) => (Array.isArray(val) ? val : [val]),
-				z.array(z.enum(allowedStatuses)).min(1),
+				z.array(z.enum(allowedStatuses)),
 			)
 			.openapi({
 				description: "Settlement state to filter",
@@ -51,7 +51,7 @@ export const GetOrdersQuerySchema = z
 		settle_status: z
 			.preprocess(
 				(val) => (Array.isArray(val) ? val : [val]),
-				z.array(z.enum(allowedSettlementStatuses)).min(1),
+				z.array(z.enum(allowedSettlementStatuses)),
 			)
 			.openapi({
 				description: "Order status to filter",
