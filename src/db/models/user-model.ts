@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { title } from "process";
 
 const ProviderDetails = new mongoose.Schema(
 	{
@@ -12,6 +13,7 @@ const ProviderDetails = new mongoose.Schema(
 
 const UserSchema = new mongoose.Schema(
 	{
+		title: { type: String, required: true },
 		role: {
 			type: String,
 			enum: ["BAP", "BPP"],
@@ -36,5 +38,5 @@ const UserSchema = new mongoose.Schema(
 
 // Compound index for uniqueness on role + subscriber_id + domain
 UserSchema.index({ role: 1, subscriber_url: 1, domain: 1 }, { unique: true });
-
+UserSchema.index({ title: 1 }, { unique: true });
 export const User = mongoose.model("User", UserSchema);

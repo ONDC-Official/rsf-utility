@@ -19,6 +19,12 @@ export class OrderRepository {
 		if (settle_status && settle_status.length > 0) {
 			query.settle_status = { $in: settle_status };
 		}
+		if (queryParams.counterparty_id) {
+			query.$or = [
+				{ "context.bap_id": queryParams.counterparty_id },
+				{ "context.bpp_id": queryParams.counterparty_id },
+			];
+		}
 
 		return await Order.find(query)
 			.skip((page - 1) * limit)

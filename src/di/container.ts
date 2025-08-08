@@ -79,6 +79,7 @@ const settlePrepareService = new SettlePrepareService(
 	userService,
 	orderService,
 	settleDbManagementService,
+	reconService,
 );
 
 const settlePrepareController = new SettlePrepareController(

@@ -1,6 +1,6 @@
 // src/strategies/settlement-options.types.ts
 
-import { BreakdownType } from "../schema/models/recon-schema";
+import { BreakdownType, ReconType } from "../schema/models/recon-schema";
 import { UserType } from "../schema/models/user-schema";
 
 // Options needed for the ProfileConfigStrategy
@@ -18,7 +18,7 @@ export interface CsvUploadOptions {
 // Options needed for the ReconDataStrategy
 export interface ReconDataOptions {
 	type: "RECON_DATA";
-	data: BreakdownType;
+	data: ReconType;
 }
 
 // Now, we create a Discriminated Union of all possible option types

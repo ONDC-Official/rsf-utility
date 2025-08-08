@@ -1,4 +1,5 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
+import { title } from "process";
 import { z } from "zod";
 
 extendZodWithOpenApi(z);
@@ -26,6 +27,10 @@ const ProviderDetailsSchema = z
 
 export const UserSchema = z
 	.object({
+		title: z.string().openapi({
+			description: "Title of the user",
+			example: "Retailer",
+		}),
 		role: z.enum(["BAP", "BPP"]).openapi({
 			description: "Role of the user",
 			example: "BAP",
