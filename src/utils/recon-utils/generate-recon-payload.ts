@@ -3,10 +3,11 @@ import { UserType } from "../../schema/models/user-schema";
 import { ReconAggregateData } from "../../types/generate-recon-types";
 import { v4 as uuidv4 } from "uuid";
 import logger from "../logger";
+import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
 export function reconBuilder(
 	userConfig: UserType,
 	reconData: ReconAggregateData,
-) {
+): ReconPayload {
 	logger.debug(
 		`Recon Builder called with data: ${JSON.stringify(reconData)}`,
 		reconData,
@@ -23,7 +24,7 @@ export function reconBuilder(
 				},
 			},
 			version: "2.0.0",
-			action: "settle",
+			action: "recon",
 			bap_id: reconData[0].orderData.bap_id,
 			bpp_id: reconData[0].orderData.bpp_id,
 			bap_uri: reconData[0].orderData.bap_uri,
