@@ -166,3 +166,23 @@ export const GetReconsQuerySchema = z
 	.openapi("GetReconsQueryParams");
 
 export type GetReconsQuery = z.infer<typeof GetReconsQuerySchema>;
+
+export const MoveReconsBodySchema = z.object({
+	orders: z
+		.array(
+			z.object({
+				order_id: z.string().openapi({
+					description: "Order ID to move to ready state",
+					example: "order123",
+				}),
+			}),
+		)
+		.openapi({
+			description: "List of order IDs to move to ready state",
+			example: JSON.stringify({
+				orders: [{ order_id: "order123" }, { order_id: "order456" }],
+			}),
+		}),
+});
+
+export type MoveReconsBody = z.infer<typeof MoveReconsBodySchema>;

@@ -79,6 +79,10 @@ export class OnSettleService {
 					settlement_reference: inter_participant?.reference_no,
 					provider_settlement_reference: provider?.reference_no,
 					self_settlement_reference: self?.reference_no,
+					error:
+						inter_participant?.error?.message ||
+						provider?.error?.message ||
+						self?.error?.message,
 				});
 				await this.settleService.updateSettlementData(
 					settlePayload._id.toString(),

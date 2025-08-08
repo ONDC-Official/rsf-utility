@@ -141,10 +141,14 @@ export class SettleDbManagementService {
 				}
 
 				if (hasError) {
-					settleData.status = "NOT-SETTLED";
+					settleData.status = "PREPARED";
+					settleData.self_status = "PREPARED";
+					settleData.provider_status = "PREPARED";
 					settleData.error = responseData.error.message || "Unknown error";
 				} else {
 					settleData.status = "PENDING";
+					settleData.self_status = "PENDING";
+					settleData.provider_status = "PENDING";
 				}
 				await this.settleRepo.updateSettlement(userId, orderId, settleData);
 			} catch (error) {
