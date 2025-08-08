@@ -12,8 +12,8 @@ payloadRouter.post(
 	rateLimiter,
 	rsfAuditLogger,
 	schemaValidator,
-	container.userController.userValidationMiddleware,
 	container.rsfRequestController.rsfPayloadHandler,
+	container.userController.userValidationMiddleware,
 	container.payloadController.nonRsfpayloadHandler,
 	(req, res) => {
 		const { action } = req.params;

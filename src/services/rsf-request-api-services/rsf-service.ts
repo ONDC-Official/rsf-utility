@@ -1,4 +1,5 @@
 import { OndcSyncResponse, RsfOnAction } from "../../types/rsf-type";
+import { getNackResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { OnReconRequestService } from "./on_recon-service";
 import { OnSettleService } from "./on_settle-service";
@@ -28,6 +29,6 @@ export class RsfService {
 			default:
 				break;
 		}
-		throw new Error(`Unsupported RSF action: ${action}`);
+		return getNackResponse("503");
 	};
 }
