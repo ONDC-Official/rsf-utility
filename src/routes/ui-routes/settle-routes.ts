@@ -8,5 +8,5 @@ settleRouter.post(
 	"/:userId/prepare",
 	container.settlePrepareController.prepareSettlement,
 );
-settleRouter.patch("/:userId", container.settleController.updateSettlement); // update settlement by userId
+settleRouter.patch("/:userId", container.settleController.updateSettlements); // update settlement by userId
 export default settleRouter;

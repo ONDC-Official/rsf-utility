@@ -37,4 +37,4 @@ test("Happy Flow Integration Tests", async () => {
 
 	const userResponse = await request(app).post("/users").send(userData);
 	console.log("User created:", userResponse.body);
-});
+}); // 20 minutes timeout
