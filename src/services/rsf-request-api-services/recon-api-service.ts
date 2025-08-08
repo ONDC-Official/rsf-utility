@@ -177,9 +177,14 @@ export class ReconRequestService {
 		for (const user of users) {
 			const subscriber_url = user.subscriber_url;
 			const user_id = user._id.toString();
-
+			logger.debug(
+				`Checking user ${user_id} with subscriber URL ${subscriber_url} for order ${order_id}`,
+			);
 			// Check if user's subscriber URL matches either BAP or BPP URI
 			if (subscriber_url === bap_uri || subscriber_url === bpp_uri) {
+				logger.debug(
+					`Found matching user ${user_id} for order ${order_id} with BAP URI ${bap_uri} or BPP URI ${bpp_uri}`,
+				);
 				// If it matches, check if a unique settlement exists for this user and order
 				const settlementExists = await this.settleService.checkUniqueSettlement(
 					order_id,
@@ -207,6 +212,9 @@ export class ReconRequestService {
 							`Settlement for order ${order_id} is already SETTLED, cannot change to ${recon_status}`,
 						);
 					}
+					logger.debug(
+						`Found settlement for order ${order_id} for user ${user_id} with status ${dbState}`,
+					);
 
 					const recon = await this.reconService.getReconById(user_id, order_id);
 
@@ -214,11 +222,17 @@ export class ReconRequestService {
 					return { user, settlement: settlements[0], recon: recon };
 				} else {
 					// fallback to order_table
+					logger.debug(
+						`No unique settlement found for order ${order_id} for user ${user_id}, checking order table`,
+					);
 					const orderExists = await this.orderService.checkUniqueOrder(
 						user_id,
 						order_id,
 					);
 					const recon = await this.reconService.getReconById(user_id, order_id);
+					logger.debug(
+						`Order existence check for user ${user_id} and order ${order_id}: ${orderExists}`,
+					);
 					if (orderExists && recon_status === "TO_BE_INITIATED") {
 						return { user, settlement: undefined, recon: recon };
 					}
