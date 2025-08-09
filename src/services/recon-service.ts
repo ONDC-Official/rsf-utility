@@ -31,7 +31,6 @@ export class ReconDbService {
 			due_date_to,
 			sort_by = "createdAt",
 			sort_order = "desc",
-			include_overdue,
 		} = queryParams;
 
 		const skip = (page - 1) * limit;
@@ -50,22 +49,6 @@ export class ReconDbService {
 			sort_order,
 			group_by_recon: queryParams.group_by_recon || true,
 		};
-
-		// If include_overdue is true, get only overdue recons
-		if (include_overdue) {
-			const overdueRecons = await this.reconRepo.getOverdueRecons(userId);
-			const totalCount = overdueRecons.length;
-
-			return {
-				data: overdueRecons.slice(skip, skip + limit),
-				pagination: {
-					total: totalCount,
-					page,
-					limit,
-					totalPages: Math.ceil(totalCount / limit),
-				},
-			};
-		}
 
 		// Get recons and total count
 		const [recons, totalCount] = await Promise.all([
