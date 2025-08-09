@@ -11,7 +11,6 @@ import apiRoutes from "./routes/api-routes";
 import swaggerUi from "swagger-ui-express";
 import { sendError, sendSuccess } from "./utils/resUtils";
 import { correlationIdMiddleware } from "./utils/logger/middleware/correlation-middleware";
-import verifyClientToken from "./middlewares/auth-handler";
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
@@ -27,7 +26,7 @@ const createServer = (): Application => {
 	app.use(responseLog);
 	const base = "/";
 	app.use(`${base}api`, apiRoutes);
-	app.use(`${base}ui`, verifyClientToken, uiRoutes);
+	app.use(`${base}ui`, uiRoutes);
 
 	/// Swagger Documentation
 	//@ts-ignore
