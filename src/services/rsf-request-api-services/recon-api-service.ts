@@ -41,7 +41,7 @@ export class ReconRequestService {
 			logger.error("No orders found or invalid format in the recon payload", {
 				reconPayload,
 			});
-			return getNackResponse("70002"); // Invalid payload
+			return getNackResponse("70002", "No order found in payload"); // Invalid payload
 		}
 		logger.warning(
 			"TODO: Implement async response for recon errors && mark something processing",
@@ -51,7 +51,7 @@ export class ReconRequestService {
 			logger.error("BAP URI or BPP URI is missing in the recon payload", {
 				reconPayload,
 			});
-			return getNackResponse("70002"); // Invalid payload
+			return getNackResponse("70002", "BAP URI or BPP URI is missing"); // Invalid payload
 		}
 
 		try {
@@ -153,13 +153,13 @@ export class ReconRequestService {
 			});
 			// You can map specific error messages to different NACK codes if needed.
 			if (error.message.includes("No user-config found")) {
-				return getNackResponse("70030"); // Specific error for user not found
+				return getNackResponse("70030", "No user-config found"); // Specific error for user not found
 			}
 			if (error.message.includes("already processed")) {
-				return getNackResponse("503"); // Service unavailable / already handled
+				return getNackResponse("503", "settlement is not in a valid state"); // Service unavailable / already handled
 			}
 			// Generic error for other validation failures (e.g., missing data)
-			return getNackResponse("70002");
+			return getNackResponse("70002", error.message || "");
 		}
 	}
 

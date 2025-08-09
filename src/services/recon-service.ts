@@ -48,6 +48,7 @@ export class ReconDbService {
 			due_date_to,
 			sort_by,
 			sort_order,
+			group_by_recon: queryParams.group_by_recon || true,
 		};
 
 		// If include_overdue is true, get only overdue recons
@@ -80,7 +81,7 @@ export class ReconDbService {
 		]);
 
 		return {
-			data: recons,
+			recons: recons.data,
 			pagination: {
 				total: totalCount,
 				page,

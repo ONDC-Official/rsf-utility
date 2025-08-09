@@ -36,12 +36,21 @@ export class SettleDbManagementService {
 			throw new Error("User not found");
 		}
 
-		const page = data.page ? 10 : 1;
-		const limit = data.limit ? 10 : 10;
+		const page = data.page ? data.page : 1;
+		const limit = data.limit ? data.limit : 10;
 		const skip = (page - 1) * limit;
 		const orderId = data.order_id;
 		const status = data.status;
-
+		logger.debug(
+			`Fetching settlements for user ${userId} with order ID ${orderId}`,
+			{
+				page: page,
+				limit: limit,
+				skip: skip,
+				status: status,
+				counterparty_id: data.counterparty_id,
+			},
+		);
 		const result = await this.settleRepo.findWithQuery({
 			user_id: userId,
 			skip,

@@ -15,6 +15,7 @@ export interface ReconQueryParams {
 	due_date_to?: Date;
 	sort_by?: string;
 	sort_order?: "asc" | "desc";
+	group_by_recon?: boolean;
 }
 
 export interface ReconAggregateResult {
@@ -52,7 +53,10 @@ export class ReconRepository {
 	}
 
 	/**
-	 * Find recon records with advanced query options
+	 * Finds Recon documents based on query parameters.
+	 * Can return a flat list or documents grouped by the first transaction ID.
+	 * @param queryParams - The parameters for filtering, sorting, and pagination.
+	 * @returns A promise that resolves to an object with the data and total count.
 	 */
 	async findWithQuery(queryParams: ReconQueryParams) {
 		const {
@@ -66,29 +70,86 @@ export class ReconRepository {
 			due_date_to,
 			sort_by = "createdAt",
 			sort_order = "desc",
+			group_by_recon = false, // Default to false for backward compatibility
 		} = queryParams;
 
-		const query: any = { user_id };
-
-		// Build query filters
-		if (order_id) query.order_id = order_id;
-		if (settlement_id) query.settlement_id = settlement_id;
-		if (recon_status) query.recon_status = recon_status;
-
-		// Date range filter
+		// Build the initial match query for both find and aggregate
+		const matchQuery: any = { user_id };
+		if (order_id) matchQuery.order_id = order_id;
+		if (settlement_id) matchQuery.settlement_id = settlement_id;
+		if (recon_status) matchQuery.recon_status = recon_status;
 		if (due_date_from || due_date_to) {
-			query.due_date = {};
-			if (due_date_from) query.due_date.$gte = due_date_from;
-			if (due_date_to) query.due_date.$lte = due_date_to;
+			matchQuery.due_date = {};
+			if (due_date_from) matchQuery.due_date.$gte = new Date(due_date_from);
+			if (due_date_to) matchQuery.due_date.$lte = new Date(due_date_to);
 		}
 
-		// Build sort object
-		const sort: any = {};
-		sort[sort_by] = sort_order === "asc" ? 1 : -1;
+		// --- GROUPING LOGIC ---
+		if (group_by_recon) {
+			// Ensure we only process documents that have transaction IDs
+			matchQuery.transaction_db_ids = { $exists: true, $ne: [] };
 
-		return await Recon.find(query).skip(skip).limit(limit).sort(sort);
+			const pipeline: any[] = [
+				// Stage 1: Filter documents based on the query parameters.
+				{ $match: matchQuery },
+				// Stage 2: Sort documents BEFORE grouping. This makes operators
+				// like $first and $last deterministic.
+				{ $sort: { [sort_by]: sort_order === "asc" ? 1 : -1 } },
+				// Stage 3: Group documents by the first transaction ID.
+				{
+					$group: {
+						_id: { $arrayElemAt: ["$transaction_db_ids", 0] },
+						// Capture the value of the field we are sorting by from the first document in the group.
+						sortKey: { $first: `$${sort_by}` },
+						// Push all documents belonging to this group into an array.
+						recons: { $push: "$$ROOT" },
+					},
+				},
+				// Stage 4: Sort the GROUPS themselves based on the captured sortKey.
+				{ $sort: { sortKey: sort_order === "asc" ? 1 : -1 } },
+				// Stage 5: Use $facet to run two parallel pipelines: one for getting the
+				// total count of groups and another for paginating the results.
+				{
+					$facet: {
+						paginatedResults: [
+							{ $skip: skip },
+							{ $limit: limit },
+							// Reshape the output for a cleaner response
+							{
+								$project: {
+									_id: 0, // remove the default _id
+									transaction_id: "$_id",
+									recons: "$recons",
+									count: { $size: "$recons" },
+								},
+							},
+						],
+						totalCount: [{ $count: "count" }],
+					},
+				},
+			];
+
+			const results = await Recon.aggregate(pipeline);
+
+			const data = results[0].paginatedResults;
+			const total =
+				results[0].totalCount.length > 0 ? results[0].totalCount[0].count : 0;
+
+			return { data, total };
+		} else {
+			// --- ORIGINAL FIND LOGIC ---
+			const sort: any = { [sort_by]: sort_order === "asc" ? 1 : -1 };
+
+			const data = await Recon.find(matchQuery)
+				.sort(sort)
+				.skip(skip)
+				.limit(limit)
+				.lean();
+			const total = await Recon.countDocuments(matchQuery);
+
+			return { data, total };
+		}
 	}
-
 	/**
 	 * Get total count of recon records for a user with filters
 	 */

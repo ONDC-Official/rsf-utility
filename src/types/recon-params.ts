@@ -149,6 +149,7 @@ export const GetReconsQuerySchema = z
 				example: "true",
 			})
 			.optional(),
+		group_by_recon: z.boolean().optional(),
 	})
 	.strict()
 	.refine(
