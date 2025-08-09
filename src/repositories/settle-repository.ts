@@ -38,10 +38,15 @@ export class SettleRepository {
 			if (due_date_from) query.due_date.$gte = due_date_from;
 			if (due_date_to) query.due_date.$lte = due_date_to;
 		}
-		return await Settle.find(query)
+		const count = await Settle.countDocuments(query);
+		const data = await Settle.find(query)
 			.skip(skip)
 			.limit(limit)
 			.sort({ createdAt: -1 });
+		return {
+			count: count,
+			data: data,
+		};
 	}
 
 	async findSingleSettlement(userId: string, orderId: string) {

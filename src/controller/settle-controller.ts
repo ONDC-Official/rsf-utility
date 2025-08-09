@@ -11,7 +11,6 @@ import { z } from "zod";
 import { validateUserId } from "../types/user-id-type";
 import { sendError, sendSuccess } from "../utils/resUtils";
 import { SettleType } from "../schema/models/settle-schema";
-import { or } from "ajv/dist/compile/codegen";
 
 const settleLogger = logger.child("settle-controller");
 

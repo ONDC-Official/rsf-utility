@@ -42,7 +42,7 @@ export class SettleDbManagementService {
 		const orderId = data.order_id;
 		const status = data.status;
 
-		return await this.settleRepo.findWithQuery({
+		const result = await this.settleRepo.findWithQuery({
 			user_id: userId,
 			skip,
 			limit,
@@ -50,6 +50,15 @@ export class SettleDbManagementService {
 			order_id: orderId,
 			status: status,
 		});
+		return {
+			settlements: result.data,
+			pagination: {
+				total: result.count,
+				page: data.page || 1,
+				limit: data.limit || 10,
+				totalPages: Math.ceil(result.count / (data.limit || 10)),
+			},
+		};
 	}
 
 	async checkSettlementsForUser(
@@ -126,19 +135,20 @@ export class SettleDbManagementService {
 				continue;
 			}
 			try {
-				const settlement = await this.settleRepo.findWithQuery({
-					user_id: userId,
-					order_id: orderId,
-					skip: 0,
-					limit: 1,
-				});
-				if (!settlement || settlement.length === 0) {
-					logger.error(
-						`Settlement not found for order ID: ${orderId} for user ID: ${userId}`,
+				const settleData = await this.settleRepo.findSingleSettlement(
+					userId,
+					orderId,
+				);
+				if (!settleData) {
+					settleLogger.error(
+						`Settlement not found for user ${userId} and order ${orderId}`,
+						{
+							userId,
+							orderId,
+						},
 					);
 					continue;
 				}
-				const settleData = settlement[0];
 				if (transDbId) {
 					settleData.transaction_db_ids.push(transDbId);
 				}

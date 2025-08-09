@@ -196,15 +196,16 @@ export class ReconRequestService {
 					settlementExists,
 				);
 				if (settlementExists) {
-					const settlements = await this.settleService.getSettlements(user_id, {
-						order_id: order_id,
-					});
-					if (!settlements || settlements.length === 0) {
+					const settlements = await this.settleService.getSingleSettlement(
+						user_id,
+						order_id,
+					);
+					if (!settlements) {
 						throw new Error(
 							`No settlements found for order ${order_id} for user ${user_id}`,
 						);
 					}
-					const dbState = settlements[0].status;
+					const dbState = settlements.status;
 					if (recon_status === "SETTLED" && dbState !== "SETTLED") {
 						throw new Error(
 							`Settlement for order ${order_id} is not in SETTLED state, current state: ${dbState}`,
@@ -222,7 +223,7 @@ export class ReconRequestService {
 					const recon = await this.reconService.getReconById(user_id, order_id);
 
 					// Assuming getSettlements returns at least one result if checkUniqueSettlement is true
-					return { user, settlement: settlements[0], recon: recon };
+					return { user, settlement: settlements, recon: recon };
 				} else {
 					// fallback to order_table
 					logger.debug(

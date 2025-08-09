@@ -40,18 +40,18 @@ export class GenerateReconService {
 				orderId,
 			);
 
-			const settleData = await this.settleDbService.getSettlements(userId, {
-				order_id: orderId,
-			});
-			if (settleData.length === 0) {
+			const settleData = await this.settleDbService.getSingleSettlement(
+				userId,
+				orderId,
+			);
+			if (!settleData) {
 				throw new Error(
-					`No settlement data found for order ID: ${orderId} for user ID: ${userId}`,
+					`Settlement not found for order ID: ${orderId} for user ID: ${userId}`,
 				);
 			}
-			const settlement = settleData[0];
 			aggregateReconData.push({
 				reconData: data,
-				settleData: settlement,
+				settleData: settleData,
 				orderData: orderData,
 			});
 		}
