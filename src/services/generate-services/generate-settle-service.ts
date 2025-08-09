@@ -36,21 +36,22 @@ export class GenerateSettleService {
 					`Settlement for order ID ${data.order_id} does not exist for config ID: ${userId}`,
 				);
 			}
-			const settlement = await this.settleService.getSettlements(userId, {
-				order_id: data.order_id,
-			});
-			if (!settlement || settlement.length === 0) {
+			const settlement = await this.settleService.getSingleSettlement(
+				userId,
+				data.order_id,
+			);
+			if (!settlement) {
 				throw new Error(
 					`Settlement for order ID ${data.order_id} does not exist for config ID: ${userId}`,
 				);
 			}
-			const settleData = settlement[0];
-			if (settleData.status === "SETTLED") {
+
+			if (settlement.status === "SETTLED") {
 				throw new Error(
 					`Settlement for order ID ${data.order_id} is already settled for config ID: ${userId}`,
 				);
 			}
-			const validId = `${settleData.collector_id}-${settleData.receiver_id}`;
+			const validId = `${settlement.collector_id}-${settlement.receiver_id}`;
 			if (uniqueId == "") {
 				uniqueId = validId;
 			}
@@ -59,7 +60,7 @@ export class GenerateSettleService {
 					`Collector and Receiver IDs do not match for order ID ${data.order_id} in config ID: ${userId}`,
 				);
 			}
-			settlements.push(settleData);
+			settlements.push(settlement);
 		}
 		if (settlements.length === 0) {
 			throw new Error("No settlements to generate payloads for");

@@ -5,7 +5,7 @@ import { getLoggerMeta } from "../utils/utility";
 import { RsfService } from "../services/rsf-request-api-services/rsf-service";
 import { RsfOnActionsSchema } from "../types/rsf-type";
 import { getAckResponse, getNackResponse } from "../utils/ackUtils";
-import { validateHeader } from "../utils/header-utils";
+import { validateHeader, validateHeaderFromNp } from "../utils/header-utils";
 import { SettleAgencyConfig } from "../config/rsf-utility-instance-config";
 const rsfLogger = logger.child("rsf-controller");
 
@@ -46,7 +46,6 @@ export class RsfRequestController {
 			// 	res.status(200).send(getNackResponse("70001"));
 			// 	return;
 			// }
-
 			// perform header-validations
 			// if (["on_settle", "on_report"].includes(action)) {
 			// 	const isHeaderValid = validateHeader(
@@ -60,22 +59,39 @@ export class RsfRequestController {
 			// 		return;
 			// 	}
 			// } else {
-			// 	// ! TODO: implement header validations for on_recon
+			// 	rsfLogger.info(
+			// 		`Validating headers for ${action} from NP`,
+			// 		getLoggerMeta(req),
+			// 	);
+			// 	const isHeaderValid = validateHeaderFromNp(
+			// 		req.headers,
+			// 		payload,
+			// 		getLoggerMeta(req),
+			// 	);
+			// 	if (!isHeaderValid) {
+			// 		rsfLogger.error("Invalid header from NP", getLoggerMeta(req));
+			// 		res.status(200).send(getNackResponse("70000"));
+			// 		return;
+			// 	}
 			// }
-			logger.info("Valid RSF payload received", getLoggerMeta(req), {
-				action,
-				payload,
-			});
+			rsfLogger.info(
+				"Valid RSF payload received with valid header",
+				getLoggerMeta(req),
+				{
+					action,
+					payload,
+				},
+			);
 			const response = await this.rsfService.ingestRsfPayload(
 				payload,
 				actionValidationResult.data,
 			);
 			return res.send(response);
-		} catch (error) {
+		} catch (error: any) {
 			rsfLogger.error("Error handling RSF payload", getLoggerMeta(req), {
 				error,
 			});
-			res.status(200).send(getNackResponse("503"));
+			res.status(200).send(getNackResponse("503", error?.message ?? ""));
 			return;
 		}
 	};
