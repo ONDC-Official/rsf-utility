@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { container } from "../../di/container";
+import { optionalCsvUploadMiddleware } from "../../middlewares/csv-upload";
 
 const settleRouter = Router();
 
@@ -8,5 +9,11 @@ settleRouter.post(
 	"/:userId/prepare",
 	container.settlePrepareController.prepareSettlement,
 );
-settleRouter.patch("/:userId", container.settleController.updateSettlements); // update settlement by userId
+// Update settlement - supports both JSON body and CSV file upload
+settleRouter.patch(
+	"/:userId",
+	optionalCsvUploadMiddleware, // Handles both CSV uploads and JSON requests
+	container.settleController.updateSettlements,
+);
+
 export default settleRouter;
