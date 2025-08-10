@@ -5,7 +5,6 @@ export const orderJsonPathMap: Record<string, string> = {
 	bap_uri: "$.context.bap_uri",
 	bpp_uri: "$.context.bpp_uri",
 	domain: "$.context.domain",
-	state: "$.message.order.state",
 	created_at: "$.message.order.created_at",
 	updated_at: "$.message.order.updated_at",
 	collected_by: "$.message.order.payment.collected_by",
@@ -20,6 +19,8 @@ export const orderJsonPathMap: Record<string, string> = {
 	withholding_amount: '$.message.order.payment["@ondc/org/withholding_amount"]',
 	quote: "$.message.order.quote",
 	provider_id: "$.message.order.provider.id",
+	pickup_time: "$.message.order.fulfillments[0].start.time.timestamp",
 	np_type:
 		'$.message.order.tags[?(@.code=="bpp_terms")].list[?(@.code=="np_type")].value',
+	state: "$.message.order.state",
 };
