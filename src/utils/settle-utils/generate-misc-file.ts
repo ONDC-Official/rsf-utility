@@ -47,7 +47,7 @@ export function generateMiscFile(
 				type: "MISC",
 				id: uuidv4(),
 
-				orders: [buildMiscSettlement(miscData)],
+				orders: buildMiscSettlement(miscData),
 			},
 		},
 	};

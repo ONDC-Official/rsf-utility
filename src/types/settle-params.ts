@@ -202,7 +202,7 @@ export const SelfSchema = z
 	})
 	.openapi({ description: "Settlement amount for Self" });
 
-export const MiscSettlementSchema = z
+export const MiscSettlementBodySchema = z
 	.object({
 		provider: ProviderSchema.optional(),
 		self: SelfSchema.optional(),
@@ -211,6 +211,8 @@ export const MiscSettlementSchema = z
 	.openapi({
 		description: "Miscellaneous settlement payload structure",
 	});
+
+export const MiscSettlementSchema = z.array(MiscSettlementBodySchema);
 
 export const NilSettlementSchema = z
 	.object({
