@@ -12,6 +12,7 @@ import { ReconType } from "../../schema/models/recon-schema";
 import { SettleDbManagementService } from "../settle-service";
 import { TransactionService } from "../transaction-serivce";
 import { SettleType } from "../../schema/models/settle-schema";
+import { update } from "lodash";
 
 // A new type to hold the prepared data after successful validation.
 type PreparedUpdate = {
@@ -74,7 +75,7 @@ export class ReconRequestService {
 				}
 
 				// Find the associated user and settlement for the order.
-				const { user, recon } = await this.findUserForOrder(
+				const { user, recon, settlement } = await this.findUserForOrder(
 					orderId,
 					order.settlements[0].status,
 					bap_uri,
@@ -82,7 +83,7 @@ export class ReconRequestService {
 					allUsers,
 				);
 
-				if (recon === null) {
+				if (recon === null || settlement === null) {
 					logger.info(
 						`No recon found for order ${orderId} for user ${user._id.toString()}. Skipping check`,
 					);
@@ -116,6 +117,7 @@ export class ReconRequestService {
 					await this.transactionService.addReconPayload(reconPayload);
 
 				const reconData = extractReconDetails(
+					settlement,
 					settleDataInPayload,
 					user._id.toString(),
 					orderId,
@@ -136,9 +138,18 @@ export class ReconRequestService {
 				`Validation successful for ${updatesToProcess.length} orders. Proceeding with database updates.`,
 			);
 
-			const updatePromises = updatesToProcess.map((update) =>
-				this.reconService.createReconOrOverride(update.reconData),
-			);
+			const updatePromises = updatesToProcess.map((update) => {
+				return async () => {
+					await this.reconService.createReconOrOverride(update.reconData);
+					await this.settleService.updateSettlementViaUser(
+						update.userId,
+						update.reconData.order_id,
+						{
+							status: ENUMS.SETTLEMENT_STATUS.IN_RECON,
+						},
+					);
+				};
+			});
 
 			// Execute all updates concurrently for better performance.
 			await Promise.all(updatePromises);
@@ -233,12 +244,12 @@ export class ReconRequestService {
 						user_id,
 						order_id,
 					);
-					const recon = await this.reconService.getReconById(user_id, order_id);
+					// const recon = await this.reconService.getReconById(user_id, order_id);
 					logger.debug(
 						`Order existence check for user ${user_id} and order ${order_id}: ${orderExists}`,
 					);
 					if (orderExists && recon_status === "TO_BE_INITIATED") {
-						return { user, settlement: undefined, recon: recon };
+						return { user, settlement: undefined, recon: null };
 					}
 				}
 			}

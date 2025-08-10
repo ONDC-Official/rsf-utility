@@ -187,7 +187,7 @@ export class SettleDbManagementService {
 		settleLogger.info("Fetching settlement by database ID");
 		return await this.settleRepo.getByTransactionDbId(dbId);
 	}
-	async updateSettlementData(
+	async updateSettlementViaTxn(
 		payload_id: string,
 		orderId: string,
 		settlement: Partial<SettleType>,
@@ -200,12 +200,20 @@ export class SettleDbManagementService {
 		);
 	}
 
+	async updateSettlementViaUser(
+		userId: string,
+		orderId: string,
+		settlement: Partial<SettleType>,
+	) {
+		await this.settleRepo.updateSettlement(userId, orderId, settlement);
+	}
+
 	async updateMultipleSettlements(
 		userId: string,
 		data: { orderId: string; settlement: Partial<SettleType> }[],
 	) {
 		for (const { orderId, settlement } of data) {
-			await this.updateSettlementData(userId, orderId, settlement);
+			await this.updateSettlementViaUser(userId, orderId, settlement);
 		}
 	}
 

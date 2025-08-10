@@ -74,7 +74,10 @@ export const GetReconsQuerySchema = z
 			.optional(),
 
 		recon_status: z
-			.array(z.enum(allowedReconStatuses))
+			.preprocess(
+				(val) => (Array.isArray(val) ? val : [val]),
+				z.array(z.enum(allowedReconStatuses)),
+			)
 			.openapi({
 				param: {
 					name: "recon_status",
@@ -136,20 +139,7 @@ export const GetReconsQuerySchema = z
 				example: "desc",
 			})
 			.optional(),
-
-		include_overdue: z
-			.string()
-			.transform((val) => val === "true")
-			.openapi({
-				param: {
-					name: "include_overdue",
-					in: "query",
-				},
-				description: "Include only overdue recons",
-				example: "true",
-			})
-			.optional(),
-		group_by_recon: z.boolean().optional(),
+		group_by_recon: z.coerce.boolean().optional(),
 	})
 	.strict()
 	.refine(

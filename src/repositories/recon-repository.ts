@@ -10,7 +10,7 @@ export interface ReconQueryParams {
 	limit?: number;
 	order_id?: string;
 	settlement_id?: string;
-	recon_status?: string[];
+	recon_status?: string[] | string;
 	due_date_from?: Date;
 	due_date_to?: Date;
 	sort_by?: string;
@@ -77,7 +77,13 @@ export class ReconRepository {
 		const matchQuery: any = { user_id };
 		if (order_id) matchQuery.order_id = order_id;
 		if (settlement_id) matchQuery.settlement_id = settlement_id;
-		if (recon_status) matchQuery.recon_status = recon_status;
+		if (recon_status) {
+			if (Array.isArray(recon_status)) {
+				matchQuery.recon_status = { $in: recon_status };
+			} else {
+				matchQuery.recon_status = recon_status;
+			}
+		}
 		if (due_date_from || due_date_to) {
 			matchQuery.due_date = {};
 			if (due_date_from) matchQuery.due_date.$gte = new Date(due_date_from);
@@ -130,7 +136,7 @@ export class ReconRepository {
 			];
 
 			const results = await Recon.aggregate(pipeline);
-
+			logger.debug("Aggregation results:", JSON.stringify(results, null, 2));
 			const data = results[0].paginatedResults;
 			const total =
 				results[0].totalCount.length > 0 ? results[0].totalCount[0].count : 0;

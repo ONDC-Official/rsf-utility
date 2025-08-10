@@ -860,6 +860,7 @@ const onConfirmSchema = {
 										then: {
 											properties: {
 												list: {
+													type: "array",
 													contains: {
 														type: "object",
 														required: ["code", "value"],

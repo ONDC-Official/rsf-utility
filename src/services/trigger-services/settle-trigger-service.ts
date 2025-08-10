@@ -1,7 +1,4 @@
-import {
-	SettleAgencyConfig,
-	subscriberConfig,
-} from "../../config/rsf-utility-instance-config";
+import { SettleAgencyConfig } from "../../config/rsf-utility-instance-config";
 import { SettleType } from "../../schema/models/settle-schema";
 import { UserType } from "../../schema/models/user-schema";
 import {

@@ -62,7 +62,7 @@ export function generateSettlePayload(
 						inter_participant: {
 							amount: {
 								currency: "INR",
-								value: settle.inter_np_settlement.toFixed(2),
+								value: Math.abs(settle.inter_np_settlement).toFixed(2),
 							},
 						},
 						collector: {
