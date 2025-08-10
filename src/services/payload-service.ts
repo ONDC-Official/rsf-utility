@@ -15,6 +15,8 @@ export const extractFields = (
 	let tempBuyerFinderFeeAmountRaw: any = 0;
 	let tempWitholdingAmount: number = 0;
 	let pickup_time: any = 0;
+	let action: string = "";
+
 	for (const [key, path] of Object.entries(paths)) {
 		try {
 			const value = JSONPath({ path, json: payload });
@@ -27,6 +29,9 @@ export const extractFields = (
 				: (value ?? "");
 
 			switch (key) {
+				case "action":
+					action = resolvedValue;
+					break;
 				case "created_at":
 					result.created_at = resolvedValue
 						? new Date(resolvedValue)
@@ -48,13 +53,13 @@ export const extractFields = (
 					break;
 
 				case "np_type":
-					const npType = resolvedValue
-						? resolvedValue?.trim().toUpperCase()
-						: null;
-
-					result.msn = npType === "MSN";
+					if (action === "on_confirm") {
+						const npType = resolvedValue
+							? resolvedValue?.trim().toUpperCase()
+							: null;
+						result.msn = npType === "MSN";
+					}
 					break;
-
 				case "buyer_finder_fee_type":
 					tempBuyerFinderFeeType = resolvedValue || "";
 					(result as any)[key] =
@@ -137,7 +142,10 @@ export const extractFields = (
 								result["due_date"] = new Date(
 									new Date(updated_at).getTime() + durationMs,
 								);
-							} else {
+							} else if (
+								pickup_time &&
+								result["settlement_basis"] === "shipment"
+							) {
 								result["due_date"] = new Date(
 									new Date(pickup_time).getTime() + durationMs,
 								);
