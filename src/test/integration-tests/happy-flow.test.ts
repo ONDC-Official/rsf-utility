@@ -20,6 +20,8 @@ import path from "path";
 import axios from "axios";
 
 import { genDummyOnSettle } from "../utils/gen_on_settle";
+import { generateOnReconPayloadDUMMY } from "../utils/gen_on_recon";
+import { generateReconDUMMY } from "../utils/gen_recon";
 
 // Mock axios
 jest.mock("axios");
@@ -39,8 +41,8 @@ describe("Happy Flow Integration Tests", () => {
 				const userData: UserType = {
 					title: "TEST_DOMAIN",
 					role: "BAP",
-					domain: "ONDC:RET10",
-					subscriber_url: "https://dev-automation.ondc.org/buyer",
+					domain: "ONDC:RET14",
+					subscriber_url: "https://fis-staging.ondc.org/rsf-utility/api",
 					np_tcs: 3,
 					np_tds: 6,
 					pr_tcs: 9,
@@ -194,6 +196,73 @@ describe("Happy Flow Integration Tests", () => {
 				);
 				const reconPayload = genReconResponse.body.data;
 				expect(genReconResponse.status).toBe(201);
+				const fakeAgencyReconResponse = {
+					message: {
+						ack: {
+							status: "ACK",
+						},
+					},
+				};
+				mockedAxios.post.mockResolvedValueOnce({
+					data: fakeAgencyReconResponse,
+				});
+				// mocking the trigger response
+				const reconTriggerResponse = await request(app)
+					.post(`/ui/trigger/${userId}/recon`)
+					.set("Authorization", `Bearer ${token}`)
+					.send(reconPayload);
+				console.log("Recon Triggered", reconTriggerResponse.body);
+				expect(reconTriggerResponse.status).toBe(200);
+
+				let fetchedData = await request(app)
+					.get(`/ui/recon/${userId}`)
+					.set("Authorization", `Bearer ${token}`)
+					.query({ page: "1", limit: "20" });
+				console.log("Recon Fetched", fetchedData.body.data.recons);
+
+				const onReconDummyPayload = generateOnReconPayloadDUMMY(reconPayload);
+
+				writeFileSync(
+					path.resolve(__dirname, "../generations/fake_on_recon.json"),
+					JSON.stringify(onReconDummyPayload, null, 2),
+				);
+				const onReconResponse = await request(app)
+					.post(`/api/on_recon`)
+					.send(onReconDummyPayload);
+				console.log("On Recon Response", onReconResponse.body);
+				expect(onReconResponse.status).toBe(200);
+
+				fetchedData = await request(app)
+					.get(`/ui/recon/${userId}`)
+					.set("Authorization", `Bearer ${token}`)
+					.query({ page: "1", limit: "100" });
+
+				// get reconPayload
+				const fakeRecon = generateReconDUMMY(getReconOrderIds, userData);
+				writeFileSync(
+					path.resolve(__dirname, "../generations/fake_recon.json"),
+					JSON.stringify(fakeRecon, null, 2),
+				);
+
+				// console.log(
+				// 	"Recon Fetched After Recon",
+				// 	JSON.stringify(fetchedData.body.data.recons, null, 2),
+				// );
+
+				const reconResponse = await request(app)
+					.post(`/api/recon`)
+					.send(fakeRecon);
+				console.log("Recon Response", reconResponse.body);
+				expect(reconResponse.status).toBe(200);
+
+				fetchedData = await request(app)
+					.get(`/ui/recon/${userId}`)
+					.set("Authorization", `Bearer ${token}`)
+					.query({ page: "1", limit: "100" });
+				console.log(
+					"Recon Fetched After Recon",
+					JSON.stringify(fetchedData.body.data.recons, null, 2),
+				);
 			},
 			20 * 60 * 1000,
 		); // 20 minutes timeout

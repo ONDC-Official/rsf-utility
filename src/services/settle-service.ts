@@ -207,7 +207,13 @@ export class SettleDbManagementService {
 		orderId: string,
 		settlement: Partial<SettleType>,
 	) {
-		return await this.settleRepo.updateSettlement(userId, orderId, settlement);
+		if (await this.checkUniqueSettlement(userId, orderId))
+			return await this.settleRepo.updateSettlement(
+				userId,
+				orderId,
+				settlement,
+			);
+		return null;
 	}
 
 	async updateMultipleSettlements(

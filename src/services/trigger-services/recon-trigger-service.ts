@@ -63,7 +63,7 @@ export class ReconTriggerService {
 		for (const orderId of orderIds) {
 			const recon = await this.reconService.getReconById(userId, orderId);
 			if (!recon) {
-				logger.warning("New reconciliation order found", {
+				logger.info("New reconciliation order found", {
 					userId,
 					orderId,
 				});
@@ -148,9 +148,9 @@ export class ReconTriggerService {
 					settlementPayload,
 					userId,
 					orderData.id,
-					dbPayload._id.toString(),
 					INTERNAL_RECON_STATUS.SENT_PENDING,
 				);
+				reconData.transaction_db_ids.push(dbPayload._id.toString());
 				if (settlementPayload.payment_id) {
 					reconData.payment_id = settlementPayload.payment_id;
 				}

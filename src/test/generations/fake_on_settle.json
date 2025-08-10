@@ -15,9 +15,9 @@
     "bap_uri": "https://receiver-app.com/ondc/",
     "bpp_id": "settlement-agency-id",
     "bpp_uri": "http://settlement-agency-url",
-    "transaction_id": "96eb4183-3b78-47e3-9005-9c929a076a3c",
-    "message_id": "7961254c-244d-4473-b0e3-39305aa4f903",
-    "timestamp": "2025-08-10T10:43:21.957Z",
+    "transaction_id": "0b936433-dd86-4c8b-828f-818e86daa178",
+    "message_id": "08c87b2d-9aac-4b6a-9f9a-3e3db2ebf4ac",
+    "timestamp": "2025-08-10T17:57:15.423Z",
     "ttl": "P1D"
   },
   "message": {
@@ -25,7 +25,7 @@
     "receiver_app_id": "fis-staging.ondc.org",
     "settlement": {
       "type": "NP-NP",
-      "id": "871ed691-8bb7-4a45-bd3f-f838c27b21c9",
+      "id": "21d65e23-ece5-4bc4-a309-4269fe81e7be",
       "orders": [
         {
           "id": "484317",
@@ -51,7 +51,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "862.00"
+              "value": "111.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -62,7 +62,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "88.00"
+              "value": "75.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -95,7 +95,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "743.00"
+              "value": "128.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -106,7 +106,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "19.00"
+              "value": "24.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -139,7 +139,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "592.00"
+              "value": "158.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -150,7 +150,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "15.00"
+              "value": "40.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -183,7 +183,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "253.00"
+              "value": "703.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -194,7 +194,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "68.00"
+              "value": "16.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -227,7 +227,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "943.00"
+              "value": "632.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -238,7 +238,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "57.00"
+              "value": "48.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -271,7 +271,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "114.00"
+              "value": "892.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -282,7 +282,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "66.00"
+              "value": "20.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -315,7 +315,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "193.00"
+              "value": "741.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -326,7 +326,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "65.00"
+              "value": "99.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -359,7 +359,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "205.00"
+              "value": "324.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -370,7 +370,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "64.00"
+              "value": "37.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -403,7 +403,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "751.00"
+              "value": "867.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -414,7 +414,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "56.00"
+              "value": "96.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -447,7 +447,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "764.00"
+              "value": "452.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -458,7 +458,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "54.00"
+              "value": "85.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -491,7 +491,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "944.00"
+              "value": "888.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -502,7 +502,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "15.00"
+              "value": "43.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -535,7 +535,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "670.00"
+              "value": "219.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -546,7 +546,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "11.00"
+              "value": "27.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -579,7 +579,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "670.00"
+              "value": "523.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -590,7 +590,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "24.00"
+              "value": "40.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -623,7 +623,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "861.00"
+              "value": "570.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -634,7 +634,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "85.00"
+              "value": "46.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -667,7 +667,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "308.00"
+              "value": "438.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -678,7 +678,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "31.00"
+              "value": "29.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -711,7 +711,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "648.00"
+              "value": "274.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -722,7 +722,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "35.00"
+              "value": "80.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -755,7 +755,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "488.00"
+              "value": "522.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -766,7 +766,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "97.00"
+              "value": "18.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -799,7 +799,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "777.00"
+              "value": "812.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -810,7 +810,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "46.00"
+              "value": "67.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -843,7 +843,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "507.00"
+              "value": "249.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -854,7 +854,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "29.00"
+              "value": "97.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -887,7 +887,7 @@
             "name": "Bank ABC",
             "amount": {
               "currency": "INR",
-              "value": "372.00"
+              "value": "966.00"
             },
             "status": "NOT_SETTLED",
             "error": {
@@ -898,7 +898,7 @@
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "11.00"
+              "value": "91.00"
             },
             "status": "NOT_SETTLED",
             "error": {

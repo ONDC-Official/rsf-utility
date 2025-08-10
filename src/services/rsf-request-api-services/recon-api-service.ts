@@ -83,26 +83,27 @@ export class ReconRequestService {
 					allUsers,
 				);
 
-				if (recon === null || settlement === null) {
-					logger.info(
-						`No recon found for order ${orderId} for user ${user._id.toString()}. Skipping check`,
-					);
-					continue; // Skip to the next order if no settlement exists.
+				if (recon) {
+					// Validate if the settlement is in a state that allows reconciliation.
+					if (this.illegalReconStatus.includes(recon.recon_status)) {
+						logger.error(
+							`Settlement for order ${orderId} is already processed or in a pending state.`,
+							{
+								userId: user._id.toString(),
+								orderId,
+								status: recon.recon_status,
+							},
+						);
+						throw new Error(
+							`Settlement for order ${orderId} is already processed or in a pending state.`,
+						);
+					}
 				}
-
-				// Validate if the settlement is in a state that allows reconciliation.
-				if (this.illegalReconStatus.includes(recon.recon_status)) {
+				if (!settlement) {
 					logger.error(
-						`Settlement for order ${orderId} is already processed or in a pending state.`,
-						{
-							userId: user._id.toString(),
-							orderId,
-							status: recon.recon_status,
-						},
+						`Settlement for order ${orderId} does not exist for user ${user._id.toString()}`,
 					);
-					throw new Error(
-						`Settlement for order ${orderId} is already processed or in a pending state.`,
-					);
+					continue;
 				}
 
 				// Validate the settlement data within the payload for this order.
@@ -113,15 +114,11 @@ export class ReconRequestService {
 					);
 				}
 
-				const transactionDb =
-					await this.transactionService.addReconPayload(reconPayload);
-
 				const reconData = extractReconDetails(
 					settlement,
 					settleDataInPayload,
 					user._id.toString(),
 					orderId,
-					transactionDb._id.toString(),
 					INTERNAL_RECON_STATUS.RECEIVED_PENDING,
 				);
 
@@ -134,24 +131,30 @@ export class ReconRequestService {
 
 			// --- Update Pass ---
 			// This section is only reached if all orders in the payload are valid.
-			logger.info(
+			logger.warning(
 				`Validation successful for ${updatesToProcess.length} orders. Proceeding with database updates.`,
 			);
+			const transactionDb =
+				await this.transactionService.addReconPayload(reconPayload);
+			const updatePromises = updatesToProcess.map(async (update) => {
+				logger.warning(`Processing recon update for order ${update.orderId}`);
 
-			const updatePromises = updatesToProcess.map((update) => {
-				return async () => {
-					await this.reconService.createReconOrOverride(update.reconData);
-					await this.settleService.updateSettlementViaUser(
-						update.userId,
-						update.reconData.order_id,
-						{
-							status: ENUMS.SETTLEMENT_STATUS.IN_RECON,
-						},
-					);
-				};
+				update.reconData.transaction_db_ids.push(transactionDb._id.toString());
+
+				logger.warning(`db id ${transactionDb._id.toString()}`);
+
+				await this.reconService.createReconOrOverride(update.reconData);
+
+				await this.settleService.updateSettlementViaUser(
+					update.userId,
+					update.reconData.order_id,
+					{
+						status: ENUMS.SETTLEMENT_STATUS.IN_RECON,
+					},
+				);
 			});
 
-			// Execute all updates concurrently for better performance.
+			// Now this works correctly
 			await Promise.all(updatePromises);
 
 			logger.info("All recon updates completed successfully.");

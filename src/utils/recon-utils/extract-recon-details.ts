@@ -7,7 +7,6 @@ export const extractReconDetails = (
 	settlement: ReconPayloadSettlement,
 	userId: string,
 	orderId: string,
-	dbId: string,
 	reconStatus: ReconType["recon_status"],
 ): ReconType => {
 	return {
@@ -17,7 +16,7 @@ export const extractReconDetails = (
 		receiver_id: dbSettlement.receiver_id,
 		recon_status: reconStatus,
 		settlement_id: settlement.id,
-		transaction_db_ids: [dbId],
+		transaction_db_ids: [],
 		recon_breakdown: {
 			amount: parseFloat(settlement.amount.value),
 			commission: parseFloat(settlement.commission.value),
