@@ -54,7 +54,7 @@ const baseReconSchema = new Schema(
 				bpp_id: { type: String, required: true, index: true },
 				bpp_uri: { type: String, required: true },
 				transaction_id: { type: String, required: true, index: true },
-				message_id: { type: String, required: true, unique: true, index: true },
+				message_id: { type: String, required: true, index: true },
 				timestamp: { type: String, required: true, index: true },
 				ttl: { type: String, required: true },
 			},
@@ -257,11 +257,14 @@ const onSettleMessageSchema = new Schema(
 );
 
 // Additional indexes for better performance
-baseReconSchema.index({
-	"context.transaction_id": 1,
-	"context.action": 1,
-	"context.message_id": 1,
-});
+baseReconSchema.index(
+	{
+		"context.transaction_id": 1,
+		"context.action": 1,
+		"context.message_id": 1,
+	},
+	{ unique: true },
+); // Ensure unique transaction_id, action, and message_id combination
 
 // Create the base model from the base schema
 const TransactionModel = model("Transaction", baseReconSchema);
