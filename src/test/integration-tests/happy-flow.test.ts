@@ -172,6 +172,8 @@ describe("Happy Flow Integration Tests", () => {
 
 				console.log("On Settle Response", onSettleResponse.body);
 				expect(onSettleResponse.status).toBe(200);
+
+				// get recons for half of the orders send recons for half of the orders
 			},
 			20 * 60 * 1000,
 		); // 20 minutes timeout
