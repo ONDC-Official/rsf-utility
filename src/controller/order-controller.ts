@@ -93,7 +93,7 @@ export class OrderController {
 		}
 	};
 	updateOrders = async (req: Request, res: Response) => {
-		const userId = req.params.id;
+		const userId = req.params.userId;
 		const body = req.body;
 
 		try {
