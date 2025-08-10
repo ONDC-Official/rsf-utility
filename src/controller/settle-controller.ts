@@ -159,14 +159,22 @@ export class SettleController {
 		if (data.collector_settlement) {
 			settlePartialData.collector_settlement = data.collector_settlement;
 		}
+		if (data.inter_np_settlement) {
+			settlePartialData.inter_np_settlement = data.inter_np_settlement;
+		}
 		return settlePartialData;
 	}
 
 	/**
 	 * Convert CSV data to settlement update format
-	 * Expected CSV columns: order_id, total_order_value, withholding_amount, tds, tcs, commission, collector_settlement
+	 * Expected CSV columns: order_id, total_order_value, withholding_amount, tds, tcs, commission, collector_settlement, inter_np_settlement
+	 * @param csvData - Array of CSV row data
+	 * @returns Object containing settlements array
+	 * @throws Error if required fields are missing or invalid
 	 */
-	private convertCsvToSettlementData(csvData: any[]): { settlements: any[] } {
+	private convertCsvToSettlementData(csvData: any[]): {
+		settlements: Partial<SettleType>[];
+	} {
 		settleLogger.info("Converting CSV data to settlement format", {
 			rowCount: csvData.length,
 		});
@@ -228,6 +236,14 @@ export class SettleController {
 				if (isNaN(settlement.collector_settlement)) {
 					throw new Error(`Row ${index + 1}: invalid collector_settlement`);
 				}
+			}
+
+			if (
+				row.inter_np_settlement !== undefined &&
+				row.inter_np_settlement !== ""
+			) {
+				settlement.inter_np_settlement =
+					row.inter_np_settlement.toString().trim() === "true";
 			}
 
 			return settlement;

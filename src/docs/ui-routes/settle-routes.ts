@@ -89,13 +89,13 @@ This endpoint updates settlements for a user and supports two modes based on the
 ### CSV Format Requirements
 
 - **Required Fields**: \`order_id\`
-- **Optional Fields**: \`total_order_value\`, \`withholding_amount\`, \`tds\`, \`tcs\`, \`commission\`, \`collector_settlement\`
+- **Optional Fields**: \`total_order_value\`, \`withholding_amount\`, \`tds\`, \`tcs\`, \`commission\`, \`collector_settlement\`, \`inter_np_settlement\`
 
 #### Example CSV:
 \`\`\`csv
-order_id,total_order_value,withholding_amount
-ORD001,1000.50,100.00
-ORD002,2500.75,250.00
+order_id,total_order_value,withholding_amount,tds,tcs,commission,collector_settlement,inter_np_settlement
+ORD001,1000.50,100.00,10.00,5.00,50.00,25.00,true
+ORD002,2500.75,250.00,25.00,12.50,125.00,62.50,false
 \`\`\`
     `,
 	request: {
