@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { title } from "process";
 
 const ProviderDetails = new mongoose.Schema(
 	{
+		provider_name: { type: String, required: true },
 		provider_id: { type: String, required: true },
 		account_number: { type: String, required: true },
 		ifsc_code: { type: String, required: true },
