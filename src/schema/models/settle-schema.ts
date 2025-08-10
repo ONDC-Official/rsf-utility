@@ -88,11 +88,11 @@ export const SettleSchema = z
 			description: "Settlement status",
 			example: "PENDING",
 		}),
-		provider_status: z.enum(statusEnum).openapi({
+		provider_status: z.enum(statusEnum).optional().nullable().openapi({
 			description: "Provider settlement status",
 			example: "SETTLED",
 		}),
-		self_status: z.enum(statusEnum).openapi({
+		self_status: z.enum(statusEnum).optional().nullable().openapi({
 			description: "Self settlement status",
 			example: "NOT-SETTLED",
 		}),
