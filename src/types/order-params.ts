@@ -72,7 +72,7 @@ export const PatchOrderBody = z
 	.array(
 		z.object({
 			order_id: z.string(),
-			due_date: z.date(), // or z.coerce.date() if you want strict date parsing
+			due_date: z.coerce.date(), // or z.coerce.date() if you want strict date parsing
 		}),
 	)
 	.min(1)
