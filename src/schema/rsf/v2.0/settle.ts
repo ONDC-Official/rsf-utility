@@ -90,7 +90,7 @@ const settleSchema = {
                           currency: { type: "string" },
                           value: {
                             type: "string",
-                            pattern: "^\\d+(\\.\\d{1,2})?$",
+                            // pattern: "^\\d+(\\.\\d{1,2})?$",
                           },
                         },
                         additionalProperties: false,
@@ -109,7 +109,7 @@ const settleSchema = {
                           currency: { type: "string" },
                           value: {
                             type: "string",
-                            pattern: "^\\d+(\\.\\d{1,2})?$",
+                            // pattern: "^\\d+(\\.\\d{1,2})?$",
                           },
                         },
                         additionalProperties: false,
