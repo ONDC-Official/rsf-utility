@@ -73,31 +73,58 @@ export class SettleController {
 					message: "Valid User ID is required",
 				});
 			}
-			const validationResult = UpdateSettlementSchema.safeParse(req.body);
-			if (!validationResult.success) {
-				settleLogger.error(
-					"Invalid body",
-					getLoggerMeta(req),
-					validationResult.error,
-				);
 
-				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
-					message: "Invalid body",
-					errors: z.treeifyError(validationResult.error),
-				});
+			let settlementData: any;
+
+			// Check if CSV data was uploaded
+			if ((req as any).processedCsvData) {
+				settleLogger.info(
+					"Processing CSV data for settlement update",
+					getLoggerMeta(req),
+				);
+				settlementData = this.convertCsvToSettlementData(
+					(req as any).processedCsvData.data,
+				);
+			} else {
+				// Handle JSON body request
+				const validationResult = UpdateSettlementSchema.safeParse(req.body);
+				if (!validationResult.success) {
+					settleLogger.error(
+						"Invalid body",
+						getLoggerMeta(req),
+						validationResult.error,
+					);
+
+					return sendError(res, "INVALID_REQUEST_BODY", undefined, {
+						message: "Invalid body",
+						errors: z.treeifyError(validationResult.error),
+					});
+				}
+				settlementData = validationResult.data;
 			}
 
-			const convertedData = validationResult.data.settlements.map(
-				(settlement) => ({
+			const convertedData = settlementData.settlements.map(
+				(settlement: any) => ({
 					orderId: settlement.order_id,
 					settlement: this.getUpdateData(settlement),
 				}),
 			);
 
+			logger.info("Updating settlements", {
+				userId,
+				settlements: convertedData,
+			});
+
 			const updated = await this.settleService.updateMultipleSettlements(
 				userId,
 				convertedData,
 			);
+
+			settleLogger.info("Settlement updated successfully", {
+				...getLoggerMeta(req),
+				dataSource: (req as any).processedCsvData ? "CSV" : "JSON",
+			});
+
 			return sendSuccess(res, updated, "Settlement updated successfully");
 		} catch (error: any) {
 			settleLogger.error(
@@ -133,5 +160,79 @@ export class SettleController {
 			settlePartialData.collector_settlement = data.collector_settlement;
 		}
 		return settlePartialData;
+	}
+
+	/**
+	 * Convert CSV data to settlement update format
+	 * Expected CSV columns: order_id, total_order_value, withholding_amount, tds, tcs, commission, collector_settlement
+	 */
+	private convertCsvToSettlementData(csvData: any[]): { settlements: any[] } {
+		settleLogger.info("Converting CSV data to settlement format", {
+			rowCount: csvData.length,
+		});
+
+		const settlements = csvData.map((row, index) => {
+			// Validate required fields
+			if (!row.order_id) {
+				throw new Error(`Row ${index + 1}: order_id is required`);
+			}
+
+			const settlement: any = {
+				order_id: row.order_id.toString().trim(),
+			};
+
+			// Convert numeric fields if present
+			if (row.total_order_value !== undefined && row.total_order_value !== "") {
+				settlement.total_order_value = parseFloat(row.total_order_value);
+				if (isNaN(settlement.total_order_value)) {
+					throw new Error(`Row ${index + 1}: invalid total_order_value`);
+				}
+			}
+
+			if (
+				row.withholding_amount !== undefined &&
+				row.withholding_amount !== ""
+			) {
+				settlement.withholding_amount = parseFloat(row.withholding_amount);
+				if (isNaN(settlement.withholding_amount)) {
+					throw new Error(`Row ${index + 1}: invalid withholding_amount`);
+				}
+			}
+
+			if (row.tds !== undefined && row.tds !== "") {
+				settlement.tds = parseFloat(row.tds);
+				if (isNaN(settlement.tds)) {
+					throw new Error(`Row ${index + 1}: invalid tds`);
+				}
+			}
+
+			if (row.tcs !== undefined && row.tcs !== "") {
+				settlement.tcs = parseFloat(row.tcs);
+				if (isNaN(settlement.tcs)) {
+					throw new Error(`Row ${index + 1}: invalid tcs`);
+				}
+			}
+
+			if (row.commission !== undefined && row.commission !== "") {
+				settlement.commission = parseFloat(row.commission);
+				if (isNaN(settlement.commission)) {
+					throw new Error(`Row ${index + 1}: invalid commission`);
+				}
+			}
+
+			if (
+				row.collector_settlement !== undefined &&
+				row.collector_settlement !== ""
+			) {
+				settlement.collector_settlement = parseFloat(row.collector_settlement);
+				if (isNaN(settlement.collector_settlement)) {
+					throw new Error(`Row ${index + 1}: invalid collector_settlement`);
+				}
+			}
+
+			return settlement;
+		});
+
+		return { settlements };
 	}
 }

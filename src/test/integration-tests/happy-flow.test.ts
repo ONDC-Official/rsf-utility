@@ -18,7 +18,7 @@ import { writeFileSync } from "fs";
 import path from "path";
 
 import axios from "axios";
-import connectDB from "../../db";
+
 import { genDummyOnSettle } from "../utils/gen_on_settle";
 
 // Mock axios
@@ -174,6 +174,26 @@ describe("Happy Flow Integration Tests", () => {
 				expect(onSettleResponse.status).toBe(200);
 
 				// get recons for half of the orders send recons for half of the orders
+				const sendReconOrderIds = orderIds.slice(0, orderIds.length / 2);
+				const getReconOrderIds = orderIds.slice(orderIds.length / 2);
+
+				const genReconResponse = await request(app)
+					.post(`/ui/generate/${userId}/recon`)
+					.set("Authorization", `Bearer ${token}`)
+					.send({
+						recon_data: [
+							...sendReconOrderIds.map((orderId) => ({
+								order_id: orderId,
+							})),
+						],
+					});
+				console.log("Recon Generated");
+				writeFileSync(
+					path.resolve(__dirname, "../generations/generate-recon.json"),
+					JSON.stringify(genReconResponse.body.data, null, 2),
+				);
+				const reconPayload = genReconResponse.body.data;
+				expect(genReconResponse.status).toBe(201);
 			},
 			20 * 60 * 1000,
 		); // 20 minutes timeout

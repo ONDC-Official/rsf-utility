@@ -48,7 +48,7 @@ export function reconBuilder(
 					settleData.withholding_amount;
 				const tcs: number = apiData.recon_data?.tcs ?? userConfig.np_tcs;
 				const tds: number = apiData.recon_data?.tds ?? userConfig.np_tds;
-				console.log(`TCS: ${tcs}, TDS: ${tds}`);
+
 				return {
 					id: settleData.order_id,
 					amount: {

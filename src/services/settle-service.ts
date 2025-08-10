@@ -205,16 +205,35 @@ export class SettleDbManagementService {
 		orderId: string,
 		settlement: Partial<SettleType>,
 	) {
-		await this.settleRepo.updateSettlement(userId, orderId, settlement);
+		return await this.settleRepo.updateSettlement(userId, orderId, settlement);
 	}
 
 	async updateMultipleSettlements(
 		userId: string,
 		data: { orderId: string; settlement: Partial<SettleType> }[],
 	) {
+		const updated = [];
 		for (const { orderId, settlement } of data) {
-			await this.updateSettlementViaUser(userId, orderId, settlement);
+			const exists = await this.settleRepo.checkUniqueSettlement(
+				userId,
+				orderId,
+			);
+			if (!exists) {
+				throw new Error(
+					`Settlement for order ID ${orderId} does not exist for user ID: ${userId}`,
+				);
+			}
 		}
+
+		for (const { orderId, settlement } of data) {
+			const updatedData = await this.updateSettlementViaUser(
+				userId,
+				orderId,
+				settlement,
+			);
+			updated.push(updatedData);
+		}
+		return updated;
 	}
 
 	async insertSettlementList(settlements: SettleType[]) {
