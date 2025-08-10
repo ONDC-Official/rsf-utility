@@ -62,6 +62,7 @@ export const SETTLEMENT_STATUS = {
 	PENDING: "PENDING",
 	SETTLED: "SETTLED",
 	NOT_SETTLED: "NOT_SETTLED",
+	IN_RECON: "IN_RECON",
 } as const;
 
 export type SettlementStatus =

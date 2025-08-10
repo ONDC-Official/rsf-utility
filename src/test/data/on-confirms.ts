@@ -2,7 +2,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -12,8 +12,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -330,7 +330,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -340,8 +340,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -658,7 +658,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -668,8 +668,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -986,7 +986,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -996,8 +996,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -1314,7 +1314,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -1324,8 +1324,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -1642,7 +1642,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -1652,8 +1652,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -1970,7 +1970,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -1980,8 +1980,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -2298,7 +2298,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -2308,8 +2308,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -2626,7 +2626,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -2636,8 +2636,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -2954,7 +2954,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -2964,8 +2964,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -3282,7 +3282,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -3292,8 +3292,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -3610,7 +3610,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -3620,8 +3620,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -3938,7 +3938,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -3948,8 +3948,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -4266,7 +4266,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -4276,8 +4276,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -4594,7 +4594,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -4604,8 +4604,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -4922,7 +4922,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -4932,8 +4932,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -5250,7 +5250,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -5260,8 +5260,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -5578,7 +5578,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -5588,8 +5588,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -5906,7 +5906,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -5916,8 +5916,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -6234,7 +6234,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -6244,8 +6244,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -6562,7 +6562,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -6572,8 +6572,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -6890,7 +6890,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -6900,8 +6900,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -7218,7 +7218,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -7228,8 +7228,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -7546,7 +7546,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -7556,8 +7556,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -7874,7 +7874,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -7884,8 +7884,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -8202,7 +8202,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -8212,8 +8212,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -8530,7 +8530,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -8540,8 +8540,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -8858,7 +8858,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -8868,8 +8868,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -9186,7 +9186,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -9196,8 +9196,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -9514,7 +9514,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -9524,8 +9524,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -9842,7 +9842,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -9852,8 +9852,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -10170,7 +10170,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -10180,8 +10180,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -10498,7 +10498,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -10508,8 +10508,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -10826,7 +10826,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -10836,8 +10836,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -11154,7 +11154,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -11164,8 +11164,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -11482,7 +11482,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -11492,8 +11492,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -11810,7 +11810,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -11820,8 +11820,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -12138,7 +12138,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -12148,8 +12148,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -12466,7 +12466,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -12476,8 +12476,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -12794,7 +12794,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -12804,8 +12804,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -13122,7 +13122,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -13132,8 +13132,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -13450,7 +13450,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -13460,8 +13460,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -13778,7 +13778,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -13788,8 +13788,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -14106,7 +14106,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -14116,8 +14116,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -14434,7 +14434,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -14444,8 +14444,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -14762,7 +14762,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -14772,8 +14772,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -15090,7 +15090,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -15100,8 +15100,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -15418,7 +15418,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -15428,8 +15428,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -15746,7 +15746,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -15756,8 +15756,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -16074,7 +16074,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -16084,8 +16084,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -16402,7 +16402,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -16412,8 +16412,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -16730,7 +16730,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -16740,8 +16740,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -17058,7 +17058,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -17068,8 +17068,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -17386,7 +17386,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -17396,8 +17396,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -17714,7 +17714,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -17724,8 +17724,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -18042,7 +18042,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -18052,8 +18052,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -18370,7 +18370,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -18380,8 +18380,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -18698,7 +18698,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -18708,8 +18708,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -19026,7 +19026,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -19036,8 +19036,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -19354,7 +19354,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -19364,8 +19364,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -19682,7 +19682,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -19692,8 +19692,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -20010,7 +20010,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -20020,8 +20020,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -20338,7 +20338,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -20348,8 +20348,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -20666,7 +20666,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -20676,8 +20676,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -20994,7 +20994,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -21004,8 +21004,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -21322,7 +21322,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -21332,8 +21332,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -21650,7 +21650,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -21660,8 +21660,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -21978,7 +21978,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -21988,8 +21988,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -22306,7 +22306,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -22316,8 +22316,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -22634,7 +22634,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -22644,8 +22644,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -22962,7 +22962,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -22972,8 +22972,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -23290,7 +23290,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -23300,8 +23300,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -23618,7 +23618,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -23628,8 +23628,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -23946,7 +23946,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -23956,8 +23956,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -24274,7 +24274,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -24284,8 +24284,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -24602,7 +24602,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -24612,8 +24612,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -24930,7 +24930,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -24940,8 +24940,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -25258,7 +25258,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -25268,8 +25268,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -25586,7 +25586,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -25596,8 +25596,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -25914,7 +25914,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -25924,8 +25924,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -26242,7 +26242,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -26252,8 +26252,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -26570,7 +26570,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -26580,8 +26580,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -26898,7 +26898,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -26908,8 +26908,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -27226,7 +27226,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -27236,8 +27236,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -27554,7 +27554,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -27564,8 +27564,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -27882,7 +27882,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -27892,8 +27892,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -28210,7 +28210,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -28220,8 +28220,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -28538,7 +28538,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -28548,8 +28548,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -28866,7 +28866,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -28876,8 +28876,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -29194,7 +29194,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -29204,8 +29204,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -29522,7 +29522,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -29532,8 +29532,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -29850,7 +29850,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -29860,8 +29860,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -30178,7 +30178,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -30188,8 +30188,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -30506,7 +30506,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -30516,8 +30516,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -30834,7 +30834,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -30844,8 +30844,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -31162,7 +31162,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -31172,8 +31172,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -31490,7 +31490,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -31500,8 +31500,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -31818,7 +31818,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -31828,8 +31828,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -32146,7 +32146,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -32156,8 +32156,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {
@@ -32474,7 +32474,7 @@ export const on_confirmPayloads = [
 	{
 		context: {
 			action: "on_confirm",
-			bap_id: "dev-automation.ondc.org",
+			bap_id: "fis-staging.ondc.org",
 			bap_uri: "https://dev-automation.ondc.org/buyer",
 			domain: "ONDC:RET10",
 			city: "std:011",
@@ -32484,8 +32484,8 @@ export const on_confirmPayloads = [
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
-			bpp_id: "dev-automation.ondc.org",
-			bpp_uri: "https://dev-automation.ondc.org/seller",
+			bpp_id: "fis-staging.ondc.org",
+			bpp_uri: "https://fis-staging.ondc.org/rsf-utility/api",
 		},
 		message: {
 			order: {

@@ -3,7 +3,6 @@ import { OrderType } from "../schema/models/order-schema";
 import { resolve } from "path";
 import duration from "iso8601-duration";
 import logger from "../utils/logger";
-import { pick } from "lodash";
 
 export const extractFields = (
 	payload: any,
@@ -66,10 +65,10 @@ export const extractFields = (
 					tempBuyerFinderFeeAmountRaw = resolvedValue;
 					break;
 				case "pickup_time":
-					 pickup_time = resolvedValue
-					 break;
-				case "collected_by": 
-					result["collected_by"] = resolvedValue
+					pickup_time = resolvedValue;
+					break;
+				case "collected_by":
+					result["collected_by"] = resolvedValue;
 					break;
 				case "quote":
 					if (typeof resolvedValue === "object" && resolvedValue !== null) {
@@ -103,7 +102,8 @@ export const extractFields = (
 						let item_tax = 0;
 						for (let item of breakup) {
 							if (item.title === "tax" && item_ids.includes(item.id)) {
-								result["item_tax"] = (result["item_tax"] || 0) + parseFloat(item.price);
+								result["item_tax"] =
+									(result["item_tax"] || 0) + parseFloat(item.price);
 							} else quoteValueWithoutTax += item.price;
 						}
 
@@ -126,13 +126,20 @@ export const extractFields = (
 					}
 					break;
 				case "state":
-					if(resolvedValue === "Completed") {
-						const durationMs = duration.toSeconds(duration.parse(result["settlement_window"] ?? "P2D")) * 1000;
+					if (resolvedValue === "Completed") {
+						const durationMs =
+							duration.toSeconds(
+								duration.parse(result["settlement_window"] ?? "P2D"),
+							) * 1000;
 						const updated_at = result["updated_at"] ?? new Date();
-						if(result["settlement_basis"] === "delivery"){
-							result["due_date"] = new Date(new Date(updated_at).getTime() + durationMs);
+						if (result["settlement_basis"] === "delivery") {
+							result["due_date"] = new Date(
+								new Date(updated_at).getTime() + durationMs,
+							);
 						} else {
-							result["due_date"] = new Date(new Date(pickup_time).getTime() + durationMs);
+							result["due_date"] = new Date(
+								new Date(pickup_time).getTime() + durationMs,
+							);
 						}
 					}
 					result["state"] = resolvedValue;

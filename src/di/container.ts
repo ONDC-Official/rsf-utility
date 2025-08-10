@@ -96,6 +96,7 @@ const reconTriggerService = new ReconTriggerService(
 	reconService,
 	userService,
 	transactionService,
+	settleDbManagementService,
 );
 const onReconTriggerService = new OnReconTriggerService(
 	reconService,
