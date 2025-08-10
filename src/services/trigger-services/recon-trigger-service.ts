@@ -1,4 +1,4 @@
-import { INTERNAL_RECON_STATUS } from "../../constants/enums";
+import { ENUMS, INTERNAL_RECON_STATUS } from "../../constants/enums";
 import { UserType } from "../../schema/models/user-schema";
 import { ReconPayload } from "../../schema/rsf/zod/recon-schema";
 import {
@@ -11,6 +11,7 @@ import logger from "../../utils/logger";
 import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
 import { triggerRequest } from "../../utils/trigger-utils";
 import { ReconDbService } from "../recon-service";
+import { SettleDbManagementService } from "../settle-service";
 import { TransactionService } from "../transaction-serivce";
 import { UserService } from "../user-service";
 
@@ -20,6 +21,7 @@ export class ReconTriggerService {
 		private reconService: ReconDbService,
 		private userService: UserService,
 		private transactionService: TransactionService,
+		private settleService: SettleDbManagementService,
 	) {}
 
 	async handleReconAction(userId: string, ondcReconPayload: ReconPayload) {
@@ -130,18 +132,32 @@ export class ReconTriggerService {
 		const orders = ondcReconPayload.message.orders;
 		for (const orderData of orders) {
 			try {
-				const settlement = orderData.settlements[0];
+				const settlementPayload = orderData.settlements[0];
+				const dbSettlement = await this.settleService.getSingleSettlement(
+					userId,
+					orderData.id,
+				);
+				if (!dbSettlement) {
+					triggerLogger.error(
+						`Settlement not found for order ID ${orderData.id} for user ${userId}`,
+					);
+					continue;
+				}
 				const reconData = extractReconDetails(
-					settlement,
+					dbSettlement,
+					settlementPayload,
 					userId,
 					orderData.id,
 					dbPayload._id.toString(),
 					INTERNAL_RECON_STATUS.SENT_PENDING,
 				);
-				if (settlement.payment_id) {
-					reconData.payment_id = settlement.payment_id;
+				if (settlementPayload.payment_id) {
+					reconData.payment_id = settlementPayload.payment_id;
 				}
 				await this.reconService.createReconOrOverride(reconData);
+				await this.settleService.updateSettlementViaUser(userId, orderData.id, {
+					status: ENUMS.SETTLEMENT_STATUS.IN_RECON,
+				});
 			} catch (error) {
 				triggerLogger.error(
 					`Error updating settlement for order ID ${orderData.id}`,

@@ -1,14 +1,10 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { ENUMS } from "../constants/enums";
 
 extendZodWithOpenApi(z);
 
-const allowedStatuses = [
-	"PREPARED",
-	"PENDING",
-	"SETTLED",
-	"NOT_SETTLED",
-] as const;
+const allowedStatuses = Object.values(ENUMS.SETTLEMENT_STATUS);
 
 export const GetSettlementsQuerySchema = z
 	.object({

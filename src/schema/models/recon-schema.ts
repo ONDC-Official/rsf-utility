@@ -42,6 +42,14 @@ export const ReconSchema = z
 			description: "Order ID",
 			example: "order123",
 		}),
+		collector_id: z.string().openapi({
+			description: "Collector ID",
+			example: "collector123",
+		}),
+		receiver_id: z.string().openapi({
+			description: "Receiver ID",
+			example: "receiver123",
+		}),
 		recon_status: z.enum(Object.values(ENUMS.INTERNAL_RECON_STATUS)).openapi({
 			description: "Recon status",
 			example: "SENT_PENDING",

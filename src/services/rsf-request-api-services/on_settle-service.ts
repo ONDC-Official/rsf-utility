@@ -107,7 +107,7 @@ export class OnSettleService {
 						provider.error?.message ||
 						self.error?.message,
 				};
-				await this.settleService.updateSettlementData(
+				await this.settleService.updateSettlementViaTxn(
 					settlePayload._id.toString(),
 					order.id,
 					settlementData,

@@ -24,6 +24,14 @@ const ReconTableSchema = new mongoose.Schema(
 			required: true,
 			index: true,
 		},
+		collector_id: {
+			type: String,
+			required: true,
+		},
+		receiver_id: {
+			type: String,
+			required: true,
+		},
 		recon_status: {
 			type: String,
 			enum: Object.values(ENUMS.INTERNAL_RECON_STATUS),
