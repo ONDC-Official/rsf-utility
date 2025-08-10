@@ -25,7 +25,7 @@ function saveRsfPayload(req: Request, data: any, res: Response) {
 	const action = req.params.action;
 	const validationResult = RsfActionListSchema.safeParse(action);
 	if (!validationResult.success) {
-		logger.warning("Skipping rsfAuditLogger middleware", getLoggerMeta(req));
+		logger.info("Skipping rsfAuditLogger middleware", getLoggerMeta(req));
 		return;
 	}
 	logger.info(

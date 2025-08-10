@@ -82,7 +82,7 @@ const onSettleSchema = {
 									id: { type: "string" },
 									inter_participant: {
 										type: "object",
-										required: ["settled_amount", "amount", "status"],
+										required: ["amount", "status"],
 										properties: {
 											settled_amount: {
 												type: "object",

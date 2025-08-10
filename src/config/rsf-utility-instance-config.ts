@@ -9,3 +9,7 @@ export const subscriberConfig = {
 	subscriberUniqueId: process.env.SUBSCRIBER_UNIQUE_ID || "",
 	subscriberPrivateKey: process.env.SUBSCRIBER_PRIVATE_KEY || "",
 };
+
+export const operationConfig = {
+	rateLimit: parseInt(process.env.RATE_LIMIT ?? "1000") || 1000, // Default rate limit
+};

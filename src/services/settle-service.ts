@@ -183,9 +183,9 @@ export class SettleDbManagementService {
 		}
 	}
 
-	async getSettlementByDbId(dbId: string) {
+	async getSettlementByDbId(orderId: string, dbId: string) {
 		settleLogger.info("Fetching settlement by database ID");
-		return await this.settleRepo.getByTransactionDbId(dbId);
+		return await this.settleRepo.getByTransactionDbId(orderId, dbId);
 	}
 	async updateSettlementViaTxn(
 		payload_id: string,

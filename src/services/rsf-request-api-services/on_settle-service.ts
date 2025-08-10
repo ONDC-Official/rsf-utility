@@ -72,6 +72,7 @@ export class OnSettleService {
 		for (const order of orders) {
 			if (order.id) {
 				const settlement = await this.settleService.getSettlementByDbId(
+					order.id,
 					settlePayload._id.toString(),
 				);
 				if (!settlement) {

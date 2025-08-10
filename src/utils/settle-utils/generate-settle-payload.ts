@@ -45,10 +45,6 @@ export function generateSettlePayload(
 				type: "NP-NP",
 				id: uuidv4(),
 				orders: settlements.map((settle) => {
-					// ! TODO: proper amount calculations currently using dummy values
-					logger.warning(
-						"Using dummy values for settlement amounts, please implement proper calculations",
-					);
 					const providerDetails = userConfig.provider_details?.find(
 						(provider) => provider.provider_id === settle.provider_id,
 					);

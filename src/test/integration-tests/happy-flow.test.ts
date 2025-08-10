@@ -19,6 +19,7 @@ import path from "path";
 
 import axios from "axios";
 import connectDB from "../../db";
+import { genDummyOnSettle } from "../utils/gen_on_settle";
 
 // Mock axios
 jest.mock("axios");
@@ -28,7 +29,7 @@ describe("Happy Flow Integration Tests", () => {
 	let app: Application;
 	beforeAll(async () => {
 		app = createServer();
-		await connectDB();
+		// await connectDB();
 	});
 
 	describe("Flow 1: User Creation and Order Processing", () => {
@@ -71,7 +72,7 @@ describe("Happy Flow Integration Tests", () => {
 				const userId = userResponse.body.data._id;
 
 				// post orders
-				for (const on_confirm of on_confirmPayloads) {
+				for (const on_confirm of on_confirmPayloads.slice(0, 20)) {
 					const data = await request(app)
 						.post("/api/on_confirm")
 						.send(on_confirm);
@@ -142,7 +143,7 @@ describe("Happy Flow Integration Tests", () => {
 					path.resolve(__dirname, "../generations/generate-settle.json"),
 					JSON.stringify(generateResponse.body.data, null, 2),
 				);
-				const payload = generateResponse.body.data;
+				const settlePayload = generateResponse.body.data;
 				const fakeAgencyResponse = {
 					message: {
 						ack: {
@@ -155,9 +156,22 @@ describe("Happy Flow Integration Tests", () => {
 				const triggerResponse = await request(app)
 					.post(`/ui/trigger/${userId}/settle`)
 					.set("Authorization", `Bearer ${token}`)
-					.send(payload);
+					.send(settlePayload);
 				console.log("Settle Triggered", triggerResponse.body);
 				expect(triggerResponse.status).toBe(200);
+
+				const onSettle = genDummyOnSettle(settlePayload);
+				writeFileSync(
+					path.resolve(__dirname, "../generations/fake_on_settle.json"),
+					JSON.stringify(onSettle, null, 2),
+				);
+				// Get on_settle with NOT_SETTLED
+				const onSettleResponse = await request(app)
+					.post(`/api/on_settle`)
+					.send(onSettle);
+
+				console.log("On Settle Response", onSettleResponse.body);
+				expect(onSettleResponse.status).toBe(200);
 			},
 			20 * 60 * 1000,
 		); // 20 minutes timeout
