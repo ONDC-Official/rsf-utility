@@ -16,6 +16,17 @@ export function generateSettlePayload(
 	if (!userConfig || !settlements || settlements.length === 0) {
 		throw new Error("Invalid user configuration or settlements data");
 	}
+
+	const settleMap = new Map<string, SettleType>();
+	for (const settle of settlements) {
+		if (settleMap.has(settle.order_id)) {
+			throw new Error(
+				`Duplicate order_id found in settlements: ${settle.order_id}`,
+			);
+		}
+		settleMap.set(settle.order_id, settle);
+	}
+
 	return {
 		context: {
 			domain: "ONDC:NTS10",
@@ -44,31 +55,44 @@ export function generateSettlePayload(
 			settlement: {
 				type: "NP-NP",
 				id: uuidv4(),
-				orders: settlements.map((settle) => {
-					const providerDetails = userConfig.provider_details?.find(
-						(provider) => provider.provider_id === settle.provider_id,
-					);
-					if (!providerDetails) {
+				orders: settlementData.map((settle) => {
+					const dbSettle = settleMap.get(settle.order_id);
+					if (!dbSettle) {
 						throw new Error(
-							`Provider details not found for provider ID: ${settle.provider_id}`,
+							`Settlement not found for order_id: ${settle.order_id}`,
 						);
 					}
-					return {
+					let providerDetails = null;
+					if (settle.provider_value) {
+						providerDetails = userConfig.provider_details?.find(
+							(provider) => provider.provider_id === dbSettle.provider_id,
+						);
+						if (!providerDetails) {
+							throw new Error(
+								`Provider details not found for provider ID: ${dbSettle.provider_id}`,
+							);
+						}
+					}
+
+					const order: any = {
 						id: settle.order_id,
 						inter_participant: {
 							amount: {
 								currency: "INR",
-								value: Math.abs(settle.inter_np_settlement).toFixed(2),
+								value: Math.abs(dbSettle.inter_np_settlement).toFixed(2),
 							},
 						},
 						collector: {
 							amount: {
 								currency: "INR",
-								value: settle.commission.toFixed(2),
+								value: dbSettle.commission.toFixed(2),
 							},
 						},
-						provider: {
-							id: settle.provider_id,
+					};
+
+					if (settle.provider_value && providerDetails) {
+						order.provider = {
+							id: dbSettle.provider_id,
 							name: providerDetails.bank_name,
 							bank_details: {
 								account_no: providerDetails.account_number,
@@ -76,16 +100,20 @@ export function generateSettlePayload(
 							},
 							amount: {
 								currency: "INR",
-								value: settle.total_order_value.toFixed(2),
+								value: settle.provider_value.toFixed(2),
 							},
-						},
-						self: {
+						};
+					}
+					if (settle.self_value) {
+						order.self = {
 							amount: {
 								currency: "INR",
-								value: settle.withholding_amount.toFixed(2),
+								value: settle.self_value.toFixed(2),
 							},
-						},
-					};
+						};
+					}
+
+					return order;
 				}),
 			},
 		},
