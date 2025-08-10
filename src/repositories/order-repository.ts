@@ -21,8 +21,8 @@ export class OrderRepository {
 		}
 		if (queryParams.counterparty_id) {
 			query.$or = [
-				{ "context.bap_id": queryParams.counterparty_id },
-				{ "context.bpp_id": queryParams.counterparty_id },
+				{ bap_id: queryParams.counterparty_id },
+				{ bpp_id: queryParams.counterparty_id },
 			];
 		}
 

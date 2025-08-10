@@ -136,7 +136,6 @@ export class ReconRepository {
 			];
 
 			const results = await Recon.aggregate(pipeline);
-			console.warn("Aggregation results:", results);
 			logger.debug("Aggregation results:", JSON.stringify(results, null, 2));
 			const data = results[0].paginatedResults;
 			const total =
