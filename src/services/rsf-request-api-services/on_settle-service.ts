@@ -89,7 +89,7 @@ export class OnSettleService {
 				const { inter_participant, self, provider } = order;
 				logger.info("updating data", order);
 
-				if (!inter_participant || !self || !provider) {
+				if (!inter_participant) {
 					onSettleLogger.error("Missing required settlement data in order", {
 						order,
 					});
@@ -99,14 +99,14 @@ export class OnSettleService {
 				const settlementData: Partial<SettleType> = {
 					status: inter_participant.status,
 					self_status: self.status,
-					provider_status: provider.status,
+					provider_status: provider?.status,
 					settlement_reference: inter_participant.reference_no,
-					provider_settlement_reference: provider.reference_no,
-					self_settlement_reference: self.reference_no,
+					provider_settlement_reference: provider?.reference_no,
+					self_settlement_reference: self?.reference_no,
 					error:
 						inter_participant.error?.message ||
-						provider.error?.message ||
-						self.error?.message,
+						provider?.error?.message ||
+						self?.error?.message,
 				};
 				await this.settleService.updateSettlementViaTxn(
 					settlePayload._id.toString(),

@@ -246,6 +246,8 @@ export class SettleController {
 					row.inter_np_settlement.toString().trim() === "true";
 			}
 
+			logger.warning("Row processed", settlement);
+
 			return settlement;
 		});
 

@@ -33,12 +33,12 @@ const SettleSchema = new mongoose.Schema(
 		},
 		provider_status: {
 			type: String,
-			required: true,
+			required: false,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
 		self_status: {
 			type: String,
-			required: true,
+			required: false,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
 		transaction_db_ids: { type: [String] },
