@@ -24,136 +24,47 @@ export class TaxEngine {
 		this.item_tax = order.item_tax ?? 0;
 	}
 	calculateTcs() {
-		if (
-			this.collected_by === "BAP" &&
-			!this.msn &&
-			this.domain !== "ONDC:RET11"
-		) {
-			return (this.total_order_value - this.item_tax) * this.tcs;
-		}
-		return 0;
+		const shouldCalculate =
+			this.collected_by === "BAP" && !this.msn && this.domain !== "ONDC:RET11";
+
+		return shouldCalculate
+			? (this.total_order_value - this.item_tax) * this.tcs
+			: 0;
 	}
 	calculateTds() {
-		if (this.collected_by === "BAP" && !this.msn) {
-			return (this.total_order_value - this.item_tax) * this.tds;
-		}
-		return 0;
+		const shouldCalculate = this.collected_by === "BAP" && !this.msn;
+
+		return shouldCalculate
+			? (this.total_order_value - this.item_tax) * this.tds
+			: 0;
 	}
 	interNpSettlement() {
+		const tcs = this.calculateTcs();
+		const tds = this.calculateTds();
+		const isRet11 = this.domain === "ONDC:RET11";
+		const addItemTax = !this.msn && isRet11;
+
 		if (this.collected_by === "BAP") {
-			if (!this.msn) {
-				if (this.domain === "ONDC:RET11") {
-					return (
-						this.total_order_value -
-						this.buyer_finder_fee_amount -
-						this.calculateTcs() -
-						this.calculateTds() -
-						this.item_tax
-					);
-				} else {
-					return (
-						this.total_order_value -
-						this.buyer_finder_fee_amount -
-						this.calculateTcs() -
-						this.calculateTds()
-					);
-				}
-			} else {
-				if (this.domain === "ONDC:RET11") {
-					return (
-						this.total_order_value -
-						this.buyer_finder_fee_amount -
-						this.calculateTcs() -
-						this.calculateTds()
-					);
-				} else {
-					return (
-						this.total_order_value -
-						this.buyer_finder_fee_amount -
-						this.calculateTcs() -
-						this.calculateTds()
-					);
-				}
-			}
+			let amount =
+				this.total_order_value - this.buyer_finder_fee_amount - tcs - tds;
+			if (addItemTax) amount -= this.item_tax;
+			return amount;
 		} else {
-			if (!this.msn) {
-				if (this.domain === "ONDC:RET11") {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds() +
-						this.item_tax
-					);
-				} else {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				}
-			} else {
-				if (this.domain === "ONDC:RET11") {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				} else {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				}
-			}
+			let amount = this.buyer_finder_fee_amount + tcs + tds;
+			if (addItemTax) amount += this.item_tax;
+			return amount;
 		}
 	}
 
 	collectorSettlement() {
-		if (this.collected_by === "BAP") {
-			if (!this.msn) {
-				if (this.domain === "ONDC:RET11") {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				} else {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				}
-			} else {
-				if (this.domain === "ONDC:RET11") {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				} else {
-					return (
-						this.buyer_finder_fee_amount +
-						this.calculateTcs() +
-						this.calculateTds()
-					);
-				}
-			}
-		} else {
-			if (!this.msn) {
-				if (this.domain === "ONDC:RET11") {
-					return this.total_order_value - this.interNpSettlement();
-				} else {
-					return this.total_order_value - this.interNpSettlement();
-				}
-			} else {
-				if (this.domain === "ONDC:RET11") {
-					return this.total_order_value - this.interNpSettlement();
-				} else {
-					return this.total_order_value - this.interNpSettlement();
-				}
-			}
+		const isBap = this.collected_by === "BAP";
+
+		if (isBap) {
+			return (
+				this.buyer_finder_fee_amount + this.calculateTcs() + this.calculateTds()
+			);
 		}
+
+		return this.total_order_value - this.interNpSettlement();
 	}
 }
