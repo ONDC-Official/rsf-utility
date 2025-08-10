@@ -58,6 +58,8 @@ export class SettleDbManagementService {
 			counterparty_id: data.counterparty_id,
 			order_id: orderId,
 			status: status,
+			due_date_from: data.due_date_from,
+			due_date_to: data.due_date_to,
 		});
 		return {
 			settlements: result.data,

@@ -65,6 +65,32 @@ export const GetOrdersQuerySchema = z
 				example: "counterparty123",
 			})
 			.optional(),
+		due_date_from: z.coerce
+			.string()
+			.regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+			.transform((str) => new Date(str))
+			.openapi({
+				param: {
+					name: "due_date_from",
+					in: "query",
+				},
+				description: "Filter orders due from this date (YYYY-MM-DD)",
+				example: "2025-08-01",
+			})
+			.optional(),
+		due_date_to: z.coerce
+			.string()
+			.regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+			.transform((str) => new Date(str))
+			.openapi({
+				param: {
+					name: "due_date_to",
+					in: "query",
+				},
+				description: "Filter orders due to this date",
+				example: "2023-12-31",
+			})
+			.optional(),
 	})
 	.strict();
 
@@ -85,4 +111,6 @@ export type GetOrderParamsType = {
 	state?: string[];
 	settle_status?: string[];
 	counterparty_id?: string;
+	due_date_from?: Date;
+	due_date_to?: Date;
 };

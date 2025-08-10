@@ -8,7 +8,8 @@ export class OrderRepository {
 		return await Order.create(data);
 	}
 	async getAllOrders(queryParams: GetOrderParamsType, user_id: string) {
-		const { page, limit, state, settle_status } = queryParams;
+		const { page, limit, state, settle_status, due_date_from, due_date_to } =
+			queryParams;
 		const query: any = {};
 		if (user_id) {
 			query.user_id = user_id;
@@ -24,6 +25,12 @@ export class OrderRepository {
 				{ bap_id: queryParams.counterparty_id },
 				{ bpp_id: queryParams.counterparty_id },
 			];
+		}
+
+		if (due_date_from || due_date_to) {
+			query.due_date = {};
+			if (due_date_from) query.due_date.$gte = due_date_from;
+			if (due_date_to) query.due_date.$lte = due_date_to;
 		}
 
 		return await Order.find(query)
