@@ -13,13 +13,13 @@
       },
       "version": "2.0.0",
       "action": "settle",
-      "bap_id": "your_subscriber_id",
+      "bap_id": "subscriber-id",
       "bap_uri": "https://dev-automation.ondc.org/buyer",
-      "bpp_id": "your_agency_id",
-      "bpp_uri": "http://localhost:4000/settlement",
-      "transaction_id": "d494689f-0054-4035-93bf-ce8f4d80cb92",
-      "message_id": "0cfde53e-0b78-4e4a-916a-27ac7e90841b",
-      "timestamp": "2025-08-09T19:23:39.469Z",
+      "bpp_id": "settlement-agency-id",
+      "bpp_uri": "http://settlement-agency-url",
+      "transaction_id": "852689bb-1a37-44b0-944f-c9938cf126d4",
+      "message_id": "d925a698-114a-418f-805d-6f9957a7099f",
+      "timestamp": "2025-08-10T06:01:52.132Z",
       "ttl": "P1D"
     },
     "message": {
@@ -27,7 +27,7 @@
       "receiver_app_id": "dev-automation.ondc.org",
       "settlement": {
         "type": "NP-NP",
-        "id": "ae1f203d-66ca-440f-86d5-ab35a277d1e7",
+        "id": "f4b21251-a492-4134-ba24-b2e806b77b30",
         "orders": [
           {
             "id": "484317",

@@ -18,6 +18,7 @@ import { writeFileSync } from "fs";
 import path from "path";
 
 import axios from "axios";
+import connectDB from "../../db";
 
 // Mock axios
 jest.mock("axios");
@@ -25,131 +26,139 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Happy Flow Integration Tests", () => {
 	let app: Application;
-	beforeAll(() => {
+	beforeAll(async () => {
 		app = createServer();
+		await connectDB();
 	});
 
 	describe("Flow 1: User Creation and Order Processing", () => {
-		it("should create a user and process an order", async () => {
-			const userData: UserType = {
-				title: "TEST_DOMAIN",
-				role: "BAP",
-				domain: "ONDC:RET10",
-				subscriber_url: "https://dev-automation.ondc.org/buyer",
-				np_tcs: 123,
-				np_tds: 456,
-				pr_tcs: 789,
-				pr_tds: 23,
-				msn: false,
-				provider_details: [
-					{
-						provider_id: "P1",
-						account_number: "1234567890",
-						ifsc_code: "IFSC1234",
-						bank_name: "Bank ABC",
+		it(
+			"should create a user and process an order",
+			async () => {
+				const userData: UserType = {
+					title: "TEST_DOMAIN",
+					role: "BAP",
+					domain: "ONDC:RET10",
+					subscriber_url: "https://dev-automation.ondc.org/buyer",
+					np_tcs: 123,
+					np_tds: 456,
+					pr_tcs: 789,
+					pr_tds: 23,
+					msn: false,
+					provider_details: [
+						{
+							provider_id: "P1",
+							account_number: "1234567890",
+							ifsc_code: "IFSC1234",
+							bank_name: "Bank ABC",
+						},
+					],
+					counterparty_ids: [],
+				};
+				const authResponse = await request(app)
+					.post("/ui/auth/sign-token")
+					.send({
+						client_id: process.env.CLIENT_ID,
+						expires: "7d",
+					});
+				const token = authResponse.body.data.token;
+				const userResponse = await request(app)
+					.post("/ui/users")
+					.set("Authorization", `Bearer ${token}`)
+					.send(userData);
+				console.log(userResponse.body, "User Creation Response");
+				const userId = userResponse.body.data._id;
+
+				// post orders
+				for (const on_confirm of on_confirmPayloads) {
+					const data = await request(app)
+						.post("/api/on_confirm")
+						.send(on_confirm);
+					console.log(data.body, "On Confirm Response");
+					expect(data.status).toBe(200);
+				}
+				console.log("User created and orders processed successfully");
+				const fetchOrders = await request(app)
+					.get(`/ui/orders/${userId}`)
+					.set("Authorization", `Bearer ${token}`);
+
+				const orderIds: string[] = fetchOrders.body.data.map(
+					(o: any) => o.order_id,
+				);
+				expect(fetchOrders.status).toBe(200);
+				console.log(orderIds, "Fetched Orders");
+
+				// 20 random orders list
+				const randomOrders = [];
+				for (let i = 0; i < 20; i++) {
+					randomOrders.push(orderIds[i]);
+				}
+				console.log(randomOrders, "Random Orders");
+
+				// prepare body:
+				const prepBody = {
+					prepare_data: [
+						...randomOrders.map((orderId) => ({
+							id: orderId,
+							strategy: "USER",
+						})),
+					],
+				};
+
+				const prepareResponse = await request(app)
+					.post("/ui/settle/" + userId + "/prepare")
+					.set("Authorization", `Bearer ${token}`)
+					.send(prepBody);
+
+				console.log(prepareResponse.body, "Prepare Response");
+				expect(prepareResponse.status).toBe(201);
+
+				// GET settlements with query
+				const settlementsResponse = await request(app)
+					.get(`/ui/settle/${userId}`)
+					.set("Authorization", `Bearer ${token}`)
+					.query({ page: "1", limit: "20" });
+
+				const settlements = settlementsResponse.body.data.settlements;
+				console.log("Settlements Fetched", settlements.length);
+				expect(settlementsResponse.status).toBe(200);
+
+				const generateBody = {
+					settle_data: [
+						...orderIds.map((orderId) => ({
+							order_id: orderId,
+							provider_value: randomInt(100, 1000),
+							self_value: randomInt(10, 100),
+						})),
+					],
+				};
+				const generateResponse = await request(app)
+					.post(`/ui/generate/${userId}/settle/np-np`)
+					.set("Authorization", `Bearer ${token}`)
+					.send(generateBody);
+				console.log("Settle Generated");
+				writeFileSync(
+					path.resolve(__dirname, "../generations/generate-settle.json"),
+					JSON.stringify(generateResponse.body, null, 2),
+				);
+				const payload = generateResponse.body.data;
+				const fakeAgencyResponse = {
+					message: {
+						ack: {
+							status: "ACK",
+						},
 					},
-				],
-				counterparty_ids: [],
-			};
-			const authResponse = await request(app).post("/ui/auth/sign-token").send({
-				client_id: process.env.CLIENT_ID,
-				expires: "7d",
-			});
-			const token = authResponse.body.data.token;
-			const userResponse = await request(app)
-				.post("/ui/users")
-				.set("Authorization", `Bearer ${token}`)
-				.send(userData);
-			const userId = userResponse.body.data._id;
-
-			// post orders
-			for (const on_confirm of on_confirmPayloads.slice(0, 20)) {
-				const data = await request(app)
-					.post("/api/on_confirm")
-					.send(on_confirm);
-				console.log(data.body, "On Confirm Response");
-				expect(data.status).toBe(200);
-			}
-			console.log("User created and orders processed successfully");
-			const fetchOrders = await request(app)
-				.get(`/ui/orders/${userId}`)
-				.set("Authorization", `Bearer ${token}`);
-
-			const orderIds: string[] = fetchOrders.body.data.map(
-				(o: any) => o.order_id,
-			);
-			expect(fetchOrders.status).toBe(200);
-			console.log(orderIds, "Fetched Orders");
-
-			// 20 random orders list
-			const randomOrders = [];
-			for (let i = 0; i < 20; i++) {
-				randomOrders.push(orderIds[i]);
-			}
-			console.log(randomOrders, "Random Orders");
-
-			// prepare body:
-			const prepBody = {
-				prepare_data: [
-					...randomOrders.map((orderId) => ({
-						id: orderId,
-						strategy: "USER",
-					})),
-				],
-			};
-
-			const prepareResponse = await request(app)
-				.post("/ui/settle/" + userId + "/prepare")
-				.set("Authorization", `Bearer ${token}`)
-				.send(prepBody);
-
-			console.log(prepareResponse.body, "Prepare Response");
-			expect(prepareResponse.status).toBe(201);
-
-			// GET settlements with query
-			const settlementsResponse = await request(app)
-				.get(`/ui/settle/${userId}`)
-				.set("Authorization", `Bearer ${token}`)
-				.query({ page: "1", limit: "20" });
-
-			const settlements = settlementsResponse.body.data.settlements;
-			console.log("Settlements Fetched", settlements.length);
-			expect(settlementsResponse.status).toBe(200);
-
-			const generateBody = {
-				settle_data: [
-					...orderIds.map((orderId) => ({
-						order_id: orderId,
-						provider_value: randomInt(100, 1000),
-						self_value: randomInt(10, 100),
-					})),
-				],
-			};
-			const generateResponse = await request(app)
-				.post(`/ui/generate/${userId}/settle/np-np`)
-				.set("Authorization", `Bearer ${token}`)
-				.send(generateBody);
-			console.log("Settle Generated");
-			writeFileSync(
-				path.resolve(__dirname, "../generations/generate-settle.json"),
-				JSON.stringify(generateResponse.body, null, 2),
-			);
-			const payload = generateResponse.body.data;
-			const fakeAgencyResponse = {
-				message: {
-					ack: {
-						status: "ACK",
-					},
-				},
-			};
-			mockedAxios.post.mockResolvedValueOnce({ data: fakeAgencyResponse });
-			// mocking the trigger response
-			const triggerResponse = await request(app)
-				.post(`/ui/trigger/${userId}/settle`)
-				.set("Authorization", `Bearer ${token}`)
-				.send(payload);
-			console.log("Settle Triggered", triggerResponse.body);
-			expect(triggerResponse.status).toBe(200);
-		});
+				};
+				mockedAxios.post.mockResolvedValueOnce({ data: fakeAgencyResponse });
+				// mocking the trigger response
+				const triggerResponse = await request(app)
+					.post(`/ui/trigger/${userId}/settle`)
+					.set("Authorization", `Bearer ${token}`)
+					.send(payload);
+				console.log("Settle Triggered", triggerResponse.body);
+				expect(triggerResponse.status).toBe(200);
+			},
+			20 * 60 * 1000,
+		); // 20 minutes timeout
 	});
 });
