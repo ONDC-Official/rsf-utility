@@ -67,6 +67,7 @@ export function generateSettlePayload(
 						providerDetails = userConfig.provider_details?.find(
 							(provider) => provider.provider_id === dbSettle.provider_id,
 						);
+
 						if (!providerDetails) {
 							// throw new Error(
 							// 	`Provider details not found for provider ID: ${dbSettle.provider_id}`,
