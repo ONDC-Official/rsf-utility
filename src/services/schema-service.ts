@@ -83,7 +83,7 @@ function createErrorMessage(validate: any, valid: boolean) {
 
 			case "required":
 				const missingProperty = params.missingProperty;
-				return `Missing required property: '${missingProperty}'`;
+				return `Missing required property: '${missingProperty}' at ${instancePath}`;
 
 			default:
 				// General message for other error types
