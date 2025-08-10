@@ -40,10 +40,10 @@ describe("Happy Flow Integration Tests", () => {
 					role: "BAP",
 					domain: "ONDC:RET10",
 					subscriber_url: "https://dev-automation.ondc.org/buyer",
-					np_tcs: 123,
-					np_tds: 456,
-					pr_tcs: 789,
-					pr_tds: 23,
+					np_tcs: 3,
+					np_tds: 6,
+					pr_tcs: 9,
+					pr_tds: 3,
 					msn: false,
 					provider_details: [
 						{
@@ -90,8 +90,8 @@ describe("Happy Flow Integration Tests", () => {
 
 				// 20 random orders list
 				const randomOrders = [];
-				for (let i = 0; i < 20; i++) {
-					randomOrders.push(orderIds[i]);
+				for (const orderId of orderIds) {
+					randomOrders.push(orderId);
 				}
 				console.log(randomOrders, "Random Orders");
 
@@ -139,7 +139,7 @@ describe("Happy Flow Integration Tests", () => {
 				console.log("Settle Generated");
 				writeFileSync(
 					path.resolve(__dirname, "../generations/generate-settle.json"),
-					JSON.stringify(generateResponse.body, null, 2),
+					JSON.stringify(generateResponse.body.data, null, 2),
 				);
 				const payload = generateResponse.body.data;
 				const fakeAgencyResponse = {
