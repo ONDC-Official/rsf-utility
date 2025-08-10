@@ -153,16 +153,28 @@ const settleMessageSchema = new Schema(
 						amount: { type: currencySchema, required: true },
 					},
 					provider: {
-						id: { type: String, required: true },
-						name: { type: String, required: true },
-						bank_details: {
-							account_no: { type: String, required: true },
-							ifsc_code: { type: String, required: true },
-						},
-						amount: { type: currencySchema, required: true },
+						type: new Schema(
+							{
+								id: { type: String, required: true },
+								name: { type: String, required: true },
+								bank_details: {
+									account_no: { type: String, required: true },
+									ifsc_code: { type: String, required: true },
+								},
+								amount: { type: currencySchema, required: true },
+							},
+							{ _id: false },
+						),
+						required: false,
 					},
 					self: {
-						amount: { type: currencySchema, required: true },
+						type: new Schema(
+							{
+								amount: { type: currencySchema, required: true },
+							},
+							{ _id: false },
+						),
+						required: false,
 					},
 				},
 			],
@@ -204,32 +216,38 @@ const onSettleMessageSchema = new Schema(
 						amount: { type: currencySchema, required: true },
 					},
 					provider: {
-						id: { type: String, required: true },
-						name: { type: String },
-						amount: { type: currencySchema, required: true },
-						status: {
-							type: String,
-							enum: Object.values(ENUMS.REPORT_STATUS),
-							required: true,
-						},
-						error: {
-							code: { type: String },
-							message: { type: String },
-						},
-						reference_no: { type: String },
+						type: new Schema({
+							id: { type: String, required: true },
+							name: { type: String },
+							amount: { type: currencySchema, required: true },
+							status: {
+								type: String,
+								enum: Object.values(ENUMS.REPORT_STATUS),
+								required: true,
+							},
+							error: {
+								code: { type: String },
+								message: { type: String },
+							},
+							reference_no: { type: String },
+						}),
+						required: false,
 					},
 					self: {
-						amount: { type: currencySchema, required: true },
-						status: {
-							type: String,
-							enum: Object.values(ENUMS.REPORT_STATUS),
-							required: true,
-						},
-						reference_no: { type: String },
-						error: {
-							code: { type: String },
-							message: { type: String },
-						},
+						type: new Schema({
+							amount: { type: currencySchema, required: true },
+							status: {
+								type: String,
+								enum: Object.values(ENUMS.REPORT_STATUS),
+								required: true,
+							},
+							reference_no: { type: String },
+							error: {
+								code: { type: String },
+								message: { type: String },
+							},
+						}),
+						required: false,
 					},
 				},
 			],

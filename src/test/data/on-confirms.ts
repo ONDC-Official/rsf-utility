@@ -3,12 +3,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -18,7 +18,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484279",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -323,7 +323,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -331,12 +331,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -346,7 +346,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484281",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -651,7 +651,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -659,12 +659,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -674,7 +674,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484283",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -979,7 +979,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -987,12 +987,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -1002,7 +1002,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484285",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -1307,7 +1307,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -1315,12 +1315,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -1330,7 +1330,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484287",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -1635,7 +1635,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -1643,12 +1643,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -1658,7 +1658,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484289",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -1963,7 +1963,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -1971,12 +1971,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -1986,7 +1986,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484291",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -2291,7 +2291,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -2299,12 +2299,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -2314,7 +2314,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484293",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -2619,7 +2619,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -2627,12 +2627,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -2642,7 +2642,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484295",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -2947,7 +2947,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -2955,12 +2955,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -2970,7 +2970,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484297",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -3275,7 +3275,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -3283,12 +3283,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -3298,7 +3298,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484299",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -3603,7 +3603,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -3611,12 +3611,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -3626,7 +3626,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484301",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -3931,7 +3931,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -3939,12 +3939,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -3954,7 +3954,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484303",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -4259,7 +4259,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -4267,12 +4267,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -4282,7 +4282,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484305",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -4587,7 +4587,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -4595,12 +4595,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -4610,7 +4610,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484307",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -4915,7 +4915,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -4923,12 +4923,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -4938,7 +4938,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484309",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -5243,7 +5243,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -5251,12 +5251,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -5266,7 +5266,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484311",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -5571,7 +5571,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -5579,12 +5579,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -5594,7 +5594,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484313",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -5899,7 +5899,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -5907,12 +5907,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -5922,7 +5922,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484315",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -6227,7 +6227,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -6235,12 +6235,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -6250,7 +6250,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484317",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -6555,7 +6555,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -6563,12 +6563,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -6578,7 +6578,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484319",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -6883,7 +6883,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -6891,12 +6891,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -6906,7 +6906,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484321",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -7211,7 +7211,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -7219,12 +7219,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -7234,7 +7234,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484323",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -7539,7 +7539,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -7547,12 +7547,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -7562,7 +7562,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484325",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -7867,7 +7867,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -7875,12 +7875,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -7890,7 +7890,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484327",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -8195,7 +8195,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -8203,12 +8203,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -8218,7 +8218,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484329",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -8523,7 +8523,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -8531,12 +8531,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -8546,7 +8546,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484331",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -8851,7 +8851,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -8859,12 +8859,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -8874,7 +8874,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484333",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -9179,7 +9179,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -9187,12 +9187,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -9202,7 +9202,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484335",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -9507,7 +9507,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -9515,12 +9515,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -9530,7 +9530,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484337",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -9835,7 +9835,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -9843,12 +9843,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -9858,7 +9858,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484339",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -10163,7 +10163,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -10171,12 +10171,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -10186,7 +10186,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484341",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -10491,7 +10491,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -10499,12 +10499,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -10514,7 +10514,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484343",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -10819,7 +10819,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -10827,12 +10827,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -10842,7 +10842,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484345",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -11147,7 +11147,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -11155,12 +11155,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -11170,7 +11170,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484347",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -11475,7 +11475,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -11483,12 +11483,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -11498,7 +11498,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484349",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -11803,7 +11803,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -11811,12 +11811,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -11826,7 +11826,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484351",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -12131,7 +12131,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -12139,12 +12139,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -12154,7 +12154,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484353",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -12459,7 +12459,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -12467,12 +12467,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -12482,7 +12482,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484355",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -12787,7 +12787,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -12795,12 +12795,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -12810,7 +12810,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484357",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -13115,7 +13115,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -13123,12 +13123,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -13138,7 +13138,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484359",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -13443,7 +13443,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -13451,12 +13451,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -13466,7 +13466,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484361",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -13771,7 +13771,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -13779,12 +13779,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -13794,7 +13794,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484363",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -14099,7 +14099,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -14107,12 +14107,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -14122,7 +14122,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484365",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -14427,7 +14427,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -14435,12 +14435,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -14450,7 +14450,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484367",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -14755,7 +14755,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -14763,12 +14763,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -14778,7 +14778,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484369",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -15083,7 +15083,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -15091,12 +15091,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -15106,7 +15106,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484371",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -15411,7 +15411,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -15419,12 +15419,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -15434,7 +15434,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484373",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -15739,7 +15739,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -15747,12 +15747,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -15762,7 +15762,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484375",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -16067,7 +16067,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -16075,12 +16075,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -16090,7 +16090,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484377",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -16395,7 +16395,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -16403,12 +16403,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -16418,7 +16418,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484379",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -16723,7 +16723,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -16731,12 +16731,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -16746,7 +16746,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484381",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -17051,7 +17051,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -17059,12 +17059,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -17074,7 +17074,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484383",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -17379,7 +17379,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -17387,12 +17387,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -17402,7 +17402,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484385",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -17707,7 +17707,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -17715,12 +17715,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -17730,7 +17730,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484387",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -18035,7 +18035,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -18043,12 +18043,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -18058,7 +18058,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484389",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -18363,7 +18363,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -18371,12 +18371,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -18386,7 +18386,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484391",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -18691,7 +18691,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -18699,12 +18699,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -18714,7 +18714,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484393",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -19019,7 +19019,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -19027,12 +19027,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -19042,7 +19042,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484395",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -19347,7 +19347,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -19355,12 +19355,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -19370,7 +19370,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484397",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -19675,7 +19675,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -19683,12 +19683,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -19698,7 +19698,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484399",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -20003,7 +20003,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -20011,12 +20011,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -20026,7 +20026,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484401",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -20331,7 +20331,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -20339,12 +20339,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -20354,7 +20354,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484403",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -20659,7 +20659,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -20667,12 +20667,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -20682,7 +20682,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484405",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -20987,7 +20987,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -20995,12 +20995,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -21010,7 +21010,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484407",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -21315,7 +21315,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -21323,12 +21323,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -21338,7 +21338,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484409",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -21643,7 +21643,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -21651,12 +21651,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -21666,7 +21666,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484411",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -21971,7 +21971,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -21979,12 +21979,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -21994,7 +21994,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484413",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -22299,7 +22299,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -22307,12 +22307,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -22322,7 +22322,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484415",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -22627,7 +22627,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -22635,12 +22635,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -22650,7 +22650,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484417",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -22955,7 +22955,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -22963,12 +22963,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -22978,7 +22978,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484419",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -23283,7 +23283,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -23291,12 +23291,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -23306,7 +23306,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484421",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -23611,7 +23611,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -23619,12 +23619,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -23634,7 +23634,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484423",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -23939,7 +23939,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -23947,12 +23947,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -23962,7 +23962,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484425",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -24267,7 +24267,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -24275,12 +24275,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -24290,7 +24290,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484427",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -24595,7 +24595,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -24603,12 +24603,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -24618,7 +24618,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484429",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -24923,7 +24923,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -24931,12 +24931,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -24946,7 +24946,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484431",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -25251,7 +25251,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -25259,12 +25259,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -25274,7 +25274,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484433",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -25579,7 +25579,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -25587,12 +25587,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -25602,7 +25602,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484435",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -25907,7 +25907,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -25915,12 +25915,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -25930,7 +25930,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484437",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -26235,7 +26235,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -26243,12 +26243,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -26258,7 +26258,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484439",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -26563,7 +26563,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -26571,12 +26571,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -26586,7 +26586,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484441",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -26891,7 +26891,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -26899,12 +26899,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -26914,7 +26914,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484443",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -27219,7 +27219,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -27227,12 +27227,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -27242,7 +27242,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484445",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -27547,7 +27547,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -27555,12 +27555,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -27570,7 +27570,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484447",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -27875,7 +27875,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -27883,12 +27883,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -27898,7 +27898,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484449",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -28203,7 +28203,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -28211,12 +28211,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -28226,7 +28226,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484451",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -28531,7 +28531,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -28539,12 +28539,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -28554,7 +28554,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484453",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -28859,7 +28859,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -28867,12 +28867,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -28882,7 +28882,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484455",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -29187,7 +29187,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -29195,12 +29195,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -29210,7 +29210,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484457",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -29515,7 +29515,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -29523,12 +29523,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -29538,7 +29538,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484459",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -29843,7 +29843,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -29851,12 +29851,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -29866,7 +29866,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484461",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -30171,7 +30171,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -30179,12 +30179,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -30194,7 +30194,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484463",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -30499,7 +30499,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -30507,12 +30507,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -30522,7 +30522,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484465",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -30827,7 +30827,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -30835,12 +30835,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -30850,7 +30850,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484467",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -31155,7 +31155,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -31163,12 +31163,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -31178,7 +31178,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484469",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -31483,7 +31483,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -31491,12 +31491,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -31506,7 +31506,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484471",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -31811,7 +31811,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -31819,12 +31819,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -31834,7 +31834,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484473",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -32139,7 +32139,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -32147,12 +32147,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -32162,7 +32162,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484475",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -32467,7 +32467,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},
@@ -32475,12 +32475,12 @@ export const on_confirmPayloads = [
 		context: {
 			action: "on_confirm",
 			bap_id: "fis-staging.ondc.org",
-			bap_uri: "https://dev-automation.ondc.org/buyer",
-			domain: "ONDC:RET10",
+			bap_uri: "https://fis-staging.ondc.org/rsf-utility/api",
+			domain: "ONDC:RET14",
 			city: "std:011",
 			country: "IND",
 			message_id: "44e3a347-a725-4fb6-a2e5-c2f04b37e8d9",
-			timestamp: "2025-06-19T08:47:20.437Z",
+			timestamp: "2025-06-19T08:47:22.437Z",
 			transaction_id: "eb58ddc1-8cc3-4d96-8b5c-22eac25aec29",
 			core_version: "1.2.5",
 			ttl: "PT30S",
@@ -32490,7 +32490,7 @@ export const on_confirmPayloads = [
 		message: {
 			order: {
 				id: "484477",
-				state: "Accepted",
+				state: "Completed",
 				provider: {
 					id: "P1",
 					locations: [
@@ -32795,7 +32795,7 @@ export const on_confirmPayloads = [
 					},
 				],
 				created_at: "2025-06-19T08:47:20.435Z",
-				updated_at: "2025-06-19T08:47:20.437Z",
+				updated_at: "2025-06-19T08:47:22.437Z",
 			},
 		},
 	},

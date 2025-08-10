@@ -14,7 +14,6 @@ import { correlationIdMiddleware } from "./utils/logger/middleware/correlation-m
 
 const createServer = (): Application => {
 	logger.info("Creating server...");
-
 	const app = express();
 
 	app.use(correlationIdMiddleware);

@@ -56,7 +56,7 @@ export const SettleSchema = z
 			description: "Inter NP settlement amount",
 			example: 300,
 		}),
-		provider_id: z.string().openapi({
+		provider_id: z.string().optional().nullable().openapi({
 			description: "Provider identifier",
 			example: "provider123",
 		}),
