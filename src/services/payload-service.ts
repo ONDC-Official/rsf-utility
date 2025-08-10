@@ -127,19 +127,21 @@ export const extractFields = (
 					break;
 				case "state":
 					if (resolvedValue === "Completed") {
-						const durationMs =
-							duration.toSeconds(
-								duration.parse(result["settlement_window"] ?? "P2D"),
-							) * 1000;
-						const updated_at = result["updated_at"] ?? new Date();
-						if (result["settlement_basis"] === "delivery") {
-							result["due_date"] = new Date(
-								new Date(updated_at).getTime() + durationMs,
-							);
-						} else {
-							result["due_date"] = new Date(
-								new Date(pickup_time).getTime() + durationMs,
-							);
+						if (result["settlement_window"] && result["settlement_basis"]) {
+							const durationMs =
+								duration.toSeconds(
+									duration.parse(result["settlement_window"] ?? "P2D"),
+								) * 1000;
+							const updated_at = result["updated_at"] ?? new Date();
+							if (result["settlement_basis"] === "delivery") {
+								result["due_date"] = new Date(
+									new Date(updated_at).getTime() + durationMs,
+								);
+							} else {
+								result["due_date"] = new Date(
+									new Date(pickup_time).getTime() + durationMs,
+								);
+							}
 						}
 					}
 					result["state"] = resolvedValue;
