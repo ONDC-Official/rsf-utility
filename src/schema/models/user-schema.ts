@@ -1,11 +1,14 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
-import { title } from "process";
 import { z } from "zod";
 
 extendZodWithOpenApi(z);
 
 const ProviderDetailsSchema = z
 	.object({
+		provider_name: z.string().openapi({
+			description: "Name of the provider",
+			example: "Provider ABC",
+		}),
 		provider_id: z.string().openapi({
 			description: "Provider ID",
 			example: "provider123",

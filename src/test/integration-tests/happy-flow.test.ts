@@ -47,6 +47,7 @@ describe("Happy Flow Integration Tests", () => {
 					msn: false,
 					provider_details: [
 						{
+							provider_name: "Provider 1",
 							provider_id: "P1",
 							account_number: "1234567890",
 							ifsc_code: "IFSC1234",
