@@ -1,5 +1,6 @@
 export const orderJsonPathMap: Record<string, string> = {
 	order_id: "$.message.order.id",
+	action: "$.context.action",
 	bap_id: "$.context.bap_id",
 	bpp_id: "$.context.bpp_id",
 	bap_uri: "$.context.bap_uri",
