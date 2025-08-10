@@ -10,14 +10,14 @@
       }
     },
     "version": "2.0.0",
-    "action": "settle",
-    "bap_id": "subscriber-id",
-    "bap_uri": "https://dev-automation.ondc.org/buyer",
+    "action": "on_settle",
+    "bap_id": "receiverapp.com",
+    "bap_uri": "https://receiver-app.com/ondc/",
     "bpp_id": "settlement-agency-id",
     "bpp_uri": "http://settlement-agency-url",
     "transaction_id": "eb92ae83-2edb-4a56-b1af-3fda5ad39262",
     "message_id": "a53e6c43-9396-40ef-916b-09c4c918332e",
-    "timestamp": "2025-08-10T10:04:43.554Z",
+    "timestamp": "2025-08-10T10:04:43.629Z",
     "ttl": "P1D"
   },
   "message": {
@@ -33,6 +33,11 @@
             "amount": {
               "currency": "INR",
               "value": "479.24"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -44,19 +49,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "695.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "208.50"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -66,6 +77,11 @@
             "amount": {
               "currency": "INR",
               "value": "489.18"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -77,19 +93,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "694.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "201.26"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -99,6 +121,11 @@
             "amount": {
               "currency": "INR",
               "value": "498.97"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -110,19 +137,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "693.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "194.04"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -132,6 +165,11 @@
             "amount": {
               "currency": "INR",
               "value": "508.63"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -143,19 +181,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "692.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "186.84"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -165,6 +209,11 @@
             "amount": {
               "currency": "INR",
               "value": "518.14"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -176,19 +225,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "691.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "179.66"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -198,6 +253,11 @@
             "amount": {
               "currency": "INR",
               "value": "527.51"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -209,19 +269,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "690.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "172.50"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -231,6 +297,11 @@
             "amount": {
               "currency": "INR",
               "value": "536.74"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -242,19 +313,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "689.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "165.36"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -264,6 +341,11 @@
             "amount": {
               "currency": "INR",
               "value": "545.83"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -275,19 +357,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "688.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "158.24"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -297,6 +385,11 @@
             "amount": {
               "currency": "INR",
               "value": "554.78"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -308,19 +401,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "687.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "151.14"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -330,6 +429,11 @@
             "amount": {
               "currency": "INR",
               "value": "563.59"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -341,19 +445,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "686.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "144.06"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -363,6 +473,11 @@
             "amount": {
               "currency": "INR",
               "value": "572.25"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -374,19 +489,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "685.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "137.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -396,6 +517,11 @@
             "amount": {
               "currency": "INR",
               "value": "580.77"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -407,19 +533,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "684.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "129.96"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -429,6 +561,11 @@
             "amount": {
               "currency": "INR",
               "value": "589.15"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -440,19 +577,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "683.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "122.94"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -462,6 +605,11 @@
             "amount": {
               "currency": "INR",
               "value": "597.39"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -473,19 +621,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "682.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "115.94"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -495,6 +649,11 @@
             "amount": {
               "currency": "INR",
               "value": "605.49"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -506,19 +665,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "681.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "108.96"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -528,6 +693,11 @@
             "amount": {
               "currency": "INR",
               "value": "613.45"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -539,19 +709,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "680.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "102.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -561,6 +737,11 @@
             "amount": {
               "currency": "INR",
               "value": "621.26"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -572,19 +753,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "679.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "95.06"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -594,6 +781,11 @@
             "amount": {
               "currency": "INR",
               "value": "628.94"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -605,19 +797,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "678.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "88.14"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -627,6 +825,11 @@
             "amount": {
               "currency": "INR",
               "value": "636.47"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -638,19 +841,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "677.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "81.24"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         },
@@ -660,6 +869,11 @@
             "amount": {
               "currency": "INR",
               "value": "643.86"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "collector": {
@@ -671,19 +885,25 @@
           "provider": {
             "id": "P1",
             "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
             "amount": {
               "currency": "INR",
               "value": "676.00"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
               "value": "74.36"
+            },
+            "status": "NOT_SETTLED",
+            "error": {
+              "code": "01",
+              "message": "Account inactive"
             }
           }
         }

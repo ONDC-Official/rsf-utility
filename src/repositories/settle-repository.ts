@@ -102,8 +102,8 @@ export class SettleRepository {
 		);
 	}
 
-	getByTransactionDbId(dbId: string) {
-		return Settle.findOne({ transaction_db_ids: dbId });
+	getByTransactionDbId(orderId: string, dbId: string) {
+		return Settle.findOne({ transaction_db_ids: dbId, order_id: orderId });
 	}
 	async deleteSettlement(userId: string, orderId: string) {
 		return await Settle.deleteOne({ user_id: userId, order_id: orderId });

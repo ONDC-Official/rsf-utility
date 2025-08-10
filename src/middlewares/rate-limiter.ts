@@ -4,10 +4,11 @@ import logger from "../utils/logger";
 const rateLimitLogger = logger.child("rate-limiter");
 import { sendError } from "../utils/resUtils";
 import { send } from "process";
+import { operationConfig } from "../config/rsf-utility-instance-config";
 
 const rateLimiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
-	limit: 100, // Limiting requests per min
+	limit: operationConfig.rateLimit, // Limiting requests per min
 	standardHeaders: "draft-8", // Return `RateLimit-*` headers for clarity
 	legacyHeaders: false,
 	keyGenerator: () => "global",
