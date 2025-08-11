@@ -10,7 +10,11 @@ export const triggerRequest = async (
 	try {
 		const url = `${requirements.forwardingBaseUrl}/${requirements.action}`;
 		logger.info("Triggering request", { url, headers });
-		const response = await axios.post(url, requirements.data, { headers });
+		const response = await axios.post(url, requirements.data, {
+			headers: {
+				Authorization: headers,
+			},
+		});
 		return {
 			status: response.status,
 			data: response.data,
