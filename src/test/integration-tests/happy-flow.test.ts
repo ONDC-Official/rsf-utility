@@ -47,6 +47,8 @@ describe("Happy Flow Integration Tests", () => {
 					np_tds: 6,
 					pr_tcs: 9,
 					pr_tds: 3,
+					tcs_applicability: "BOTH",
+					tds_applicability: "BOTH",
 					msn: false,
 					provider_details: [
 						{
