@@ -15,9 +15,9 @@
     "bpp_id": "fis-staging.ondc.org",
     "bap_uri": "https://fis-staging.ondc.org/rsf-utility/api",
     "bpp_uri": "https://fis-staging.ondc.org/rsf-utility/api",
-    "transaction_id": "1e6319bd-8d32-4f09-a682-64c42086acdb",
-    "message_id": "4041da96-8691-4735-9c98-7ab32f919458",
-    "timestamp": "2025-08-10T17:57:15.492Z",
+    "transaction_id": "e5934af9-2442-405b-b4c0-f6218f9ee3ec",
+    "message_id": "3198c40e-7c6f-4376-a92d-546c986fc6a8",
+    "timestamp": "2025-08-11T07:06:57.637Z",
     "ttl": "P1D"
   },
   "message": {
@@ -30,7 +30,7 @@
         },
         "settlements": [
           {
-            "id": "20a68d6a-1c74-4fd6-a840-1fac2aacb7d8",
+            "id": "1573ec30-3b30-4be5-ab08-7b00bf4a45de",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -47,13 +47,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "14.38"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "28.75"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -65,7 +65,7 @@
         },
         "settlements": [
           {
-            "id": "be20cae2-25be-42f9-9c54-1a33feee1cf5",
+            "id": "053dfc46-bae3-4e89-bbd6-588f8216550f",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -82,13 +82,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "14.68"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "29.35"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -100,7 +100,7 @@
         },
         "settlements": [
           {
-            "id": "a55e07b4-d9d1-4301-a767-1db802706f80",
+            "id": "b80f1ec4-aa59-49df-9eeb-9803eb30f072",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -117,13 +117,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "14.97"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "29.94"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -135,7 +135,7 @@
         },
         "settlements": [
           {
-            "id": "e571d729-af57-4d21-bb83-1b468e329468",
+            "id": "3c064de2-55e8-4a43-9bd4-a86c4247a36a",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -152,13 +152,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "15.26"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "30.52"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -170,7 +170,7 @@
         },
         "settlements": [
           {
-            "id": "0bf75c53-4dc5-4b84-a0b3-2a312d4dc232",
+            "id": "fdced494-da70-4846-95b2-120cc481075b",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -187,13 +187,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "15.54"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "31.09"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -205,7 +205,7 @@
         },
         "settlements": [
           {
-            "id": "0547a82e-2f81-4bb7-8830-c725a3d79dc1",
+            "id": "649c489e-bfd5-493a-a229-a22fd99900cb",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -222,13 +222,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "15.83"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "31.65"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -240,7 +240,7 @@
         },
         "settlements": [
           {
-            "id": "3601e780-5946-4ef0-a861-60cf3ab39c9d",
+            "id": "a3a84bd8-cda8-4ae2-a50a-a85a8b8b20f2",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -257,13 +257,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "16.10"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "32.20"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -275,7 +275,7 @@
         },
         "settlements": [
           {
-            "id": "650ffde6-396d-4546-ad22-8fdabba55978",
+            "id": "aa655994-e2a2-4b5f-a675-e7fd23a3bdae",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -292,13 +292,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "16.37"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "32.75"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -310,7 +310,7 @@
         },
         "settlements": [
           {
-            "id": "8bb9d46a-318b-4126-aa47-b675fd5e7cac",
+            "id": "ade0a73b-055b-4375-a9f3-7d7cc483b59f",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -327,13 +327,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "16.64"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "33.29"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       },
@@ -345,7 +345,7 @@
         },
         "settlements": [
           {
-            "id": "4bd2482e-a471-4980-9d9b-08a3def008ae",
+            "id": "97fc19cd-e695-48bd-8c6b-3acb5d9e0341",
             "payment_id": "pymnt-1",
             "status": "PENDING",
             "amount": {
@@ -362,13 +362,13 @@
             },
             "tcs": {
               "currency": "INR",
-              "value": "3.00"
+              "value": "16.91"
             },
             "tds": {
               "currency": "INR",
-              "value": "6.00"
+              "value": "33.82"
             },
-            "updated_at": "2025-08-10T17:57:15.492Z"
+            "updated_at": "2025-08-11T07:06:57.637Z"
           }
         ]
       }
