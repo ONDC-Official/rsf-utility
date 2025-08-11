@@ -87,7 +87,7 @@ export function generateSettlePayload(
 						collector: {
 							amount: {
 								currency: "INR",
-								value: dbSettle.commission.toFixed(2),
+								value: dbSettle.collector_settlement.toFixed(2),
 							},
 						},
 					};
