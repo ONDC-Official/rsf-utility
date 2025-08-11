@@ -12,7 +12,7 @@ export class UserConfigStrategy
 		order: OrderType,
 		options: ProfileConfigOptions,
 	): Promise<SettleType> {
-		const { commission, tds, tcs, inter_np_settlement } =
+		const { collector_settlement, tds, tcs, inter_np_settlement } =
 			calculateSettlementDetails(order, options.profile);
 
 		return {
@@ -22,8 +22,8 @@ export class UserConfigStrategy
 			collector_id: order.collected_by === "BAP" ? order.bap_id : order.bpp_id,
 			receiver_id: order.collected_by === "BAP" ? order.bpp_id : order.bap_id,
 			total_order_value: order.quote.total_order_value, // calc
-			commission: commission, // calc
-			collector_settlement: 0,
+			commission: order.buyer_finder_fee_amount, // calc
+			collector_settlement: collector_settlement,
 			tds: tds, // calc
 			tcs: tcs, // calc
 			withholding_amount: order.withholding_amount ?? 0,
