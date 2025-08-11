@@ -32,7 +32,7 @@ describe("Happy Flow Integration Tests", () => {
 	let app: Application;
 	beforeAll(async () => {
 		app = createServer();
-		await connectDB();
+		// await connectDB();
 	});
 
 	describe("Flow 1: User Creation and Order Processing", () => {
