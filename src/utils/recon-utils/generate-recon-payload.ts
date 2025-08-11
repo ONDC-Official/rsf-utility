@@ -1,4 +1,3 @@
-import { subscriberConfig } from "../../config/rsf-utility-instance-config";
 import { UserType } from "../../schema/models/user-schema";
 import { ReconAggregateData } from "../../types/generate-recon-types";
 import { v4 as uuidv4 } from "uuid";
@@ -46,9 +45,10 @@ export function reconBuilder(
 				const withholdingAmount =
 					apiData.recon_data?.withholding_amount ??
 					settleData.withholding_amount;
-				const tcs: number = apiData.recon_data?.tcs ?? userConfig.np_tcs;
-				const tds: number = apiData.recon_data?.tds ?? userConfig.np_tds;
-
+				const tcsValue: number = apiData.recon_data?.tcs ?? userConfig.np_tcs;
+				const tdsValue: number = apiData.recon_data?.tds ?? userConfig.np_tds;
+				const tcs = (settlementAmount * tcsValue) / 100;
+				const tds = (settlementAmount * tdsValue) / 100;
 				return {
 					id: settleData.order_id,
 					amount: {
