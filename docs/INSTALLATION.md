@@ -113,21 +113,75 @@ ONDC_ENV=STAGING  # Options: STAGING, PREPROD, PROD
 
 ## Docker Setup
 
+The RSF Utility can be deployed using Docker and Docker Compose for both development and production environments.
+
+### Prerequisites
+- Docker Engine
+- Docker Compose v3.8 or higher
+- `.env` file configured (see [Configuration](#configuration))
+
+### Using Docker Compose (Recommended)
+
+1. **Start the Services**
+```bash
+docker-compose up -d
+```
+This will:
+- Start MongoDB container with persistent storage
+- Build and start RSF Utility container
+- Configure the network between services
+- Map ports (6400 for API, 27017 for MongoDB)
+
+2. **View Logs**
+```bash
+# View all services
+docker-compose logs -f
+
+# View specific service
+docker-compose logs -f rsf-utility
+```
+
+3. **Stop Services**
+```bash
+docker-compose down
+```
+
+### Manual Docker Setup
+
 1. **Build Docker Image**
 ```bash
 docker build -t rsf-utility .
 ```
 
-2. **Run with Docker**
+2. **Run MongoDB**
 ```bash
 docker run -d \
-  --name rsf-utility \
-  -p 3000:3000 \
+  --name mongo_container \
+  -p 27017:27017 \
+  -v mongo_data:/data/db \
+  mongo:latest
+```
+
+3. **Run RSF Utility**
+```bash
+docker run -d \
+  --name rsf_utility_container \
+  -p 6400:6400 \
   --env-file .env \
+  --link mongo_container:mongodb \
   rsf-utility
 ```
 
-3. **Docker Compose (Optional)**
+### Container Details
+- RSF Utility
+  - Base: Node.js 18 LTS
+  - Port: 6400
+  - Environment: via `.env` file
+  
+- MongoDB
+  - Version: Latest
+  - Port: 27017
+  - Data: Persistent via Docker volume
 Create a `docker-compose.yml` file:
 ```yaml
 version: '3'

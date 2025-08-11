@@ -29,7 +29,7 @@ RSF Utility is built as a modular transaction processing system with the followi
 ## Core Architecture
 
 ### Component Overview
-![High Level Design](./docs/HLD.jpg)
+![High Level Design](./HLD.jpg)
 
 ### 1. Service Layer
 ```typescript

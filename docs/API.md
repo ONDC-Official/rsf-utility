@@ -44,7 +44,7 @@ Authorization: Bearer <your-jwt-token>
 > Implementation: `src/controller/` contains the business logic for each endpoint
 
 #### 1. Transaction APIs
-- **Order Processing**: `/on_confirm`, `/on_status`
+- **Order Processing**: `/on_confirm`, `/on_status`, `/on_update`, `/on_cancel`
   - Handle order confirmations and status updates
   - Implementation: `src/controller/order-controller.ts`
 
