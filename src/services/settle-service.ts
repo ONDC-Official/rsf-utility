@@ -173,6 +173,7 @@ export class SettleDbManagementService {
 					settleData.status = "PENDING";
 					settleData.self_status = "PENDING";
 					settleData.provider_status = "PENDING";
+					settleData.error = null;
 				}
 				await this.settleRepo.updateSettlement(userId, orderId, settleData);
 			} catch (error) {
