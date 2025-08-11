@@ -24,6 +24,8 @@ export class UserService {
 			"np_tds",
 			"pr_tcs",
 			"pr_tds",
+			"tcs_applicability",
+			"tds_applicability",
 			"settlement_agency_url",
 			"settlement_agency_api_key",
 			"settlement_agency_id",

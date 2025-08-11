@@ -22,6 +22,7 @@ import axios from "axios";
 import { genDummyOnSettle } from "../utils/gen_on_settle";
 import { generateOnReconPayloadDUMMY } from "../utils/gen_on_recon";
 import { generateReconDUMMY } from "../utils/gen_recon";
+import connectDB from "../../db";
 
 // Mock axios
 jest.mock("axios");

@@ -69,10 +69,10 @@ export class RsfOrchestratorService {
 		const reconStatus = recon.recon_status;
 		if (
 			reconStatus !== ENUMS.INTERNAL_RECON_STATUS.RECEIVED_ACCEPTED &&
-			reconStatus !== ENUMS.INTERNAL_RECON_STATUS.RECEIVED_REJECTED
+			reconStatus !== ENUMS.INTERNAL_RECON_STATUS.SENT_ACCEPTED
 		) {
 			throw new Error(
-				`Recon status for order ${order.order_id} is already ${reconStatus}. Cannot move to ready.`,
+				`Recon status for order ${order.order_id} is ${reconStatus}. Cannot move to ready.`,
 			);
 		}
 		return recon;
