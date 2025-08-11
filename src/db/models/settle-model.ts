@@ -17,7 +17,7 @@ const SettleSchema = new mongoose.Schema(
 		withholding_amount: { type: Number, required: true, set: round2 },
 		inter_np_settlement: { type: Number, required: true, set: round2 },
 		provider_id: { type: String, required: false },
-		due_date: { type: Date, required: true },
+		due_date: { type: Date, required: false },
 		type: {
 			type: String,
 			enum: Object.values(ENUMS.SETTLEMENT_TYPE),

@@ -29,7 +29,7 @@ export class UserConfigStrategy
 			withholding_amount: order.withholding_amount ?? 0,
 			inter_np_settlement: inter_np_settlement, // calc
 			provider_id: order.provider_id,
-			due_date: new Date(),
+			due_date: order.due_date,
 			type: "NP-NP",
 			status: "PREPARED",
 			provider_status: "PREPARED",

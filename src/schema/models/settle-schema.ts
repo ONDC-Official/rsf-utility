@@ -60,7 +60,7 @@ export const SettleSchema = z
 			description: "Provider identifier",
 			example: "provider123",
 		}),
-		due_date: z.date().openapi({
+		due_date: z.date().optional().nullable().openapi({
 			description: "Due date for settlement",
 			example: "2025-08-07T00:00:00.000Z",
 		}),
