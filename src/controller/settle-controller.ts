@@ -74,7 +74,9 @@ export class SettleController {
 				});
 			}
 
-			let settlementData: any;
+			let settlementData: {
+				settlements: Partial<SettleType>[];
+			};
 
 			// Check if CSV data was uploaded
 			if ((req as any).processedCsvData) {
@@ -141,25 +143,25 @@ export class SettleController {
 
 	private getUpdateData(data: UpdateSettlementType["settlements"][number]) {
 		const settlePartialData: Partial<SettleType> = {};
-		if (data.total_order_value) {
+		if (data.total_order_value !== undefined) {
 			settlePartialData.total_order_value = data.total_order_value;
 		}
-		if (data.withholding_amount) {
+		if (data.withholding_amount !== undefined) {
 			settlePartialData.withholding_amount = data.withholding_amount;
 		}
-		if (data.tds) {
+		if (data.tds !== undefined) {
 			settlePartialData.tds = data.tds;
 		}
-		if (data.tcs) {
+		if (data.tcs !== undefined) {
 			settlePartialData.tcs = data.tcs;
 		}
-		if (data.commission) {
+		if (data.commission !== undefined) {
 			settlePartialData.commission = data.commission;
 		}
-		if (data.collector_settlement) {
+		if (data.collector_settlement !== undefined) {
 			settlePartialData.collector_settlement = data.collector_settlement;
 		}
-		if (data.inter_np_settlement) {
+		if (data.inter_np_settlement !== undefined) {
 			settlePartialData.inter_np_settlement = data.inter_np_settlement;
 		}
 		return settlePartialData;
@@ -246,11 +248,11 @@ export class SettleController {
 					row.inter_np_settlement.toString().trim() === "true";
 			}
 
-			logger.warning("Row processed", settlement);
-
 			return settlement;
 		});
-
+		logger.debug("Converted CSV data to settlement format", {
+			settlements: settlements,
+		});
 		return { settlements };
 	}
 }
