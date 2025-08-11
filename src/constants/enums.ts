@@ -142,6 +142,13 @@ export const INTERNAL_ORDER_SETTLE_STATUS = {
 	RECON: "RECON", // order after successful recon
 };
 
+export const APPLICABILITY_VALUES = {
+	MSN: "MSN",
+	ISN: "ISN",
+	BOTH: "BOTH",
+	NONE: "NONE",
+};
+
 export const ENUMS = {
 	ORDER_STATE,
 	NP_TYPE,

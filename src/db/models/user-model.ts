@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { APPLICABILITY_VALUES } from "../../constants/enums";
 
 const ProviderDetails = new mongoose.Schema(
 	{
@@ -25,6 +26,16 @@ const UserSchema = new mongoose.Schema(
 		np_tds: { type: Number, required: true },
 		pr_tcs: { type: Number, required: false },
 		pr_tds: { type: Number, required: false },
+		tcs_applicability: {
+			type: String,
+			enum: Object.values(APPLICABILITY_VALUES),
+			required: true,
+		},
+		tds_applicability: {
+			type: String,
+			enum: Object.values(APPLICABILITY_VALUES),
+			required: true,
+		},
 		msn: { type: Boolean, required: true },
 		provider_details: { type: [ProviderDetails], required: true },
 		counterparty_ids: {

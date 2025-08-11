@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { APPLICABILITY_VALUES } from "../../constants/enums";
 
 extendZodWithOpenApi(z);
 
@@ -61,6 +62,14 @@ export const UserSchema = z
 		pr_tds: z.number().optional().nullable().openapi({
 			description: "Provider TDS",
 			example: 10,
+		}),
+		tcs_applicability: z.enum(Object.values(APPLICABILITY_VALUES)).openapi({
+			description: "TCS applicability",
+			example: "BOTH",
+		}),
+		tds_applicability: z.enum(Object.values(APPLICABILITY_VALUES)).openapi({
+			description: "TDS applicability",
+			example: "BOTH",
 		}),
 		msn: z.boolean().openapi({
 			description: "MSN flag",
