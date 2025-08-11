@@ -6,7 +6,7 @@ This document provides a high-level overview of the RSF Utility system architect
 - [Database Integration Guide](./DATABASE_INTEGRATION.md)
 - [Observability Integration Guide](./OBSERVABILITY_INTEGRATION.md)
 - [API Documentation](./API.md)
-- [Deployment Guide](./DEPLOYMENT.md)
+- [Installation Guide](./INSTALLATION.md)
 
 ## Table of Contents
 - [System Overview](#system-overview)
