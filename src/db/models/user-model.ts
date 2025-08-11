@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { APPLICABILITY_VALUES } from "../../constants/enums";
+import { round2 } from "./order-model";
 
 const ProviderDetails = new mongoose.Schema(
 	{
@@ -22,10 +23,10 @@ const UserSchema = new mongoose.Schema(
 		},
 		subscriber_url: { type: String, required: true },
 		domain: { type: String, required: true },
-		np_tcs: { type: Number, required: true },
-		np_tds: { type: Number, required: true },
-		pr_tcs: { type: Number, required: false },
-		pr_tds: { type: Number, required: false },
+		np_tcs: { type: Number, required: true, set: round2 },
+		np_tds: { type: Number, required: true, set: round2 },
+		pr_tcs: { type: Number, required: false, set: round2 },
+		pr_tds: { type: Number, required: false, set: round2 },
 		tcs_applicability: {
 			type: String,
 			enum: Object.values(APPLICABILITY_VALUES),

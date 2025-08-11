@@ -18,11 +18,11 @@ export function calculateSettlementDetails(
 	const tds = taxEngine.calculateTds();
 	const total_tax = tcs + tds;
 
-	const commission = taxEngine.collectorSettlement();
+	const collectorSettlement = taxEngine.collectorSettlement();
 	const inter_np_settlement = taxEngine.interNpSettlement();
 
 	return {
-		commission: commission,
+		collector_settlement: collectorSettlement,
 		tds: tds,
 		tcs: tcs,
 		inter_np_settlement: inter_np_settlement,
