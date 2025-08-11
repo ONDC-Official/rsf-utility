@@ -1,40 +1,95 @@
-# rsf-utility
+# RSF Utility
 
-rsf utility
+## Overview
+RSF Utility is a modular transaction processing system designed for handling transaction payloads, settlements, and reconciliation in the ONDC (Open Network for Digital Commerce) ecosystem. The system provides a comprehensive solution for:
 
-routes: (for NPs) - api/:action
+- Ingesting transaction payloads from the network
+- Managing settlement interactions with external Settlement Agencies
+- Performing reconciliation with the network
+- Providing a UI for operators and configuration
+- Persisting operational and audit data in MongoDB
+- Exposing observability using Loki and Grafana
+- Securing UI ↔ API traffic with JWT and TLS
 
-routes: UI - ui/:config/orders - ui/:config/settle - ui/:config/settle/prepare(post) - ui/:config/settle/generate(get) - ui/:config/settle/trigger
+## Documentation Structure
+- [System Architecture](./docs/ARCHITECTURE.md) - Detailed system architecture and components
+- [Installation Guide](./docs/INSTALLATION.md) - Setup and installation instructions
+- [Development Guide](./docs/DEVELOPMENT.md) - Guide for developers
+- [API Documentation](./docs/API.md) - API endpoints and usage
+- [High Level Design](./docs/HLD.md) - High-level system design document
+- [Contributing Guidelines](./docs/CONTRIBUTING.md) - How to contribute to the project
 
-    - ui/:config/recon/prepare
-    - ui/:config/recon/trigger
+## Quick Start
 
-configID/ order_ids > POST IN SETTLE
-INTER NP SETTLEMENT CALC
-TAX calc
-GET
-You
-18:24
-only completed orders
-status: pending
-You
-18:27
-limit 100 order
-collector_Id, reciever_id unique
-You
-18:28
-bap_id from userProfile , bpp_id fixed
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (v4.4 or higher)
+- Docker (optional, for containerization)
+- npm or yarn
 
-// prepare(post to settle) (in-progress)
-// get api
-// generate(payload generate settle using settle db: with 100 limit);
+### Basic Setup
+1. Clone the repository:
+```bash
+git clone https://github.com/ONDC-Official/rsf-utility.git
+cd rsf-utility
+```
 
-/\*
+2. Install dependencies:
+```bash
+npm install
+```
 
-recon
+3. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
 
-\*/
+4. Start the development server:
+```bash
+npm run dev
+```
 
-move to ready
-: delete orders from settle
-: un-mark orders: [READY,SETTLE,RECON]
+The application will be available at `http://localhost:3000` by default.
+
+### Environment Configuration
+Key environment variables:
+- `NODE_ENV`: Application environment (development/production/test)
+- `PORT`: Server port (default: 3000)
+- `MONGODB_URI`: MongoDB connection string
+- `SETTLEMENT_AGENCY_URL`: Settlement agency endpoint
+- `JWT_SECRET`: Secret for JWT authentication
+- See [Installation Guide](./docs/INSTALLATION.md) for complete configuration details
+
+## Key Features
+1. **Transaction Management**
+   - Payload validation
+   - Order state management
+   - Transaction processing
+
+2. **Settlement Processing**
+   - Settlement request generation
+   - Interaction with Settlement Agency
+   - Settlement status tracking
+
+3. **Reconciliation**
+   - Network reconciliation
+   - Settlement reconciliation
+   - Discrepancy handling
+
+4. **Administration UI**
+   - Order management
+   - Settlement monitoring
+   - System configuration
+   - Audit logging
+
+5. **Observability**
+   - Structured logging
+   - Performance monitoring
+   - Error tracking
+
+## License
+ISC License
+
+## Support
+For support and queries, please [create an issue](https://github.com/ONDC-Official/rsf-utility/issues) or contact the maintainers.
