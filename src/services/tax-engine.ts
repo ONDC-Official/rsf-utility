@@ -13,6 +13,8 @@ export class TaxEngine {
 	msn: boolean;
 	buyer_finder_fee_amount: number;
 	item_tax: number;
+	tcs_applicability: string
+	tds_applicability: string
 	constructor(order: OrderType, userConfig: UserType) {
 		this.tcs = (userConfig.np_tcs ?? 0) / 100;
 		this.tds = (userConfig.np_tds ?? 0) / 100;
@@ -22,21 +24,28 @@ export class TaxEngine {
 		this.msn = order.msn ?? true;
 		this.buyer_finder_fee_amount = order.buyer_finder_fee_amount ?? 0;
 		this.item_tax = order.item_tax ?? 0;
+		this.tcs_applicability = userConfig.tcs_applicability
+		this.tds_applicability = userConfig.tds_applicability
 	}
 	calculateTcs() {
-		const shouldCalculate =
-			this.collected_by === "BAP" && !this.msn && this.domain !== "ONDC:RET11";
+		const shouldApplyTcs =
+		this.tcs_applicability === "BOTH" ||
+		(this.tcs_applicability === "ISN" && !this.msn) ||
+		(this.tcs_applicability === "MSN" && this.msn);
 
-		return shouldCalculate
-			? (this.total_order_value - this.item_tax) * this.tcs
-			: 0;
+	return shouldApplyTcs
+		? (this.total_order_value - this.item_tax) * this.tcs
+		: 0;
 	}
 	calculateTds() {
-		const shouldCalculate = this.collected_by === "BAP" && !this.msn;
+		const shouldApplyTds =
+		this.tds_applicability === "BOTH" ||
+		(this.tds_applicability === "ISN" && !this.msn) ||
+		(this.tds_applicability === "MSN" && this.msn);
 
-		return shouldCalculate
-			? (this.total_order_value - this.item_tax) * this.tds
-			: 0;
+	return shouldApplyTds
+		? (this.total_order_value - this.item_tax) * this.tds
+		: 0;
 	}
 	interNpSettlement() {
 		const tcs = this.calculateTcs();
@@ -50,8 +59,7 @@ export class TaxEngine {
 			if (addItemTax) amount -= this.item_tax;
 			return amount;
 		} else {
-			let amount = this.buyer_finder_fee_amount + tcs + tds;
-			if (addItemTax) amount += this.item_tax;
+			let amount = this.buyer_finder_fee_amount;
 			return amount;
 		}
 	}
@@ -60,9 +68,13 @@ export class TaxEngine {
 		const isBap = this.collected_by === "BAP";
 
 		if (isBap) {
-			return (
+			if(this.domain === "ONDC:RET11" && !this.msn){
+				return this.buyer_finder_fee_amount + this.calculateTcs() + this.calculateTds() + this.item_tax
+			} else {
+				return (
 				this.buyer_finder_fee_amount + this.calculateTcs() + this.calculateTds()
-			);
+			)
+			}
 		}
 
 		return this.total_order_value - this.interNpSettlement();

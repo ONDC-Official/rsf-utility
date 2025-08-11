@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 import { ENUMS } from "../../constants/enums";
 
+const round2 = (value: number) => {
+	return value != null ? Math.round(value * 100) / 100 : value;
+};
 const Quote = new mongoose.Schema({
-	total_order_value: { type: Number, required: true },
+	total_order_value: { type: Number, required: true, set:round2 },
 	breakup: [
 		{
 			title: { type: String, required: true },
-			price: { type: Number, required: true },
+			price: { type: Number, required: true, set:round2 },
 			id: { type: String, required: true },
 		},
 	],
@@ -36,18 +39,18 @@ const OrderSchema = new mongoose.Schema(
 		},
 		msn: { type: Boolean, default: false, required: true },
 		settlement_counterparty: { type: String, required: false },
-		buyer_finder_fee_amount: { type: Number, required: true },
+		buyer_finder_fee_amount: { type: Number, required: true, set: round2 },
 		buyer_finder_fee_type: { type: String, required: true },
-		settlement_basis: { type: String, required: false, default:null},
-		settlement_window: { type: String, required: false, default: null},
-		withholding_amount: { type: Number, required: false },
-		item_tax: { type: Number, required: false, default: 0 },
+		settlement_basis: { type: String, required: false, default: null },
+		settlement_window: { type: String, required: false, default: null },
+		withholding_amount: { type: Number, required: false, set: round2},
+		item_tax: { type: Number, required: false, default: 0, set: round2 },
 		settle_status: {
 			type: String,
 			enum: Object.values(ENUMS.INTERNAL_ORDER_SETTLE_STATUS),
 			default: ENUMS.INTERNAL_ORDER_SETTLE_STATUS.READY,
 		},
-		due_date: { type: Date, required: false, default: null},
+		due_date: { type: Date, required: false, default: null },
 		quote: { type: Quote, required: true },
 		payment_transaction_id: { type: String, required: false },
 	},

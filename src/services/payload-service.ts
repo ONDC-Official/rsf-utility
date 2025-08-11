@@ -43,13 +43,8 @@ export const extractFields = (
 						? new Date(resolvedValue)
 						: new Date();
 					break;
-
 				case "withholding_amount":
-					tempWitholdingAmount =
-						resolvedValue !== "" && !isNaN(resolvedValue)
-							? Number(resolvedValue)
-							: 0;
-					result.withholding_amount = tempWitholdingAmount;
+					tempWitholdingAmount = parseFloat(resolvedValue);
 					break;
 
 				case "np_type":
@@ -77,7 +72,7 @@ export const extractFields = (
 					break;
 				case "quote":
 					if (typeof resolvedValue === "object" && resolvedValue !== null) {
-						const priceValue = Number(resolvedValue?.price?.value || 0);
+						const priceValue = parseFloat(resolvedValue?.price?.value || 0);
 
 						const breakup = Array.isArray(resolvedValue.breakup)
 							? resolvedValue.breakup.map((item: any) => ({
@@ -119,8 +114,10 @@ export const extractFields = (
 
 						result["buyer_finder_fee_amount"] =
 							Math.round(fee * 1.18 * 100) / 100; // Assuming 18% GST on fee
-						result.withholding_amount =
-							(priceValue * tempWitholdingAmount) / 100;
+						if (action === "on_confirm") {
+							result.withholding_amount =
+								(priceValue * tempWitholdingAmount) / 100;
+						}
 					} else {
 						result.quote = {
 							total_order_value: 0,
