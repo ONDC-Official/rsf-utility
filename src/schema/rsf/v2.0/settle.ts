@@ -178,6 +178,7 @@ const settleSchema = {
 		},
 	},
 	additionalProperties: false,
+
 };
 
 export default settleSchema;
