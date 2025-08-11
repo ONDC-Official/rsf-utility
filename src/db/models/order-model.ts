@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 import { ENUMS } from "../../constants/enums";
 
-const round2 = (value: number) => {
-	return value != null ? Math.round(value * 100) / 100 : value;
+export const round2 = (value: any) => {
+	if (typeof value !== "number") {
+		return value;
+	}
+	return Math.round(value * 100) / 100;
 };
 const Quote = new mongoose.Schema({
-	total_order_value: { type: Number, required: true, set:round2 },
+	total_order_value: { type: Number, required: true, set: round2 },
 	breakup: [
 		{
 			title: { type: String, required: true },
-			price: { type: Number, required: true, set:round2 },
+			price: { type: Number, required: true, set: round2 },
 			id: { type: String, required: true },
 		},
 	],
@@ -43,7 +46,7 @@ const OrderSchema = new mongoose.Schema(
 		buyer_finder_fee_type: { type: String, required: true },
 		settlement_basis: { type: String, required: false, default: null },
 		settlement_window: { type: String, required: false, default: null },
-		withholding_amount: { type: Number, required: false, set: round2},
+		withholding_amount: { type: Number, required: false, set: round2 },
 		item_tax: { type: Number, required: false, default: 0, set: round2 },
 		settle_status: {
 			type: String,
