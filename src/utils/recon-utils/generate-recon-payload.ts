@@ -62,23 +62,23 @@ export function reconBuilder(
 							status: "PENDING",
 							amount: {
 								currency: "INR",
-								value: settlementAmount.toFixed(2),
+								value: Math.abs(settlementAmount).toFixed(2),
 							},
 							commission: {
 								currency: "INR",
-								value: commission.toFixed(2),
+								value: Math.abs(commission).toFixed(2),
 							},
 							withholding_amount: {
 								currency: "INR",
-								value: withholdingAmount.toFixed(2),
+								value: Math.abs(withholdingAmount).toFixed(2),
 							},
 							tcs: {
 								currency: "INR",
-								value: tcs.toFixed(2),
+								value: Math.abs(tcs).toFixed(2),
 							},
 							tds: {
 								currency: "INR",
-								value: tds.toFixed(2),
+								value: Math.abs(tds).toFixed(2),
 							},
 							updated_at: new Date().toISOString(),
 						},

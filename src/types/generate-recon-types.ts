@@ -84,14 +84,20 @@ export const GenOnReconBodyObject = z
 			description: "Details of the reconciliation if in accord",
 		}),
 	})
-	.refine((data) => data.recon_accord || data.on_recon_data != null, {
-		message: "on_recon_data is required if recon_accord is false",
-		path: ["on_recon_data"],
-	})
-	.refine((data) => !data.recon_accord || data.due_date != null, {
-		message: "due_date is required if recon_accord is true",
-		path: ["due_date"],
-	});
+	.refine(
+		(data) => (data.recon_accord === true ? data.due_date != null : true),
+		{
+			message: "due_date is required if recon_accord is true",
+			path: ["due_date"],
+		},
+	)
+	.refine(
+		(data) => (data.recon_accord === false ? data.on_recon_data != null : true),
+		{
+			message: "on_recon_data is required if recon_accord is false",
+			path: ["on_recon_data"],
+		},
+	);
 
 export const GenOnReconBody = z.object({
 	on_recon_data: z.array(GenOnReconBodyObject).min(1).openapi({

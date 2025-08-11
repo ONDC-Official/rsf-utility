@@ -91,9 +91,14 @@ export class RsfOrchestratorService {
 		await this.settleService.deleteSettlement(userId, order.order_id);
 
 		// un-mark order & add due date
-		await this.orderService.updateOrder(userId, order.order_id, {
+		const data = await this.orderService.updateOrder(userId, order.order_id, {
 			due_date: recon.due_date,
 			settle_status: ENUMS.INTERNAL_ORDER_SETTLE_STATUS.RECON,
+		});
+		logger.warning(`handleReadyFor: Order updated for userId: ${userId}`, {
+			userId: userId,
+			orderId: order.order_id,
+			data: data,
 		});
 
 		await this.reconService.updateData(userId, order.order_id, {

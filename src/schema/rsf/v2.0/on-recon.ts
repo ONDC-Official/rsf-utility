@@ -79,7 +79,7 @@ const onReconSchema = {
 									type: "object",
 									required: [
 										"id",
-										"payment_id",
+										// "payment_id",
 										"status",
 										"amount",
 										"commission",

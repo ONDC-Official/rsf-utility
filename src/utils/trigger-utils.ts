@@ -16,8 +16,8 @@ export const triggerRequest = async (
 			},
 		});
 		return {
-			status: response.status,
-			data: response.data,
+			status: response?.status,
+			data: response?.data,
 		};
 	} catch (error) {
 		logger.error("Error triggering request", requirements, error);

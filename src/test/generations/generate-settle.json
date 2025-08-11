@@ -15,9 +15,9 @@
     "bap_uri": "https://fis-staging.ondc.org/rsf-utility/api",
     "bpp_id": "settlement-agency-id",
     "bpp_uri": "http://settlement-agency-url",
-    "transaction_id": "73ab1a78-8206-4143-87b2-7c6d5e65e9f0",
-    "message_id": "7d8429f6-616f-4bc2-815c-c7d03b8f17e3",
-    "timestamp": "2025-08-11T07:06:57.442Z",
+    "transaction_id": "84b0ca8c-049a-40c4-aa43-5b8e94838f08",
+    "message_id": "e0d001bd-8e65-4479-8f34-ffbf86fb2626",
+    "timestamp": "2025-08-11T12:38:50.161Z",
     "ttl": "P1D"
   },
   "message": {
@@ -25,20 +25,20 @@
     "receiver_app_id": "fis-staging.ondc.org",
     "settlement": {
       "type": "NP-NP",
-      "id": "90b1c4e7-bfaf-4e2d-ab2b-495cca1cd19c",
+      "id": "9067bc53-ed0d-474d-94bd-8b56faa853c2",
       "orders": [
         {
-          "id": "484317",
+          "id": "484477",
           "inter_participant": {
             "amount": {
               "currency": "INR",
-              "value": "479.24"
+              "value": "844.39"
             }
           },
           "collector": {
             "amount": {
               "currency": "INR",
-              "value": "215.76"
+              "value": "1619.39"
             }
           },
           "provider": {
@@ -50,28 +50,28 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "401.00"
+              "value": "449.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "57.00"
+              "value": "24.00"
             }
           }
         },
         {
-          "id": "484315",
+          "id": "484475",
           "inter_participant": {
             "amount": {
               "currency": "INR",
-              "value": "489.18"
+              "value": "823.03"
             }
           },
           "collector": {
             "amount": {
               "currency": "INR",
-              "value": "204.82"
+              "value": "1597.03"
             }
           },
           "provider": {
@@ -83,568 +83,7 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "810.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "81.00"
-            }
-          }
-        },
-        {
-          "id": "484313",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "498.97"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "194.03"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "622.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "82.00"
-            }
-          }
-        },
-        {
-          "id": "484311",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "508.63"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "183.37"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "105.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "92.00"
-            }
-          }
-        },
-        {
-          "id": "484309",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "518.14"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "172.86"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "710.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "43.00"
-            }
-          }
-        },
-        {
-          "id": "484307",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "527.51"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "162.49"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "363.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "48.00"
-            }
-          }
-        },
-        {
-          "id": "484305",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "536.74"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "152.26"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "693.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "13.00"
-            }
-          }
-        },
-        {
-          "id": "484303",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "545.83"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "142.17"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "683.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "77.00"
-            }
-          }
-        },
-        {
-          "id": "484301",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "554.78"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "132.22"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "373.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "50.00"
-            }
-          }
-        },
-        {
-          "id": "484299",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "563.59"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "122.41"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "262.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "97.00"
-            }
-          }
-        },
-        {
-          "id": "484297",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "572.25"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "112.75"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "419.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "48.00"
-            }
-          }
-        },
-        {
-          "id": "484295",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "580.77"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "103.23"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "507.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "39.00"
-            }
-          }
-        },
-        {
-          "id": "484293",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "589.15"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "93.85"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "358.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "82.00"
-            }
-          }
-        },
-        {
-          "id": "484291",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "597.39"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "84.61"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "322.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "90.00"
-            }
-          }
-        },
-        {
-          "id": "484289",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "605.49"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "75.51"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "786.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "19.00"
-            }
-          }
-        },
-        {
-          "id": "484287",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "613.45"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "66.55"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "892.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "71.00"
-            }
-          }
-        },
-        {
-          "id": "484285",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "621.26"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "57.74"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "643.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "81.00"
-            }
-          }
-        },
-        {
-          "id": "484283",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "628.94"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "49.06"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "251.00"
-            }
-          },
-          "self": {
-            "amount": {
-              "currency": "INR",
-              "value": "28.00"
-            }
-          }
-        },
-        {
-          "id": "484281",
-          "inter_participant": {
-            "amount": {
-              "currency": "INR",
-              "value": "636.47"
-            }
-          },
-          "collector": {
-            "amount": {
-              "currency": "INR",
-              "value": "40.53"
-            }
-          },
-          "provider": {
-            "id": "P1",
-            "name": "Bank ABC",
-            "bank_details": {
-              "account_no": "1234567890",
-              "ifsc_code": "IFSC1234"
-            },
-            "amount": {
-              "currency": "INR",
-              "value": "799.00"
+              "value": "948.00"
             }
           },
           "self": {
@@ -655,17 +94,17 @@
           }
         },
         {
-          "id": "484279",
+          "id": "484473",
           "inter_participant": {
             "amount": {
               "currency": "INR",
-              "value": "643.86"
+              "value": "801.81"
             }
           },
           "collector": {
             "amount": {
               "currency": "INR",
-              "value": "32.14"
+              "value": "1574.81"
             }
           },
           "provider": {
@@ -677,13 +116,1564 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "590.00"
+              "value": "243.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "82.00"
+              "value": "80.00"
+            }
+          }
+        },
+        {
+          "id": "484471",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "780.74"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1552.74"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "957.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "13.00"
+            }
+          }
+        },
+        {
+          "id": "484469",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "759.81"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1530.81"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "439.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "21.00"
+            }
+          }
+        },
+        {
+          "id": "484467",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "739.02"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1509.02"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "758.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "49.00"
+            }
+          }
+        },
+        {
+          "id": "484465",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "718.37"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1487.37"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "898.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "87.00"
+            }
+          }
+        },
+        {
+          "id": "484463",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "697.86"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1465.86"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "240.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "54.00"
+            }
+          }
+        },
+        {
+          "id": "484461",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "677.50"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1444.50"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "608.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "67.00"
+            }
+          }
+        },
+        {
+          "id": "484459",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "657.27"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1423.27"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "801.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "15.00"
+            }
+          }
+        },
+        {
+          "id": "484457",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "637.19"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1402.19"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "757.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "31.00"
+            }
+          }
+        },
+        {
+          "id": "484455",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "617.25"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1381.25"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "860.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "39.00"
+            }
+          }
+        },
+        {
+          "id": "484453",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "597.45"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1360.45"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "673.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "75.00"
+            }
+          }
+        },
+        {
+          "id": "484451",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "577.79"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1339.79"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "434.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "70.00"
+            }
+          }
+        },
+        {
+          "id": "484449",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "558.28"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1319.28"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "744.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "57.00"
+            }
+          }
+        },
+        {
+          "id": "484447",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "538.90"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1298.90"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "400.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "63.00"
+            }
+          }
+        },
+        {
+          "id": "484445",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "519.67"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1278.67"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "937.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "73.00"
+            }
+          }
+        },
+        {
+          "id": "484443",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "500.58"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1258.58"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "299.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "67.00"
+            }
+          }
+        },
+        {
+          "id": "484441",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "481.63"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1238.63"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "915.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "14.00"
+            }
+          }
+        },
+        {
+          "id": "484439",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "462.82"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1218.82"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "935.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "90.00"
+            }
+          }
+        },
+        {
+          "id": "484437",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "444.16"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1199.16"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "789.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "55.00"
+            }
+          }
+        },
+        {
+          "id": "484435",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "425.63"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1179.63"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "403.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "98.00"
+            }
+          }
+        },
+        {
+          "id": "484433",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "407.25"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1160.25"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "829.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "57.00"
+            }
+          }
+        },
+        {
+          "id": "484431",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "389.01"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1141.01"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "529.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "32.00"
+            }
+          }
+        },
+        {
+          "id": "484429",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "370.91"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1121.91"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "987.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "12.00"
+            }
+          }
+        },
+        {
+          "id": "484427",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "352.95"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1102.95"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "489.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "65.00"
+            }
+          }
+        },
+        {
+          "id": "484425",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "335.13"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1084.13"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "204.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "83.00"
+            }
+          }
+        },
+        {
+          "id": "484423",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "317.46"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1065.46"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "528.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "51.00"
+            }
+          }
+        },
+        {
+          "id": "484421",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "299.93"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1046.93"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "467.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "55.00"
+            }
+          }
+        },
+        {
+          "id": "484419",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "282.53"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1028.53"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "770.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "33.00"
+            }
+          }
+        },
+        {
+          "id": "484417",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "265.28"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "1010.28"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "760.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "89.00"
+            }
+          }
+        },
+        {
+          "id": "484415",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "248.17"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "992.17"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "178.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "74.00"
+            }
+          }
+        },
+        {
+          "id": "484413",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "231.21"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "974.21"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "517.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "66.00"
+            }
+          }
+        },
+        {
+          "id": "484411",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "214.38"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "956.38"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "333.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "25.00"
+            }
+          }
+        },
+        {
+          "id": "484409",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "197.70"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "938.70"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "666.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "62.00"
+            }
+          }
+        },
+        {
+          "id": "484407",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "181.16"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "921.16"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "258.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "41.00"
+            }
+          }
+        },
+        {
+          "id": "484405",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "164.76"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "903.76"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "252.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "31.00"
+            }
+          }
+        },
+        {
+          "id": "484403",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "148.50"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "886.50"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "376.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "93.00"
+            }
+          }
+        },
+        {
+          "id": "484401",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "132.38"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "869.38"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "820.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "23.00"
+            }
+          }
+        },
+        {
+          "id": "484399",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "116.40"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "852.40"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "980.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "95.00"
+            }
+          }
+        },
+        {
+          "id": "484397",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "100.57"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "835.57"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "304.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "19.00"
+            }
+          }
+        },
+        {
+          "id": "484395",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "84.88"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "818.88"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "140.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "58.00"
+            }
+          }
+        },
+        {
+          "id": "484393",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "69.33"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "802.33"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "573.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "32.00"
+            }
+          }
+        },
+        {
+          "id": "484391",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "53.92"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "785.92"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "526.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "36.00"
+            }
+          }
+        },
+        {
+          "id": "484389",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "38.65"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "769.65"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "982.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "27.00"
+            }
+          }
+        },
+        {
+          "id": "484387",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "23.52"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "753.52"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "221.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "41.00"
+            }
+          }
+        },
+        {
+          "id": "484385",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "8.54"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "737.54"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "664.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "47.00"
+            }
+          }
+        },
+        {
+          "id": "484383",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "6.31"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "721.69"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "510.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "30.00"
+            }
+          }
+        },
+        {
+          "id": "484381",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "21.01"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "705.99"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "408.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "11.00"
+            }
+          }
+        },
+        {
+          "id": "484379",
+          "inter_participant": {
+            "amount": {
+              "currency": "INR",
+              "value": "35.57"
+            }
+          },
+          "collector": {
+            "amount": {
+              "currency": "INR",
+              "value": "690.43"
+            }
+          },
+          "provider": {
+            "id": "P1",
+            "name": "Bank ABC",
+            "bank_details": {
+              "account_no": "1234567890",
+              "ifsc_code": "IFSC1234"
+            },
+            "amount": {
+              "currency": "INR",
+              "value": "253.00"
+            }
+          },
+          "self": {
+            "amount": {
+              "currency": "INR",
+              "value": "33.00"
             }
           }
         }
