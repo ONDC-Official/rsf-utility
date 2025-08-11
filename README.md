@@ -1,12 +1,12 @@
 # RSF Utility
 
 ## Overview
-RSF Utility is a modular transaction processing system designed for handling transaction payloads, settlements, and reconciliation in the ONDC (Open Network for Digital Commerce) ecosystem. The system provides a comprehensive solution for:
+RSF Utility is a modular transaction processing system designed for handling transaction payloads, settlement handling and reconciliation in the ONDC (Open Network for Digital Commerce) ecosystem. The system provides a comprehensive solution for:
 
-- Ingesting transaction payloads from the network
-- Managing settlement interactions with external Settlement Agencies
-- Performing reconciliation with the network
-- Providing a UI for operators and configuration
+- Ingesting transaction payloads by the network participants
+- Managing settlement interactions with external Settlement Agency (SA) 
+- Performing reconciliation with the counterparty network participants
+- Providing a intutive UI for operators (such as Finance team, Support team) and configuration of key values
 - Persisting operational and audit data in MongoDB
 - Exposing observability using Loki and Grafana
 - Securing UI ↔ API traffic with JWT and TLS
