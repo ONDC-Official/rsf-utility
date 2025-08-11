@@ -1,15 +1,19 @@
-# System Architecture
+# RSF Utility System Architecture
 
-This document provides a detailed overview of the RSF Utility system architecture.
+This document provides a high-level overview of the RSF Utility system architecture. For detailed implementation guides, refer to the specific documentation linked in each section.
+
+## Quick Links
+- [Database Integration Guide](./DATABASE_INTEGRATION.md)
+- [Observability Integration Guide](./OBSERVABILITY_INTEGRATION.md)
+- [API Documentation](./API.md)
+- [Deployment Guide](./DEPLOYMENT.md)
 
 ## Table of Contents
 - [System Overview](#system-overview)
-- [Architecture Components](#architecture-components)
+- [Core Architecture](#core-architecture)
 - [Data Flow](#data-flow)
-- [External Interfaces](#external-interfaces)
-- [Database Design](#database-design)
-- [Security](#security)
-- [Observability](#observability)
+- [Integration Points](#integration-points)
+- [Technical Implementation](#technical-implementation)
 
 ## System Overview
 
@@ -22,50 +26,81 @@ RSF Utility is built as a modular transaction processing system with the followi
 5. Data persistence and audit
 6. System monitoring and observability
 
-## Architecture Components
+## Core Architecture
 
-### 1. Frontend Layer
-- **RSF Utility UI (React)**
-  - Single-page application
-  - JWT authentication
-  - HTTPS communication
-  - Dynamic configuration
+### Component Overview
+![High Level Design](./docs/HLD.jpg)
 
-### 2. Backend Layer (Node.js, TypeScript)
-- **API Endpoints**
-  - Transaction endpoints (`/on_confirm`, `/on_status`, `/on_update`, `/on_cancel`)
-  - Settlement endpoints (`/settle`, `/on_settle`)
-  - Reconciliation endpoints (`/recon`, `/on_recon`)
-  - UI/Admin endpoints
+### 1. Service Layer
+```typescript
+// Main service components and their responsibilities
+interface ServiceArchitecture {
+    frontend: {
+        ui: "React SPA",
+        auth: "JWT-based",
+        communication: "HTTPS"
+    },
+    backend: {
+        runtime: "Node.js + TypeScript",
+        api: "RESTful endpoints",
+        security: "Rate limiting + Auth"
+    }
+}
+```
 
-### 3. Core Modules
+> For detailed API documentation and endpoints, see [API Documentation](./API.md)
 
-#### Transaction Payload Ingestion Module
-- Validates incoming payloads
-- Schema validation
-- Forwards to Order Manager
+### 2. API Structure
+```typescript
+// Core API Groups
+const endpoints = {
+    transaction: [
+        "/on_confirm",   // Order confirmation
+        "/on_status",    // Status updates
+        "/on_update",    // Order updates
+        "/on_cancel"     // Cancellation
+    ],
+    settlement: [
+        "/settle",      // Initiate settlement
+        "/on_settle"    // Settlement callbacks
+    ],
+    reconciliation: [
+        "/recon",       // Start reconciliation
+        "/on_recon"     // Reconciliation updates
+    ]
+}
 
-#### Order Manager Module
-- Creates order records
-- Manages state transitions
-- Persists to Order DB
+### 3. Core Services
 
-#### Settle Manager Module
-- Composes settlement requests
-- Persists to Settle DB
-- Interacts with Settlement Agency
+> Detailed service implementations can be found in `src/services/`
 
-#### Recon Manager Module
-- Manages reconciliation logic
-- Persists to Recon DB
-- Network interaction handling
+```typescript
+// Core Service Architecture
+interface CoreServices {
+    TransactionHandler: {
+        validation: "ONDC Protocol Schema",
+        tracking: "Transaction Correlation",
+        routing: "Message State Management"
+    },
+    SettlementManager: {
+        requests: "Settlement Composition",
+        tracking: "State Management",
+        integration: "Agency Communication"
+    },
+    ReconciliationEngine: {
+        matching: "Transaction Reconciliation",
+        calculations: "Financial Processing",
+        sync: "Network State Management"
+    },
+    MonitoringSystem: {
+        health: "System Metrics",
+        database: "Connection Monitoring",
+        metrics: "Prometheus Integration"
+    }
+}
+```
 
-#### Async Transaction Manager
-- Background task processing
-- Event handling
-- Audit logging
-
-### 4. Interfaces
+### 4. External Interfaces
 
 #### Settlement Agency Interface
 - External settlement agency communication
@@ -82,80 +117,184 @@ RSF Utility is built as a modular transaction processing system with the followi
 ### 1. Transaction Flow
 ```mermaid
 graph LR
-    A[Network] --> B[Transaction Ingestion]
-    B --> C[Order Manager]
-    C --> D[(Order DB)]
-    C --> E[Async Txn Manager]
-    E --> F[(Audit DB)]
+    A[ONDC Network] --> B[Transaction Handler]
+    B --> C[Schema Validation]
+    C --> D[Transaction Processing]
+    D --> E[(MongoDB)]
+    D --> F[Audit Logger]
 ```
 
 ### 2. Settlement Flow
 ```mermaid
 graph LR
-    A[Order Manager] --> B[Settle Manager]
-    B --> C[Settlement Agency Interface]
-    C --> D[External Settlement Agency]
-    B --> E[(Settle DB)]
-    D --> F[Callback Handler]
-    F --> E
+    A[Transaction Handler] --> B[Settlement Module]
+    B --> C[Settlement Agency]
+    B --> D[(MongoDB)]
+    C --> E[Callback Processing]
+    E --> D
+    D --> F[Status Updates]
 ```
 
 ### 3. Reconciliation Flow
 ```mermaid
 graph LR
-    A[Settle Manager] --> B[Recon Manager]
+    A[Settlement Module] --> B[Reconciliation Module]
     B --> C[Network Interface]
-    C --> D[Network]
-    B --> E[(Recon DB)]
-    D --> F[Callback Handler]
-    F --> E
+    B --> D[(MongoDB)]
+    C --> E[Status Tracking]
+    E --> D
+    D --> F[Metrics Collection]
 ```
 
 ## External Interfaces
 
-### 1. Network Interfaces
-- **Incoming Transaction Endpoints**
-  - Schema validation
-  - Payload processing
-  - State management
+### 1. ONDC Network Interfaces
 
-- **Reconciliation Endpoints**
-  - Network communication
-  - Status tracking
-  - Error handling
+#### Registry Endpoints
+- **Environment-specific Registry URLs**
+  ```
+  STAGING:  https://staging.registry.ondc.org/v2.0/
+  PREPROD:  https://preprod.registry.ondc.org/v2.0/
+  PROD:     https://prod.registry.ondc.org/
+  ```
+
+#### Transaction Endpoints
+- **Incoming Transaction APIs**
+  - `/on_confirm` - Order confirmation handling
+  - `/on_status` - Order status updates
+  - `/on_update` - Order updates
+  - `/on_cancel` - Order cancellation
+  
+- **Features**
+  - Schema validation against ONDC protocol
+  - Transaction ID and Message ID tracking
+  - State management and persistence
+  - Error handling with NACK responses
 
 ### 2. Settlement Agency Interface
-- **Settlement Operations**
-  - Request composition
-  - Response handling
-  - Status tracking
 
-### 3. Administrative Interface
-- **UI Endpoints**
-  - Configuration management
-  - Status monitoring
-  - User management
-
-## Database Design
-
-### 1. Logical Database Structure
+#### Configuration
+```typescript
+interface SettlementAgencyConfig {
+    agencyUrl: string;    // Settlement agency endpoint
+    agencyId: string;     // Agency identifier
+    agencyKey: string;    // Authentication key
+}
 ```
-MongoDB
-├── Order DB
-│   ├── Orders
-│   └── Transactions
-├── Settle DB
-│   ├── Settlements
-│   └── Settlement_Status
-├── Recon DB
-│   ├── Reconciliations
-│   └── Discrepancies
-├── Config DB
-│   ├── System_Config
-│   └── User_Config
-└── Audit DB
-    ├── Operation_Logs
-    └── System_Events
+
+#### Endpoints
+- **Settlement Operations**
+  - `/settle` - Initiate settlement requests
+  - `/on_settle` - Handle settlement callbacks
+  
+- **Features**
+  - Transaction correlation with IDs
+  - Error handling and retries
+  - Settlement status tracking
+
+### 3. Reconciliation Interface
+
+#### Endpoints
+- **Reconciliation Operations**
+  - `/recon` - Initiate reconciliation
+  - `/on_recon` - Handle reconciliation responses
+
+- **Features**
+  - Batch order processing
+  - Atomic updates
+  - Status tracking (INACTIVE, ERROR, SENT_PENDING, etc.)
+  - Financial breakdown tracking
+
+### 4. Administrative Interface
+
+#### Configuration
+```typescript
+interface OperationConfig {
+    rateLimit: number;    // API rate limiting (default: 1000)
+}
+```
+
+#### Features
+- **Authentication**
+  ```typescript
+  interface SubscriberConfig {
+      subscriberId: string;
+      subscriberUniqueId: string;
+      subscriberPrivateKey: string;
+  }
+  ```
+
+- **UI Endpoints**
+  - User management and configuration
+  - Transaction monitoring
+  - Settlement status tracking
+  - Reconciliation management
+  - System health monitoring
+
+#### Security
+- JWT authentication
+- API key validation
+- Rate limiting
+- Role-based access control
+
+## Technical Implementation
+
+### Database Architecture
+> Detailed setup and configuration available in [Database Integration Guide](./DATABASE_INTEGRATION.md)
+
+```typescript
+// Core Database Configuration
+interface DatabaseArchitecture {
+    type: "MongoDB",
+    config: {
+        uri: string,          // Connection string
+        monitoring: boolean,  // Health checks enabled
+        indexes: "Automatic"  // Via Mongoose schemas
+    },
+    features: [
+        "Health Monitoring",
+        "Prometheus Metrics",
+        "Auto-reconnection"
+    ]
+}
+```
+
+### 2. Collection Structure
+```
+MongoDB (rsf-utility)
+├── Collections
+│   ├── orders                 # Order management and tracking
+│   │   └── Indexes:
+│   │       ├── order_id
+│   │       └── user_id
+│   │
+│   ├── settlements           # Settlement records and status
+│   │   └── Indexes:
+│   │       ├── user_id_order_id (unique)
+│   │       └── settlement_id
+│   │
+│   ├── reconciliations      # Reconciliation records
+│   │   └── Indexes:
+│   │       ├── user_id
+│   │       ├── order_id
+│   │       ├── settlement_id
+│   │       └── recon_status
+│   │
+│   ├── rsf_transactions     # All RSF-related transactions
+│   │   └── Indexes:
+│   │       ├── context.action
+│   │       └── context.domain
+│   │
+│   └── users               # User and provider configurations
+│       └── Indexes:
+│           ├── role_subscriber_url_domain (unique)
+│           └── title (unique)
+│
+└── Implemented Features
+    ├── Automatic Indexing        # Via Mongoose schemas
+    ├── Health Monitoring         # 30-second intervals
+    ├── Prometheus Integration    # Health metrics
+    └── Connection Management     # Auto-reconnect
 ```
 
 ### 2. Key Collections
@@ -165,89 +304,240 @@ MongoDB
 interface Order {
     order_id: string;
     user_id: string;
+    bap_uri: string;
+    bpp_uri: string;
+    bap_id: string;
+    bpp_id: string;
+    domain: string;
+    provider_id: string;
     state: OrderState;
     created_at: Date;
     updated_at: Date;
-    // ... other fields
+    collected_by: "BAP" | "BPP";
+    msn: boolean;
+    settlement_counterparty: string;
+    buyer_finder_fee_amount: number;
+    buyer_finder_fee_type: string;
+    settlement_basis: string;
+    settlement_window: string;
+    withholding_amount: number;
+    item_tax: number;
+    settle_status: INTERNAL_ORDER_SETTLE_STATUS;
+    quote: {
+        total_order_value: number;
+        breakup: Array<{
+            title: string;
+            price: number;
+            id: string;
+        }>;
+    };
 }
 ```
 
 #### Settlements Collection
 ```typescript
 interface Settlement {
-    settlement_id: string;
     order_id: string;
-    status: SettlementStatus;
-    amount: number;
-    // ... other fields
+    user_id: string;
+    settlement_id: string;
+    collector_id: string;
+    receiver_id: string;
+    total_order_value: number;
+    commission: number;
+    collector_settlement: number;
+    tds: number;
+    tcs: number;
+    withholding_amount: number;
+    inter_np_settlement: number;
+    provider_id?: string;
+    due_date: Date;
+    type: SETTLEMENT_TYPE;
+    settlement_reference?: string;
+    provider_settlement_reference?: string;
+    self_settlement_reference?: string;
+    error?: string;
+    status: SETTLEMENT_STATUS;
+    provider_status?: SETTLEMENT_STATUS;
+    self_status?: SETTLEMENT_STATUS;
+    transaction_db_ids: string[];
+    createdAt: Date;
+    updatedAt: Date;
 }
 ```
 
 #### Reconciliation Collection
 ```typescript
 interface Reconciliation {
-    recon_id: string;
+    user_id: string;
+    order_id: string;
+    collector_id: string;
+    receiver_id: string;
+    recon_status: INTERNAL_RECON_STATUS;
     settlement_id: string;
-    status: ReconStatus;
-    // ... other fields
+    payment_id?: string;
+    transaction_db_ids: string[];
+    recon_breakdown: {
+        amount: number;
+        commission: number;
+        withholding_amount: number;
+        tcs: number;
+        tds: number;
+    };
 }
 ```
 
-## Security
+#### Transactions Collection
+```typescript
+interface Transaction {
+    context: {
+        domain: "ONDC:NTS10";
+        location: {
+            country: { code: string };
+            city: { code: string };
+        };
+        version: "2.0.0";
+        action: "recon" | "on_recon" | "settle" | "on_settle";
+        // ... other context fields
+    };
+    currency: {
+        currency: "INR";
+        value: string;
+    };
+    timestamps: {
+        createdAt: Date;
+        updatedAt: Date;
+    };
+}
+```
 
-### 1. Authentication
-- JWT-based authentication
-- Role-based access control
-- Token management
+#### Users Collection
+```typescript
+interface User {
+    title: string;
+    role: "BAP" | "BPP";
+    subscriber_url: string;
+    domain: string;
+    np_tcs: number;
+    np_tds: number;
+    pr_tcs?: number;
+    pr_tds?: number;
+    msn: boolean;
+    provider_details: Array<{
+        provider_name: string;
+        provider_id: string;
+        account_number: string;
+        ifsc_code: string;
+        bank_name: string;
+    }>;
+    counterparty_ids: string[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+```
 
-### 2. Communication Security
-- HTTPS encryption
-- API key authentication
-- Request signing
+### Security Implementation
+> For detailed security configurations, see [Security Guide](./SECURITY.md)
 
-### 3. Data Security
-- Encrypted sensitive data
-- Access logging
-- Audit trails
+```typescript
+// Core Security Architecture
+interface SecurityStack {
+    authentication: {
+        type: "JWT",
+        config: {
+            secret: string,    // JWT_SECRET
+            clientId: string   // CLIENT_ID
+        }
+    },
+    rateLimit: {
+        window: "1 minute",
+        limit: number,        // Default: 1000
+        headers: "draft-8"    // Standard headers
+    },
+    implementation: "./src/middlewares/auth-handler.ts"
+}
+- Global rate limiting per minute
+- Configurable limits through environment variables
+- Standard rate limit headers (draft-8 specification)
+- Custom error handling for limit exceeded
 
-## Observability
+### 3. Request/Response Security
+- HTTPS encryption for all communications
+- API key authentication for external services
+- Request signing for Settlement Agency communications
+- Comprehensive security headers
 
-### 1. Logging
-- Structured JSON logs
-- Log levels and categorization
-- Centralized logging (Loki)
+### 4. Data Security & Auditing
+- Correlation ID tracking across requests
+- Encrypted sensitive data (banking details, keys) #TODO
+- Comprehensive request logging
+  ```typescript
+  {
+      method: string;
+    url: string;
+    body: any;
+    query: any;
+    correlationId: string;
+    params: any;
+  }
+  ```
+- Response audit logging
+  ```typescript
+  {
+      statusCode: number;
+      correlationId: string;
+  }
+  ```
+- RSF-specific audit logging for all operations
+- Database-level validation and sanitization
 
-### 2. Monitoring
-- Grafana dashboards
-- Performance metrics
-- Error tracking
+### Observability Architecture
+> Complete setup instructions in [Observability Integration Guide](./OBSERVABILITY_INTEGRATION.md)
 
-### 3. Metrics
-- Transaction throughput
-- Error rates
-- Response times
-- System health
+```typescript
+// Monitoring Architecture
+interface ObservabilityStack {
+    logging: {
+        development: {
+            transport: "Console",
+            format: "Developer friendly"
+        },
+        production: {
+            transport: "Loki",
+            aggregation: "Centralized"
+        },
+        implementation: "./src/utils/logger/"
+    },
+    metrics: {
+        provider: "Prometheus",
+        endpoint: "/metrics",
+        collectors: [
+            "system_cpu_usage",
+            "system_memory_usage",
+            "db_health_status"
+        ]
+    },
+    logging: {
+        provider: "Winston + Loki",
+        config: "src/utils/logger/",
+        modes: {
+            development: "Console transport",
+            production: "Loki transport"
+        }
+    }
+}
 
-### 4. Alerting
-- Error rate thresholds
-- System health alerts
-- Performance degradation alerts
-
-## Infrastructure
-
-### 1. Deployment
-- Docker containerization
-- Network participant hosting
-- Scalable architecture
-
-### 2. Storage
-- MongoDB for persistent data
-- Replica sets for high availability
-- Backup mechanisms
-
-### 3. Observability Stack
-- Loki for log aggregation
-- Grafana for visualization
-- Prometheus for metrics
+// Environment Configuration
+// .env configuration
+const observabilityConfig = {
+    required: {
+        NODE_ENV: "production",
+        LOG_LEVEL: "info"
+    },
+    optional: {
+        LOKI_HOST: "http://loki:3100",
+        PORT: 4000
+    }
+}
+```
 
 For more detailed information about specific components, please refer to the respective documentation in the `docs/` directory.

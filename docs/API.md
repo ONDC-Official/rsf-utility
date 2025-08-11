@@ -1,20 +1,26 @@
-# API Documentation
+# RSF Utility API Documentation
 
-This document provides detailed information about the RSF Utility API endpoints.
+> For detailed API specifications, schemas, and examples, refer to the auto-generated OpenAPI documentation at `/api-docs` endpoint.
 
-## Table of Contents
-- [Authentication](#authentication)
-- [API Endpoints](#api-endpoints)
-- [Request/Response Formats](#request-response-formats)
-- [Error Handling](#error-handling)
-- [Rate Limiting](#rate-limiting)
-- [Versioning](#versioning)
+## Overview
+
+RSF Utility exposes RESTful APIs for settlement, reconciliation, and transaction management in the ONDC network. This document provides a high-level overview of the API structure and features.
+
+> Implementation: See `src/docs/open-apiSpec.ts` for complete OpenAPI definitions.
+
+## API Categories
+
+### Core APIs
+- **Authentication**: JWT-based access control
+- **Transaction Management**: Order processing and status updates
+- **Settlement Operations**: Payment settlement flows
+- **Reconciliation**: Transaction reconciliation endpoints
+
+> Routes Implementation: See `src/routes/api-routes/` and `src/routes/ui-routes/`
 
 ## Authentication
 
-All API requests require authentication using JWT tokens.
-
-### Getting a Token
+All APIs require JWT authentication. Token management is handled via:
 ```http
 POST /auth/login
 Content-Type: application/json
@@ -33,40 +39,24 @@ Authorization: Bearer <your-jwt-token>
 
 ## API Endpoints
 
-### Transaction Endpoints
+### Core API Groups
 
-#### 1. On Confirm
-```http
-POST /on_confirm
-Content-Type: application/json
+> Implementation: `src/controller/` contains the business logic for each endpoint
 
-{
-    "context": {
-        "domain": "ONDC:NTS10",
-        "action": "on_confirm",
-        // ... other context fields
-    },
-    "message": {
-        // ... message content
-    }
-}
-```
+#### 1. Transaction APIs
+- **Order Processing**: `/on_confirm`, `/on_status`
+  - Handle order confirmations and status updates
+  - Implementation: `src/controller/order-controller.ts`
 
-#### 2. On Status
-```http
-POST /on_status
-Content-Type: application/json
+#### 2. Settlement APIs
+- **Settlement Flow**: `/settle`, `/on_settle`
+  - Manage payment settlements between parties
+  - Implementation: `src/controller/settle-controller.ts`
 
-{
-    "context": {
-        "domain": "ONDC:NTS10",
-        "action": "on_status",
-        // ... other context fields
-    },
-    "message": {
-        // ... message content
-    }
-}
+#### 3. Reconciliation APIs
+- **Recon Operations**: `/recon`, `/on_recon`
+  - Handle transaction reconciliation
+  - Implementation: `src/controller/recon-controller.ts`
 ```
 
 ### Settlement Endpoints
@@ -143,160 +133,107 @@ Content-Type: application/json
 }
 ```
 
-## Request/Response Formats
+## Common Patterns
 
-### Standard Response Format
-```json
-{
-    "success": true,
-    "data": {
-        // Response data
-    },
-    "message": "Operation successful"
-}
-```
+### Response Structure
+> Implementation: See `src/utils/resUtils.ts`
 
-### Error Response Format
-```json
-{
-    "success": false,
-    "error": {
-        "code": "ERROR_CODE",
-        "message": "Error description"
-    }
-}
-```
+All API responses follow standardized formats:
+- Success responses include `success`, `data`, and `message` fields
+- Error responses include `success`, `error.code`, and `error.message`
+- Paginated responses include `pagination` metadata
 
-### Pagination Format
-```json
-{
-    "success": true,
-    "data": {
-        "items": [],
-        "pagination": {
-            "page": 1,
-            "limit": 10,
-            "totalPages": 5,
-            "totalItems": 48
-        }
-    }
-}
+### Request Validation
+> Implementation: See `src/schema/` for Zod schemas
+
+All requests are validated using:
+- Zod schema validation
+- OpenAPI specification compliance
+- Automatic request parsing and type checking
 ```
 
 ## Error Handling
 
-### Error Codes
-| Code | Description |
-|------|-------------|
-| INVALID_REQUEST | Request validation failed |
-| UNAUTHORIZED | Authentication failed |
-| FORBIDDEN | Insufficient permissions |
-| NOT_FOUND | Resource not found |
-| INTERNAL_ERROR | Internal server error |
+> Implementation: See `src/constants/error-codes.ts` for error definitions
 
-### Validation Errors
-```json
-{
-    "success": false,
-    "error": {
-        "code": "VALIDATION_ERROR",
-        "message": "Validation failed",
-        "details": [
-            {
-                "field": "amount",
-                "message": "Amount must be greater than 0"
-            }
-        ]
-    }
-}
+The API uses standardized error handling:
+- Consistent error codes across all endpoints
+- Detailed validation error messages
+- Proper HTTP status code mapping
+
+Common error categories:
+- Authentication errors (401, 403)
+- Validation failures (400)
+- Resource errors (404)
+- Server errors (500)
+
+> For detailed error codes and handling, refer to the OpenAPI documentation.
 ```
 
-## Rate Limiting
+## API Protection
 
-API endpoints are rate-limited based on client ID:
+### Rate Limiting
+> Implementation: `src/middlewares/rate-limiter.ts`
 
-- Default limit: 1000 requests per minute
-- Headers provided:
-  - X-RateLimit-Limit
-  - X-RateLimit-Remaining
-  - X-RateLimit-Reset
-
-Example rate limit response:
-```json
-{
-    "success": false,
-    "error": {
-        "code": "RATE_LIMIT_EXCEEDED",
-        "message": "Too many requests",
-        "retryAfter": 60
-    }
-}
-```
-
-## Versioning
+The API implements rate limiting:
+- Per-client rate limits
+- Standard rate limit headers
+- Configurable thresholds
 
 ### API Versioning
-- API version is specified in the URL path
+> Implementation: See route configurations in `src/routes/`
+
+Version management:
+- URL-based versioning
 - Current version: v2.0
-- Example: `/api/v2.0/orders`
+- Version headers supported
 
-### Version Support
-- v2.0 (Current)
-  - Full feature set
-  - Recommended for new integrations
+### Security Features
+> Implementation: `src/middlewares/`
 
-- v1.0 (Deprecated)
-  - Basic features only
-  - Will be discontinued on [date]
+- JWT Authentication
+- Rate limiting
+- Request validation
+- Audit logging
 
-### Version Headers
-```http
-Accept-Version: 2.0
-API-Version: 2.0
-```
+## Additional Features
 
-## Webhook Integration
+### Health Monitoring
+> Implementation: `src/utils/health-monitor.ts`
 
-### Webhook Registration
-```http
-POST /api/webhooks
-Content-Type: application/json
+- Health check endpoint: `/health`
+- Service status monitoring
+- Database connectivity checks
 
-{
-    "url": "https://your-domain.com/webhook",
-    "events": ["settlement.completed", "recon.completed"]
-}
-```
+### Event System
+> Implementation: `src/services/`
 
-### Webhook Payload Format
-```json
-{
-    "event": "settlement.completed",
-    "timestamp": "2025-08-11T10:00:00Z",
-    "data": {
-        // Event specific data
-    }
-}
-```
+Supports event-based operations:
+- Settlement notifications
+- Reconciliation events
+- Status updates
 
-## API Status
+### API Documentation
+> Implementation: `src/docs/`
 
-Check API status and health:
-```http
-GET /health
-```
+- OpenAPI/Swagger documentation
+- Auto-generated API specs
+- Interactive API explorer at `/api-docs`
 
-Response:
-```json
-{
-    "status": "healthy",
-    "version": "2.0.0",
-    "timestamp": "2025-08-11T10:00:00Z",
-    "services": {
-        "database": "connected",
-        "cache": "connected"
-    }
-}
-```
+## Developer Resources
 
-For detailed information about specific endpoints, request/response schemas, and examples, please refer to the OpenAPI documentation available at `/api-docs` when running the application.
+1. **API Explorer**
+   - Available at `/api-docs` endpoint
+   - Interactive documentation
+   - Request/response examples
+
+2. **Integration Guide**
+   - Refer to OpenAPI documentation
+   - Example requests in Swagger UI
+   - Testing endpoints in dev environment
+
+3. **Source References**
+   - Controllers: `src/controller/`
+   - Routes: `src/routes/`
+   - Schemas: `src/schema/`
+   - Middleware: `src/middlewares/`
