@@ -16,7 +16,6 @@ RSF Utility is a modular transaction processing system designed for handling tra
 - [Installation Guide](./docs/INSTALLATION.md) - Setup and installation instructions
 - [Development Guide](./docs/DEVELOPMENT.md) - Guide for developers
 - [API Documentation](https://fis-staging.ondc.org/rsf-utility/api-docs) - API endpoints and usage
-- [High Level Design](./docs/HLD.md) - High-level system design document
 - [Contributing Guidelines](./docs/CONTRIBUTING.md) - How to contribute to the project
 
 ## Quick Start
