@@ -32,7 +32,7 @@ describe("Happy Flow Integration Tests", () => {
 	let app: Application;
 	beforeAll(async () => {
 		app = createServer();
-		// await connectDB();
+		await connectDB();
 	});
 
 	describe("Flow 1: User Creation and Order Processing", () => {
@@ -77,7 +77,7 @@ describe("Happy Flow Integration Tests", () => {
 				const userId = userResponse.body.data._id;
 
 				// post orders
-				for (const on_confirm of on_confirmPayloads.slice(0, 20)) {
+				for (const on_confirm of on_confirmPayloads) {
 					const data = await request(app)
 						.post("/api/on_confirm")
 						.send(on_confirm);
@@ -241,7 +241,7 @@ describe("Happy Flow Integration Tests", () => {
 					.query({ page: "1", limit: "100" });
 
 				// get reconPayload
-				const fakeRecon = generateReconDUMMY(getReconOrderIds, userData);
+				const fakeRecon: any = generateReconDUMMY(getReconOrderIds, userData);
 				writeFileSync(
 					path.resolve(__dirname, "../generations/fake_recon.json"),
 					JSON.stringify(fakeRecon, null, 2),
@@ -264,6 +264,51 @@ describe("Happy Flow Integration Tests", () => {
 					.query({ page: "1", limit: "100" });
 				console.log(
 					"Recon Fetched After Recon",
+					JSON.stringify(fetchedData.body.data.recons, null, 2),
+				);
+
+				// generate on-recon
+				const reconGenResponse = await request(app)
+					.post(`/ui/generate/${userId}/on_recon`)
+					.set("Authorization", `Bearer ${token}`)
+					.send({
+						on_recon_data: [
+							...getReconOrderIds.map((orderId) => ({
+								order_id: orderId,
+								recon_accord: true,
+								due_date: new Date().toISOString(),
+							})),
+						],
+					});
+				console.log("On Recon Generated", reconGenResponse.body);
+
+				expect(reconGenResponse.status).toBe(201);
+				const onReconGenPayload = reconGenResponse.body.data;
+				writeFileSync(
+					path.resolve(__dirname, "../generations/generate-on-recon.json"),
+					JSON.stringify(onReconGenPayload, null, 2),
+				);
+
+				// trigger on-recon
+				mockedAxios.post.mockResolvedValueOnce({
+					data: { message: { ack: { status: "ACK" } } },
+				});
+
+				const onReconTriggerResponse = await request(app)
+					.post(`/ui/trigger/${userId}/on_recon`)
+					.set("Authorization", `Bearer ${token}`)
+					.send(onReconGenPayload);
+				console.log("On Recon Triggered", onReconTriggerResponse.body);
+				expect(onReconTriggerResponse.status).toBe(200);
+
+				// fetch data
+				fetchedData = await request(app)
+					.get(`/ui/recon/${userId}`)
+					.set("Authorization", `Bearer ${token}`)
+					.query({ page: "1", limit: "100" });
+
+				console.log(
+					"Recon Fetched After On Recon Trigger",
 					JSON.stringify(fetchedData.body.data.recons, null, 2),
 				);
 			},

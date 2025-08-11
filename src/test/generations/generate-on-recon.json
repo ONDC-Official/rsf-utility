@@ -10,30 +10,30 @@
       }
     },
     "version": "2.0.0",
-    "action": "recon",
+    "action": "on_recon",
     "bap_id": "subscriber-id",
-    "bpp_id": "bpp.example.com",
     "bap_uri": "https://fis-staging.ondc.org/rsf-utility/api",
+    "bpp_id": "bpp.example.com",
     "bpp_uri": "https://bpp.example.com/ondc",
     "transaction_id": "30ab91cd-9b99-4dba-a4f2-d397ee4b15ff",
     "message_id": "fbed9a36-40d9-4132-a0d8-91567e66cf97",
-    "timestamp": "2025-08-11T12:38:50.628Z",
+    "timestamp": "2025-08-11T12:38:50.755Z",
     "ttl": "P1D"
   },
   "message": {
     "orders": [
       {
         "id": "484427",
-        "payment_id": "payment-1",
         "amount": {
           "currency": "INR",
-          "value": "1697.00"
+          "value": "4717.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "cf55662b-8dde-42ef-b0a1-847aa4981c34",
-            "payment_id": "payment-1",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "4717.00"
@@ -54,22 +54,22 @@
               "currency": "INR",
               "value": "1.49"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484425",
-        "payment_id": "payment-2",
         "amount": {
           "currency": "INR",
-          "value": "3424.00"
+          "value": "1963.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "7f1a6a50-ae3a-4e7b-841c-5cfe3e30b161",
-            "payment_id": "payment-2",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "1963.00"
@@ -90,94 +90,22 @@
               "currency": "INR",
               "value": "1.45"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
-          }
-        ]
-      },
-      {
-        "id": "484423",
-        "payment_id": "payment-3",
-        "amount": {
-          "currency": "INR",
-          "value": "2545.00"
-        },
-        "settlements": [
-          {
-            "id": "b8aedac7-4a07-4c23-a28b-75a30b35d409",
-            "payment_id": "payment-3",
-            "status": "PENDING",
-            "amount": {
-              "currency": "INR",
-              "value": "3966.00"
-            },
-            "commission": {
-              "currency": "INR",
-              "value": "3.43"
-            },
-            "withholding_amount": {
-              "currency": "INR",
-              "value": "0.99"
-            },
-            "tcs": {
-              "currency": "INR",
-              "value": "0.84"
-            },
-            "tds": {
-              "currency": "INR",
-              "value": "1.41"
-            },
-            "updated_at": "2025-08-11T12:38:50.628Z"
-          }
-        ]
-      },
-      {
-        "id": "484421",
-        "payment_id": "payment-4",
-        "amount": {
-          "currency": "INR",
-          "value": "3084.00"
-        },
-        "settlements": [
-          {
-            "id": "e068a598-200e-4af3-b755-aa506ef20061",
-            "payment_id": "payment-4",
-            "status": "PENDING",
-            "amount": {
-              "currency": "INR",
-              "value": "4466.00"
-            },
-            "commission": {
-              "currency": "INR",
-              "value": "2.93"
-            },
-            "withholding_amount": {
-              "currency": "INR",
-              "value": "0.74"
-            },
-            "tcs": {
-              "currency": "INR",
-              "value": "0.81"
-            },
-            "tds": {
-              "currency": "INR",
-              "value": "0.48"
-            },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484419",
-        "payment_id": "payment-5",
         "amount": {
           "currency": "INR",
-          "value": "2364.00"
+          "value": "1767.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "5c0d5361-153e-4fb7-9663-a1420eb8a6a2",
-            "payment_id": "payment-5",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "1767.00"
@@ -198,22 +126,22 @@
               "currency": "INR",
               "value": "0.92"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484417",
-        "payment_id": "payment-6",
         "amount": {
           "currency": "INR",
-          "value": "4891.00"
+          "value": "2035.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "2700dd59-ac12-402f-b34b-69022049f427",
-            "payment_id": "payment-6",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "2035.00"
@@ -234,22 +162,22 @@
               "currency": "INR",
               "value": "0.72"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484415",
-        "payment_id": "payment-7",
         "amount": {
           "currency": "INR",
-          "value": "3523.00"
+          "value": "4040.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "882c6cf3-583e-4a3c-aa65-11826efacc4d",
-            "payment_id": "payment-7",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "4040.00"
@@ -270,22 +198,22 @@
               "currency": "INR",
               "value": "0.78"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484413",
-        "payment_id": "payment-8",
         "amount": {
           "currency": "INR",
-          "value": "2970.00"
+          "value": "1781.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "22c80ffb-2eea-4824-a2a1-6a139c438aac",
-            "payment_id": "payment-8",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "1781.00"
@@ -306,94 +234,58 @@
               "currency": "INR",
               "value": "0.57"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
-        "id": "484411",
-        "payment_id": "payment-9",
+        "id": "484423",
         "amount": {
           "currency": "INR",
-          "value": "1836.00"
+          "value": "3966.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
-            "id": "bf9e4616-ee34-46a2-b3e6-cb6c1887719a",
-            "payment_id": "payment-9",
+            "id": "b8aedac7-4a07-4c23-a28b-75a30b35d409",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
-              "value": "3375.00"
+              "value": "3966.00"
             },
             "commission": {
               "currency": "INR",
-              "value": "4.15"
+              "value": "3.43"
             },
             "withholding_amount": {
               "currency": "INR",
-              "value": "1.00"
+              "value": "0.99"
             },
             "tcs": {
               "currency": "INR",
-              "value": "0.33"
+              "value": "0.84"
             },
             "tds": {
               "currency": "INR",
-              "value": "1.23"
+              "value": "1.41"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
-          }
-        ]
-      },
-      {
-        "id": "484409",
-        "payment_id": "payment-10",
-        "amount": {
-          "currency": "INR",
-          "value": "4410.00"
-        },
-        "settlements": [
-          {
-            "id": "c431afbd-0b8f-4579-adab-172c3adad915",
-            "payment_id": "payment-10",
-            "status": "PENDING",
-            "amount": {
-              "currency": "INR",
-              "value": "3304.00"
-            },
-            "commission": {
-              "currency": "INR",
-              "value": "3.79"
-            },
-            "withholding_amount": {
-              "currency": "INR",
-              "value": "0.74"
-            },
-            "tcs": {
-              "currency": "INR",
-              "value": "0.79"
-            },
-            "tds": {
-              "currency": "INR",
-              "value": "0.89"
-            },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484407",
-        "payment_id": "payment-11",
         "amount": {
           "currency": "INR",
-          "value": "4077.00"
+          "value": "2494.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "2f9e0915-824f-49d9-84d2-18cb3d7887d1",
-            "payment_id": "payment-11",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "2494.00"
@@ -414,22 +306,22 @@
               "currency": "INR",
               "value": "1.01"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484405",
-        "payment_id": "payment-12",
         "amount": {
           "currency": "INR",
-          "value": "4843.00"
+          "value": "2649.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "f93c4ce7-be79-4319-9d06-4a65188cda97",
-            "payment_id": "payment-12",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "2649.00"
@@ -450,22 +342,22 @@
               "currency": "INR",
               "value": "1.37"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484403",
-        "payment_id": "payment-13",
         "amount": {
           "currency": "INR",
-          "value": "3590.00"
+          "value": "4737.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "25c5b75d-9b57-450f-8bcf-b27d79e8d2b3",
-            "payment_id": "payment-13",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "4737.00"
@@ -486,22 +378,58 @@
               "currency": "INR",
               "value": "0.66"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
+          }
+        ]
+      },
+      {
+        "id": "484421",
+        "amount": {
+          "currency": "INR",
+          "value": "4466.00"
+        },
+        "recon_accord": true,
+        "settlements": [
+          {
+            "id": "e068a598-200e-4af3-b755-aa506ef20061",
+            "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
+            "amount": {
+              "currency": "INR",
+              "value": "4466.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "2.93"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "0.74"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.81"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "0.48"
+            },
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484401",
-        "payment_id": "payment-14",
         "amount": {
           "currency": "INR",
-          "value": "2418.00"
+          "value": "2257.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "eb52c697-b8af-4f09-b0fa-672d9e35ae78",
-            "payment_id": "payment-14",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "2257.00"
@@ -522,22 +450,22 @@
               "currency": "INR",
               "value": "1.17"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484399",
-        "payment_id": "payment-15",
         "amount": {
           "currency": "INR",
-          "value": "3906.00"
+          "value": "4520.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "70ff90fc-0a20-4006-b1f2-83f3ad0f3a88",
-            "payment_id": "payment-15",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "4520.00"
@@ -558,22 +486,22 @@
               "currency": "INR",
               "value": "0.68"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484397",
-        "payment_id": "payment-16",
         "amount": {
           "currency": "INR",
-          "value": "3960.00"
+          "value": "2519.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "8222bd66-dfb8-409b-8e6b-866d0d96e982",
-            "payment_id": "payment-16",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "2519.00"
@@ -594,22 +522,22 @@
               "currency": "INR",
               "value": "1.12"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484395",
-        "payment_id": "payment-17",
         "amount": {
           "currency": "INR",
-          "value": "2073.00"
+          "value": "1505.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "849835d6-d684-4357-9e79-800bd076a581",
-            "payment_id": "payment-17",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "1505.00"
@@ -630,94 +558,22 @@
               "currency": "INR",
               "value": "1.41"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
-          }
-        ]
-      },
-      {
-        "id": "484393",
-        "payment_id": "payment-18",
-        "amount": {
-          "currency": "INR",
-          "value": "3099.00"
-        },
-        "settlements": [
-          {
-            "id": "4556d54f-dea0-43e9-b299-d408575efafc",
-            "payment_id": "payment-18",
-            "status": "PENDING",
-            "amount": {
-              "currency": "INR",
-              "value": "2578.00"
-            },
-            "commission": {
-              "currency": "INR",
-              "value": "2.15"
-            },
-            "withholding_amount": {
-              "currency": "INR",
-              "value": "0.68"
-            },
-            "tcs": {
-              "currency": "INR",
-              "value": "0.79"
-            },
-            "tds": {
-              "currency": "INR",
-              "value": "1.09"
-            },
-            "updated_at": "2025-08-11T12:38:50.628Z"
-          }
-        ]
-      },
-      {
-        "id": "484391",
-        "payment_id": "payment-19",
-        "amount": {
-          "currency": "INR",
-          "value": "3249.00"
-        },
-        "settlements": [
-          {
-            "id": "a697701c-7afd-42c6-a5cf-144f824fe12b",
-            "payment_id": "payment-19",
-            "status": "PENDING",
-            "amount": {
-              "currency": "INR",
-              "value": "3251.00"
-            },
-            "commission": {
-              "currency": "INR",
-              "value": "3.48"
-            },
-            "withholding_amount": {
-              "currency": "INR",
-              "value": "0.72"
-            },
-            "tcs": {
-              "currency": "INR",
-              "value": "0.60"
-            },
-            "tds": {
-              "currency": "INR",
-              "value": "0.38"
-            },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484389",
-        "payment_id": "payment-20",
         "amount": {
           "currency": "INR",
-          "value": "4073.00"
+          "value": "3505.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "ca72aa3b-7043-45e7-9858-7250e2d8e51c",
-            "payment_id": "payment-20",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "3505.00"
@@ -738,22 +594,22 @@
               "currency": "INR",
               "value": "0.74"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484387",
-        "payment_id": "payment-21",
         "amount": {
           "currency": "INR",
-          "value": "4729.00"
+          "value": "2155.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "b42f10a5-5958-447e-a88c-db311ea73cb2",
-            "payment_id": "payment-21",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "2155.00"
@@ -774,94 +630,58 @@
               "currency": "INR",
               "value": "0.52"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
-        "id": "484385",
-        "payment_id": "payment-22",
+        "id": "484411",
         "amount": {
           "currency": "INR",
-          "value": "1807.00"
+          "value": "3375.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
-            "id": "d5537069-92e5-4b01-b2bf-5a0d7f53d063",
-            "payment_id": "payment-22",
+            "id": "bf9e4616-ee34-46a2-b3e6-cb6c1887719a",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
-              "value": "3358.00"
+              "value": "3375.00"
             },
             "commission": {
               "currency": "INR",
-              "value": "4.28"
+              "value": "4.15"
             },
             "withholding_amount": {
               "currency": "INR",
-              "value": "0.55"
+              "value": "1.00"
             },
             "tcs": {
               "currency": "INR",
-              "value": "0.65"
+              "value": "0.33"
             },
             "tds": {
               "currency": "INR",
-              "value": "0.99"
+              "value": "1.23"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
-          }
-        ]
-      },
-      {
-        "id": "484383",
-        "payment_id": "payment-23",
-        "amount": {
-          "currency": "INR",
-          "value": "4346.00"
-        },
-        "settlements": [
-          {
-            "id": "9c2549fc-53cf-4d55-a76c-61e70f412e8b",
-            "payment_id": "payment-23",
-            "status": "PENDING",
-            "amount": {
-              "currency": "INR",
-              "value": "4241.00"
-            },
-            "commission": {
-              "currency": "INR",
-              "value": "1.98"
-            },
-            "withholding_amount": {
-              "currency": "INR",
-              "value": "1.85"
-            },
-            "tcs": {
-              "currency": "INR",
-              "value": "0.44"
-            },
-            "tds": {
-              "currency": "INR",
-              "value": "1.30"
-            },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484381",
-        "payment_id": "payment-24",
         "amount": {
           "currency": "INR",
-          "value": "4951.00"
+          "value": "1809.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "2816f858-ae53-44e5-8ee8-00ca29d1a5f0",
-            "payment_id": "payment-24",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "1809.00"
@@ -882,22 +702,22 @@
               "currency": "INR",
               "value": "1.01"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       },
       {
         "id": "484379",
-        "payment_id": "payment-25",
         "amount": {
           "currency": "INR",
-          "value": "2380.00"
+          "value": "3484.00"
         },
+        "recon_accord": true,
         "settlements": [
           {
             "id": "2dc77b13-c480-4c1f-bc5e-29698ec01836",
-            "payment_id": "payment-25",
             "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
             "amount": {
               "currency": "INR",
               "value": "3484.00"
@@ -918,7 +738,187 @@
               "currency": "INR",
               "value": "0.88"
             },
-            "updated_at": "2025-08-11T12:38:50.628Z"
+            "updated_at": "2025-08-11T12:38:50.755Z"
+          }
+        ]
+      },
+      {
+        "id": "484409",
+        "amount": {
+          "currency": "INR",
+          "value": "3304.00"
+        },
+        "recon_accord": true,
+        "settlements": [
+          {
+            "id": "c431afbd-0b8f-4579-adab-172c3adad915",
+            "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
+            "amount": {
+              "currency": "INR",
+              "value": "3304.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "3.79"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "0.74"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.79"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "0.89"
+            },
+            "updated_at": "2025-08-11T12:38:50.755Z"
+          }
+        ]
+      },
+      {
+        "id": "484385",
+        "amount": {
+          "currency": "INR",
+          "value": "3358.00"
+        },
+        "recon_accord": true,
+        "settlements": [
+          {
+            "id": "d5537069-92e5-4b01-b2bf-5a0d7f53d063",
+            "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
+            "amount": {
+              "currency": "INR",
+              "value": "3358.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "4.28"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "0.55"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.65"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "0.99"
+            },
+            "updated_at": "2025-08-11T12:38:50.755Z"
+          }
+        ]
+      },
+      {
+        "id": "484393",
+        "amount": {
+          "currency": "INR",
+          "value": "2578.00"
+        },
+        "recon_accord": true,
+        "settlements": [
+          {
+            "id": "4556d54f-dea0-43e9-b299-d408575efafc",
+            "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
+            "amount": {
+              "currency": "INR",
+              "value": "2578.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "2.15"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "0.68"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.79"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "1.09"
+            },
+            "updated_at": "2025-08-11T12:38:50.755Z"
+          }
+        ]
+      },
+      {
+        "id": "484391",
+        "amount": {
+          "currency": "INR",
+          "value": "3251.00"
+        },
+        "recon_accord": true,
+        "settlements": [
+          {
+            "id": "a697701c-7afd-42c6-a5cf-144f824fe12b",
+            "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
+            "amount": {
+              "currency": "INR",
+              "value": "3251.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "3.48"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "0.72"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.60"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "0.38"
+            },
+            "updated_at": "2025-08-11T12:38:50.755Z"
+          }
+        ]
+      },
+      {
+        "id": "484383",
+        "amount": {
+          "currency": "INR",
+          "value": "4241.00"
+        },
+        "recon_accord": true,
+        "settlements": [
+          {
+            "id": "9c2549fc-53cf-4d55-a76c-61e70f412e8b",
+            "status": "PENDING",
+            "due_date": "2025-08-11T12:38:50.741Z",
+            "amount": {
+              "currency": "INR",
+              "value": "4241.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "1.98"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "1.85"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.44"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "1.30"
+            },
+            "updated_at": "2025-08-11T12:38:50.755Z"
           }
         ]
       }

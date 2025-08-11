@@ -42,6 +42,7 @@ const SettleSchema = new mongoose.Schema(
 			required: false,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
+		initiated_date: { type: Date, required: false },
 		transaction_db_ids: { type: [String] },
 	},
 	{ timestamps: true, strict: false },
