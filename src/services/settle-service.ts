@@ -112,7 +112,7 @@ export class SettleDbManagementService {
 		settlePayload: SettlePayload,
 		responseData: any,
 	) {
-		const hasError = responseData.error ? true : false;
+		const hasError = checkPerfectAck(responseData);
 		let orderIds = settlePayload.message.settlement.orders?.map(
 			(order) => order.id,
 		);

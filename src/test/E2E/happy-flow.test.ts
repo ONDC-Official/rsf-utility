@@ -153,7 +153,6 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 
 		expect(settlementsResponse.status).toBe(200);
 		const firstSettlement = settlementsResponse.body.data.settlements[0];
-		console.log("First Settlement Status:", firstSettlement);
 		expect(firstSettlement.status).toBe("NOT_SETTLED");
 	});
 
@@ -239,8 +238,6 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 			.set("Authorization", `Bearer ${token}`)
 			.query({ page: "1", limit: "100" });
 
-		console.log("Fetched Recon Data:", fetchedReconData.body.data.recons);
-
 		const convertedData = fetchedReconData.body.data.recons.map(
 			(recon: any) => ({
 				transaction_id: recon.transaction_id,
@@ -253,10 +250,6 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 				count: recon.count,
 			}),
 		);
-		console.log(
-			"Recon IDs with Status:",
-			JSON.stringify(convertedData, null, 2),
-		);
 		expect(convertedData.length).toBeGreaterThan(0);
 		expect(convertedData[0].recons.length).toBeGreaterThan(0);
 		// RECEIVED_ACCEPTED for ordersForOnRecon
@@ -267,7 +260,6 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 						d.transaction_id === onReconGeneratedPayload.context.transaction_id,
 				)
 				.recons.every((r: any) => {
-					console.log("Recon Record:", r);
 					return r.recon_status === "RECEIVED_ACCEPTED";
 				}),
 		).toBe(true);
