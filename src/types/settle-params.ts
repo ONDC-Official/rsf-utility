@@ -178,7 +178,7 @@ export const AmountSchema = z.object({
 	currency: z.string().openapi({ example: "INR" }),
 	value: z
 		.string()
-		.regex(/^\d+(\.\d{1,2})?$/)
+		.regex(/^\d+(?:\.\d{2})?$/)
 		.openapi({ example: "800.00" }),
 });
 
