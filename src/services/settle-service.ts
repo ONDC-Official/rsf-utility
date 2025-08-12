@@ -1,8 +1,5 @@
 import { SettleRepository } from "../repositories/settle-repository";
-import {
-	GetSettlementsQuerySchema,
-	UpdateSettlementSchema,
-} from "../types/settle-params";
+import { GetSettlementsQuerySchema } from "../types/settle-params";
 import { UserService } from "./user-service";
 import { z } from "zod";
 import logger from "../utils/logger";
@@ -137,25 +134,25 @@ export class SettleDbManagementService {
 			transDbId = transactionDbSave._id.toString();
 		}
 
-		for (const orderId of orderIds) {
-			if (!orderId) {
+		for (const order of settlePayload.message.settlement.orders || []) {
+			if (!order.id) {
 				settleLogger.error("Order ID is undefined or empty", {
 					userId,
-					orderId,
+					orderId: order.id,
 				});
 				continue;
 			}
 			try {
 				const settleData = await this.settleRepo.findSingleSettlement(
 					userId,
-					orderId,
+					order.id,
 				);
 				if (!settleData) {
 					settleLogger.error(
-						`Settlement not found for user ${userId} and order ${orderId}`,
+						`Settlement not found for user ${userId} and order ${order.id}`,
 						{
 							userId,
-							orderId,
+							orderId: order.id,
 						},
 					);
 					continue;
@@ -166,21 +163,37 @@ export class SettleDbManagementService {
 
 				if (hasError) {
 					settleData.status = "PREPARED";
-					settleData.self_status = "PREPARED";
-					settleData.provider_status = "PREPARED";
+					if (order.self) {
+						settleData.self_status = "PREPARED";
+					} else {
+						settleData.self_status = null;
+					}
+					if (order.provider) {
+						settleData.provider_status = "PREPARED";
+					} else {
+						settleData.provider_status = null;
+					}
 					settleData.error = responseData.error.message || "Unknown error";
 				} else {
 					settleData.status = "PENDING";
-					settleData.self_status = "PENDING";
-					settleData.provider_status = "PENDING";
+					if (order.self) {
+						settleData.self_status = "PENDING";
+					} else {
+						settleData.self_status = null;
+					}
+					if (order.provider) {
+						settleData.provider_status = "PENDING";
+					} else {
+						settleData.provider_status = null;
+					}
 					settleData.error = null;
 					settleData.initiated_date = new Date();
 				}
-				await this.settleRepo.updateSettlement(userId, orderId, settleData);
+				await this.settleRepo.updateSettlement(userId, order.id, settleData);
 			} catch (error) {
 				settleLogger.error(
-					`Error updating settlement for order ID ${orderId}`,
-					{ userId, orderId },
+					`Error updating settlement for order ID ${order.id}`,
+					{ userId, orderId: order.id },
 					error,
 				);
 			}
