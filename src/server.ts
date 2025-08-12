@@ -18,7 +18,7 @@ const createServer = (): Application => {
 
 	app.use(correlationIdMiddleware);
 	app.use(cors());
-	app.use(express.json({ limit: "50mb" }));
+	app.use(express.json({ limit: "3mb" }));
 
 	// Logging Middleware
 	app.use(requestLog);

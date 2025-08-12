@@ -4,11 +4,13 @@ import { schemaValidator } from "../../controller/validation-controller";
 import { container } from "../../di/container";
 import { sendSuccess } from "../../utils/resUtils";
 import { rsfAuditLogger } from "../../middlewares/rsf-audit-logger";
+import { requireJsonContent } from "../../middlewares/http-validations";
 
 const payloadRouter = Router();
 
 payloadRouter.post(
 	"/:action",
+	requireJsonContent,
 	rateLimiter,
 	rsfAuditLogger,
 	schemaValidator,

@@ -81,7 +81,7 @@ describe("Happy Flow Integration Tests", () => {
 					const data = await request(app)
 						.post("/api/on_confirm")
 						.send(on_confirm);
-					console.log(data.body, "On Confirm Response");
+					// console.log(data.body, "On Confirm Response");
 					expect(data.status).toBe(200);
 				}
 				console.log("User created and orders processed successfully");
@@ -117,7 +117,7 @@ describe("Happy Flow Integration Tests", () => {
 					.set("Authorization", `Bearer ${token}`)
 					.send(prepBody);
 
-				console.log(prepareResponse.body, "Prepare Response");
+				// console.log(prepareResponse.body, "Prepare Response");
 				expect(prepareResponse.status).toBe(201);
 
 				// GET settlements with query
@@ -162,7 +162,7 @@ describe("Happy Flow Integration Tests", () => {
 					.post(`/ui/trigger/${userId}/settle`)
 					.set("Authorization", `Bearer ${token}`)
 					.send(settlePayload);
-				console.log("Settle Triggered", triggerResponse.body);
+				console.log("Settle Triggered");
 				expect(triggerResponse.status).toBe(200);
 
 				const onSettle = genDummyOnSettle(settlePayload);
@@ -175,7 +175,7 @@ describe("Happy Flow Integration Tests", () => {
 					.post(`/api/on_settle`)
 					.send(onSettle);
 
-				console.log("On Settle Response", onSettleResponse.body);
+				// console.log("On Settle Response", onSettleResponse.body);
 				expect(onSettleResponse.status).toBe(200);
 
 				// get recons for half of the orders send recons for half of the orders
@@ -214,14 +214,14 @@ describe("Happy Flow Integration Tests", () => {
 					.post(`/ui/trigger/${userId}/recon`)
 					.set("Authorization", `Bearer ${token}`)
 					.send(reconPayload);
-				console.log("Recon Triggered", reconTriggerResponse.body);
+				console.log("Recon Triggered");
 				expect(reconTriggerResponse.status).toBe(200);
 
 				let fetchedData = await request(app)
 					.get(`/ui/recon/${userId}`)
 					.set("Authorization", `Bearer ${token}`)
 					.query({ page: "1", limit: "20" });
-				console.log("Recon Fetched", fetchedData.body.data.recons);
+				console.log("Recon Fetched");
 
 				const onReconDummyPayload = generateOnReconPayloadDUMMY(reconPayload);
 
@@ -232,7 +232,7 @@ describe("Happy Flow Integration Tests", () => {
 				const onReconResponse = await request(app)
 					.post(`/api/on_recon`)
 					.send(onReconDummyPayload);
-				console.log("On Recon Response", onReconResponse.body);
+				console.log("On Recon Response");
 				expect(onReconResponse.status).toBe(200);
 
 				fetchedData = await request(app)
@@ -255,7 +255,7 @@ describe("Happy Flow Integration Tests", () => {
 				const reconResponse = await request(app)
 					.post(`/api/recon`)
 					.send(fakeRecon);
-				console.log("Recon Response", reconResponse.body);
+				// console.log("Recon Response", reconResponse.body);
 				expect(reconResponse.status).toBe(200);
 
 				fetchedData = await request(app)
@@ -264,7 +264,7 @@ describe("Happy Flow Integration Tests", () => {
 					.query({ page: "1", limit: "100" });
 				console.log(
 					"Recon Fetched After Recon",
-					JSON.stringify(fetchedData.body.data.recons, null, 2),
+					// JSON.stringify(fetchedData.body.data.recons, null, 2),
 				);
 
 				// generate on-recon
@@ -280,7 +280,7 @@ describe("Happy Flow Integration Tests", () => {
 							})),
 						],
 					});
-				console.log("On Recon Generated", reconGenResponse.body);
+				console.log("On Recon Generated");
 
 				expect(reconGenResponse.status).toBe(201);
 				const onReconGenPayload = reconGenResponse.body.data;
@@ -298,7 +298,7 @@ describe("Happy Flow Integration Tests", () => {
 					.post(`/ui/trigger/${userId}/on_recon`)
 					.set("Authorization", `Bearer ${token}`)
 					.send(onReconGenPayload);
-				console.log("On Recon Triggered", onReconTriggerResponse.body);
+				// console.log("On Recon Triggered", onReconTriggerResponse.body);
 				expect(onReconTriggerResponse.status).toBe(200);
 
 				// fetch data
@@ -307,10 +307,7 @@ describe("Happy Flow Integration Tests", () => {
 					.set("Authorization", `Bearer ${token}`)
 					.query({ page: "1", limit: "100" });
 
-				console.log(
-					"Recon Fetched After On Recon Trigger",
-					JSON.stringify(fetchedData.body.data.recons, null, 2),
-				);
+				console.log("Recon Fetched After On Recon Trigger");
 			},
 			20 * 60 * 1000,
 		); // 20 minutes timeout
