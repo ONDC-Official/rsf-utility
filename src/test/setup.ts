@@ -14,6 +14,10 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+	const collections = mongoose.connection.collections;
+	for (const key in collections) {
+		await collections[key].deleteMany({});
+	}
 	await mongoose.disconnect();
 	await mongoServer.stop();
 });
