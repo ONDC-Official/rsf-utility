@@ -151,6 +151,7 @@ export class ReconTriggerService {
 					INTERNAL_RECON_STATUS.SENT_PENDING,
 				);
 				reconData.transaction_db_ids.push(dbPayload._id.toString());
+				reconData.transaction_id = dbPayload.context.transaction_id;
 				if (settlementPayload.payment_id) {
 					reconData.payment_id = settlementPayload.payment_id;
 				}

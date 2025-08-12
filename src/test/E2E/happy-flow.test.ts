@@ -12,6 +12,7 @@ import { generateReconDUMMY } from "../utils/gen_recon";
 import { UserType } from "../../schema/models/user-schema";
 import { User } from "../../db/models/user-model";
 import { Order } from "../../db/models/order-model";
+import { GenOnReconBody } from "../../types/generate-recon-types";
 
 // Mock axios for the entire test suite
 jest.mock("axios");
@@ -249,7 +250,7 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 				recons: recon.recons.map((r: any) => ({
 					order_id: r.order_id,
 					recon_accord: r.recon_accord,
-					state: r.state,
+					recon_status: r.recon_status,
 					due_date: r.due_date,
 				})),
 				count: recon.count,
@@ -259,5 +260,19 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 			"Recon IDs with Status:",
 			JSON.stringify(convertedData, null, 2),
 		);
+		expect(convertedData.length).toBeGreaterThan(0);
+		expect(convertedData[0].recons.length).toBeGreaterThan(0);
+		// RECEIVED_ACCEPTED for ordersForOnRecon
+		expect(
+			convertedData
+				.find(
+					(d: any) =>
+						d.transaction_id === onReconGeneratedPayload.context.transaction_id,
+				)
+				.recons.every((r: any) => {
+					console.log("Recon Record:", r);
+					return r.recon_status === "RECEIVED_ACCEPTED";
+				}),
+		).toBe(true);
 	});
 });

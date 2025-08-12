@@ -66,6 +66,10 @@ export const ReconSchema = z
 			description: "Transaction DB IDs",
 			example: ["transaction1", "transaction2"],
 		}),
+		transaction_id: z.string().openapi({
+			description: "Transaction ID",
+			example: "txn123",
+		}),
 		recon_breakdown: BreakdownSchema.openapi({
 			description: "Recon breakdown",
 		}),

@@ -54,6 +54,10 @@ const ReconTableSchema = new mongoose.Schema(
 			type: [String],
 			required: true,
 		},
+		transaction_id: {
+			type: String,
+			required: true,
+		},
 		recon_breakdown: {
 			type: BreakdownSchema,
 			required: true,
