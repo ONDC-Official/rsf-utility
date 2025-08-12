@@ -15,9 +15,9 @@
     "bap_uri": "https://fis-staging.ondc.org/rsf-utility/api",
     "bpp_id": "settlement-agency-id",
     "bpp_uri": "http://settlement-agency-url",
-    "transaction_id": "f1b35279-d1e6-4582-a1f1-633fc256d1bf",
-    "message_id": "e5c737e1-2ac6-4160-b450-94f343bd5be8",
-    "timestamp": "2025-08-12T04:57:02.809Z",
+    "transaction_id": "5eae9155-0c0d-4546-bff3-f7b84f23e09c",
+    "message_id": "bfd24b71-0d20-4ff3-b4cf-3bb7ace87959",
+    "timestamp": "2025-08-12T05:51:42.767Z",
     "ttl": "P1D"
   },
   "message": {
@@ -25,7 +25,7 @@
     "receiver_app_id": "fis-staging.ondc.org",
     "settlement": {
       "type": "NP-NP",
-      "id": "aabc5741-8bb9-4c31-9b2a-77ad976715cd",
+      "id": "92cf8db2-3a87-43a9-a2d5-39e8e73a26f4",
       "orders": [
         {
           "id": "484477",
@@ -50,13 +50,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "839.00"
+              "value": "185.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "73.00"
+              "value": "59.00"
             }
           }
         },
@@ -83,13 +83,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "846.00"
+              "value": "258.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "46.00"
+              "value": "98.00"
             }
           }
         },
@@ -116,13 +116,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "921.00"
+              "value": "909.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "91.00"
+              "value": "71.00"
             }
           }
         },
@@ -149,13 +149,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "525.00"
+              "value": "725.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "33.00"
+              "value": "36.00"
             }
           }
         },
@@ -182,13 +182,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "440.00"
+              "value": "121.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "52.00"
+              "value": "12.00"
             }
           }
         },
@@ -215,13 +215,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "738.00"
+              "value": "799.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "14.00"
+              "value": "80.00"
             }
           }
         },
@@ -248,13 +248,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "214.00"
+              "value": "609.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "68.00"
+              "value": "69.00"
             }
           }
         },
@@ -281,13 +281,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "536.00"
+              "value": "500.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "86.00"
+              "value": "10.00"
             }
           }
         },
@@ -314,13 +314,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "956.00"
+              "value": "742.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "39.00"
+              "value": "68.00"
             }
           }
         },
@@ -347,13 +347,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "404.00"
+              "value": "358.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "45.00"
+              "value": "84.00"
             }
           }
         },
@@ -380,13 +380,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "204.00"
+              "value": "268.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "52.00"
+              "value": "78.00"
             }
           }
         },
@@ -413,13 +413,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "688.00"
+              "value": "873.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "96.00"
+              "value": "50.00"
             }
           }
         },
@@ -446,13 +446,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "507.00"
+              "value": "856.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "18.00"
+              "value": "53.00"
             }
           }
         },
@@ -479,13 +479,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "564.00"
+              "value": "200.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "41.00"
+              "value": "39.00"
             }
           }
         },
@@ -512,13 +512,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "962.00"
+              "value": "791.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "57.00"
+              "value": "17.00"
             }
           }
         },
@@ -545,13 +545,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "668.00"
+              "value": "958.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "55.00"
+              "value": "20.00"
             }
           }
         },
@@ -578,13 +578,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "333.00"
+              "value": "654.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "97.00"
+              "value": "89.00"
             }
           }
         },
@@ -611,13 +611,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "257.00"
+              "value": "535.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "82.00"
+              "value": "93.00"
             }
           }
         },
@@ -644,13 +644,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "411.00"
+              "value": "104.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "80.00"
+              "value": "48.00"
             }
           }
         },
@@ -677,13 +677,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "762.00"
+              "value": "199.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "49.00"
+              "value": "17.00"
             }
           }
         },
@@ -710,13 +710,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "538.00"
+              "value": "787.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "15.00"
+              "value": "82.00"
             }
           }
         },
@@ -743,13 +743,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "939.00"
+              "value": "822.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "18.00"
+              "value": "49.00"
             }
           }
         },
@@ -776,13 +776,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "150.00"
+              "value": "276.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "38.00"
+              "value": "47.00"
             }
           }
         },
@@ -809,13 +809,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "821.00"
+              "value": "121.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "59.00"
+              "value": "44.00"
             }
           }
         },
@@ -842,13 +842,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "594.00"
+              "value": "230.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "54.00"
+              "value": "18.00"
             }
           }
         },
@@ -875,13 +875,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "515.00"
+              "value": "764.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "29.00"
+              "value": "24.00"
             }
           }
         },
@@ -908,13 +908,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "363.00"
+              "value": "107.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "76.00"
+              "value": "63.00"
             }
           }
         },
@@ -941,13 +941,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "438.00"
+              "value": "533.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "87.00"
+              "value": "35.00"
             }
           }
         },
@@ -974,13 +974,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "621.00"
+              "value": "913.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "84.00"
+              "value": "15.00"
             }
           }
         },
@@ -1007,13 +1007,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "593.00"
+              "value": "407.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "61.00"
+              "value": "78.00"
             }
           }
         },
@@ -1040,13 +1040,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "360.00"
+              "value": "463.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "25.00"
+              "value": "86.00"
             }
           }
         },
@@ -1073,13 +1073,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "714.00"
+              "value": "243.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "90.00"
+              "value": "68.00"
             }
           }
         },
@@ -1106,13 +1106,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "417.00"
+              "value": "706.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "56.00"
+              "value": "42.00"
             }
           }
         },
@@ -1139,13 +1139,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "616.00"
+              "value": "731.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "45.00"
+              "value": "85.00"
             }
           }
         },
@@ -1172,13 +1172,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "500.00"
+              "value": "326.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "28.00"
+              "value": "57.00"
             }
           }
         },
@@ -1205,13 +1205,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "893.00"
+              "value": "765.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "36.00"
+              "value": "18.00"
             }
           }
         },
@@ -1238,13 +1238,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "595.00"
+              "value": "360.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "72.00"
+              "value": "59.00"
             }
           }
         },
@@ -1271,13 +1271,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "525.00"
+              "value": "681.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "11.00"
+              "value": "86.00"
             }
           }
         },
@@ -1304,13 +1304,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "873.00"
+              "value": "589.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "17.00"
+              "value": "67.00"
             }
           }
         },
@@ -1337,13 +1337,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "843.00"
+              "value": "599.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "78.00"
+              "value": "75.00"
             }
           }
         },
@@ -1370,13 +1370,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "565.00"
+              "value": "668.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "29.00"
+              "value": "14.00"
             }
           }
         },
@@ -1403,13 +1403,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "672.00"
+              "value": "371.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "64.00"
+              "value": "83.00"
             }
           }
         },
@@ -1436,13 +1436,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "904.00"
+              "value": "582.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "97.00"
+              "value": "86.00"
             }
           }
         },
@@ -1469,13 +1469,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "888.00"
+              "value": "241.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "10.00"
+              "value": "53.00"
             }
           }
         },
@@ -1502,13 +1502,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "916.00"
+              "value": "790.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "57.00"
+              "value": "94.00"
             }
           }
         },
@@ -1535,13 +1535,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "981.00"
+              "value": "740.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "97.00"
+              "value": "68.00"
             }
           }
         },
@@ -1568,13 +1568,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "843.00"
+              "value": "728.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "82.00"
+              "value": "54.00"
             }
           }
         },
@@ -1601,13 +1601,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "895.00"
+              "value": "391.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "92.00"
+              "value": "71.00"
             }
           }
         },
@@ -1634,13 +1634,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "101.00"
+              "value": "821.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "89.00"
+              "value": "18.00"
             }
           }
         },
@@ -1667,13 +1667,13 @@
             },
             "amount": {
               "currency": "INR",
-              "value": "452.00"
+              "value": "902.00"
             }
           },
           "self": {
             "amount": {
               "currency": "INR",
-              "value": "92.00"
+              "value": "84.00"
             }
           }
         }
