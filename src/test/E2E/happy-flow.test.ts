@@ -10,9 +10,6 @@ import { genDummyOnSettle } from "../utils/gen_on_settle";
 import { generateOnReconPayloadDUMMY } from "../utils/gen_on_recon";
 import { generateReconDUMMY } from "../utils/gen_recon";
 import { UserType } from "../../schema/models/user-schema";
-import { User } from "../../db/models/user-model";
-import { Order } from "../../db/models/order-model";
-import { GenOnReconBody } from "../../types/generate-recon-types";
 
 // Mock axios for the entire test suite
 jest.mock("axios");

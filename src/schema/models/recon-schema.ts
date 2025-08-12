@@ -88,6 +88,10 @@ export const ReconSchema = z
 			description: "Due date",
 			example: "2025-08-07T00:00:00.000Z",
 		}),
+		recon_date: z.date().openapi({
+			description: "Recon date",
+			example: "2025-08-07T00:00:00.000Z",
+		}),
 	})
 	.strict()
 	.openapi("ReconSchema");

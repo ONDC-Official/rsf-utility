@@ -25,5 +25,6 @@ export const extractReconDetails = (
 			tcs: parseFloat(settlement.tcs.value),
 			tds: parseFloat(settlement.tds.value),
 		},
+		recon_date: new Date(), // Set to current date
 	};
 };

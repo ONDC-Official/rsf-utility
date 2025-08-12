@@ -75,6 +75,10 @@ const ReconTableSchema = new mongoose.Schema(
 			required: false,
 			index: true,
 		},
+		recon_date: {
+			type: Date,
+			required: true,
+		},
 	},
 	{
 		timestamps: true,
