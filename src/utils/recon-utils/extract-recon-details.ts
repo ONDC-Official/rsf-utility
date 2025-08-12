@@ -17,6 +17,7 @@ export const extractReconDetails = (
 		recon_status: reconStatus,
 		settlement_id: settlement.id,
 		transaction_db_ids: [],
+		transaction_id: "DUMMY_TRANSACTION_ID", // This will be set later
 		recon_breakdown: {
 			amount: parseFloat(settlement.amount.value),
 			commission: parseFloat(settlement.commission.value),
@@ -24,5 +25,6 @@ export const extractReconDetails = (
 			tcs: parseFloat(settlement.tcs.value),
 			tds: parseFloat(settlement.tds.value),
 		},
+		recon_date: new Date(), // Set to current date
 	};
 };

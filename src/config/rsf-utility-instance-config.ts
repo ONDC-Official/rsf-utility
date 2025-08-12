@@ -11,5 +11,5 @@ export const subscriberConfig = {
 };
 
 export const operationConfig = {
-	rateLimit: parseInt(process.env.RATE_LIMIT ?? "1000") || 1000, // Default rate limit
+	rateLimit: parseInt(process.env.RATE_LIMIT ?? "500") || 500, // Default rate limit
 };
