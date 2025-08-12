@@ -31,7 +31,7 @@ export const genDummyOnSettle = (settlePayload: SettlePayload) => {
 				type: settlePayload.message.settlement.type,
 				id: settlePayload.message.settlement.id,
 				orders: settlePayload.message.settlement?.orders?.map((order) => {
-					return {
+					const result: any = {
 						id: order.id,
 						inter_participant: {
 							amount: {
@@ -50,19 +50,6 @@ export const genDummyOnSettle = (settlePayload: SettlePayload) => {
 								value: order.collector?.amount.value,
 							},
 						},
-						provider: {
-							id: order.provider?.id,
-							name: order.provider?.name,
-							amount: {
-								currency: "INR",
-								value: order.provider?.amount.value,
-							},
-							status: "NOT_SETTLED",
-							error: {
-								code: "01",
-								message: "Account inactive",
-							},
-						},
 						self: {
 							amount: {
 								currency: "INR",
@@ -75,6 +62,22 @@ export const genDummyOnSettle = (settlePayload: SettlePayload) => {
 							},
 						},
 					};
+					if (order.provider) {
+						result.provider = {
+							id: order.provider.id,
+							name: order.provider.name,
+							amount: {
+								currency: "INR",
+								value: order.provider.amount.value,
+							},
+							status: "NOT_SETTLED",
+							error: {
+								code: "01",
+								message: "Account inactive",
+							},
+						};
+					}
+					return result;
 				}),
 			},
 		},
