@@ -3,7 +3,7 @@ import { ENUMS } from "../../../constants/enums";
 
 const currencyObject = z.object({
 	currency: z.string(),
-	value: z.string().regex(/^\d+(\.\d{1,2})?$/, "Invalid currency format"),
+	value: z.string().regex(/^\d+(?:\.\d{2})?$/, "Invalid currency format"),
 });
 
 const settlePayloadZod = z
