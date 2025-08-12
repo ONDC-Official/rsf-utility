@@ -102,11 +102,10 @@ export const extractFields = (
 						let item_tax = 0;
 						for (let item of breakup) {
 							if (item.title === "tax" && item_ids.includes(item.id)) {
-								result["item_tax"] =
-									(result["item_tax"] || 0) + parseFloat(item.price);
+								item_tax += parseFloat(item.price)
 							} else quoteValueWithoutTax += item.price;
 						}
-
+						result["item_tax"] = item_tax
 						const fee =
 							tempBuyerFinderFeeType === "percent"
 								? (quoteValueWithoutTax * numericFee) / 100
@@ -116,7 +115,7 @@ export const extractFields = (
 							Math.round(fee * 1.18 * 100) / 100; // Assuming 18% GST on fee
 						if (action === "on_confirm") {
 							result.withholding_amount =
-								(priceValue * tempWitholdingAmount) / 100;
+								(priceValue * tempWitholdingAmount) / 100  + item_tax;
 						}
 					} else {
 						result.quote = {
