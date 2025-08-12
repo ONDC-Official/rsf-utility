@@ -33,10 +33,13 @@ export class OrderRepository {
 			if (due_date_to) query.due_date.$lte = due_date_to;
 		}
 
-		return await Order.find(query)
+		const totalCount = await Order.countDocuments(query);
+		const data = await Order.find(query)
 			.skip((page - 1) * limit)
 			.limit(limit)
 			.sort({ createdAt: -1 });
+
+		return { totalCount, data };
 	}
 	async findOrderByUserAndOrderId(user_id: string, order_id: string) {
 		return await Order.findOne({ user_id, order_id });
