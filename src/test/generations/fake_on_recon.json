@@ -15,9 +15,9 @@
     "bap_uri": "https://fis-staging.ondc.org/rsf-utility/api",
     "bpp_id": "fis-staging.ondc.org",
     "bpp_uri": "https://fis-staging.ondc.org/rsf-utility/api",
-    "transaction_id": "cd891ccf-cc61-48a1-9905-268642bc4366",
-    "message_id": "69cdb554-d8bf-4b0f-a992-b66f665d78a1",
-    "timestamp": "2025-08-11T12:38:50.585Z",
+    "transaction_id": "5461859b-f580-420d-9ff0-09eb1da5452e",
+    "message_id": "f93dda4f-cbe4-4580-b2de-d1a673ad740a",
+    "timestamp": "2025-08-12T04:57:03.255Z",
     "ttl": "P1D"
   },
   "message": {
@@ -34,7 +34,7 @@
             "id": "settlement-id-1",
             "payment_id": "pymnt-1",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "844.39"
@@ -55,7 +55,7 @@
               "currency": "INR",
               "value": "50.66"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -96,7 +96,7 @@
               "value": "52.38",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -112,7 +112,7 @@
             "id": "settlement-id-3",
             "payment_id": "pymnt-3",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "801.81"
@@ -133,7 +133,7 @@
               "currency": "INR",
               "value": "48.11"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -174,7 +174,7 @@
               "value": "49.84",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -190,7 +190,7 @@
             "id": "settlement-id-5",
             "payment_id": "pymnt-5",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "759.81"
@@ -211,7 +211,7 @@
               "currency": "INR",
               "value": "45.59"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -252,7 +252,7 @@
               "value": "47.34",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -268,7 +268,7 @@
             "id": "settlement-id-7",
             "payment_id": "pymnt-7",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "718.37"
@@ -289,7 +289,7 @@
               "currency": "INR",
               "value": "43.10"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -330,7 +330,7 @@
               "value": "44.87",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -346,7 +346,7 @@
             "id": "settlement-id-9",
             "payment_id": "pymnt-9",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "677.50"
@@ -367,7 +367,7 @@
               "currency": "INR",
               "value": "40.65"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -408,7 +408,7 @@
               "value": "42.44",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -424,7 +424,7 @@
             "id": "settlement-id-11",
             "payment_id": "pymnt-11",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "637.19"
@@ -445,7 +445,7 @@
               "currency": "INR",
               "value": "38.23"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -486,7 +486,7 @@
               "value": "40.03",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -502,7 +502,7 @@
             "id": "settlement-id-13",
             "payment_id": "pymnt-13",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "597.45"
@@ -523,7 +523,7 @@
               "currency": "INR",
               "value": "35.85"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -564,7 +564,7 @@
               "value": "37.67",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -580,7 +580,7 @@
             "id": "settlement-id-15",
             "payment_id": "pymnt-15",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "558.28"
@@ -601,7 +601,7 @@
               "currency": "INR",
               "value": "33.50"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -642,7 +642,7 @@
               "value": "35.33",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -658,7 +658,7 @@
             "id": "settlement-id-17",
             "payment_id": "pymnt-17",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "519.67"
@@ -679,7 +679,7 @@
               "currency": "INR",
               "value": "31.18"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -720,7 +720,7 @@
               "value": "33.03",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -736,7 +736,7 @@
             "id": "settlement-id-19",
             "payment_id": "pymnt-19",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "481.63"
@@ -757,7 +757,7 @@
               "currency": "INR",
               "value": "28.90"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -798,7 +798,7 @@
               "value": "30.77",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -814,7 +814,7 @@
             "id": "settlement-id-21",
             "payment_id": "pymnt-21",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "444.16"
@@ -835,7 +835,7 @@
               "currency": "INR",
               "value": "26.65"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -876,7 +876,7 @@
               "value": "28.54",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -892,7 +892,7 @@
             "id": "settlement-id-23",
             "payment_id": "pymnt-23",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "407.25"
@@ -913,7 +913,7 @@
               "currency": "INR",
               "value": "24.43"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -954,7 +954,7 @@
               "value": "26.34",
               "diff_value": "3.00"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       },
@@ -970,7 +970,7 @@
             "id": "settlement-id-25",
             "payment_id": "pymnt-25",
             "status": "PENDING",
-            "due_date": "2025-08-11",
+            "due_date": "2025-08-12",
             "amount": {
               "currency": "INR",
               "value": "370.91"
@@ -991,7 +991,7 @@
               "currency": "INR",
               "value": "22.25"
             },
-            "updated_at": "2025-08-11T12:38:50.585Z"
+            "updated_at": "2025-08-12T04:57:03.255Z"
           }
         ]
       }

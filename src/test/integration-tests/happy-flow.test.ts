@@ -89,7 +89,7 @@ describe("Happy Flow Integration Tests", () => {
 					.get(`/ui/orders/${userId}`)
 					.set("Authorization", `Bearer ${token}`);
 
-				const orderIds: string[] = fetchOrders.body.data.map(
+				const orderIds: string[] = fetchOrders.body.data.orders.map(
 					(o: any) => o.order_id,
 				);
 				expect(fetchOrders.status).toBe(200);

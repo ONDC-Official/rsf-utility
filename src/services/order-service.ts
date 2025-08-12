@@ -24,7 +24,16 @@ export class OrderService {
 		if (!(await this.userService.checkUserById(user_id))) {
 			throw new Error("User not found");
 		}
-		return await this.orderRepo.getAllOrders(queryParams, user_id);
+		const data = await this.orderRepo.getAllOrders(queryParams, user_id);
+		return {
+			orders: data.data,
+			pagination: {
+				totalCount: data.totalCount,
+				page: queryParams.page || 1,
+				limit: queryParams.limit || 10,
+				totalPages: Math.ceil(data.totalCount / (queryParams.limit || 10)),
+			},
+		};
 	}
 	async getUniqueOrders(user_id: string, order_id: string) {
 		const order = await this.orderRepo.findOrderByUserAndOrderId(
