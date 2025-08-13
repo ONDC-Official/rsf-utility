@@ -69,10 +69,9 @@ export function generateSettlePayload(
 						);
 
 						if (!providerDetails) {
-							// throw new Error(
-							// 	`Provider details not found for provider ID: ${dbSettle.provider_id}`,
-							// );
-							providerDetails = null;
+							throw new Error(
+								`Provider details not found for provider ID: ${dbSettle.provider_id}`,
+							);
 						}
 					}
 
