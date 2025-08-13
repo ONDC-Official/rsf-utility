@@ -8,3 +8,15 @@ export function getLoggerMeta(req: Request) {
 		userId: req.params.userId,
 	};
 }
+
+export function getAnyError(error: any) {
+	if (error.message && typeof error.message === "string") {
+		return error.message;
+	}
+	try {
+		const jsonError = JSON.stringify(error);
+		return jsonError;
+	} catch {
+		return "Unknown error";
+	}
+}
