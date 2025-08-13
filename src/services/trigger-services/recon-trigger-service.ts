@@ -5,7 +5,7 @@ import {
 	TriggerActionType,
 	TriggeringRequirements,
 } from "../../types/trigger-types";
-import { checkPerfectAck } from "../../utils/ackUtils";
+import { isPerfectAck } from "../../utils/ackUtils";
 import { createHeader } from "../../utils/header-utils";
 import logger from "../../utils/logger";
 import { extractReconDetails } from "../../utils/recon-utils/extract-recon-details";
@@ -121,7 +121,7 @@ export class ReconTriggerService {
 			data: ondcReconPayload,
 			response: syncResponse,
 		});
-		if (!checkPerfectAck(syncResponse)) {
+		if (!isPerfectAck(syncResponse)) {
 			triggerLogger.warning(
 				"Sync response is not a perfect ACK, skipping settlement update",
 			);

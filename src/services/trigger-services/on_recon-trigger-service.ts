@@ -4,7 +4,7 @@ import {
 	TriggerActionType,
 	TriggeringRequirements,
 } from "../../types/trigger-types";
-import { checkPerfectAck } from "../../utils/ackUtils";
+import { isPerfectAck } from "../../utils/ackUtils";
 import { createHeader } from "../../utils/header-utils";
 import logger from "../../utils/logger";
 import { triggerRequest } from "../../utils/trigger-utils";
@@ -121,7 +121,7 @@ export class OnReconTriggerService {
 		});
 		// Implement the logic to update the settlement table
 		// if accepted mark ACCEPTED in recon_status else if rejected
-		if (!checkPerfectAck(syncResponse)) {
+		if (!isPerfectAck(syncResponse)) {
 			triggerLogger.warning(
 				"Sync response is not a perfect ACK, skipping settlement update",
 			);

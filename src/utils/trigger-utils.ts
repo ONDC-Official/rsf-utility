@@ -13,6 +13,8 @@ export const triggerRequest = async (
 		const response = await axios.post(url, requirements.data, {
 			headers: {
 				Authorization: headers,
+				"User-Agent": "nocs-user/2.0.0",
+				"Content-Type": "application/json",
 			},
 		});
 		return {

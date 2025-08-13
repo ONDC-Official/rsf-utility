@@ -6,7 +6,7 @@ import logger from "../utils/logger";
 import { SettleSchema, SettleType } from "../schema/models/settle-schema";
 import { SettlePayload } from "../schema/rsf/zod/settle-schema";
 import { TransactionService } from "./transaction-serivce";
-import { checkPerfectAck } from "../utils/ackUtils";
+import { isPerfectAck } from "../utils/ackUtils";
 
 const settleLogger = logger.child("settle-service");
 export class SettleDbManagementService {
@@ -112,7 +112,7 @@ export class SettleDbManagementService {
 		settlePayload: SettlePayload,
 		responseData: any,
 	) {
-		const hasError = !checkPerfectAck(responseData);
+		const hasError = !isPerfectAck(responseData);
 		let orderIds = settlePayload.message.settlement.orders?.map(
 			(order) => order.id,
 		);
@@ -128,7 +128,7 @@ export class SettleDbManagementService {
 		});
 
 		let transDbId: string | undefined = undefined;
-		if (checkPerfectAck(responseData)) {
+		if (isPerfectAck(responseData)) {
 			const transactionDbSave =
 				await this.transactionService.addSettlePayload(settlePayload);
 			transDbId = transactionDbSave._id.toString();
