@@ -6,6 +6,7 @@ import { validateUserId } from "../types/user-id-type";
 import { TriggerActionSchema } from "../types/trigger-types";
 import { z } from "zod";
 import { sendError, sendSuccess } from "../utils/resUtils";
+import { isPerfectAck } from "../utils/ackUtils";
 const triggerLogger = logger.child("trigger-controller");
 
 export class TriggerController {
@@ -42,6 +43,18 @@ export class TriggerController {
 				userId,
 				body,
 			);
+
+			if (!isPerfectAck(response.data)) {
+				triggerLogger.error(
+					"Trigger response is not a perfect ACK",
+					getLoggerMeta(req),
+					{
+						response,
+					},
+				);
+				return sendError(res, "BAD_GATEWAY", undefined, response.data);
+			}
+
 			triggerLogger.info("Trigger handled successfully", getLoggerMeta(req), {
 				response,
 			});

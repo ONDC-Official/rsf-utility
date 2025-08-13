@@ -31,7 +31,7 @@ export const getAckResponse = (): OndcSyncResponse => {
 	};
 };
 
-export const checkPerfectAck = (response: any) => {
+export const isPerfectAck = (response: any) => {
 	if (response?.message?.ack?.status === "ACK") {
 		return true;
 	}

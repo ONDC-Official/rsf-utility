@@ -33,7 +33,7 @@ const onConfirmSchema = {
 				},
 				bap_uri: {
 					type: "string",
-					format: "url",
+					format: "uri",
 				},
 				bpp_id: {
 					type: "string",
@@ -41,7 +41,7 @@ const onConfirmSchema = {
 				},
 				bpp_uri: {
 					type: "string",
-					format: "url",
+					format: "uri",
 				},
 				transaction_id: {
 					type: "string",
