@@ -7,6 +7,7 @@ import { SettleSchema, SettleType } from "../schema/models/settle-schema";
 import { SettlePayload } from "../schema/rsf/zod/settle-schema";
 import { TransactionService } from "./transaction-serivce";
 import { isPerfectAck } from "../utils/ackUtils";
+import { getAnyError } from "../utils/utility";
 
 const settleLogger = logger.child("settle-service");
 export class SettleDbManagementService {
@@ -173,7 +174,7 @@ export class SettleDbManagementService {
 					} else {
 						settleData.provider_status = null;
 					}
-					settleData.error = responseData.error.message || "Unknown error";
+					settleData.error = getAnyError(responseData);
 				} else {
 					settleData.status = "PENDING";
 					if (order.self) {
