@@ -52,7 +52,7 @@ export class TriggerController {
 						response,
 					},
 				);
-				return sendError(res, "BAD_GATEWAY", undefined, response.data);
+				return sendError(res, "BAD_GATEWAY", undefined, { got: response.data });
 			}
 
 			triggerLogger.info("Trigger handled successfully", getLoggerMeta(req), {
