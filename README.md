@@ -99,4 +99,4 @@ Key environment variables:
 - np_type is expected as a mandatory tag attribute
 
 ## Support
-For support and queries, please [create an issue](https://github.com/ONDC-Official/rsf-utility/issues) or contact the maintainers.
+For support and queries, please [create an issue](https://github.com/ONDC-Official/rsf-utility/issues) tagging the mainteners (@92shreyansh, @sandeepshahi, @extedcouD, @shivang1131, @Rishabh-ondc) or contact them separately.
