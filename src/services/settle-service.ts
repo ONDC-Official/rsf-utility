@@ -1,15 +1,13 @@
 import { SettleRepository } from "../repositories/settle-repository";
-import {
-	GetSettlementsQuerySchema,
-	UpdateSettlementSchema,
-} from "../types/settle-params";
+import { GetSettlementsQuerySchema } from "../types/settle-params";
 import { UserService } from "./user-service";
 import { z } from "zod";
 import logger from "../utils/logger";
 import { SettleSchema, SettleType } from "../schema/models/settle-schema";
 import { SettlePayload } from "../schema/rsf/zod/settle-schema";
 import { TransactionService } from "./transaction-serivce";
-import { checkPerfectAck } from "../utils/ackUtils";
+import { isPerfectAck } from "../utils/ackUtils";
+import { getAnyError } from "../utils/utility";
 
 const settleLogger = logger.child("settle-service");
 export class SettleDbManagementService {
@@ -115,7 +113,7 @@ export class SettleDbManagementService {
 		settlePayload: SettlePayload,
 		responseData: any,
 	) {
-		const hasError = responseData.error ? true : false;
+		const hasError = !isPerfectAck(responseData);
 		let orderIds = settlePayload.message.settlement.orders?.map(
 			(order) => order.id,
 		);
@@ -131,31 +129,31 @@ export class SettleDbManagementService {
 		});
 
 		let transDbId: string | undefined = undefined;
-		if (checkPerfectAck(responseData)) {
+		if (isPerfectAck(responseData)) {
 			const transactionDbSave =
 				await this.transactionService.addSettlePayload(settlePayload);
 			transDbId = transactionDbSave._id.toString();
 		}
 
-		for (const orderId of orderIds) {
-			if (!orderId) {
+		for (const order of settlePayload.message.settlement.orders || []) {
+			if (!order.id) {
 				settleLogger.error("Order ID is undefined or empty", {
 					userId,
-					orderId,
+					orderId: order.id,
 				});
 				continue;
 			}
 			try {
 				const settleData = await this.settleRepo.findSingleSettlement(
 					userId,
-					orderId,
+					order.id,
 				);
 				if (!settleData) {
 					settleLogger.error(
-						`Settlement not found for user ${userId} and order ${orderId}`,
+						`Settlement not found for user ${userId} and order ${order.id}`,
 						{
 							userId,
-							orderId,
+							orderId: order.id,
 						},
 					);
 					continue;
@@ -166,19 +164,37 @@ export class SettleDbManagementService {
 
 				if (hasError) {
 					settleData.status = "PREPARED";
-					settleData.self_status = "PREPARED";
-					settleData.provider_status = "PREPARED";
-					settleData.error = responseData.error.message || "Unknown error";
+					if (order.self) {
+						settleData.self_status = "PREPARED";
+					} else {
+						settleData.self_status = null;
+					}
+					if (order.provider) {
+						settleData.provider_status = "PREPARED";
+					} else {
+						settleData.provider_status = null;
+					}
+					settleData.error = getAnyError(responseData);
 				} else {
 					settleData.status = "PENDING";
-					settleData.self_status = "PENDING";
-					settleData.provider_status = "PENDING";
+					if (order.self) {
+						settleData.self_status = "PENDING";
+					} else {
+						settleData.self_status = null;
+					}
+					if (order.provider) {
+						settleData.provider_status = "PENDING";
+					} else {
+						settleData.provider_status = null;
+					}
+					settleData.error = null;
+					settleData.initiated_date = new Date();
 				}
-				await this.settleRepo.updateSettlement(userId, orderId, settleData);
+				await this.settleRepo.updateSettlement(userId, order.id, settleData);
 			} catch (error) {
 				settleLogger.error(
-					`Error updating settlement for order ID ${orderId}`,
-					{ userId, orderId },
+					`Error updating settlement for order ID ${order.id}`,
+					{ userId, orderId: order.id },
 					error,
 				);
 			}

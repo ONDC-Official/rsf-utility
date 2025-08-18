@@ -1,4 +1,3 @@
-import { subscriberConfig } from "../../config/rsf-utility-instance-config";
 import { UserType } from "../../schema/models/user-schema";
 import { ReconAggregateData } from "../../types/generate-recon-types";
 import { v4 as uuidv4 } from "uuid";
@@ -46,9 +45,10 @@ export function reconBuilder(
 				const withholdingAmount =
 					apiData.recon_data?.withholding_amount ??
 					settleData.withholding_amount;
-				const tcs: number = apiData.recon_data?.tcs ?? userConfig.np_tcs;
-				const tds: number = apiData.recon_data?.tds ?? userConfig.np_tds;
-
+				const tcsValue: number = apiData.recon_data?.tcs ?? userConfig.np_tcs;
+				const tdsValue: number = apiData.recon_data?.tds ?? userConfig.np_tds;
+				const tcs = (settlementAmount * tcsValue) / 100;
+				const tds = (settlementAmount * tdsValue) / 100;
 				return {
 					id: settleData.order_id,
 					amount: {
@@ -62,23 +62,23 @@ export function reconBuilder(
 							status: "PENDING",
 							amount: {
 								currency: "INR",
-								value: settlementAmount.toFixed(2),
+								value: Math.abs(settlementAmount).toFixed(2),
 							},
 							commission: {
 								currency: "INR",
-								value: commission.toFixed(2),
+								value: Math.abs(commission).toFixed(2),
 							},
 							withholding_amount: {
 								currency: "INR",
-								value: withholdingAmount.toFixed(2),
+								value: Math.abs(withholdingAmount).toFixed(2),
 							},
 							tcs: {
 								currency: "INR",
-								value: tcs.toFixed(2),
+								value: Math.abs(tcs).toFixed(2),
 							},
 							tds: {
 								currency: "INR",
-								value: tds.toFixed(2),
+								value: Math.abs(tds).toFixed(2),
 							},
 							updated_at: new Date().toISOString(),
 						},

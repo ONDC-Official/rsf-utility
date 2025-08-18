@@ -9,7 +9,8 @@
 		"build": "tsc",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"test:cov": "jest --coverage"
+		"test:cov": "jest --coverage",
+		"test:multi-instance": "docker-compose -f src/test/E2E/docker-compose.multi-instance.yml up -d && npm test -- --testNamePattern='Docker Multi-Instance' && docker-compose -f src/test/E2E/docker-compose.multi-instance.yml down -v"
 	},
 	"keywords": [],
 	"author": "",

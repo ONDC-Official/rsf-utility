@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ENUMS } from "../../constants/enums";
+import { round2 } from "./order-model";
 
 const SettleSchema = new mongoose.Schema(
 	{
@@ -8,15 +9,15 @@ const SettleSchema = new mongoose.Schema(
 		settlement_id: { type: String, required: true },
 		collector_id: { type: String, required: true },
 		receiver_id: { type: String, required: true },
-		total_order_value: { type: Number, required: true },
-		commission: { type: Number, required: true },
-		collector_settlement: { type: Number, required: true },
-		tds: { type: Number, required: true },
-		tcs: { type: Number, required: true },
-		withholding_amount: { type: Number, required: true },
-		inter_np_settlement: { type: Number, required: true },
+		total_order_value: { type: Number, required: true, set: round2 },
+		commission: { type: Number, required: true, set: round2 },
+		collector_settlement: { type: Number, required: true, set: round2 },
+		tds: { type: Number, required: true, set: round2 },
+		tcs: { type: Number, required: true, set: round2 },
+		withholding_amount: { type: Number, required: true, set: round2 },
+		inter_np_settlement: { type: Number, required: true, set: round2 },
 		provider_id: { type: String, required: false },
-		due_date: { type: Date, required: true },
+		due_date: { type: Date, required: false },
 		type: {
 			type: String,
 			enum: Object.values(ENUMS.SETTLEMENT_TYPE),
@@ -41,6 +42,7 @@ const SettleSchema = new mongoose.Schema(
 			required: false,
 			enum: Object.values(ENUMS.SETTLEMENT_STATUS),
 		},
+		initiated_date: { type: Date, required: false },
 		transaction_db_ids: { type: [String] },
 	},
 	{ timestamps: true, strict: false },

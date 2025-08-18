@@ -66,6 +66,10 @@ export const ReconSchema = z
 			description: "Transaction DB IDs",
 			example: ["transaction1", "transaction2"],
 		}),
+		transaction_id: z.string().openapi({
+			description: "Transaction ID",
+			example: "txn123",
+		}),
 		recon_breakdown: BreakdownSchema.openapi({
 			description: "Recon breakdown",
 		}),
@@ -82,6 +86,10 @@ export const ReconSchema = z
 			}),
 		due_date: z.date().optional().nullable().openapi({
 			description: "Due date",
+			example: "2025-08-07T00:00:00.000Z",
+		}),
+		recon_date: z.date().openapi({
+			description: "Recon date",
 			example: "2025-08-07T00:00:00.000Z",
 		}),
 	})

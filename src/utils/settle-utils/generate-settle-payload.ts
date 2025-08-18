@@ -69,10 +69,9 @@ export function generateSettlePayload(
 						);
 
 						if (!providerDetails) {
-							// throw new Error(
-							// 	`Provider details not found for provider ID: ${dbSettle.provider_id}`,
-							// );
-							providerDetails = null;
+							throw new Error(
+								`Provider details not found for provider ID: ${dbSettle.provider_id}`,
+							);
 						}
 					}
 
@@ -87,7 +86,7 @@ export function generateSettlePayload(
 						collector: {
 							amount: {
 								currency: "INR",
-								value: dbSettle.commission.toFixed(2),
+								value: dbSettle.collector_settlement.toFixed(2),
 							},
 						},
 					};

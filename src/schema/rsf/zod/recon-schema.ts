@@ -10,9 +10,9 @@ const statusList = [
 
 const reconStatusEnum = z.enum(statusList);
 
-const currencyObject = z.object({
+const amountObject = z.object({
 	currency: z.string(),
-	value: z.string().regex(/^\d+(\.\d{1,2})?$/, "Invalid currency format"), // Ensures value is a valid decimal string
+	value: z.string().regex(/^\d+(?:\.\d{2})?$/, "Invalid currency format"), // Ensures value is a valid decimal string
 });
 
 // Main Recon Schema
@@ -46,17 +46,17 @@ const reconSchema = z
 			orders: z.array(
 				z.object({
 					id: z.string(),
-					amount: currencyObject,
+					amount: amountObject,
 					settlements: z.array(
 						z.object({
 							id: z.string(),
 							payment_id: z.string(),
 							status: reconStatusEnum,
-							amount: currencyObject,
-							commission: currencyObject,
-							withholding_amount: currencyObject,
-							tcs: currencyObject,
-							tds: currencyObject,
+							amount: amountObject,
+							commission: amountObject,
+							withholding_amount: amountObject,
+							tcs: amountObject,
+							tds: amountObject,
 							settlement_ref_no: z.string().optional(), // Not in required array, so it's optional
 							updated_at: z.string(),
 						}),

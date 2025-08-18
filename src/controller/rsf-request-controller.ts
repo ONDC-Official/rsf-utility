@@ -30,6 +30,13 @@ export class RsfRequestController {
 				return next();
 			}
 			const action = req.params.action;
+			if (action == "settle" && process.env.NODE_ENV === "test") {
+				rsfLogger.warning(
+					"Settle is not supported responding with ACK for testing purposes",
+					getLoggerMeta(req),
+				);
+				res.send(getAckResponse());
+			}
 			const actionValidationResult = RsfOnActionsSchema.safeParse(action);
 			if (!actionValidationResult.success) {
 				rsfLogger.error(

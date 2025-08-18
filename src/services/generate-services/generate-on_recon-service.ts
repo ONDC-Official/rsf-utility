@@ -1,7 +1,7 @@
 import { ReconType } from "../../schema/models/recon-schema";
 import { SettleType } from "../../schema/models/settle-schema";
 import { GenOnReconBodyObjectType } from "../../types/generate-recon-types";
-import { checkPerfectAck } from "../../utils/ackUtils";
+import { isPerfectAck } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { createOnReconPayload } from "../../utils/on_recon_utils/generate-on-recon-payload";
 import { ReconDbService } from "../recon-service";

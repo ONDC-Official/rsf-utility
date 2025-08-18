@@ -10,10 +10,16 @@ export const triggerRequest = async (
 	try {
 		const url = `${requirements.forwardingBaseUrl}/${requirements.action}`;
 		logger.info("Triggering request", { url, headers });
-		const response = await axios.post(url, requirements.data, { headers });
+		const response = await axios.post(url, requirements.data, {
+			headers: {
+				Authorization: headers,
+				"User-Agent": "nocs-user/2.0.0",
+				"Content-Type": "application/json",
+			},
+		});
 		return {
-			status: response.status,
-			data: response.data,
+			status: response?.status,
+			data: response?.data,
 		};
 	} catch (error) {
 		logger.error("Error triggering request", requirements, error);

@@ -16,6 +16,7 @@ export class UserController {
 	createUser = async (req: Request, res: Response) => {
 		try {
 			const body = req.body;
+			body.counterparty_infos = body.counterparty_infos || [];
 			const validationResult = UserSchema.safeParse(body);
 			if (!validationResult.success) {
 				userLogger.error(

@@ -74,7 +74,9 @@ export class SettleController {
 				});
 			}
 
-			let settlementData: any;
+			let settlementData: {
+				settlements: Partial<SettleType>[];
+			};
 
 			// Check if CSV data was uploaded
 			if ((req as any).processedCsvData) {
@@ -132,6 +134,12 @@ export class SettleController {
 				getLoggerMeta(req),
 				error,
 			);
+			if (error.message && error.message.includes("INVALID::")) {
+				return sendError(res, "INVALID_REQUEST_BODY", undefined, {
+					message: "Invalid CSV data",
+					errors: [error.message],
+				});
+			}
 
 			return sendError(res, "INTERNAL_ERROR", undefined, {
 				error: error.message,
@@ -141,25 +149,25 @@ export class SettleController {
 
 	private getUpdateData(data: UpdateSettlementType["settlements"][number]) {
 		const settlePartialData: Partial<SettleType> = {};
-		if (data.total_order_value) {
+		if (data.total_order_value !== undefined) {
 			settlePartialData.total_order_value = data.total_order_value;
 		}
-		if (data.withholding_amount) {
+		if (data.withholding_amount !== undefined) {
 			settlePartialData.withholding_amount = data.withholding_amount;
 		}
-		if (data.tds) {
+		if (data.tds !== undefined) {
 			settlePartialData.tds = data.tds;
 		}
-		if (data.tcs) {
+		if (data.tcs !== undefined) {
 			settlePartialData.tcs = data.tcs;
 		}
-		if (data.commission) {
+		if (data.commission !== undefined) {
 			settlePartialData.commission = data.commission;
 		}
-		if (data.collector_settlement) {
+		if (data.collector_settlement !== undefined) {
 			settlePartialData.collector_settlement = data.collector_settlement;
 		}
-		if (data.inter_np_settlement) {
+		if (data.inter_np_settlement !== undefined) {
 			settlePartialData.inter_np_settlement = data.inter_np_settlement;
 		}
 		return settlePartialData;
@@ -182,7 +190,7 @@ export class SettleController {
 		const settlements = csvData.map((row, index) => {
 			// Validate required fields
 			if (!row.order_id) {
-				throw new Error(`Row ${index + 1}: order_id is required`);
+				throw new Error(`INVALID::Row ${index + 1}: order_id is required`);
 			}
 
 			const settlement: any = {
@@ -193,7 +201,9 @@ export class SettleController {
 			if (row.total_order_value !== undefined && row.total_order_value !== "") {
 				settlement.total_order_value = parseFloat(row.total_order_value);
 				if (isNaN(settlement.total_order_value)) {
-					throw new Error(`Row ${index + 1}: invalid total_order_value`);
+					throw new Error(
+						`INVALID::Row ${index + 1}: invalid total_order_value`,
+					);
 				}
 			}
 
@@ -203,28 +213,30 @@ export class SettleController {
 			) {
 				settlement.withholding_amount = parseFloat(row.withholding_amount);
 				if (isNaN(settlement.withholding_amount)) {
-					throw new Error(`Row ${index + 1}: invalid withholding_amount`);
+					throw new Error(
+						`INVALID::Row ${index + 1}: invalid withholding_amount`,
+					);
 				}
 			}
 
 			if (row.tds !== undefined && row.tds !== "") {
 				settlement.tds = parseFloat(row.tds);
 				if (isNaN(settlement.tds)) {
-					throw new Error(`Row ${index + 1}: invalid tds`);
+					throw new Error(`INVALID::Row ${index + 1}: invalid tds`);
 				}
 			}
 
 			if (row.tcs !== undefined && row.tcs !== "") {
 				settlement.tcs = parseFloat(row.tcs);
 				if (isNaN(settlement.tcs)) {
-					throw new Error(`Row ${index + 1}: invalid tcs`);
+					throw new Error(`INVALID::Row ${index + 1}: invalid tcs`);
 				}
 			}
 
 			if (row.commission !== undefined && row.commission !== "") {
 				settlement.commission = parseFloat(row.commission);
 				if (isNaN(settlement.commission)) {
-					throw new Error(`Row ${index + 1}: invalid commission`);
+					throw new Error(`INVALID::Row ${index + 1}: invalid commission`);
 				}
 			}
 
@@ -234,7 +246,9 @@ export class SettleController {
 			) {
 				settlement.collector_settlement = parseFloat(row.collector_settlement);
 				if (isNaN(settlement.collector_settlement)) {
-					throw new Error(`Row ${index + 1}: invalid collector_settlement`);
+					throw new Error(
+						`INVALID::Row ${index + 1}: invalid collector_settlement`,
+					);
 				}
 			}
 
@@ -242,15 +256,19 @@ export class SettleController {
 				row.inter_np_settlement !== undefined &&
 				row.inter_np_settlement !== ""
 			) {
-				settlement.inter_np_settlement =
-					row.inter_np_settlement.toString().trim() === "true";
+				settlement.inter_np_settlement = parseFloat(row.inter_np_settlement);
+				if (isNaN(settlement.inter_np_settlement)) {
+					throw new Error(
+						`INVALID::Row ${index + 1}: invalid inter_np_settlement`,
+					);
+				}
 			}
-
-			logger.warning("Row processed", settlement);
 
 			return settlement;
 		});
-
+		logger.debug("Converted CSV data to settlement format", {
+			settlements: settlements,
+		});
 		return { settlements };
 	}
 }

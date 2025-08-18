@@ -170,9 +170,10 @@ export const MoveReconsBodySchema = z.object({
 		)
 		.openapi({
 			description: "List of order IDs to move to ready state",
-			example: JSON.stringify({
-				orders: [{ order_id: "order123" }, { order_id: "order456" }],
-			}),
+			example: JSON.stringify([
+				{ order_id: "order123" },
+				{ order_id: "order456" },
+			]),
 		}),
 });
 

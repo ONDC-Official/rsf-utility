@@ -1,3 +1,4 @@
+import { subscriberConfig } from "../config/rsf-utility-instance-config";
 import { UserRepository } from "../repositories/user-repository";
 import { UserType } from "../schema/models/user-schema";
 import logger from "../utils/logger";
@@ -24,10 +25,13 @@ export class UserService {
 			"np_tds",
 			"pr_tcs",
 			"pr_tds",
+			"tcs_applicability",
+			"tds_applicability",
 			"settlement_agency_url",
 			"settlement_agency_api_key",
 			"settlement_agency_id",
 			"provider_details",
+			"counterparty_infos",
 		];
 		for (const key of Object.keys(userData)) {
 			if (!allowedFields.includes(key)) {
@@ -99,7 +103,16 @@ export class UserService {
 
 	async pushCounterpartyId(userId: string, counterpartyIds: string[]) {
 		try {
-			return await this.userRepo.pushCounterpartyIds(userId, counterpartyIds);
+			counterpartyIds = counterpartyIds.filter(
+				(id) => id && id.trim() !== "" && id !== subscriberConfig.subscriberId,
+			);
+			const counterpartyInfo = counterpartyIds.map((id) => {
+				return {
+					id: id,
+					name: id,
+				};
+			});
+			return await this.userRepo.pushCounterpartyIds(userId, counterpartyInfo);
 		} catch (error) {
 			logger.error(
 				"Error pushing counterparty ID:",

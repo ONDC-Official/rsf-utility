@@ -104,7 +104,7 @@ export class ReconRepository {
 				// Stage 3: Group documents by the first transaction ID.
 				{
 					$group: {
-						_id: { $arrayElemAt: ["$transaction_db_ids", 0] },
+						_id: "$transaction_id", // Group by the transaction ID
 						// Capture the value of the field we are sorting by from the first document in the group.
 						sortKey: { $first: `$${sort_by}` },
 						// Push all documents belonging to this group into an array.

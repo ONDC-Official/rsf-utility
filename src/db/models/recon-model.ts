@@ -1,13 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 import { ENUMS } from "../../constants/enums";
+import { round2 } from "./order-model";
 
 const BreakdownSchema = new mongoose.Schema(
 	{
-		amount: { type: Number, required: true },
-		commission: { type: Number, required: true },
-		withholding_amount: { type: Number, required: true },
-		tcs: { type: Number, required: true },
-		tds: { type: Number, required: true },
+		amount: { type: Number, required: true, set: round2 },
+		commission: { type: Number, required: true, set: round2 },
+		withholding_amount: { type: Number, required: true, set: round2 },
+		tcs: { type: Number, required: true, set: round2 },
+		tds: { type: Number, required: true, set: round2 },
 	},
 	{ _id: false },
 );
@@ -53,6 +54,10 @@ const ReconTableSchema = new mongoose.Schema(
 			type: [String],
 			required: true,
 		},
+		transaction_id: {
+			type: String,
+			required: true,
+		},
 		recon_breakdown: {
 			type: BreakdownSchema,
 			required: true,
@@ -69,6 +74,10 @@ const ReconTableSchema = new mongoose.Schema(
 			type: Date,
 			required: false,
 			index: true,
+		},
+		recon_date: {
+			type: Date,
+			required: true,
 		},
 	},
 	{

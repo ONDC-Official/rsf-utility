@@ -139,7 +139,6 @@ export const GenSettlementsBodyObject = z.object({
 	provider_value: z
 		.number()
 		.min(0)
-		.positive()
 		.openapi({
 			description: "settlment value for the provider in the settlement",
 			example: 800.0,
@@ -148,7 +147,6 @@ export const GenSettlementsBodyObject = z.object({
 	self_value: z
 		.number()
 		.min(0)
-		.positive()
 		.openapi({
 			description: "Self value in the settlement",
 			example: 200.0,
@@ -178,7 +176,7 @@ export const AmountSchema = z.object({
 	currency: z.string().openapi({ example: "INR" }),
 	value: z
 		.string()
-		.regex(/^\d+(\.\d{1,2})?$/)
+		.regex(/^\d+(?:\.\d{2})?$/)
 		.openapi({ example: "800.00" }),
 });
 

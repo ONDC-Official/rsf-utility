@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Settle } from "../db/models/settle-model";
 import { SettleSchema, SettleType } from "../schema/models/settle-schema";
+import logger from "../utils/logger";
 
 export class SettleRepository {
 	async findWithQuery(queryData: {
@@ -62,6 +63,11 @@ export class SettleRepository {
 		orderId: string,
 		settlement: Partial<SettleType>,
 	) {
+		logger.debug("Updating settlement for user", {
+			userId,
+			orderId,
+			settlement,
+		});
 		return await Settle.findOneAndUpdate(
 			{ user_id: userId, order_id: orderId },
 			{ $set: settlement },

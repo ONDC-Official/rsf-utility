@@ -1,5 +1,7 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+import { APPLICABILITY_VALUES } from "../../constants/enums";
+import { count } from "console";
 
 extendZodWithOpenApi(z);
 
@@ -62,6 +64,14 @@ export const UserSchema = z
 			description: "Provider TDS",
 			example: 10,
 		}),
+		tcs_applicability: z.enum(Object.values(APPLICABILITY_VALUES)).openapi({
+			description: "TCS applicability",
+			example: "BOTH",
+		}),
+		tds_applicability: z.enum(Object.values(APPLICABILITY_VALUES)).openapi({
+			description: "TDS applicability",
+			example: "BOTH",
+		}),
 		msn: z.boolean().openapi({
 			description: "MSN flag",
 			example: true,
@@ -69,13 +79,34 @@ export const UserSchema = z
 		provider_details: z.array(ProviderDetailsSchema).optional().openapi({
 			description: "Details of providers",
 		}),
+		counterparty_infos: z
+			.array(
+				z.object({
+					id: z.string().openapi({
+						description: "Counterparty ID",
+						example: "counterparty123",
+					}),
+					nickName: z.string().openapi({
+						description: "Counterparty name",
+						example: "Counterparty ABC",
+					}),
+				}),
+			)
+			.openapi({
+				description: "List of counterparty information",
+				example: [
+					{ id: "counterparty123", name: "Counterparty ABC" },
+					{ id: "counterparty456", name: "Counterparty XYZ" },
+				],
+			}),
 		counterparty_ids: z
 			.array(z.string())
 			.optional()
-			.default([])
+			.nullable()
 			.openapi({
-				description: "List of counterparty IDs",
-				example: ["counterparty1", "counterparty2"],
+				description:
+					"DEPRECATED: List of counterparty IDs, USE counterparty_infos instead",
+				example: ["counterparty123", "counterparty456"],
 			}),
 	})
 	.strict()

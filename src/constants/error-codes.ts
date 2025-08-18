@@ -70,7 +70,12 @@ export const ERROR_CODES = {
 		message: "Invalid client ID.",
 		httpStatus: 403,
 	},
-
+	BAD_GATEWAY: {
+		code: "GEN_502",
+		message:
+			"Bad Gateway. The server received an invalid response from the upstream server.",
+		httpStatus: 502,
+	},
 	// // Settlement-related errors
 	// SETTLEMENT_CREATION_FAILED: {
 	// 	code: "SET_500",

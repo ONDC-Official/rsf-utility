@@ -140,7 +140,7 @@ export class ReconRequestService {
 				logger.warning(`Processing recon update for order ${update.orderId}`);
 
 				update.reconData.transaction_db_ids.push(transactionDb._id.toString());
-
+				update.reconData.transaction_id = transactionDb.context.transaction_id;
 				logger.warning(`db id ${transactionDb._id.toString()}`);
 
 				await this.reconService.createReconOrOverride(update.reconData);

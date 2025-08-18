@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { APPLICABILITY_VALUES } from "../../constants/enums";
+import { round2 } from "./order-model";
 
 const ProviderDetails = new mongoose.Schema(
 	{
@@ -7,6 +9,14 @@ const ProviderDetails = new mongoose.Schema(
 		account_number: { type: String, required: true },
 		ifsc_code: { type: String, required: true },
 		bank_name: { type: String, required: true },
+	},
+	{ _id: false },
+);
+
+const CounterpartyInfo = new mongoose.Schema(
+	{
+		id: { type: String, required: true },
+		nickName: { type: String, required: true },
 	},
 	{ _id: false },
 );
@@ -21,16 +31,29 @@ const UserSchema = new mongoose.Schema(
 		},
 		subscriber_url: { type: String, required: true },
 		domain: { type: String, required: true },
-		np_tcs: { type: Number, required: true },
-		np_tds: { type: Number, required: true },
-		pr_tcs: { type: Number, required: false },
-		pr_tds: { type: Number, required: false },
+		np_tcs: { type: Number, required: true, set: round2 },
+		np_tds: { type: Number, required: true, set: round2 },
+		pr_tcs: { type: Number, required: false, set: round2 },
+		pr_tds: { type: Number, required: false, set: round2 },
+		tcs_applicability: {
+			type: String,
+			enum: Object.values(APPLICABILITY_VALUES),
+			required: true,
+		},
+		tds_applicability: {
+			type: String,
+			enum: Object.values(APPLICABILITY_VALUES),
+			required: true,
+		},
 		msn: { type: Boolean, required: true },
 		provider_details: { type: [ProviderDetails], required: true },
+		counterparty_infos: {
+			type: [CounterpartyInfo],
+			required: true,
+		},
 		counterparty_ids: {
 			type: [String],
-			required: true,
-			default: [],
+			required: false,
 		},
 	},
 	{ timestamps: true },
