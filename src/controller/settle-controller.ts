@@ -256,8 +256,12 @@ export class SettleController {
 				row.inter_np_settlement !== undefined &&
 				row.inter_np_settlement !== ""
 			) {
-				settlement.inter_np_settlement =
-					row.inter_np_settlement.toString().trim() === "true";
+				settlement.inter_np_settlement = parseFloat(row.inter_np_settlement);
+				if (isNaN(settlement.inter_np_settlement)) {
+					throw new Error(
+						`INVALID::Row ${index + 1}: invalid inter_np_settlement`,
+					);
+				}
 			}
 
 			return settlement;
