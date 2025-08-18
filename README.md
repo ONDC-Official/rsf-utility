@@ -10,6 +10,7 @@ RSF Utility is a modular transaction processing system designed for handling tra
 - Persisting operational and audit data in MongoDB
 - Exposing observability using Loki and Grafana
 - Securing UI ↔ API traffic with JWT and TLS
+- Refer [RSF 2.0 Framework](https://docs.google.com/document/d/1Pj7e1MuObQeLczx_palbcliUPTkMRYA76esjrfAMT14/edit?usp=sharing) for understanding the settlement and reconciliation mechanics 
 
 ## Documentation Structure
 - [System Architecture](./docs/ARCHITECTURE.md) - Detailed system architecture and components
@@ -87,8 +88,15 @@ Key environment variables:
    - Performance monitoring
    - Error tracking
 
-## License
-ISC License
+## Assumptions
+- Single settlement file can be created at once, the user must only pass upto 100 orders for generation. If there are >100 orders to be settled, the utility shall throw an error
+- Buyer Finder Fee (BFF) is tax exclusive and the utility calculates at 18% GST and shows Commission inclusive of GST on BFF
+- A NACK will be provided if a /recon API call is received where a /recon call has been self triggered (PENDING, ACCEPTED states) for the respective order
+- For calculations of BFF and Taxes, refer [ONDC Guidance](https://ondc-static-website-media.s3.ap-south-1.amazonaws.com/ondc-website-media/downloads/governance-and-policies/CHAPTER-%5B3%5D-Commercial%2BModel.pdf)
+- The amounts across all fields in the order transaction APIs should be upto 2 decimal digits
+- Settlement Window (@ondc/org/settlement_window) and Settlement basis (@ondc/org/settlement_basis) are expected as mandatory attributes to calculate settlement due date for each order
+- For settlement basis of return_window_expiry, settlement due date is can be entered in the Orders Ready section
+- np_type is expected as a mandatory tag attribute
 
 ## Support
 For support and queries, please [create an issue](https://github.com/ONDC-Official/rsf-utility/issues) or contact the maintainers.
