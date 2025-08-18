@@ -62,7 +62,7 @@ describe("Docker Multi-Instance E2E: Real Isolation", () => {
 				bank_name: "BAP Docker Bank",
 			},
 		],
-		counterparty_ids: [],
+		counterparty_infos: [],
 	};
 
 	const bppUser: UserType = {
@@ -86,7 +86,7 @@ describe("Docker Multi-Instance E2E: Real Isolation", () => {
 				bank_name: "BPP Docker Bank",
 			},
 		],
-		counterparty_ids: [],
+		counterparty_infos: [],
 	};
 
 	beforeAll(async () => {

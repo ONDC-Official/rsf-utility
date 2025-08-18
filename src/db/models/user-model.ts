@@ -13,6 +13,14 @@ const ProviderDetails = new mongoose.Schema(
 	{ _id: false },
 );
 
+const CounterpartyInfo = new mongoose.Schema(
+	{
+		id: { type: String, required: true },
+		nickName: { type: String, required: true },
+	},
+	{ _id: false },
+);
+
 const UserSchema = new mongoose.Schema(
 	{
 		title: { type: String, required: true },
@@ -39,10 +47,13 @@ const UserSchema = new mongoose.Schema(
 		},
 		msn: { type: Boolean, required: true },
 		provider_details: { type: [ProviderDetails], required: true },
+		counterparty_infos: {
+			type: [CounterpartyInfo],
+			required: true,
+		},
 		counterparty_ids: {
 			type: [String],
-			required: true,
-			default: [],
+			required: false,
 		},
 	},
 	{ timestamps: true },

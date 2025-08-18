@@ -45,7 +45,7 @@ describe("Full E2E Flow: User Creation, Settlement, and Reconciliation", () => {
 				bank_name: "Bank ABC",
 			},
 		],
-		counterparty_ids: [],
+		counterparty_infos: [],
 	};
 
 	// Setup server, database, and auth token once for all tests in this suite
