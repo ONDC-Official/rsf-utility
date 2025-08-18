@@ -57,7 +57,7 @@ describe("E2E Bulk CSV Upload: Settlement Updates via File Upload", () => {
 				bank_name: "CSV Test Bank",
 			},
 		],
-		counterparty_ids: [],
+		counterparty_infos: [],
 	};
 
 	beforeAll(async () => {
