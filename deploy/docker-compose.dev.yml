@@ -1,0 +1,83 @@
+# Development Docker Compose Configuration
+# Use this for local development with hot reload and debugging
+
+version: '3.8'
+
+services:
+  # MongoDB Database Service
+  mongodb-dev:
+    image: mongo:latest
+    container_name: rsf_mongodb_dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_dev_data:/data/db
+    networks:
+      - rsf-dev-network
+    environment:
+      # Development database - no authentication
+      MONGO_INITDB_DATABASE: rsf-utility-dev
+    restart: unless-stopped
+
+  # Backend API Service (Development Mode)
+  rsf-backend-dev:
+    build:
+      context: ../rsf-utility-backend
+      dockerfile: Dockerfile
+    container_name: rsf_backend_dev
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Node.js debugger port
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb-dev:27017/rsf-utility-dev
+      - JWT_SECRET=development-secret-key
+      - CLIENT_ID=dev-client
+      - ONDC_ENV=STAGING
+      - LOG_LEVEL=debug
+    volumes:
+      # Mount source code for hot reload
+      - ../rsf-utility-backend:/app
+      - /app/node_modules
+      - /app/dist
+    networks:
+      - rsf-dev-network
+    depends_on:
+      - mongodb-dev
+    command: npm run dev
+    restart: unless-stopped
+
+  # Frontend Web Application (Development Mode)
+  rsf-frontend-dev:
+    build:
+      context: ../rsf-utility-frontend
+      dockerfile: Dockerfile
+      target: development  # Use development stage if multi-stage build
+    container_name: rsf_frontend_dev
+    ports:
+      - "6500:3000"
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_BACKEND_URL=http://localhost:3000
+      - GENERATE_SOURCEMAP=true
+      - FAST_REFRESH=true
+    volumes:
+      # Mount source code for hot reload
+      - ../rsf-utility-frontend:/app
+      - /app/node_modules
+      - /app/build
+    networks:
+      - rsf-dev-network
+    depends_on:
+      - rsf-backend-dev
+    command: npm start
+    restart: unless-stopped
+
+volumes:
+  mongo_dev_data:
+    driver: local
+
+networks:
+  rsf-dev-network:
+    driver: bridge
