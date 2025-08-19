@@ -1,0 +1,6 @@
+[submodule "rsf-utility-backend"]
+	path = rsf-utility-backend
+	url = https://github.com/ONDC-Official/rsf-utility-backend
+[submodule "rsf-utility-frontend"]
+	path = rsf-utility-frontend
+	url = https://github.com/ONDC-Official/rsf-utility-frontend
