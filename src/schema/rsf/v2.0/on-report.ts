@@ -2,7 +2,7 @@ import { ENUMS } from "../../../constants/enums";
 
 const onReportSchema = {
 	type: "object",
-	required: ["context", "message"],
+	required: ["context"],
 	properties: {
 		context: {
 			type: "object",
@@ -176,6 +176,15 @@ const onReportSchema = {
 					},
 				},
 			},
+		},
+		error: {
+			type: "object",
+			required: ["code", "message"],
+			properties: {
+				code: { type: "string" },
+				message: { type: "string" },
+			},
+			additionalProperties: false,
 		},
 	},
 	additionalProperties: false,

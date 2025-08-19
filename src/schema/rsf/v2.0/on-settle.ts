@@ -77,7 +77,6 @@ const onSettleSchema = {
 							type: "array",
 							items: {
 								type: "object",
-								required: ["self"],
 								properties: {
 									id: { type: "string" },
 									inter_participant: {
