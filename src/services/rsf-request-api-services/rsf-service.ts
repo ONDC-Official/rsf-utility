@@ -1,5 +1,5 @@
 import { OndcSyncResponse, RsfOnAction } from "../../types/rsf-type";
-import { getNackResponse } from "../../utils/ackUtils";
+import { getAckResponse, getNackResponse } from "../../utils/ackUtils";
 import logger from "../../utils/logger";
 import { OnReconRequestService } from "./on_recon-service";
 import { OnSettleService } from "./on_settle-service";
@@ -21,7 +21,10 @@ export class RsfService {
 		rsfLogger.info("Ingesting RSF payload", { action });
 		switch (action) {
 			case "on_settle":
-				return await this.onSettleService.ingestOnSettlePayload(payload);
+				const idleResponse =
+					await this.onSettleService.ingestOnSettlePayload(payload);
+				logger.warning("Idle response for on_settle:", idleResponse);
+				return getAckResponse();
 			case "recon":
 				return await this.reconRequestService.ingestReconPayload(payload);
 			case "on_recon":
