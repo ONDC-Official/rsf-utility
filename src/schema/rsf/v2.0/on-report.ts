@@ -56,13 +56,13 @@ const onReportSchema = {
 		},
 		message: {
 			type: "object",
-			required: ["collector_app_id", "receiver_app_id", "settlement"],
+			required: ["settlement"],
 			properties: {
 				collector_app_id: { type: "string" },
 				receiver_app_id: { type: "string" },
 				settlement: {
 					type: "object",
-					required: ["type", "id", "orders"],
+					required: ["type"],
 					properties: {
 						type: {
 							type: "string",
@@ -73,7 +73,6 @@ const onReportSchema = {
 							type: "array",
 							items: {
 								type: "object",
-								required: ["id"],
 								properties: {
 									id: { type: "string" },
 									inter_participant: {
