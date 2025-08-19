@@ -29,6 +29,8 @@ export class RsfService {
 				return await this.reconRequestService.ingestReconPayload(payload);
 			case "on_recon":
 				return await this.onReconRequestService.ingestOnReconPayload(payload);
+			case "on_report":
+				return getAckResponse();
 			default:
 				break;
 		}
