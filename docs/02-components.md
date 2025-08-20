@@ -56,7 +56,7 @@ The RSF Utility system comprises specialized components managing ONDC settlement
 graph LR
     Frontend[Frontend React App] -->|HTTPS/REST| Backend[Backend API Server]
     Backend -->|Queries| MongoDB[(MongoDB)]
-    Backend -->|Webhooks| ONDC[ONDC Network]
+    Backend -->|Webhooks| NP[Network Participant]
     Backend -->|API Calls| SA[Settlement Agency]
     Frontend -->|State Management| ReactQuery[React Query Cache]
 ```

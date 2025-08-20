@@ -55,7 +55,7 @@ graph TB
 ### Key Features
 
 - **Structured Logging**: JSON-formatted logs with correlation IDs
-- **Real-time Metrics**: Prometheus metrics for system and business KPIs
+- **Real-time Metrics**: Prometheus metrics for system performance
 - **Health Monitoring**: Automated health checks for all components
 - **Request Tracing**: End-to-end request tracking across services
 - **Incident Response**: Automated alerting and runbook procedures
@@ -269,14 +269,6 @@ logger.error('Settlement processing failed', {
   participantId: 'participant-789'
 });
 
-// Info logging for business events
-logger.info('Settlement generated successfully', {
-  settlementId: 'settlement-123',
-  totalAmount: 1500.50,
-  ordersCount: 25,
-  participantId: 'participant-789'
-});
-
 // Debug logging for detailed tracing
 logger.debug('Database query executed', {
   collection: 'orders',
@@ -366,18 +358,6 @@ export const correlationIdMiddleware = (req: Request, res: Response, next: NextF
 }
 ```
 
-#### Business Logic Logs
-```json
-{
-  "type": "business",
-  "workflow": "settlement_processing",
-  "stage": "validation_complete",
-  "orderId": "order_67890",
-  "validationResult": "passed",
-  "nextStage": "payment_initiation"
-}
-```
-
 #### System Logs
 ```json
 {
@@ -427,55 +407,11 @@ const dbLatencyGauge = new promClient.Gauge({
   labelNames: ['operation', 'collection']
 });
 
-// Business Metrics
-const settlementRequestsTotal = new promClient.Counter({
-  name: 'settlement_requests_total',
-  help: 'Total number of settlement requests processed',
-  labelNames: ['status', 'user_type']
-});
 
 const reconciliationProcessingTime = new promClient.Histogram({
   name: 'reconciliation_processing_duration_seconds',
   help: 'Time taken to process reconciliation requests',
   buckets: [0.1, 0.5, 1, 2, 5, 10, 30, 60]
-});
-```
-
-### Business KPI Metrics
-
-#### Settlement Operations
-```typescript
-// Settlement success rate
-const settlementSuccessRate = new promClient.Gauge({
-  name: 'settlement_success_rate_percent',
-  help: 'Percentage of successful settlements in last hour',
-  collect() {
-    // Calculate from recent settlement attempts
-    this.set(calculateSettlementSuccessRate());
-  }
-});
-
-// Settlement processing volume
-const settlementVolume = new promClient.Counter({
-  name: 'settlement_volume_total',
-  help: 'Total settlement amount processed',
-  labelNames: ['currency', 'agency']
-});
-```
-
-#### Reconciliation Metrics
-```typescript
-// Reconciliation accuracy
-const reconciliationAccuracy = new promClient.Gauge({
-  name: 'reconciliation_accuracy_percent',
-  help: 'Percentage of reconciliations with zero discrepancy'
-});
-
-// Discrepancy amounts
-const discrepancyAmounts = new promClient.Histogram({
-  name: 'reconciliation_discrepancy_amount',
-  help: 'Distribution of reconciliation discrepancy amounts',
-  buckets: [0, 1, 5, 10, 50, 100, 500, 1000]
 });
 ```
 
@@ -1094,53 +1030,6 @@ docker exec rsf_mongodb mongorestore \
   }
 }
 ```
-
-#### Business Metrics Dashboard
-
-```json
-{
-  "dashboard": {
-    "title": "RSF Utility - Business Metrics",
-    "panels": [
-      {
-        "title": "Settlement Volume (24h)",
-        "type": "stat",
-        "targets": [
-          {
-            "expr": "increase(settlement_volume_total[24h])",
-            "legendFormat": "Total Volume"
-          }
-        ]
-      },
-      {
-        "title": "Reconciliation Accuracy",
-        "type": "gauge",
-        "targets": [
-          {
-            "expr": "reconciliation_accuracy_percent",
-            "legendFormat": "Accuracy %"
-          }
-        ]
-      },
-      {
-        "title": "Processing Times",
-        "type": "graph",
-        "targets": [
-          {
-            "expr": "histogram_quantile(0.95, settlement_processing_duration_seconds_bucket)",
-            "legendFormat": "95th Percentile"
-          },
-          {
-            "expr": "histogram_quantile(0.50, settlement_processing_duration_seconds_bucket)", 
-            "legendFormat": "Median"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
 ### Log Analysis Queries
 
 #### Grafana Loki Queries
@@ -1500,25 +1389,6 @@ groups:
           summary: "Low settlement success rate"
           description: "Settlement success rate is {{ $value }}%"
 
-  - name: rsf_utility_business
-    rules:
-      - alert: ReconciliationAccuracyLow
-        expr: reconciliation_accuracy_percent < 99
-        for: 30m
-        labels:
-          severity: warning
-        annotations:
-          summary: "Reconciliation accuracy below threshold"
-          description: "Reconciliation accuracy is {{ $value }}%"
-
-      - alert: HighDiscrepancyAmounts
-        expr: histogram_quantile(0.95, reconciliation_discrepancy_amount_bucket) > 100
-        for: 1h
-        labels:
-          severity: info
-        annotations:
-          summary: "High reconciliation discrepancies detected"
-          description: "95th percentile discrepancy amount is {{ $value }}"
 ```
 
 ### Alertmanager Configuration

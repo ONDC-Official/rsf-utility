@@ -1,3 +1,4 @@
+
 # RSF Utility
 
 > **Reconciliation and Settlement Framework** for ONDC Network Participants
@@ -79,7 +80,7 @@ RSF Utility follows a **microservice architecture** using git submodules for ind
 graph TD
     A[Frontend React App] -->|HTTPS/REST| B[Backend API Server]
     B -->|Queries| C[(MongoDB)]
-    B -->|Webhooks| D[ONDC Network]
+    B -->|Webhooks| D[Network Participant]
     B -->|Settlement API| E[Settlement Agency]
     F[Loki] --> G[Grafana]
     B --> F
@@ -95,9 +96,9 @@ graph TD
 
 ### Key Capabilities
 - ✅ **ONDC Protocol Compliance**: Full webhook handling and schema validation
-- ✅ **Multi-Party Settlements**: Automated calculation and processing
-- ✅ **Cross-Participant Reconciliation**: Dispute detection and resolution workflows  
-- ✅ **Real-Time Monitoring**: Comprehensive observability with Prometheus + Grafana
+- ✅ **Multi-Party Settlements**: Config based calculation and processing
+- ✅ **Cross-Participant Reconciliation**: Inter NP reconcillation workflows  
+- ✅ **Real-Time Monitoring**: Comprehensive observability with Prometheus + Grafana (Optional)
 - ✅ **Secure Authentication**: JWT-based with client-ID validation
 - ✅ **Production Ready**: Docker containerization with health checks
 
@@ -148,59 +149,21 @@ npm run build  # In both submodules
 
 ---
 
-## 📊 Core Workflows
-
-### 1. Order Settlement Process
-```mermaid
-sequenceDiagram
-    participant NP as Network Participant
-    participant RSF as RSF Utility
-    participant SA as Settlement Agency
-    participant ONDC as ONDC Network
-    
-    NP->>RSF: Configure settlement parameters
-    RSF->>ONDC: Receive on_confirm webhook
-    RSF->>RSF: Calculate settlement amounts
-    RSF->>SA: Generate settlement request
-    SA->>RSF: Settlement response
-    RSF->>NP: Settlement completion notification
-```
-
-### 2. Reconciliation Workflow
-```mermaid
-sequenceDiagram
-    participant NP1 as Network Participant 1
-    participant RSF as RSF Utility
-    participant NP2 as Network Participant 2
-    
-    NP1->>RSF: Generate reconciliation request
-    RSF->>NP2: Send reconciliation data
-    NP2->>RSF: Reconciliation response
-    RSF->>RSF: Detect discrepancies
-    RSF->>NP1: Reconciliation report
-    RSF->>NP2: Reconciliation report
-```
-
-For detailed workflow documentation, see [User Workflows](docs/03-workflows.md).
-
----
-
 ## 🔒 Security & Compliance
 
 ### Authentication & Authorization
 - **JWT-based authentication** with configurable expiration
 - **Client-ID validation** for API access control
-- **Role-based access** for different network participant types
+- **Role-based access** for different network participant config
 
 ### ONDC Protocol Compliance
 - **Schema validation** for all ONDC protocol messages
-- **Digital signature verification** for webhook authenticity
-- **Audit logging** for all financial transactions
+- **Digital signature verification** for webhook authenticity `/settle`, `/on_settle`,`/recon`,`/on_recon`
+- **Audit logging** for all transactions
 
 ### Data Security
-- **Encryption at rest** for sensitive financial data
-- **HTTPS/TLS** for all API communications
-- **PII protection** with configurable data retention
+- **Encryption at rest**  `Recomended NP to configure`
+- **HTTPS/TLS** for all API communications `Recomended NP to configure`
 
 For complete security documentation, see [Security Implementation](docs/08-security.md).
 
@@ -235,17 +198,17 @@ For complete deployment instructions, see [Deployment Guide](docs/06-deployment.
 
 ---
 
-## 📈 Monitoring & Observability
+## 📈 Monitoring & Observability (Optional)
 
 ### Available Dashboards
 - **Application Metrics**: Performance, error rates, and throughput
 - **Business Metrics**: Settlement volumes, reconciliation success rates
 - **Infrastructure Metrics**: CPU, memory, database performance
-- **Security Metrics**: Authentication failures, API abuse detection
+- **Security Metrics**: Authentication failures
 
 ### Log Aggregation
 - **Structured logging** with correlation IDs
-- **Grafana Loki** for centralized log collection
+- **Grafana Loki** for centralized log collection `Recomended NP to configure`
 - **Real-time alerting** for critical errors and thresholds
 
 ### Health Monitoring
@@ -305,19 +268,15 @@ For detailed contribution guidelines, see [Contributing](docs/10-contributing.md
 ## 📋 Project Status
 
 ### Current Version
-- **Backend**: v1.0.0 (Production Ready)
+- **Backend**: v0.1.0 (Beta Release)
 - **Frontend**: v0.1.0 (Beta Release)
-- **Main Repo**: v1.0.0 (Documentation Complete)
+- **Main Repo**: v0.1.0 (Beta Release)
 
 ### Roadmap
-- [ ] **Advanced Analytics Dashboard** (Q1 2025)
-- [ ] **Multi-Currency Support** (Q2 2025)
-- [ ] **Mobile Application** (Q3 2025)
-- [ ] **API Gateway Integration** (Q4 2025)
+- [ ] **Reporting Dashboard** (Q4 2025)
+- [ ] **Analytics Dashboard** (Q1 2026)
 
 ### Key Metrics
-- **API Uptime**: 99.9%
-- **Settlement Processing**: < 30 seconds
 - **Test Coverage**: 85%+
 - **Documentation Coverage**: 100%
 

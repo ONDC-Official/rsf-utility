@@ -898,7 +898,7 @@ interface OndcContext {
 ### Deprecation Policy
 
 #### Deprecation Process
-1. **Announcement**: Minimum 6 months advance notice
+1. **Announcement**: Minimum 15 days advance notice
 2. **Documentation**: Clear migration guide provided
 3. **Headers**: Deprecation warnings in response headers
 4. **Support**: Continued support during deprecation period
@@ -912,15 +912,8 @@ Link: <https://docs.api.com/migration>; rel="successor-version"
 
 #### Migration Support
 - **Parallel API Support**: Old and new versions run simultaneously
-- **Migration Tools**: Automated migration scripts provided
 - **Documentation**: Detailed migration guides with examples
 - **Support**: Technical support during migration period
-
-### Version Compatibility Matrix
-| API Version | ONDC Version | Status | Support Until |
-|-------------|-------------|---------|---------------|
-| 1.0.0 | 2.0.0 | Current | - |
-| 0.9.x | 1.2.x | Deprecated | 2024-12-01 |
 
 ---
 
@@ -1114,13 +1107,6 @@ curl -X POST \
 - Rate limiting and security features
 - Comprehensive error handling
 - OpenAPI 3.1.0 documentation
-
-### Planned Features
-- **API Key Authentication**: Alternative to JWT for service-to-service calls
-- **Webhook Subscriptions**: Event-driven notifications
-- **GraphQL Endpoint**: Alternative query interface
-- **API Analytics**: Usage metrics and reporting
-- **Multi-tenant Support**: Organization-based API isolation
 
 ---
 

@@ -8,10 +8,8 @@ This guide provides comprehensive instructions for deploying the RSF Utility in 
 - **Local Development**: Docker Compose with MongoDB
 - **Production**: Independent service deployment with observability stack
 - **Testing**: Multi-instance Docker environments for E2E testing
-- **CI/CD**: Automated deployment pipelines for each service
 
 ---
-
 ## Prerequisites
 
 ### System Requirements
@@ -460,18 +458,6 @@ Load Balancer:
   Network: 1Gbps
 ```
 
-#### Recommended Production Architecture
-```yaml
-Production Setup:
-  Load Balancer: NGINX/HAProxy
-  Backend Instances: 2+ (horizontal scaling)
-  Frontend Instances: 2+ (CDN + static hosting)
-  Database: MongoDB Replica Set (3 nodes)
-  Monitoring: Prometheus + Grafana + Loki
-  Backup: Automated MongoDB backups
-  SSL/TLS: Let's Encrypt or corporate certificates
-```
-
 ### Production Environment Variables
 ```bash
 # Backend Production Configuration
@@ -532,125 +518,7 @@ server {
 
 ---
 
-## CI/CD Pipeline
-
-### GitHub Actions Workflow Overview
-
-#### Backend CI/CD Pipeline
-```yaml
-# .github/workflows/backend-deployment.yml
-name: Backend Deployment
-on:
-  push:
-    branches: [main]
-    paths: ['rsf-utility-backend/**']
-  
-workflow_dispatch:
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: |
-          cd rsf-utility-backend
-          npm ci
-      - name: Run tests
-        run: |
-          cd rsf-utility-backend
-          npm test
-      - name: Build application
-        run: |
-          cd rsf-utility-backend
-          npm run build
-  
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Deploy to production
-        run: |
-          # Deployment steps
-          echo "Deploy backend to production"
-```
-
-#### Frontend CI/CD Pipeline
-```yaml
-# .github/workflows/frontend-deployment.yml
-name: Frontend Deployment
-on:
-  push:
-    branches: [main, develop]
-    paths: ['rsf-utility-frontend/**']
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install and build
-        run: |
-          cd rsf-utility-frontend
-          npm ci
-          npm run build
-      - name: Deploy to S3/CDN
-        run: |
-          # Frontend deployment steps
-          echo "Deploy frontend to CDN"
-```
-
-### Deployment Strategies
-
-#### Blue-Green Deployment
-```bash
-# Blue-Green deployment script
-#!/bin/bash
-
-# Deploy new version (Green)
-docker-compose -f docker-compose.green.yml up -d
-
-# Health check Green environment
-curl -f http://green.rsf.local/health || exit 1
-
-# Switch traffic from Blue to Green
-# Update load balancer configuration
-
-# Stop Blue environment
-docker-compose -f docker-compose.blue.yml down
-```
-
-#### Rolling Deployment
-```bash
-# Rolling deployment with zero downtime
-#!/bin/bash
-
-# Scale up new instances
-docker-compose up -d --scale rsf-backend=4
-
-# Gradually remove old instances
-for i in {1..2}; do
-  docker stop rsf-backend_$i
-  sleep 30
-  docker rm rsf-backend_$i
-done
-
-# Scale down to desired count
-docker-compose up -d --scale rsf-backend=2
-```
-
-### Deployment Verification
+## Deployment Verification
 ```bash
 # Post-deployment health checks
 #!/bin/bash
@@ -789,7 +657,7 @@ volumes:
 
 ---
 
-## Monitoring & Observability
+## Monitoring & Observability (Optional)
 
 ### Health Monitoring Setup
 ```bash
