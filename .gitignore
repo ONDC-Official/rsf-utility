@@ -1,1 +1,5 @@
+.DS_Store
+.env
+/deploy/config
+/deploy/mongo_data
 .copilot/
