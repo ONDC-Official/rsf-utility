@@ -1,1 +1,6 @@
+.DS_Store
+.env
+/deploy/config/*
+!/deploy/config/grafana/
+/deploy/mongo_data
 .copilot/
