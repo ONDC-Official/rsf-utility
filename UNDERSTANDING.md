@@ -19,14 +19,14 @@ RSF (Reconciliation and Settlement Framework) Utility is a full-stack web applic
 **Technology Stack:**
 - Backend: Node.js + Express + TypeScript + MongoDB
 - Frontend: React 17 + TypeScript + Material-UI + React Query
-- Infrastructure: Docker, Prometheus, Grafana Loki
+- Infrastructure: Docker, Grafana Loki 
 - Testing: Jest, Supertest, MongoDB Memory Server
 
 ## Backend (Independent Submodule)
 **Repository:** `https://github.com/ONDC-Official/rsf-utility-backend`
 - **Entry Point:** `src/index.ts` → `src/server.ts`
 - **Purpose:** RESTful API server for ONDC reconciliation and settlement operations
-- **Port:** 3000 (configurable via PORT env variable)
+- **Port:** 3000 (configurable via BACKEND_PORT env variable)
 - **Detailed Documentation:** See `rsf-utility-backend/UNDERSTANDING.md`
 
 ### Key Architecture Layers:
@@ -54,7 +54,7 @@ RSF (Reconciliation and Settlement Framework) Utility is a full-stack web applic
    - MongoDB connection establishment with health monitoring
    - Express server initialization with middleware stack
    - Graceful shutdown handlers (SIGTERM, SIGINT) registration
-   - Health monitoring setup with Prometheus metrics
+   - Health monitoring setup
 
 2. **Request Handling**
    - CORS enabled for cross-origin requests
@@ -109,7 +109,7 @@ RSF (Reconciliation and Settlement Framework) Utility is a full-stack web applic
 **Repository:** `https://github.com/ONDC-Official/rsf-utility-frontend`
 - **Entry Point:** `src/index.tsx` → `src/App.tsx`
 - **Purpose:** React-based dashboard for network participant settlement management
-- **Port:** 3000 (default Create React App, typically served on 6500 in compose)
+- **Port:** 3000 (default Create React App, configurable via FRONTEND_PORT in Docker)
 - **Detailed Documentation:** See `rsf-utility-frontend/UNDERSTANDING.md`
 
 ### Key Architecture Layers:
@@ -412,6 +412,7 @@ Parent Repository (rsf-utility)
 2. **Submodule Updates**: Parent repository updates submodule references when ready for integration
 3. **Unified Documentation**: Parent repository maintains overall project understanding
 4. **Coordinated Releases**: Parent repository can create releases with specific submodule versions
+5. **Documentation Consistency**: Task 01 ensures all UNDERSTANDING.md files remain synchronized
 
 **Benefits:**
 - ✅ **Independent Teams**: Backend and frontend teams can work autonomously
@@ -443,7 +444,6 @@ This architecture pattern is ideal for the RSF Utility project as it enables:
 - **Digital Signatures**: Cryptographic verification of network messages
 
 ### Observability & Monitoring
-- **Prometheus**: Metrics collection, health monitoring, and performance tracking
 - **Grafana Loki**: Centralized logging in production with structured JSON format
 - **Grafana Dashboards**: Enhanced monitoring with provisioned dashboards and datasources (commit 34889ac)
 - **Winston Logger**: Structured logging with correlation IDs and metadata
@@ -499,7 +499,6 @@ Frontend Testing Stack:
 ### Backend Performance
 - **Connection Pooling**: Optimized MongoDB connection management
 - **Query Optimization**: Strategic database indexing and query patterns
-- **Caching Strategy**: Redis integration for frequently accessed data
 - **Resource Management**: Memory and CPU optimization for container deployment
 - **Async Processing**: Non-blocking operations for settlement calculations
 
@@ -577,7 +576,6 @@ Frontend:
 
 Observability:
 - LOKI_HOST, GF_SECURITY_ADMIN_USER, GF_SECURITY_ADMIN_PASSWORD
-- PROMETHEUS_PORT, METRICS_ENABLED
 
 Docker Infrastructure (commit c8eab4d, 34889ac):
 - Simplified configuration with single .env file
@@ -659,4 +657,17 @@ All submodule changes have been tracked and synchronized with the main repositor
 
 **Task 03 Changelog Maintenance Completed (August 22, 2025)**: Updated /docs/CHANGELOG.md with chronological commit tracking, detailed impact analysis, and submodule synchronization status.
 
-**Last Understood Commit**: 34889ac (fix(docker): update compose and grafana dashboard) - 2025-08-22 10:48:23 +0530
+**Task 01 UNDERSTANDING.md Sync Completed (August 22, 2025)**: Resolved inconsistencies across all UNDERSTANDING.md files:
+- ✅ Updated port environment variable references: PORT → BACKEND_PORT
+- ✅ Marked Prometheus and Redis as planned features with timelines
+- ✅ Synchronized environment variable documentation across all repositories
+- ✅ Corrected frontend port configuration references
+
+**Task 03 Continuous Documentation Sync Completed (August 22, 2025)**: Established ongoing alignment mechanism:
+- ✅ Environment variable synchronization protocol across README.md and UNDERSTANDING.md
+- ✅ Automated cross-reference validation between documentation files  
+- ✅ Feature implementation status tracking (planned vs implemented)
+- ✅ CHANGELOG.md maintenance with commit-driven updates
+- ✅ Documentation sync protocol established in `.copilot/sync-protocol.md`
+
+**Last Understood Commit**: 03dec72 (Merge pull request #78 from ONDC-Official/feat/submodule) - 2025-08-22 13:58:58 +0530

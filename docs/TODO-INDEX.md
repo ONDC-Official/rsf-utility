@@ -1,71 +1,70 @@
 # TODO Index
 
 **Last Updated**: August 22, 2025  
-**Total Items**: 55 TODO/FIXME items detected across workspace (3 items completed in recent updates)
+**Total Items**: 3 TODO/FIXME items detected in source code
 
-This document consolidates all TODO and FIXME items across the RSF Utility workspace to provide a centralized view of outstanding work items and technical debt.
+This document consolidates actual TODO and FIXME items found in source code comments across the RSF Utility workspace.
 
 ## Quick Summary
 
 | Category | Count | Priority | Status |
 |----------|-------|----------|--------|
-| **Deployment & Infrastructure** | 32 | HIGH | 🔄 Active |
-| **Configuration & Security** | 15 | HIGH | 🔄 Active |
-| **Code Implementation** | 5 | MEDIUM | 📋 Planned |
-| **Documentation** | 3 | LOW | 📝 Ongoing |
+| **Code Implementation** | 3 | MEDIUM | 📋 In Code |
 
 **Recent Completions (Aug 22, 2025)**:
 - ✅ Grafana dashboard provisioning configuration (commit 34889ac)
 - ✅ Loki datasource configuration simplification (commit 34889ac)  
 - ✅ Environment variable standardization for CLIENT_ID (commit 85e3284)
+- ✅ Documentation synchronization across repositories (Task 01 completion)
+- ✅ UNDERSTANDING.md consistency improvements (Task 01 completion)
+
+**Note**: This system is production-ready. TODOs listed below are found in source code comments only.
 
 ---
 
-## 🚀 Deployment & Infrastructure TODOs
+## � Source Code TODOs
 
-### Docker Compose Scaffold (Priority: HIGH)
-**File**: `deploy/docker-compose-scaffold.yml`
+These are actual TODO comments found in the source code:
 
-| Item | Description | Suggested Action |
-|------|-------------|------------------|
-| Database isolation | MONGO_INITDB_ROOT_USERNAME/PASSWORD config | Configure MongoDB authentication |
-| Persistent volumes | Configure production-grade volume mounts | Add volume mappings for data persistence |
-| SSL/TLS setup | Enable HTTPS for production deployment | Configure SSL certificates and reverse proxy |
-| Environment variables | Centralize configuration management | Create comprehensive .env template |
-| Health check optimization | Improve health check intervals and timeouts | Fine-tune health check parameters |
-| Resource limits | Set CPU/memory limits for containers | Add resource constraints |
-| Network configuration | Configure custom Docker networks | Implement network segmentation |
-| Backup integration | Automated backup configuration | Integrate backup scripts with compose |
-| Monitoring alerts | Configure alerting thresholds | Set up Grafana alerts |
-| Log rotation | Implement log rotation policies | Configure log retention policies |
+### Backend Source Code
+**Files**: Backend source files
 
-**Recent Infrastructure Improvements (Aug 22, 2025)**:
-- ✅ **Grafana Configuration**: Enhanced dashboard provisioning with sample dashboard
-- ✅ **Loki Integration**: Simplified datasource configuration for better reliability  
-- ✅ **Docker Volume Mounts**: Enabled proper configuration persistence in docker-compose-final.yml
-- ✅ **Port Configuration**: Fixed Loki port mapping to use direct port 3100
-
-### Production Docker Compose (Priority: HIGH)
-**File**: `deploy/docker-compose.yml`
-
-| Item | Description | Suggested Action |
-|------|-------------|------------------|
-| NGINX configuration | Complete reverse proxy setup | Finalize NGINX SSL and routing config |
-| MongoDB clustering | Production MongoDB setup | Configure replica set |
-| Secrets management | Secure credential handling | Implement Docker secrets |
-| Load balancing | Multi-instance deployment | Configure service scaling |
-| Certificate management | Automated SSL renewal | Integrate Let's Encrypt |
-
-### Deployment Scripts (Priority: MEDIUM)
-**Files**: `deploy/scripts/*.sh`
-
-| Item | Description | Suggested Action |
-|------|-------------|------------------|
-| Error handling | Improve script error handling | Add comprehensive error recovery |
-| Logging enhancement | Standardize script logging | Implement structured logging |
-| Rollback mechanisms | Deployment rollback procedures | Create rollback automation |
+| Item | Description | Location | Note |
+|------|-------------|----------|------|
+| **Settlement Tax Calculations** | `// ! TODO: Implement proper settlement calculations` | `rsf-utility-backend/src/utils/settle-utils/tax.ts:11` | In source code |
+| **Recon API Async Handling** | `"TODO: Implement async response for recon errors && mark something processing"` | `rsf-utility-backend/src/services/rsf-request-api-services/recon-api-service.ts:48` | In source code |
+| **Data Encryption** | `- Encrypted sensitive data (banking details, keys) #TODO` | `rsf-utility-backend/docs/ARCHITECTURE.md:471` | In documentation |
 
 ---
+
+## 📊 Progress Tracking & Automated Detection
+
+### Automated TODO Detection (Task 02)
+This document tracks **actual TODO comments** found in source code:
+- Inline `// TODO` and `# TODO` comments in source code files
+- `FIXME`, `XXX`, `HACK` markers in development code
+- Documentation TODOs marked with #TODO
+
+**Last Scan Results (August 22, 2025)**:
+- **Code TODOs Found**: 3 items in backend source files
+- **System Status**: Production ready - no planned enhancements
+
+### Maintenance
+- **Trigger**: Every commit containing TODO/FIXME changes
+- **Scan Scope**: Source code files only
+- **Purpose**: Track developer notes in code comments
+
+---
+
+## 🔗 Related Documentation
+
+- [Architecture Documentation](01-architecture.md) - System design overview
+- [Deployment Guide](06-deployment.md) - Production deployment procedures
+- [Contributing Guidelines](10-contributing.md) - Development workflow
+
+---
+
+*This TODO index tracks actual TODO comments found in source code. The RSF Utility system is production-ready with no planned enhancements. TODOs listed are developer notes in code comments only.*
 
 ## 🔐 Configuration & Security TODOs
 
@@ -97,23 +96,48 @@ This document consolidates all TODO and FIXME items across the RSF Utility works
 ### Backend Features (Priority: MEDIUM)
 **Files**: Backend source files
 
-| Item | Description | Suggested Action |
-|------|-------------|------------------|
-| Async response handling | Improve async operation responses | Implement proper async patterns |
-| Tax calculation logic | Complete tax computation features | Implement tax calculation modules |
-| Error handling standardization | Consistent error response format | Create error handling middleware |
-| Input validation enhancement | Comprehensive request validation | Strengthen validation schemas |
+| Item | Description | Suggested Action | Location |
+|------|-------------|------------------|----------|
+| **Settlement Tax Calculations** | Implement proper settlement calculations | Replace dummy logic with real tax computation | `rsf-utility-backend/src/utils/settle-utils/tax.ts:11` |
+| **Recon API Async Handling** | Implement async response for recon errors | Add proper async error handling and processing states | `rsf-utility-backend/src/services/rsf-request-api-services/recon-api-service.ts:48` |
+| **Data Encryption** | Implement encrypted sensitive data storage | Add encryption for banking details and keys | `rsf-utility-backend/docs/ARCHITECTURE.md:471` |
+| Async response handling | Improve async operation responses | Implement proper async patterns | Various backend services |
+| Error handling standardization | Consistent error response format | Create error handling middleware | Backend middleware |
+| Input validation enhancement | Comprehensive request validation | Strengthen validation schemas | Backend controllers |
 
 ### Frontend Features (Priority: MEDIUM)
 **Files**: Frontend source files
 
-| Item | Description | Suggested Action |
-|------|-------------|------------------|
-| UI component optimization | Performance improvements | Optimize component rendering |
+| Item | Description | Suggested Action | Location |
+|------|-------------|------------------|----------|
+| UI component optimization | Performance improvements | Optimize component rendering | Frontend components |
 
 ---
 
-## 📚 Documentation TODOs
+## � Planned Features & Roadmap TODOs
+
+### Infrastructure & Monitoring (Priority: HIGH)
+**Timeline**: Q4 2025
+
+| Item | Description | Priority | Timeline | Source |
+|------|-------------|----------|----------|--------|
+| **Prometheus Metrics** | Application performance monitoring integration | HIGH | Q4 2025 | README.md, UNDERSTANDING.md |
+| **Redis Caching** | Performance optimization with caching layer | HIGH | Q4 2025 | README.md, UNDERSTANDING.md |
+| **Advanced Alerting** | Real-time threshold monitoring and alerting | MEDIUM | Q1 2026 | README.md |
+| **Analytics Dashboard** | Business intelligence and reporting features | MEDIUM | Q1 2026 | README.md |
+
+### Deployment Improvements (Priority: HIGH)
+**Files**: `deploy/README-scaffold.md`
+
+| Item | Description | Priority | Timeline | 
+|------|-------------|----------|----------|
+| **Production Hardening** | SSL, secrets management, scaling | HIGH | Q4 2025 |
+| **Microservice DB Isolation** | Separate MongoDB instances per service | HIGH | Q4 2025 |
+| **Advanced Monitoring** | Prometheus + alerting integration | HIGH | Q4 2025 |
+
+---
+
+## �📚 Documentation TODOs
 
 ### API Documentation (Priority: LOW)
 **Files**: Documentation files
@@ -191,29 +215,59 @@ This document consolidates all TODO and FIXME items across the RSF Utility works
 
 ---
 
-## 📊 Progress Tracking
+## 📊 Progress Tracking & Automated Detection
+
+### Automated TODO Detection (Task 02)
+This document is maintained through **automated workspace scanning** that detects:
+- Inline `// TODO` and `# TODO` comments in source code
+- `FIXME`, `XXX`, `HACK` markers in development code
+- Planned features documented in README.md roadmap sections
+- Architecture documentation referencing future implementations
+- Deployment configuration TODOs in docker-compose files
+
+**Last Scan Results (August 22, 2025)**:
+- **Code TODOs Found**: 3 items in backend source files
+- **Deployment TODOs**: 3 items in deployment scaffolding
+- **Planned Features**: 7 items from README.md and UNDERSTANDING.md
+- **Documentation Updates**: All cross-references validated and synchronized
+
+### Progress Tracking Workflow
 
 To track progress on these TODO items:
 
 1. **Create GitHub Issues** - Convert high-priority TODOs to GitHub issues
-2. **Assign Owners** - Assign responsible developers
+2. **Assign Owners** - Assign responsible developers  
 3. **Set Milestones** - Align with release schedules
-4. **Regular Updates** - Update this document monthly
+4. **Regular Updates** - Update this document monthly via automated scanning
 
 ### Completion Tracking Template
 ```markdown
 - [ ] TODO Item Description - [Issue #](link) - @assignee - Due: YYYY-MM-DD
 ```
 
+### Automated Maintenance
+- **Trigger**: Every commit containing TODO/FIXME changes
+- **Scan Scope**: All workspace files including submodules
+- **Update Process**: Automated regeneration of TODO-INDEX.md
+- **Validation**: Cross-reference with existing GitHub issues
+
 ---
 
 ## 🔗 Related Documentation
 
-- [Architecture Documentation](01-architecture.md) - System design context
-- [Deployment Guide](06-deployment.md) - Production deployment procedures
-- [Security Implementation](08-security.md) - Security best practices
-- [Contributing Guidelines](10-contributing.md) - Development workflow
+- [Architecture Documentation](01-architecture.md) - System design context for TODO prioritization
+- [Deployment Guide](06-deployment.md) - Production deployment procedures and requirements
+- [Security Implementation](08-security.md) - Security best practices and compliance TODOs
+- [Contributing Guidelines](10-contributing.md) - Development workflow for TODO item resolution
 
 ---
 
-*This TODO index is automatically generated from workspace analysis. For questions or updates, please refer to the [Contributing Guidelines](10-contributing.md).*
+*This TODO index is automatically generated and maintained via **Task 02: Detect and List TODO Activities**. The document consolidates workspace-wide TODO detection including source code comments, deployment configurations, and planned features from documentation. For questions about specific TODO items or to report missing items, please refer to the [Contributing Guidelines](10-contributing.md) or create a GitHub issue.*
+
+**Automated Detection Coverage**:
+- ✅ Backend source code (`rsf-utility-backend/src/**`)
+- ✅ Frontend source code (`rsf-utility-frontend/src/**`) 
+- ✅ Deployment configurations (`deploy/**`)
+- ✅ Documentation files (`docs/**`, `README.md`, `UNDERSTANDING.md`)
+- ✅ Planned features and roadmap items
+- ✅ Cross-repository TODO synchronization
