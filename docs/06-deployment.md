@@ -85,14 +85,15 @@ git commit -m "Update backend submodule to latest"
 # Core Server Configuration
 # ===========================================
 NODE_ENV=development                    # Environment mode (development/production/test)
-PORT=3000                              # Server port (default: 3000)
+PORT=3000                              # Server port (default: 3000) - legacy
+BACKEND_PORT=3000                      # Backend server port (updated in commit 656ec21)
 MONGODB_URI=mongodb://localhost:27017/rsf-utility  # MongoDB connection string
 
 # ===========================================
 # Authentication & Security  
 # ===========================================
 JWT_SECRET=your-super-secret-jwt-key   # JWT signing key (required)
-CLIENT_ID=your-client-id               # API client identifier (required)
+REACT_APP_CLIENT_ID=your-client-id     # API client identifier (required - updated in commit 85e3284)
 
 # ===========================================
 # ONDC Protocol Configuration
@@ -115,6 +116,14 @@ REGISTRY_PROD=https://prod.registry.ondc.org/
 SETTLEMENT_AGENCY_URL=https://settlement-agency.example.com  # Settlement agency endpoint
 SETTLEMENT_AGENCY_ID=your-agency-id                          # Agency identifier
 SETTLEMENT_AGENCY_KEY=your-agency-key                        # Authentication key
+
+# ===========================================
+# Environment Variable Migration Notes (August 2025)
+# ===========================================
+# The following variables have been updated for better Docker compatibility:
+# - CLIENT_ID → REACT_APP_CLIENT_ID (commits 656ec21, 85e3284)
+# - PORT → BACKEND_PORT (commit 656ec21) 
+# Legacy PORT variable still supported for backward compatibility
 
 # ===========================================
 # Subscriber Configuration (ONDC)

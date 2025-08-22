@@ -49,6 +49,11 @@ The RSF Utility system comprises specialized components managing ONDC settlement
 
 **Documentation**: Complete frontend documentation available in `rsf-utility-frontend/UNDERSTANDING.md`
 
+**Recent Updates** (August 2025):
+- Enhanced frontend documentation with comprehensive architecture details (commit 8d21de1)
+- Backend environment configuration standardization for Docker compatibility (commits 656ec21, 85e3284)
+- Updated CLIENT_ID configuration to REACT_APP_CLIENT_ID for frontend compatibility
+
 ## Integration Between Submodules
 
 ### Communication Pattern

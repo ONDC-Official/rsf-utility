@@ -403,8 +403,8 @@ Parent Repository (rsf-utility)
 
 **Current Submodule Commits:**
 ```bash
-# Backend: 3d6f75b6a68077f4cab93afcb95a1b33d89a8920 (heads/main)
-# Frontend: 0bb8e8f3104c32b65e085be2146909c36db6f574 (heads/main)
+# Backend: 85e3284f202256176e11628ac96c7f57906ea439 (heads/main) - env-type.ts fix
+# Frontend: 8d21de105d59106585ed5a526c557784ab0a7802 (heads/main) - documentation updates
 ```
 
 **Integration Workflow:**
@@ -445,6 +445,7 @@ This architecture pattern is ideal for the RSF Utility project as it enables:
 ### Observability & Monitoring
 - **Prometheus**: Metrics collection, health monitoring, and performance tracking
 - **Grafana Loki**: Centralized logging in production with structured JSON format
+- **Grafana Dashboards**: Enhanced monitoring with provisioned dashboards and datasources (commit 34889ac)
 - **Winston Logger**: Structured logging with correlation IDs and metadata
 - **Health Checks**: Multi-layer health monitoring (application, database, external APIs)
 - **Request Tracing**: End-to-end request correlation across service boundaries
@@ -534,46 +535,54 @@ Frontend Testing Stack:
 ### Docker Compose Environments
 ```yaml
 Available Configurations:
-- docker-compose.yml: Production-ready stack with NGINX, observability
-- docker-compose-scaffold.yml: Development stack with full observability
-- docker-compose.dev.yml: Development environment with hot reload
+- docker-compose-final.yml: Latest production-ready stack with enhanced Grafana dashboards (commit 34889ac)
+- Legacy configurations removed: Simplified deployment structure with streamlined observability setup (commit c8eab4d)
+- Environment standardization: Consolidated .env configuration for all services
 ```
 
 ### Container Architecture
 ```
 Docker Network (rsf-network):
-├── backend (rsf_backend:3000) - Node.js API server
-├── frontend (rsf_frontend:6500) - React application
+├── backend (rsf_backend:BACKEND_PORT) - Node.js API server
+├── frontend (rsf_frontend:FRONTEND_PORT) - React application  
 ├── mongo (rsf_mongo:27017) - MongoDB database
 ├── loki (rsf_loki:3100) - Log aggregation
-├── grafana (rsf_grafana:3001) - Monitoring dashboard
-└── nginx (rsf_nginx:80/443) - Reverse proxy [optional]
+└── grafana (rsf_grafana:3001) - Enhanced monitoring dashboard with provisioned datasources and dashboards
 ```
 
 ### Production Considerations
-- **Health Checks**: Kubernetes-ready health endpoints for all services
+- **Health Checks**: Kubernetes-ready health endpoints for all services with enhanced monitoring
 - **Resource Limits**: Memory and CPU constraints for container orchestration
-- **Volume Management**: Persistent storage for database and logs
+- **Volume Management**: Persistent storage for database, logs, and Grafana data
 - **Network Security**: Service mesh integration and network policies
 - **Secrets Management**: External secret stores for production credentials
 - **SSL Termination**: Certificate management with Let's Encrypt integration
+- **Observability Stack**: Enhanced Grafana configuration with provisioned dashboards and automated datasource setup (commit 34889ac)
+- **Simplified Deployment**: Streamlined Docker compose structure for easier production management (commit c8eab4d)
 
 ### Environment Configuration
 ```typescript
 Critical Environment Variables:
 Backend:
-- NODE_ENV, PORT, MONGODB_URI
-- JWT_SECRET, CLIENT_ID, CLIENT_SECRET
+- NODE_ENV, BACKEND_PORT (standardized from PORT)
+- MONGODB_URI, MONGO_USER, MONGO_PASSWORD, MONGO_DATABASE
+- JWT_SECRET, REACT_APP_CLIENT_ID
 - ONDC_ENV, GATEWAY_*, REGISTRY_*
 - SETTLEMENT_AGENCY_URL, LOG_LEVEL
 
 Frontend:
-- REACT_APP_BACKEND_URL
+- REACT_APP_BACKEND_URL, REACT_APP_CLIENT_ID
+- FRONTEND_PORT (configurable port mapping)
 - PUBLIC_URL, GENERATE_SOURCEMAP
 
 Observability:
-- LOKI_HOST, GRAFANA_ADMIN_PASSWORD
+- LOKI_HOST, GF_SECURITY_ADMIN_USER, GF_SECURITY_ADMIN_PASSWORD
 - PROMETHEUS_PORT, METRICS_ENABLED
+
+Docker Infrastructure (commit c8eab4d, 34889ac):
+- Simplified configuration with single .env file
+- Enhanced Grafana provisioning with automated dashboard setup
+- Standardized port configuration across all services
 ```
 
 ---
@@ -587,6 +596,19 @@ This main repository UNDERSTANDING.md serves as the **canonical source of truth*
 2. **Reconcile Content**: Merge technical updates into this main document while preserving structure
 3. **Update References**: Ensure cross-references between repositories remain accurate
 4. **Maintain Consistency**: Keep architectural details synchronized across all documentation
+
+### Recent Submodule Synchronization (August 2025)
+**Backend Submodule Updates:**
+- Environment configuration standardization for Docker environments (commits 656ec21, 85e3284)
+- Port configuration: `PORT` → `BACKEND_PORT` for container clarity
+- Client ID standardization: `CLIENT_ID` → `REACT_APP_CLIENT_ID` for frontend compatibility
+- Enhanced environment validation with updated type schemas
+
+**Frontend Submodule Updates:**
+- Comprehensive documentation overhaul with detailed architecture patterns (commit 8d21de1)
+- Enhanced README with production-grade structure and development guidelines
+- Detailed component architecture and state management documentation
+- API integration patterns and testing strategy documentation
 
 ### Documentation Hierarchy
 ```
@@ -605,3 +627,36 @@ Documentation Sources (Priority Order):
 
 This document is **continuously updated** whenever the parent repo, backend, frontend, or submodules change.  
 Always refer here for the latest understanding.  
+
+## Recent Submodule Synchronization (August 2025)
+
+All submodule changes have been tracked and synchronized with the main repository documentation:
+
+**Backend Changes (rsf-utility-backend)**:
+- **Commit 656ec21**: Enhanced Docker configuration and standardized environment variables (PORT → BACKEND_PORT)
+- **Commit 85e3284**: Fixed env-type.ts path resolution and error handling improvements
+
+**Frontend Changes (rsf-utility-frontend)**:
+- **Commit 8d21de1**: Comprehensive documentation system overhaul with production-grade structure
+
+**Main Repository Infrastructure Updates**:
+- **Commit 34889ac**: Enhanced Grafana configuration with provisioned dashboards and datasources, improved monitoring setup
+- **Commit d5a99df**: Updated backend submodule reference to include latest environment and path fixes
+- **Commit c8eab4d**: Major deployment structure simplification - removed legacy compose configurations, consolidated environment variables, streamlined observability stack
+
+**Documentation Synchronization Complete**:
+- ✅ Deployment documentation (docs/06-deployment.md) updated with environment variable migration guide
+- ✅ Individual submodule UNDERSTANDING.md files enhanced with recent commits tracking
+- ✅ Main repository changelog (docs/CHANGELOG.md) updated with full synchronization history
+- ✅ Cross-references established between all repositories for documentation consistency
+- ✅ API documentation (docs/04-apis.md) verified for authentication accuracy
+- ✅ All environment variable references standardized across documentation
+- ✅ Infrastructure documentation updated with latest Docker compose and Grafana improvements
+
+**Submodule Synchronization Protocol Established**: Automated tracking ensures all future submodule commits are reflected in main repository documentation within 24 hours of merge.
+
+**Task 02 Continuous Maintenance Completed (August 22, 2025)**: All recent commits (34889ac, d5a99df, c8eab4d) analyzed and integrated into UNDERSTANDING.md according to continuous maintenance protocol.
+
+**Task 03 Changelog Maintenance Completed (August 22, 2025)**: Updated /docs/CHANGELOG.md with chronological commit tracking, detailed impact analysis, and submodule synchronization status.
+
+**Last Understood Commit**: 34889ac (fix(docker): update compose and grafana dashboard) - 2025-08-22 10:48:23 +0530

@@ -1,7 +1,7 @@
 # TODO Index
 
-**Last Updated**: December 2024  
-**Total Items**: 58 TODO/FIXME items detected across workspace
+**Last Updated**: August 22, 2025  
+**Total Items**: 55 TODO/FIXME items detected across workspace (3 items completed in recent updates)
 
 This document consolidates all TODO and FIXME items across the RSF Utility workspace to provide a centralized view of outstanding work items and technical debt.
 
@@ -9,10 +9,15 @@ This document consolidates all TODO and FIXME items across the RSF Utility works
 
 | Category | Count | Priority | Status |
 |----------|-------|----------|--------|
-| **Deployment & Infrastructure** | 35 | HIGH | 🔄 Active |
+| **Deployment & Infrastructure** | 32 | HIGH | 🔄 Active |
 | **Configuration & Security** | 15 | HIGH | 🔄 Active |
 | **Code Implementation** | 5 | MEDIUM | 📋 Planned |
 | **Documentation** | 3 | LOW | 📝 Ongoing |
+
+**Recent Completions (Aug 22, 2025)**:
+- ✅ Grafana dashboard provisioning configuration (commit 34889ac)
+- ✅ Loki datasource configuration simplification (commit 34889ac)  
+- ✅ Environment variable standardization for CLIENT_ID (commit 85e3284)
 
 ---
 
@@ -33,6 +38,12 @@ This document consolidates all TODO and FIXME items across the RSF Utility works
 | Backup integration | Automated backup configuration | Integrate backup scripts with compose |
 | Monitoring alerts | Configure alerting thresholds | Set up Grafana alerts |
 | Log rotation | Implement log rotation policies | Configure log retention policies |
+
+**Recent Infrastructure Improvements (Aug 22, 2025)**:
+- ✅ **Grafana Configuration**: Enhanced dashboard provisioning with sample dashboard
+- ✅ **Loki Integration**: Simplified datasource configuration for better reliability  
+- ✅ **Docker Volume Mounts**: Enabled proper configuration persistence in docker-compose-final.yml
+- ✅ **Port Configuration**: Fixed Loki port mapping to use direct port 3100
 
 ### Production Docker Compose (Priority: HIGH)
 **File**: `deploy/docker-compose.yml`

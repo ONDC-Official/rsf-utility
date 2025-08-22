@@ -979,6 +979,42 @@ docker exec rsf_mongodb mongorestore \
 
 ### Grafana Dashboard Configuration
 
+#### Dashboard Provisioning Setup
+**Recent Update** (Commit 34889ac): Simplified Grafana configuration with enhanced dashboard provisioning.
+
+**Configuration**: `deploy/config/grafana/dashboards/dashboards.yml`
+```yaml
+apiVersion: 1
+
+providers:
+  - name: "default"
+    orgId: 1
+    folder: ""
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+```
+
+**Datasource Configuration**: `deploy/config/grafana/datasources/datasources.yaml`
+```yaml
+apiVersion: 1
+
+datasources:
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    isDefault: true
+```
+
+**Key Configuration Changes**:
+- Simplified Loki datasource configuration for better reliability
+- Removed deprecated traceID and Prometheus configurations
+- Fixed Loki port to use direct port 3100 instead of environment variable
+- Enabled volume mounts for dashboards and datasources in docker-compose
+
 #### System Overview Dashboard
 
 ```json

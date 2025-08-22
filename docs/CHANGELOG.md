@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - 2025-08-22
+- **Enhanced Grafana Configuration** (commit 34889ac, 2025-08-22): Sample dashboard provisioning with JSON template
+- **Grafana Dashboard Provisioning** (commit 34889ac): Automated dashboard setup via YML configuration
+- **Comprehensive Frontend Documentation** (commit 8d21de1, 2025-08-19): Production-grade documentation overhaul in frontend submodule
+- **Backend Environment Standardization** (commits 656ec21, 85e3284, 2025-08-21): Docker-compatible environment variable configuration
+
+### Changed - 2025-08-21/22
+- **Major Infrastructure Simplification** (commit c8eab4d, 2025-08-21): 
+  - Removed 2,345 lines of legacy deployment configurations
+  - Consolidated environment variables into single .env structure
+  - Streamlined observability stack with docker-compose-final.yml as primary configuration
+- **Backend Submodule Update** (commit d5a99df, 2025-08-21): Updated reference to include latest environment fixes
+- **Environment Variable Standardization** (commits 656ec21, 85e3284, 2025-08-21):
+  - `CLIENT_ID` → `REACT_APP_CLIENT_ID` for frontend compatibility
+  - `PORT` → `BACKEND_PORT` for container clarity
+- **Grafana Datasource Configuration** (commit 34889ac, 2025-08-22): Simplified Loki configuration with direct port mapping
+
+### Removed - 2025-08-21
+- **Legacy Deployment Infrastructure** (commit c8eab4d): 
+  - docker-compose-scaffold.yml, docker-compose.dev.yml, docker-compose.yml
+  - Obsolete deployment scripts (deploy.sh, health-check.sh, quick-start-scaffold.sh)
+  - Redundant environment files (.env.scaffold.example)
+  - Legacy nginx configurations and monitoring configs
+
+### Fixed - 2025-08-21/22
+- **Backend Environment Validation** (commit 85e3284, 2025-08-21): Updated env-type.ts schema for new CLIENT_ID naming
+- **Docker Configuration** (commit 656ec21, 2025-08-21): Port and authentication config alignment across services
+- **Grafana Provisioning** (commit 34889ac, 2025-08-22): Fixed volume mounts for dashboards and datasources
+- **gitignore Patterns** (commit 34889ac, 2025-08-22): Properly include Grafana configuration files
+
+### Documentation Updates - 2025-08-19/22
+- **Frontend Submodule** (commit 8d21de1, 2025-08-19): Complete architectural documentation with component details
+- **Backend Submodule**: Environment configuration tracking and recent changes documentation
+- **Main Repository**: UNDERSTANDING.md updated with latest infrastructure changes and commit synchronization
+- **Changelog Maintenance**: Chronological tracking of all infrastructure and submodule changes
+
+### Submodule Commit Tracking - 2025-08-19/22
+- **Backend Latest**: 85e3284 (fix: env-type.ts) - Environment schema validation fix
+- **Frontend Latest**: 8d21de1 (feat - add comprehensive documentation) - Documentation overhaul
+- **Main Repository Latest**: 34889ac (fix(docker): update compose and grafana dashboard) - Infrastructure enhancement
+- **Synchronization Status**: All submodule changes integrated into main repository documentation
+
+## [1.0.0] - 2024-08-19
+
 ### Added
 - Comprehensive documentation suite (docs-01 through docs-10)
 - Contributing guidelines with submodule workflow
