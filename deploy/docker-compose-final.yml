@@ -70,7 +70,7 @@ services:
     container_name: rsf-loki
     image: grafana/loki:latest
     ports:
-      - "${LOKI_PORT}:3100"
+      - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - loki_data:/loki
@@ -83,7 +83,7 @@ services:
           "--quiet",
           "--tries=1",
           "--spider",
-          "http://localhost:${LOKI_PORT}/ready",
+          "http://localhost:3100/ready",
         ]
       interval: 30s
       timeout: 10s
@@ -105,8 +105,8 @@ services:
         condition: service_started
     volumes:
       - grafana_data:/var/lib/grafana
-      # - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
-      # - ./config/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources:ro
     networks:
       - rsf_network
     healthcheck:
